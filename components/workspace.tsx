@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle, Github, Linkedin, Mail } from "lucide-react";
+import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import type { ContentFile, ContentFolder } from "@/lib/content";
-import { Button } from "@/components/ui/button";
+import { usePanelResize } from "@/lib/use-panel-resize";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +24,22 @@ const folderLabels: Record<string, string> = {
   patents: "PATENTS",
   ideas: "IDEAS",
 };
+
+const TERMINAL_HEADER_HEIGHT = 32;
+const DEFAULT_TERMINAL_BODY_HEIGHT = 200;
+const MIN_TERMINAL_BODY_HEIGHT = 64;
+const MAX_TERMINAL_BODY_RATIO = 0.55;
+
+const DEFAULT_SIDEBAR_WIDTH = 280;
+const MIN_SIDEBAR_WIDTH = 180;
+const MAX_SIDEBAR_WIDTH = 520;
+
+const DEFAULT_INSIGHTS_WIDTH = 300;
+const MIN_INSIGHTS_WIDTH = 200;
+const MAX_INSIGHTS_WIDTH = 520;
+
+const PORTRAIT_WIDTH = 712;
+const PORTRAIT_HEIGHT = 882;
 
 function promptAnswer(question: string, files: ContentFile[]) {
   const q = question.toLowerCase();
@@ -54,6 +72,51 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     "Indexed 20 markdown files.",
     "Type help, open lintern.md, search orchestration, or ask \"What is ZeroFabric?\"",
   ]);
+  const getMaxTerminalBodyHeight = useCallback(
+    () => Math.max(MIN_TERMINAL_BODY_HEIGHT, Math.floor(window.innerHeight * MAX_TERMINAL_BODY_RATIO)),
+    []
+  );
+
+  const sidebar = usePanelResize({
+    initial: DEFAULT_SIDEBAR_WIDTH,
+    min: MIN_SIDEBAR_WIDTH,
+    max: MAX_SIDEBAR_WIDTH,
+    axis: "x",
+  });
+
+  const insights = usePanelResize({
+    initial: DEFAULT_INSIGHTS_WIDTH,
+    min: MIN_INSIGHTS_WIDTH,
+    max: MAX_INSIGHTS_WIDTH,
+    axis: "x",
+    invertDelta: true,
+  });
+
+  const terminal = usePanelResize({
+    initial: DEFAULT_TERMINAL_BODY_HEIGHT,
+    min: MIN_TERMINAL_BODY_HEIGHT,
+    max: getMaxTerminalBodyHeight,
+    axis: "y",
+    invertDelta: true,
+  });
+
+  const { setSize: setTerminalHeight, clamp: clampTerminalHeight } = terminal;
+
+  const portraitPanelWidth = useMemo(
+    () => Math.round(terminal.size * (PORTRAIT_WIDTH / PORTRAIT_HEIGHT)),
+    [terminal.size]
+  );
+
+  useEffect(() => {
+    const syncViewport = () => {
+      const maxTerminal = getMaxTerminalBodyHeight();
+      setTerminalHeight((height) => clampTerminalHeight(Math.min(height, maxTerminal)));
+    };
+
+    syncViewport();
+    window.addEventListener("resize", syncViewport);
+    return () => window.removeEventListener("resize", syncViewport);
+  }, [getMaxTerminalBodyHeight, setTerminalHeight, clampTerminalHeight]);
 
   const activeFile = allFiles.find((file) => file.slug === activeSlug) ?? allFiles[0];
   const relatedFiles = allFiles
@@ -123,8 +186,12 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         </div>
       </header>
 
-      <main className="grid min-h-0 flex-1 grid-cols-[280px_minmax(0,1fr)_300px] max-lg:grid-cols-[240px_minmax(0,1fr)] max-md:grid-cols-1">
-        <aside className="min-h-0 border-r border-ide-border bg-ide-panel max-md:hidden">
+      <div className="flex min-h-0 flex-1 flex-col">
+      <main className="flex min-h-0 flex-1 max-md:flex-col">
+        <aside
+          className="flex min-h-0 shrink-0 flex-col bg-ide-panel max-md:hidden"
+          style={{ width: sidebar.size }}
+        >
           <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">Workspace</div>
           <div className="overflow-auto p-2 text-xs">
             {folders.map((folder) => {
@@ -162,21 +229,42 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           </div>
         </aside>
 
-        <section className="min-h-0 bg-ide-bg">
-          <div className="flex h-9 items-center border-b border-ide-border bg-[#202020] text-xs">
+        <PanelResizeHandle
+          orientation="horizontal"
+          active={sidebar.active}
+          label="Resize workspace panel"
+          className="max-md:hidden"
+          onMouseDown={sidebar.onResizeStart}
+          onDoubleClick={sidebar.reset}
+        />
+
+        <section className="flex min-h-0 min-w-0 flex-1 flex-col bg-ide-bg">
+          <div className="flex h-9 shrink-0 items-center border-b border-ide-border bg-[#202020] text-xs">
             <div className="flex h-full items-center border-r border-ide-border bg-ide-bg px-3 text-ide-text">
               <FileText className="mr-2 h-3.5 w-3.5 text-ide-green" />
               {activeFile.title}
             </div>
           </div>
-          <div className="h-[calc(100vh-10rem)] overflow-auto px-8 py-6 max-md:h-[calc(100vh-14rem)] max-md:px-4">
+          <div className="min-h-0 flex-1 overflow-auto px-8 py-6 max-md:px-4">
             <div className="prose-ide mx-auto max-w-4xl">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{activeFile.content}</ReactMarkdown>
             </div>
           </div>
         </section>
 
-        <aside className="min-h-0 border-l border-ide-border bg-ide-panel max-lg:hidden">
+        <PanelResizeHandle
+          orientation="horizontal"
+          active={insights.active}
+          label="Resize insights panel"
+          className="max-lg:hidden"
+          onMouseDown={insights.onResizeStart}
+          onDoubleClick={insights.reset}
+        />
+
+        <aside
+          className="flex min-h-0 shrink-0 flex-col bg-ide-panel max-lg:hidden"
+          style={{ width: insights.size }}
+        >
           <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">Insights</div>
           <div className="space-y-4 p-4 text-xs">
             <div>
@@ -218,30 +306,61 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         </aside>
       </main>
 
-      <footer className="border-t border-ide-border bg-[#111]">
-        <div className="flex h-8 items-center gap-3 border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
+      <PanelResizeHandle
+        orientation="vertical"
+        active={terminal.active}
+        label="Resize terminal panel"
+        onMouseDown={terminal.onResizeStart}
+        onDoubleClick={terminal.reset}
+      />
+
+      <footer
+        className="flex shrink-0 flex-col bg-[#111]"
+        style={{ height: TERMINAL_HEADER_HEIGHT + terminal.size }}
+      >
+        <div className="flex h-8 shrink-0 items-center gap-3 border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
           <Terminal className="h-3.5 w-3.5" /> Terminal
           <span className="text-ide-green">local knowledge mode</span>
         </div>
-        <div className="grid h-28 grid-cols-[1fr_360px] max-md:grid-cols-1">
-          <div className="overflow-auto px-3 py-2 text-xs leading-relaxed">
-            {terminalHistory.slice(-6).map((line, index) => (
-              <pre key={index} className={cn("whitespace-pre-wrap", line.startsWith(">") ? "text-ide-blue" : "text-ide-muted")}>{line}</pre>
-            ))}
+        <div className="flex min-h-0 flex-1">
+          <div
+            className="flex h-full shrink-0 items-center border-r border-ide-border bg-[#0d0d0d] pl-2 pr-0 max-md:hidden"
+            style={{ width: portraitPanelWidth }}
+          >
+            <Image
+              src="/anki.png"
+              alt="Anki Nelaturu"
+              width={PORTRAIT_WIDTH}
+              height={PORTRAIT_HEIGHT}
+              className="h-full w-auto object-contain"
+              sizes="(max-width: 768px) 0px, 200px"
+            />
           </div>
           <form
-            className="flex items-center border-l border-ide-border px-2 max-md:border-l-0 max-md:border-t"
+            className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden"
             onSubmit={(event) => {
               event.preventDefault();
               runCommand(query);
             }}
           >
-            <span className="text-ide-green">$</span>
-            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={'ask "What is ZeroFabric?"'} />
-            <Button variant="terminal" type="submit">Run</Button>
+            <div className="min-h-0 flex-1 overflow-auto px-3 py-2 text-xs leading-relaxed">
+              {terminalHistory.map((line, index) => (
+                <pre key={index} className={cn("whitespace-pre-wrap", line.startsWith(">") ? "text-ide-blue" : "text-ide-muted")}>{line}</pre>
+              ))}
+            </div>
+            <div className="flex shrink-0 items-center px-3 pb-2 pt-1">
+              <span className="shrink-0 text-ide-green">$</span>
+              <Input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder='ask "What is ZeroFabric?"'
+                aria-label="Terminal command"
+              />
+            </div>
           </form>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
