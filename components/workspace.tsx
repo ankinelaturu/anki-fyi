@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle } from "lucide-react";
@@ -346,7 +346,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         <div className="flex h-8 shrink-0 items-center gap-3 border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
           <Terminal className="h-3.5 w-3.5" /> Terminal
           <span className="text-ide-green">local knowledge mode</span>
-          <span className="text-[#f87171]">Ask Anki</span>
         </div>
         <div className="flex min-h-0 flex-1">
           <div
@@ -374,13 +373,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                 <pre key={index} className={cn("whitespace-pre-wrap", line.startsWith(">") ? "text-ide-blue" : "text-ide-muted")}>{line}</pre>
               ))}
             </div>
-            <div className="flex shrink-0 items-center px-3 pb-2 pt-1">
-              <span className="shrink-0 text-ide-green">$</span>
+            <div className="flex shrink-0 items-center gap-1 px-3 pb-2 pt-1 text-xs">
+              <span className="shrink-0 text-[13px] text-[#f87171]">Ask Anki</span>
+              <span className="shrink-0 text-[13px] text-ide-muted">›</span>
               <Input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder='ask "What is ZeroFabric?"'
+                placeholder='What is ZeroFabric?'
                 aria-label="Terminal command"
+                className="h-7 px-1 text-xs"
               />
             </div>
           </form>
