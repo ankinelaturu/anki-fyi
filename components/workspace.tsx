@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Trash2, Circle } from "lucide-react";
+import { FileText, Sparkles, Terminal, Trash2, Circle } from "lucide-react";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
+import { ActivityBar, type SidePanelView } from "@/components/workspace/ActivityBar";
+import { ExplorerPanel } from "@/components/workspace/ExplorerPanel";
+import { SearchPanel } from "@/components/workspace/SearchPanel";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
-import { FOLDER_LABELS } from "@/lib/folders";
 import { usePanelResize } from "@/lib/use-panel-resize";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -68,6 +70,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     lab: true,
     "creative-systems": true,
   });
+  const [sidePanelView, setSidePanelView] = useState<SidePanelView>("explorer");
   const [query, setQuery] = useState("");
   const [terminalHistory, setTerminalHistory] = useState<string[]>([
     "Workspace ready.",
@@ -197,57 +200,25 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
 
       <div className="flex min-h-0 flex-1 flex-col">
       <main className="flex min-h-0 flex-1 max-md:flex-col">
+        <ActivityBar activeView={sidePanelView} onViewChange={setSidePanelView} />
+
         <aside
           className="flex min-h-0 shrink-0 flex-col bg-ide-panel max-md:hidden"
           style={{ width: sidebar.size }}
         >
-          <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">Workspace</div>
-          <div className="overflow-auto p-2 text-xs">
-            {folders.map((folder) => {
-              const isOpen = expanded[folder.name] ?? true;
-              return (
-                <div key={folder.name} className="mb-1">
-                  <button
-                    className="flex w-full items-center gap-1 rounded px-1 py-1 text-left text-ide-muted hover:bg-ide-active hover:text-ide-text"
-                    onClick={() => setExpanded((state) => ({ ...state, [folder.name]: !isOpen }))}
-                  >
-                    {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
-                    {isOpen ? <FolderOpen className="h-3.5 w-3.5 text-ide-blue" /> : <Folder className="h-3.5 w-3.5 text-ide-blue" />}
-                    <span>{FOLDER_LABELS[folder.name] ?? folder.name.toUpperCase()}</span>
-                  </button>
-                  {isOpen && (
-                    <div className="ml-4 border-l border-[#303030] pl-2">
-                      {folder.files.map((file) => {
-                        const isActive = activeFile.slug === file.slug;
-                        return (
-                        <button
-                          key={file.slug}
-                          onClick={() => setActiveSlug(file.slug)}
-                          className={cn(
-                            "flex w-full items-center gap-2 rounded px-1 py-1 text-left text-[12px] hover:bg-ide-active",
-                            isActive ? "bg-ide-active text-white" : "text-ide-text"
-                          )}
-                        >
-                          <FileIcon file={file} selected={isActive} />
-                          <span className="min-w-0 flex-1 truncate">{file.title}</span>
-                          {file.featured && (
-                            <span
-                              className={cn(
-                                "h-1.5 w-1.5 shrink-0 rounded-full",
-                                isActive ? "bg-ide-blue" : "bg-ide-yellow"
-                              )}
-                              aria-label="Featured"
-                            />
-                          )}
-                        </button>
-                      );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          {sidePanelView === "explorer" ? (
+            <ExplorerPanel
+              folders={folders}
+              activeSlug={activeSlug}
+              expanded={expanded}
+              onToggleFolder={(folder) =>
+                setExpanded((state) => ({ ...state, [folder]: !(state[folder] ?? true) }))
+              }
+              onSelectFile={setActiveSlug}
+            />
+          ) : (
+            <SearchPanel files={allFiles} activeSlug={activeSlug} onSelectFile={setActiveSlug} />
+          )}
         </aside>
 
         <PanelResizeHandle
