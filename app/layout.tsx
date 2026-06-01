@@ -8,7 +8,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "anki.fyi — Professional Knowledge Workspace",
+  title: "Anki Nelaturu — Principal AI Product Engineer",
   description: "An IDE-style professional knowledge workspace for Anki Nelaturu: AI orchestration, developer platforms, runtime systems, and interactive AI products.",
 };
 

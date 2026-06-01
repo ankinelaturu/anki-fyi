@@ -188,13 +188,13 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <Circle className="h-3 w-3 fill-[#f87171] text-[#f87171]" />
           <Circle className="h-3 w-3 fill-[#fbbf24] text-[#fbbf24]" />
           <Circle className="h-3 w-3 fill-[#34d399] text-[#34d399]" />
-          <span className="ml-3 font-semibold text-ide-blue">anki.fyi</span>
-          <span className="text-ide-muted">— professional knowledge workspace</span>
+          <span className="ml-3 font-semibold text-ide-blue">Anki Nelaturu</span>
+          <span className="text-ide-muted">— Principal AI Product Engineer</span>
         </div>
         <div className="hidden items-center gap-3 md:flex">
           <span className="text-ide-green">main</span>
           <span className="text-ide-muted">●</span>
-          <span className="text-ide-yellow">Local AI placeholder</span>
+          <span className="text-ide-yellow">Building AI-native systems</span>
         </div>
       </header>
 
