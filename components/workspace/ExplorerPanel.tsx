@@ -29,6 +29,7 @@ export function ExplorerPanel({
       <div className="min-h-0 flex-1 overflow-auto p-2 text-xs">
         {folders.map((folder) => {
           const isOpen = expanded[folder.name] ?? true;
+          const containsActive = folder.files.some((file) => file.slug === activeSlug);
           return (
             <div key={folder.name} className="mb-1">
               <button
@@ -38,9 +39,9 @@ export function ExplorerPanel({
               >
                 {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
                 {isOpen ? (
-                  <FolderOpen className="h-3.5 w-3.5 text-ide-blue" />
+                  <FolderOpen className={cn("h-3.5 w-3.5", containsActive ? "text-ide-blue" : "text-ide-muted")} />
                 ) : (
-                  <Folder className="h-3.5 w-3.5 text-ide-blue" />
+                  <Folder className={cn("h-3.5 w-3.5", containsActive ? "text-ide-blue" : "text-ide-muted")} />
                 )}
                 <span>{FOLDER_LABELS[folder.name] ?? folder.name.toUpperCase()}</span>
               </button>

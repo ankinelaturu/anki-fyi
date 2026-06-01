@@ -9,8 +9,11 @@ import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import { ActivityBar, type SidePanelView } from "@/components/workspace/ActivityBar";
 import { ExplorerPanel } from "@/components/workspace/ExplorerPanel";
 import { SearchPanel } from "@/components/workspace/SearchPanel";
+import { StatusBar } from "@/components/workspace/StatusBar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
+import { FOLDER_LABELS } from "@/lib/folders";
 import { usePanelResize } from "@/lib/use-panel-resize";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -131,6 +134,12 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   }, [getMaxTerminalBodyHeight, setTerminalHeight, clampTerminalHeight]);
 
   const activeFile = allFiles.find((file) => file.slug === activeSlug) ?? allFiles[0];
+  const activeTabTooltip = useMemo(() => {
+    const parts = activeFile.path.split("/");
+    if (parts.length === 1) return activeFile.path;
+    const folderLabel = FOLDER_LABELS[parts[0]!] ?? parts[0]!.toUpperCase();
+    return `${folderLabel}/${parts.slice(1).join("/")}`;
+  }, [activeFile.path]);
   const relatedFiles = allFiles
     .filter((file) => file.slug !== activeFile.slug)
     .map((file) => ({ file, score: file.tags.filter((tag) => activeFile.tags.includes(tag)).length }))
@@ -182,6 +191,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   }
 
   return (
+    <TooltipProvider delayDuration={400}>
     <div className="flex h-screen flex-col overflow-hidden bg-ide-bg text-ide-text">
       <header className="flex h-10 items-center justify-between border-b border-ide-border bg-[#181818] px-3 text-xs">
         <div className="flex items-center gap-2">
@@ -232,10 +242,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
 
         <section className="flex min-h-0 min-w-0 flex-1 flex-col bg-ide-bg">
           <div className="flex h-9 shrink-0 items-center border-b border-ide-border bg-[#202020] text-xs">
-            <div className="flex h-full items-center border-r border-ide-border bg-ide-bg px-3 text-ide-text">
-              <FileIcon file={activeFile} selected className="mr-1 text-ide-green" />
-              {activeFile.filename}
-            </div>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="flex h-full cursor-default items-center border-r border-ide-border bg-ide-bg px-3 text-ide-text">
+                  <FileIcon file={activeFile} selected className="mr-1 text-ide-green" />
+                  {activeFile.filename}
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">{activeTabTooltip}</TooltipContent>
+            </Tooltip>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">
             {activeFile.type === "filmstrip" ? (
@@ -380,6 +395,9 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         </div>
       </footer>
       </div>
+
+      <StatusBar />
     </div>
+    </TooltipProvider>
   );
 }
