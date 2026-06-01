@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle } from "lucide-react";
+import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Trash2, Circle } from "lucide-react";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import { FileIcon } from "@/components/workspace/FileIcon";
@@ -74,6 +74,13 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     `Indexed ${folders.flatMap((f) => f.files).length} workspace files.`,
     "Type help, open lintern.md, search orchestration, or ask \"What is ZeroFabric?\"",
   ]);
+  const terminalOutputRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = terminalOutputRef.current;
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
+  }, [terminalHistory]);
   const getMaxTerminalBodyHeight = useCallback(
     () => Math.max(MIN_TERMINAL_BODY_HEIGHT, Math.floor(window.innerHeight * MAX_TERMINAL_BODY_RATIO)),
     []
@@ -343,9 +350,20 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         className="flex shrink-0 flex-col bg-[#111]"
         style={{ height: TERMINAL_HEADER_HEIGHT + terminal.size }}
       >
-        <div className="flex h-8 shrink-0 items-center gap-3 border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
-          <Terminal className="h-3.5 w-3.5" /> Terminal
-          <span className="text-ide-green">local knowledge mode</span>
+        <div className="flex h-8 shrink-0 items-center justify-between border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
+          <div className="flex min-w-0 items-center gap-3">
+            <Terminal className="h-3.5 w-3.5 shrink-0" />
+            <span>Terminal</span>
+            <span className="text-ide-green">local knowledge mode</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setTerminalHistory([])}
+            className="shrink-0 rounded p-1 text-ide-muted hover:bg-ide-active hover:text-ide-text"
+            aria-label="Clear terminal"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
         </div>
         <div className="flex min-h-0 flex-1">
           <div
@@ -368,7 +386,10 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               runCommand(query);
             }}
           >
-            <div className="min-h-0 flex-1 overflow-auto px-3 py-2 text-xs leading-relaxed">
+            <div
+              ref={terminalOutputRef}
+              className="min-h-0 flex-1 overflow-y-auto px-3 py-2 text-xs leading-relaxed"
+            >
               {terminalHistory.map((line, index) => (
                 <pre key={index} className={cn("whitespace-pre-wrap", line.startsWith(">") ? "text-ide-blue" : "text-ide-muted")}>{line}</pre>
               ))}
