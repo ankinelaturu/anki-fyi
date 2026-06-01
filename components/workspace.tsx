@@ -5,6 +5,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle, Github, Linkedin, Mail } from "lucide-react";
+import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import type { ContentFile, ContentFolder } from "@/lib/content";
 import { usePanelResize } from "@/lib/use-panel-resize";
@@ -23,6 +24,7 @@ const folderLabels: Record<string, string> = {
   capabilities: "CAPABILITIES",
   patents: "PATENTS",
   ideas: "IDEAS",
+  "Creative Systems": "CREATIVE SYSTEMS",
 };
 
 const TERMINAL_HEADER_HEIGHT = 32;
@@ -245,10 +247,23 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               {activeFile.title}
             </div>
           </div>
-          <div className="min-h-0 flex-1 overflow-auto px-8 py-6 max-md:px-4">
-            <div className="prose-ide mx-auto max-w-4xl">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{activeFile.content}</ReactMarkdown>
-            </div>
+          <div className="min-h-0 flex-1 overflow-hidden">
+            {activeFile.type === "filmstrip" ? (
+              <FilmstripViewer
+                key={activeFile.slug}
+                title={activeFile.title}
+                description={activeFile.description ?? activeFile.summary}
+                markdown={activeFile.content}
+                imagePattern={activeFile.imagePattern}
+                totalFrames={activeFile.totalFrames}
+              />
+            ) : (
+              <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
+                <div className="prose-ide mx-auto max-w-4xl">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{activeFile.content}</ReactMarkdown>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

@@ -11,6 +11,10 @@ export type ContentFile = {
   tags: string[];
   content: string;
   path: string;
+  type?: string;
+  description?: string;
+  imagePattern?: string;
+  totalFrames?: number;
 };
 
 export type ContentFolder = {
@@ -46,6 +50,10 @@ export function getAllFiles(): ContentFile[] {
         tags: Array.isArray(data.tags) ? data.tags : [],
         content,
         path: relative,
+        type: typeof data.type === "string" ? data.type : undefined,
+        description: typeof data.description === "string" ? data.description : undefined,
+        imagePattern: typeof data.imagePattern === "string" ? data.imagePattern : undefined,
+        totalFrames: typeof data.totalFrames === "number" ? data.totalFrames : undefined,
       } satisfies ContentFile;
     })
     .sort((a, b) => a.order - b.order || a.path.localeCompare(b.path));
@@ -62,7 +70,7 @@ export function getFolders(): ContentFolder[] {
     const folder = file.path.includes("/") ? file.path.split("/")[0] : "root";
     groups.set(folder, [...(groups.get(folder) ?? []), file]);
   }
-  const order = ["root", "experience", "projects", "capabilities", "patents", "ideas"];
+  const order = ["root", "experience", "projects", "capabilities", "patents", "ideas", "Creative Systems"];
   return Array.from(groups.entries())
     .sort(([a], [b]) => order.indexOf(a) - order.indexOf(b))
     .map(([name, files]) => ({ name, files }));

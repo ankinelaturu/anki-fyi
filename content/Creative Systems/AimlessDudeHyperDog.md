@@ -2,9 +2,9 @@
 title: Aimless Dude & Hyper Dog
 type: filmstrip
 category: Creative Systems
-description: 125+ days of caveman-style micro stories (Caikus) featuring Aimless Dude and Rudy.
+description: Caveman-style micro stories (Caikus) featuring Anki and Rudy.
 imagePattern: /images/adhd/d{day}.png
-totalFrames: 126
+totalFrames: 100
 characters:
   - Aimless Dude
   - Rudy
