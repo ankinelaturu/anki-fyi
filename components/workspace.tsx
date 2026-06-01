@@ -321,6 +321,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         <div className="flex h-8 shrink-0 items-center gap-3 border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
           <Terminal className="h-3.5 w-3.5" /> Terminal
           <span className="text-ide-green">local knowledge mode</span>
+          <span className="text-[#f87171]">Ask Anki</span>
         </div>
         <div className="flex min-h-0 flex-1">
           <div
