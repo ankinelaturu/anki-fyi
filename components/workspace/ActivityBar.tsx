@@ -1,15 +1,8 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import {
-  Files,
-  Search,
-  Linkedin,
-  Github,
-  Youtube,
-  FileText,
-  Mail,
-} from "lucide-react";
+import { Files, Search, Linkedin, Github, Youtube, Mail } from "lucide-react";
+import { PdfIcon } from "@/components/workspace/PdfIcon";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 import { cn } from "@/lib/utils";
 
@@ -39,21 +32,23 @@ function ActivityBarButton({
       aria-current={active ? "page" : undefined}
       onClick={onClick}
       className={cn(
-        "relative flex h-12 w-12 items-center justify-center text-ide-muted transition-colors hover:text-ide-text",
+        "relative flex h-14 w-14 items-center justify-center text-ide-muted transition-colors hover:text-ide-text",
         active && "text-ide-text before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-ide-blue"
       )}
     >
-      <Icon className="h-5 w-5" strokeWidth={1.75} />
+      <Icon className="h-6 w-6" strokeWidth={1.75} />
     </button>
   );
 }
+
+type ActivityLinkIcon = LucideIcon | typeof PdfIcon;
 
 function ActivityBarLink({
   icon: Icon,
   label,
   href,
 }: {
-  icon: LucideIcon;
+  icon: ActivityLinkIcon;
   label: string;
   href: string;
 }) {
@@ -66,16 +61,16 @@ function ActivityBarLink({
       aria-label={label}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="flex h-10 w-12 items-center justify-center text-ide-muted transition-colors hover:bg-ide-active hover:text-ide-text"
+      className="flex h-11 w-14 items-center justify-center text-ide-muted transition-colors hover:bg-ide-active hover:text-ide-text"
     >
-      <Icon className="h-4 w-4" strokeWidth={1.75} />
+      {Icon === PdfIcon ? <PdfIcon className="h-5 w-5" /> : <Icon className="h-5 w-5" strokeWidth={1.75} />}
     </a>
   );
 }
 
 export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
   return (
-    <aside className="flex w-12 shrink-0 flex-col border-r border-ide-border bg-[#181818] max-md:hidden">
+    <aside className="flex w-14 shrink-0 flex-col border-r border-ide-border bg-[#181818] max-md:hidden">
       <div className="flex flex-col items-center">
         <ActivityBarButton
           icon={Files}
@@ -95,7 +90,7 @@ export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
         <ActivityBarLink icon={Linkedin} label="LinkedIn" href={SOCIAL_LINKS.linkedin} />
         <ActivityBarLink icon={Github} label="GitHub" href={SOCIAL_LINKS.github} />
         <ActivityBarLink icon={Youtube} label="YouTube" href={SOCIAL_LINKS.youtube} />
-        <ActivityBarLink icon={FileText} label="Resume PDF" href={SOCIAL_LINKS.resumePdf} />
+        <ActivityBarLink icon={PdfIcon} label="Resume PDF" href={SOCIAL_LINKS.resumePdf} />
         <ActivityBarLink icon={Mail} label="Email" href={SOCIAL_LINKS.email} />
       </div>
     </aside>
