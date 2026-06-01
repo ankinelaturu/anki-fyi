@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { MarkdownProse } from "@/components/markdown-prose";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { FilmstripThumbnail } from "@/components/filmstrip/FilmstripThumbnail";
 import { Input } from "@/components/ui/input";
@@ -104,9 +103,7 @@ export function FilmstripViewer({ title, description, markdown, imagePattern, to
           showSearch={false}
         />
         <div className="min-h-0 flex-1 overflow-auto px-8 py-6 max-md:px-4">
-          <div className="prose-ide mx-auto max-w-4xl">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
-          </div>
+          <MarkdownProse>{markdown}</MarkdownProse>
         </div>
       </div>
     );

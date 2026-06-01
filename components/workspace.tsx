@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { MarkdownProse } from "@/components/markdown-prose";
 import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle, Github, Linkedin, Mail } from "lucide-react";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
@@ -259,9 +258,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               />
             ) : (
               <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
-                <div className="prose-ide mx-auto max-w-4xl">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{activeFile.content}</ReactMarkdown>
-                </div>
+                <MarkdownProse>{activeFile.content}</MarkdownProse>
               </div>
             )}
           </div>

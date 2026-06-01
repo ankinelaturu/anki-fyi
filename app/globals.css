@@ -20,10 +20,30 @@ body {
 .prose-ide h3 { color: #c586c0; font-size: 0.85rem; margin-top: 1.1rem; }
 .prose-ide p { color: #d4d4d4; line-height: 1.65; margin: .55rem 0; }
 .prose-ide ul { margin: .5rem 0 1rem 1.2rem; list-style: none; }
-.prose-ide li { margin: .45rem 0; position: relative; }
+.prose-ide li { color: #d4d4d4; margin: .45rem 0; position: relative; }
 .prose-ide li::before { content: '▹'; color: #6a9955; position: absolute; left: -1.1rem; }
 .prose-ide a { color: #4fc1ff; text-decoration: none; }
 .prose-ide a:hover { text-decoration: underline; }
-.prose-ide code { color: #ce9178; background: #252526; border: 1px solid #333; border-radius: 4px; padding: .1rem .3rem; font-size: 0.9em; }
+.prose-ide .prose-strong { color: #dcdcaa; font-weight: 600; }
+.prose-ide .prose-em { color: #c586c0; font-style: italic; }
+/* Inline terms (`backticks`) — type/name color, no box */
+.prose-ide .prose-kw {
+  color: #9cdcfe;
+  font-size: inherit;
+  font-style: normal;
+}
+/* Fenced code blocks only */
+.prose-ide pre {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  background: #252526;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+.prose-ide pre code {
+  color: #d4d4d4;
+  font-size: 0.9em;
+}
 .prose-ide blockquote { border-left: 3px solid #569cd6; padding-left: 1rem; color: #b5cea8; }
 .prose-ide hr { border-color: #333; margin: 1.5rem 0; }
