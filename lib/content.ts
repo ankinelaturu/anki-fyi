@@ -1,26 +1,10 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { FOLDER_ORDER } from "@/lib/folders";
 
-export type ContentFile = {
-  slug: string;
-  title: string;
-  category: string;
-  order: number;
-  summary?: string;
-  tags: string[];
-  content: string;
-  path: string;
-  type?: string;
-  description?: string;
-  imagePattern?: string;
-  totalFrames?: number;
-};
-
-export type ContentFolder = {
-  name: string;
-  files: ContentFile[];
-};
+export type { ContentFile, ContentFolder, ContentKind, WorkspaceFile } from "@/lib/content-types";
+import type { ContentFile, ContentFolder } from "@/lib/content-types";
 
 const contentDir = path.join(process.cwd(), "content");
 
@@ -34,29 +18,35 @@ function walk(dir: string): string[] {
   });
 }
 
+function parseFile(filePath: string): ContentFile {
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { data, content } = matter(raw);
+  const relative = path.relative(contentDir, filePath).replace(/\\/g, "/");
+  const slug = relative.replace(/\.md$/, "");
+  const folder = relative.includes("/") ? relative.split("/")[0]! : "about";
+
+  return {
+    slug,
+    title: data.title ?? path.basename(filePath, ".md"),
+    filename: path.basename(filePath),
+    category: data.category ?? folder.toUpperCase(),
+    kind: typeof data.kind === "string" ? data.kind : undefined,
+    icon: typeof data.icon === "string" ? data.icon : undefined,
+    featured: data.featured === true,
+    order: typeof data.order === "number" ? data.order : 100,
+    summary: typeof data.summary === "string" ? data.summary : "",
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    content,
+    path: relative,
+    type: typeof data.type === "string" ? data.type : undefined,
+    description: typeof data.description === "string" ? data.description : undefined,
+    imagePattern: typeof data.imagePattern === "string" ? data.imagePattern : undefined,
+    totalFrames: typeof data.totalFrames === "number" ? data.totalFrames : undefined,
+  };
+}
+
 export function getAllFiles(): ContentFile[] {
-  return walk(contentDir)
-    .map((filePath) => {
-      const raw = fs.readFileSync(filePath, "utf8");
-      const { data, content } = matter(raw);
-      const relative = path.relative(contentDir, filePath).replace(/\\/g, "/");
-      const slug = relative.replace(/\.md$/, "");
-      return {
-        slug,
-        title: data.title ?? path.basename(filePath, ".md"),
-        category: data.category ?? path.dirname(relative).split("/")[0] ?? "root",
-        order: data.order ?? 100,
-        summary: data.summary ?? "",
-        tags: Array.isArray(data.tags) ? data.tags : [],
-        content,
-        path: relative,
-        type: typeof data.type === "string" ? data.type : undefined,
-        description: typeof data.description === "string" ? data.description : undefined,
-        imagePattern: typeof data.imagePattern === "string" ? data.imagePattern : undefined,
-        totalFrames: typeof data.totalFrames === "number" ? data.totalFrames : undefined,
-      } satisfies ContentFile;
-    })
-    .sort((a, b) => a.order - b.order || a.path.localeCompare(b.path));
+  return walk(contentDir).map(parseFile);
 }
 
 export function getFile(slug: string): ContentFile | undefined {
@@ -66,12 +56,14 @@ export function getFile(slug: string): ContentFile | undefined {
 export function getFolders(): ContentFolder[] {
   const files = getAllFiles();
   const groups = new Map<string, ContentFile[]>();
+
   for (const file of files) {
-    const folder = file.path.includes("/") ? file.path.split("/")[0] : "root";
+    const folder = file.path.includes("/") ? file.path.split("/")[0]! : "about";
     groups.set(folder, [...(groups.get(folder) ?? []), file]);
   }
-  const order = ["root", "experience", "projects", "capabilities", "patents", "ideas", "Creative Systems"];
-  return Array.from(groups.entries())
-    .sort(([a], [b]) => order.indexOf(a) - order.indexOf(b))
-    .map(([name, files]) => ({ name, files }));
+
+  return FOLDER_ORDER.filter((name) => groups.has(name)).map((name) => ({
+    name,
+    files: (groups.get(name) ?? []).sort((a, b) => a.order - b.order),
+  }));
 }

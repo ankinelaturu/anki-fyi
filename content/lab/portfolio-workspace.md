@@ -1,11 +1,17 @@
 ---
-title: portfolio-workspace.md
+title: Portfolio Workspace
 category: IDEAS
-order: 80
-summary: The idea behind anki.fyi as a local-first professional knowledge workspace.
-tags: [portfolio, knowledge base, local AI, RAG]
+order: 10
+summary: The anki.fyi IDE-style knowledge workspace concept.
+tags:
+  - portfolio
+  - knowledge base
+  - local AI
+  - RAG
+kind: lab
+icon: layout-dashboard
+featured: true
 ---
-
 # portfolio-workspace.md
 
 ## The Idea

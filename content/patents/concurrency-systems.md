@@ -1,11 +1,16 @@
 ---
-title: thread-synchronization.md
+title: Concurrency Systems
 category: PATENTS
-order: 60
-summary: Patent related to thread synchronization for platform neutrality.
-tags: [patent, synchronization, runtime]
+order: 20
+summary: Thread synchronization and concurrent execution innovations.
+tags:
+  - patent
+  - synchronization
+  - runtime
+kind: patent
+icon: git-branch
+featured: false
 ---
-
 # thread-synchronization.md
 
 ## Patent

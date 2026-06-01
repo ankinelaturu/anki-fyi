@@ -1,11 +1,17 @@
 ---
-title: rudy-finds.md
+title: Rudy Finds
 category: PROJECTS
-order: 25
-summary: Semantic search style browser experiment for finding relevant content using AI-assisted retrieval.
-tags: [semantic search, browser extension, retrieval, AI tooling]
+order: 50
+summary: Search-driven discovery experience built around Rudy.
+tags:
+  - semantic search
+  - browser extension
+  - retrieval
+  - AI tooling
+kind: project
+icon: search
+featured: false
 ---
-
 # rudy-finds.md
 
 ## What It Is

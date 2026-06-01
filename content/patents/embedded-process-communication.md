@@ -1,11 +1,16 @@
 ---
-title: embedded-process-communication.md
+title: Embedded Process Communication
 category: PATENTS
-order: 61
-summary: Patent related to virtual channels for embedded process communication.
-tags: [patent, embedded, communication]
+order: 30
+summary: Inter-process communication for embedded and mobile runtimes.
+tags:
+  - patent
+  - embedded
+  - communication
+kind: patent
+icon: radio
+featured: false
 ---
-
 # embedded-process-communication.md
 
 ## Patent

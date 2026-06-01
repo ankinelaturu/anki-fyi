@@ -1,11 +1,17 @@
 ---
-title: lintern.md
+title: Lintern
 category: PROJECTS
-order: 20
-summary: Local-first data guardrails for AI workflows and browser environments.
-tags: [local-first AI, data guardrails, browser extension, embeddings]
+order: 10
+summary: Local-first data guardrails for AI workflows.
+tags:
+  - local-first AI
+  - data guardrails
+  - browser extension
+  - embeddings
+kind: project
+icon: lintern-logo
+featured: true
 ---
-
 # lintern.md
 
 ## What It Is

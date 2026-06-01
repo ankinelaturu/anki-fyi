@@ -1,11 +1,17 @@
 ---
-title: ozmap.md
+title: OzMap
 category: PROJECTS
-order: 21
-summary: AI-powered learning trails with graph-based exploration and synchronized execution state.
-tags: [learning systems, graph orchestration, AI, interactive systems]
+order: 30
+summary: Interactive mapping and spatial exploration project.
+tags:
+  - learning systems
+  - graph orchestration
+  - AI
+  - interactive systems
+kind: project
+icon: map
+featured: false
 ---
-
 # ozmap.md
 
 ## What It Is

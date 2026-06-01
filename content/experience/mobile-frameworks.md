@@ -1,11 +1,17 @@
 ---
-title: mobile-framework.md
+title: Mobile Frameworks
 category: EXPERIENCE
-order: 12
-summary: Cross-platform mobile framework architecture across Java, C/C++, and native mobile layers.
-tags: [Oracle MAF, mobile, runtime systems, Java]
+order: 40
+summary: Mobile application frameworks and runtime systems at Oracle.
+tags:
+  - Oracle MAF
+  - mobile
+  - runtime systems
+  - Java
+kind: experience
+icon: smartphone
+featured: false
 ---
-
 # mobile-framework.md
 
 ## Role

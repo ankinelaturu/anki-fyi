@@ -1,11 +1,17 @@
 ---
-title: zerofabric.md
+title: ZeroFabric
 category: PROJECTS
-order: 26
-summary: Runtime semantic capability coordination concept for agentic workflows and governed execution paths.
-tags: [AI orchestration, agentic workflows, runtime systems, capabilities]
+order: 10
+summary: Runtime semantic capability coordination for agentic workflows.
+tags:
+  - AI orchestration
+  - agentic workflows
+  - runtime systems
+  - capabilities
+kind: writing
+icon: network
+featured: true
 ---
-
 # zerofabric.md
 
 ## What It Is

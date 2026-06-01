@@ -1,11 +1,17 @@
 ---
-title: developer-platforms.md
+title: Developer Platforms
 category: CAPABILITIES
-order: 41
-summary: Developer platforms, visual tooling, and interactive authoring systems.
-tags: [developer platforms, tooling, Visual Builder, authoring]
+order: 20
+summary: Tools and platforms that make complex systems usable for builders.
+tags:
+  - developer platforms
+  - tooling
+  - Visual Builder
+  - authoring
+kind: capability
+icon: terminal
+featured: true
 ---
-
 # developer-platforms.md
 
 ## Developer Platform Experience

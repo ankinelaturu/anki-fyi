@@ -1,11 +1,16 @@
 ---
-title: mobile-application-features.md
+title: Mobile Platform Innovations
 category: PATENTS
-order: 62
-summary: Patent related to assembling features into mobile applications.
-tags: [patent, mobile, application framework]
+order: 40
+summary: Mobile application platform features and runtime enhancements.
+tags:
+  - patent
+  - mobile
+  - application framework
+kind: patent
+icon: layers
+featured: false
 ---
-
 # mobile-application-features.md
 
 ## Patent

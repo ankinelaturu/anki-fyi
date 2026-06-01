@@ -1,11 +1,16 @@
 ---
-title: CONTACT.md
+title: Contact
 category: ABOUT
 order: 3
-summary: Contact links.
-tags: [contact, LinkedIn, email]
+summary: 'Ways to reach Anki for collaboration, consulting, and professional inquiries.'
+tags:
+  - contact
+  - LinkedIn
+  - email
+kind: profile
+icon: mail
+featured: false
 ---
-
 # CONTACT.md
 
 ## Contact

@@ -1,11 +1,17 @@
 ---
-title: ai-orchestration.md
+title: AI Orchestration
 category: CAPABILITIES
-order: 40
-summary: Connecting adaptive LLM capabilities with deterministic, inspectable execution systems.
-tags: [orchestration, LLMs, workflows, function calling]
+order: 10
+summary: 'Agentic workflows, governed execution paths, and capability coordination.'
+tags:
+  - orchestration
+  - LLMs
+  - workflows
+  - function calling
+kind: capability
+icon: network
+featured: true
 ---
-
 # ai-orchestration.md
 
 ## How I Think About AI Orchestration

@@ -1,11 +1,17 @@
 ---
-title: interactive-systems.md
+title: Interactive Systems
 category: CAPABILITIES
-order: 43
-summary: Real-time interfaces, visual programming canvases, and human-AI interaction systems.
-tags: [interactive systems, frontend, UX, real-time]
+order: 40
+summary: 'Low-latency, human-in-the-loop interactive products and authoring tools.'
+tags:
+  - interactive systems
+  - frontend
+  - UX
+  - real-time
+kind: capability
+icon: mouse-pointer
+featured: false
 ---
-
 # interactive-systems.md
 
 ## Interactive Systems

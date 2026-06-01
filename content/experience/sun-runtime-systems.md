@@ -1,11 +1,17 @@
 ---
-title: sun-runtime-systems.md
+title: Sun Runtime Systems
 category: EXPERIENCE
-order: 13
-summary: Embedded JVM, Java Card VM, and secure runtime systems work at Sun Microsystems and Oracle.
-tags: [Sun Microsystems, JVM, embedded, runtime systems]
+order: 50
+summary: Embedded JVM and runtime platform work at Sun Microsystems.
+tags:
+  - Sun Microsystems
+  - JVM
+  - embedded
+  - runtime systems
+kind: experience
+icon: cpu
+featured: true
 ---
-
 # sun-runtime-systems.md
 
 ## What I Worked On

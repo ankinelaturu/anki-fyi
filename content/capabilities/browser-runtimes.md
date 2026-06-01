@@ -1,11 +1,17 @@
 ---
-title: browser-runtimes.md
+title: Browser Runtimes
 category: CAPABILITIES
-order: 42
-summary: Browser-native systems, local-first AI, extensions, and in-browser execution.
-tags: [browser, local-first, ONNX, extensions]
+order: 30
+summary: 'Browser-native AI, WebLLM, and local-first execution models.'
+tags:
+  - browser
+  - local-first
+  - ONNX
+  - extensions
+kind: capability
+icon: globe
+featured: false
 ---
-
 # browser-runtimes.md
 
 ## Browser Runtime Interests

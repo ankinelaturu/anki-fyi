@@ -1,11 +1,16 @@
 ---
-title: embedded-jvm.md
+title: Embedded JVM Runtime
 category: PATENTS
-order: 63
-summary: Patent related to JVM embedded in a native mobile application.
-tags: [patent, JVM, mobile]
+order: 50
+summary: Embedded JVM architecture and runtime optimizations.
+tags:
+  - patent
+  - JVM
+  - mobile
+kind: patent
+icon: cpu
+featured: false
 ---
-
 # embedded-jvm.md
 
 ## Patent

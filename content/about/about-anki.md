@@ -1,11 +1,19 @@
 ---
-title: ABOUT_ANKI.md
+title: About Anki
 category: ABOUT
 order: 1
-summary: Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.
-tags: [AI orchestration, developer platforms, TypeScript, runtime systems]
+summary: >-
+  Principal engineer specializing in AI orchestration, developer platforms, and
+  interactive systems.
+tags:
+  - AI orchestration
+  - developer platforms
+  - TypeScript
+  - runtime systems
+kind: profile
+icon: user
+featured: false
 ---
-
 # ABOUT_ANKI.md
 
 Principal Engineer specializing in **AI-native orchestration systems**, `developer platforms`, and `runtime workflows`.

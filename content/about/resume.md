@@ -1,11 +1,17 @@
 ---
-title: RESUME.md
+title: Resume
 category: ABOUT
 order: 2
-summary: Resume summary, skills, selected projects, and career history.
-tags: [resume, Oracle, Sun Microsystems, AI systems]
+summary: 'Resume summary, skills, selected projects, and career history.'
+tags:
+  - resume
+  - Oracle
+  - Sun Microsystems
+  - AI systems
+kind: profile
+icon: file-user
+featured: false
 ---
-
 # RESUME.md
 
 ## Headline

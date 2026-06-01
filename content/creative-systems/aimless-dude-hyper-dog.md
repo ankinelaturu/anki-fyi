@@ -2,9 +2,9 @@
 title: Aimless Dude & Hyper Dog
 type: filmstrip
 category: Creative Systems
-description: Caveman-style micro stories (Caikus) featuring Anki and Rudy.
-imagePattern: /images/adhd/d{day}.png
-totalFrames: 100
+description: Caveman-style micro stories (Caikus) featuring Aimless Dude and Rudy.
+imagePattern: '/images/adhd/d{day}.png'
+totalFrames: 126
 characters:
   - Aimless Dude
   - Rudy
@@ -14,8 +14,12 @@ tags:
   - comic strip
   - creative systems
   - daily project
+kind: creative
+icon: film
+summary: Daily illustrated diary with Caiku micro-poems and filmstrip viewer.
+featured: true
+order: 10
 ---
-
 # Aimless Dude & Hyper Dog
 
 A daily illustrated diary about two idiots exploring the world together.

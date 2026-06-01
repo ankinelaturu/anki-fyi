@@ -1,11 +1,17 @@
 ---
-title: oracle-visual-builder.md
+title: Oracle Visual Builder
 category: EXPERIENCE
 order: 10
-summary: Oracle Visual Builder platform work spanning TypeScript enablement and generative AI integration.
-tags: [Oracle, Visual Builder, TypeScript, generative AI]
+summary: Enterprise visual application development platform at Oracle.
+tags:
+  - Oracle
+  - Visual Builder
+  - TypeScript
+  - generative AI
+kind: experience
+icon: blocks
+featured: true
 ---
-
 # oracle-visual-builder.md
 
 ## Role

@@ -1,11 +1,17 @@
 ---
-title: crafticle.md
+title: Crafticle
 category: PROJECTS
-order: 22
-summary: AI-assisted idea-to-article composer focused on iterative human-guided writing workflows.
-tags: [AI writing, TipTap, React, human-in-the-loop]
+order: 70
+summary: Authoring and publishing tools for structured creative writing.
+tags:
+  - AI writing
+  - TipTap
+  - React
+  - human-in-the-loop
+kind: project
+icon: pen-tool
+featured: false
 ---
-
 # crafticle.md
 
 ## What It Is

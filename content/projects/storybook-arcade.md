@@ -1,11 +1,17 @@
 ---
-title: storybook-arcade.md
+title: Storybook Arcade
 category: PROJECTS
-order: 23
-summary: Multimodal storytelling system orchestrating LLMs, image generation, and TTS into synchronized story workflows.
-tags: [multimodal AI, storytelling, TTS, orchestration]
+order: 40
+summary: Playful component exploration and interactive UI experiments.
+tags:
+  - multimodal AI
+  - storytelling
+  - TTS
+  - orchestration
+kind: project
+icon: gamepad
+featured: false
 ---
-
 # storybook-arcade.md
 
 ## What It Is

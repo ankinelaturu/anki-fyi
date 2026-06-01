@@ -1,11 +1,17 @@
 ---
-title: ask-rudy.md
+title: Ask Rudy
 category: PROJECTS
-order: 24
-summary: Retrieval-style Q&A concept for asking questions over local or page-level knowledge.
-tags: [retrieval, local AI, Q&A, browser]
+order: 60
+summary: Conversational interface for guided exploration and Q&A.
+tags:
+  - retrieval
+  - local AI
+  - Q&A
+  - browser
+kind: project
+icon: message-circle
+featured: false
 ---
-
 # ask-rudy.md
 
 ## What It Is

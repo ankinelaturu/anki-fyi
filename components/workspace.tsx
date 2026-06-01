@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronDown, ChevronRight, FileText, Folder, FolderOpen, Search, Sparkles, Terminal, Circle } from "lucide-react";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
-import type { ContentFile, ContentFolder } from "@/lib/content";
+import { FileIcon } from "@/components/workspace/FileIcon";
+import type { ContentFile, ContentFolder } from "@/lib/content-types";
+import { FOLDER_LABELS } from "@/lib/folders";
 import { usePanelResize } from "@/lib/use-panel-resize";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -14,16 +16,6 @@ import { cn } from "@/lib/utils";
 type WorkspaceProps = {
   folders: ContentFolder[];
   initialSlug: string;
-};
-
-const folderLabels: Record<string, string> = {
-  root: "ABOUT",
-  experience: "EXPERIENCE",
-  projects: "PROJECTS",
-  capabilities: "CAPABILITIES",
-  patents: "PATENTS",
-  ideas: "IDEAS",
-  "Creative Systems": "CREATIVE SYSTEMS",
 };
 
 const TERMINAL_HEADER_HEIGHT = 32;
@@ -66,11 +58,20 @@ function promptAnswer(question: string, files: ContentFile[]) {
 export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   const allFiles = useMemo(() => folders.flatMap((folder) => folder.files), [folders]);
   const [activeSlug, setActiveSlug] = useState(initialSlug);
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ root: true, experience: true, projects: true, capabilities: true, patents: false, ideas: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({
+    about: true,
+    experience: true,
+    capabilities: true,
+    projects: true,
+    writing: false,
+    patents: false,
+    lab: true,
+    "creative-systems": true,
+  });
   const [query, setQuery] = useState("");
   const [terminalHistory, setTerminalHistory] = useState<string[]>([
     "Workspace ready.",
-    "Indexed 20 markdown files.",
+    `Indexed ${folders.flatMap((f) => f.files).length} workspace files.`,
     "Type help, open lintern.md, search orchestration, or ask \"What is ZeroFabric?\"",
   ]);
   const getMaxTerminalBodyHeight = useCallback(
@@ -136,15 +137,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     if (command === "help") {
       output = `Available commands:\n\nopen <file>\nsearch <topic>\nask "<question>"\nresume\ncontact\nprojects`;
     } else if (command === "projects") {
-      output = allFiles.filter((file) => file.category === "PROJECTS").map((file) => file.path).join("\n");
+      output = allFiles.filter((file) => file.path.startsWith("projects/")).map((file) => file.path).join("\n");
     } else if (command === "resume") {
-      const resume = allFiles.find((file) => file.path === "resume.md");
+      const resume = allFiles.find((file) => file.path === "about/resume.md");
       if (resume) setActiveSlug(resume.slug);
-      output = "Opening RESUME.md";
+      output = "Opening resume.md";
     } else if (command === "contact") {
-      const contact = allFiles.find((file) => file.path === "contact.md");
+      const contact = allFiles.find((file) => file.path === "about/contact.md");
       if (contact) setActiveSlug(contact.slug);
-      output = "Opening CONTACT.md";
+      output = "Opening contact.md";
     } else if (command.startsWith("open ")) {
       const target = command.replace(/^open\s+/, "").replace(/^\//, "").toLowerCase();
       const match = allFiles.find((file) => file.path.toLowerCase().includes(target) || file.title.toLowerCase().includes(target));
@@ -205,23 +206,35 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   >
                     {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
                     {isOpen ? <FolderOpen className="h-3.5 w-3.5 text-ide-blue" /> : <Folder className="h-3.5 w-3.5 text-ide-blue" />}
-                    <span>{folderLabels[folder.name] ?? folder.name.toUpperCase()}</span>
+                    <span>{FOLDER_LABELS[folder.name] ?? folder.name.toUpperCase()}</span>
                   </button>
                   {isOpen && (
                     <div className="ml-4 border-l border-[#303030] pl-2">
-                      {folder.files.map((file) => (
+                      {folder.files.map((file) => {
+                        const isActive = activeFile.slug === file.slug;
+                        return (
                         <button
                           key={file.slug}
                           onClick={() => setActiveSlug(file.slug)}
                           className={cn(
                             "flex w-full items-center gap-2 rounded px-1 py-1 text-left text-[12px] hover:bg-ide-active",
-                            activeFile.slug === file.slug ? "bg-ide-active text-white" : "text-ide-text"
+                            isActive ? "bg-ide-active text-white" : "text-ide-text"
                           )}
                         >
-                          <FileText className="h-3.5 w-3.5 text-ide-green" />
-                          <span className="truncate">{file.title}</span>
+                          <FileIcon file={file} selected={isActive} />
+                          <span className="min-w-0 flex-1 truncate">{file.title}</span>
+                          {file.featured && (
+                            <span
+                              className={cn(
+                                "h-1.5 w-1.5 shrink-0 rounded-full",
+                                isActive ? "bg-ide-blue" : "bg-ide-yellow"
+                              )}
+                              aria-label="Featured"
+                            />
+                          )}
                         </button>
-                      ))}
+                      );
+                      })}
                     </div>
                   )}
                 </div>
@@ -242,8 +255,8 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         <section className="flex min-h-0 min-w-0 flex-1 flex-col bg-ide-bg">
           <div className="flex h-9 shrink-0 items-center border-b border-ide-border bg-[#202020] text-xs">
             <div className="flex h-full items-center border-r border-ide-border bg-ide-bg px-3 text-ide-text">
-              <FileText className="mr-2 h-3.5 w-3.5 text-ide-green" />
-              {activeFile.title}
+              <FileIcon file={activeFile} selected className="mr-1 text-ide-green" />
+              {activeFile.filename}
             </div>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">

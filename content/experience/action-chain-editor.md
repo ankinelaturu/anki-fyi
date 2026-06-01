@@ -1,11 +1,17 @@
 ---
-title: action-chain-editor.md
+title: Action Chain Editor
 category: EXPERIENCE
-order: 11
-summary: High-performance visual programming canvas for composing application logic through drag-and-drop workflows.
-tags: [visual programming, orchestration, developer tools, Oracle]
+order: 20
+summary: Visual workflow authoring for enterprise mobile and web applications.
+tags:
+  - visual programming
+  - orchestration
+  - developer tools
+  - Oracle
+kind: experience
+icon: workflow
+featured: true
 ---
-
 # action-chain-editor.md
 
 ## Role
