@@ -1,7 +1,10 @@
 export const ASSISTANT_CORPUS_URL = "/assistant/corpus.json";
 export const ASSISTANT_VECTORS_URL = "/assistant/vectors.json";
 
-export const ASSISTANT_MIN_SCORE = 0.38;
+/** Min score to include a chunk in the top-K set passed to Gemma. */
+export const ASSISTANT_MIN_SCORE = 0.28;
+/** Below this top-1 score, refuse before calling Gemma (clearly off-topic). */
+export const ASSISTANT_REFUSE_BELOW_SCORE = 0.22;
 export const ASSISTANT_TOP_K = 5;
 
 export const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";

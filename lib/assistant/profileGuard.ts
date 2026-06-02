@@ -1,4 +1,4 @@
-import { ASSISTANT_MIN_SCORE } from "@/lib/assistant/config";
+import { ASSISTANT_REFUSE_BELOW_SCORE } from "@/lib/assistant/config";
 import type { RetrievalResult } from "@/lib/assistant/types";
 
 const BLOCKLIST: RegExp[] = [
@@ -24,7 +24,7 @@ export function isBlocklistedQuestion(question: string): boolean {
 
 export function isRelevantRetrieval(results: RetrievalResult[]): boolean {
   if (results.length === 0) return false;
-  return results[0]!.score >= ASSISTANT_MIN_SCORE;
+  return results[0]!.score >= ASSISTANT_REFUSE_BELOW_SCORE;
 }
 
 export function shouldRefuseQuestion(question: string, results: RetrievalResult[]): boolean {

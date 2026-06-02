@@ -42,6 +42,16 @@ export async function askAnki(
 
   const results = await searchSimilar(q, undefined, callbacks?.onStatus);
 
+  if (process.env.NODE_ENV === "development") {
+    const top = results[0];
+    console.debug("[Ask Anki] retrieval", {
+      question: q,
+      topScore: top?.score ?? null,
+      topPath: top?.chunk.path ?? null,
+      resultCount: results.length,
+    });
+  }
+
   if (shouldRefuseQuestion(q, results)) {
     return {
       answer: REFUSAL_MESSAGE,

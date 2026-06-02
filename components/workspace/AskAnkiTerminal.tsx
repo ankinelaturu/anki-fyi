@@ -220,15 +220,15 @@ export function AskAnkiTerminal({
 
       <div className="flex min-h-0 flex-1">
         <div
-          className="flex h-full shrink-0 items-center border-r border-ide-border bg-[#0d0d0d] pl-2 pr-0 max-md:hidden"
+          className="flex h-full shrink-0 items-end justify-start border-r border-ide-border bg-[#0d0d0d] max-md:hidden"
           style={{ width: portraitPanelWidth }}
         >
           <Image
-            src="/anki.png"
+            src="/anki2.png"
             alt="Anki Nelaturu"
             width={portraitWidth}
             height={portraitHeight}
-            className="h-full w-auto object-contain"
+            className="h-full w-auto object-contain object-left-bottom"
             sizes="(max-width: 768px) 0px, 200px"
           />
         </div>

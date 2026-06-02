@@ -34,7 +34,7 @@ const DEFAULT_INSIGHTS_WIDTH = 300;
 const MIN_INSIGHTS_WIDTH = 200;
 const MAX_INSIGHTS_WIDTH = 520;
 
-const PORTRAIT_WIDTH = 712;
+const PORTRAIT_WIDTH = 668;
 const PORTRAIT_HEIGHT = 882;
 
 export function Workspace({ folders, initialSlug }: WorkspaceProps) {
