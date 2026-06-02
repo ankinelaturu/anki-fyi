@@ -1,4 +1,4 @@
-import { MAX_CONTEXT_CHARS } from "@/lib/assistant/config";
+import { MAX_CHUNK_BODY_CHARS, MAX_CONTEXT_CHARS } from "@/lib/assistant/config";
 import type { CorpusChunk } from "@/lib/assistant/types";
 
 export const ANKI_MISSING_INFO_REPLY = "I don't have that in my portfolio yet.";
@@ -31,13 +31,19 @@ Answer style:
 - Do not include source links inside the answer body; the UI displays source links separately.
 - If there are multiple relevant areas, connect them clearly but do not overstate the connection.`;
 
+function truncateChunkBody(text: string, maxChars: number): string {
+  if (text.length <= maxChars) return text;
+  return `${text.slice(0, maxChars)}\n...[truncated]`;
+}
+
 function formatSourceBlock(chunk: CorpusChunk): string {
+  const body = truncateChunkBody(chunk.text, MAX_CHUNK_BODY_CHARS);
   return [
     `SOURCE_PATH: ${chunk.path}`,
     `SOURCE_TITLE: ${chunk.title}`,
     `SOURCE_KIND: ${chunk.kind}`,
     "TEXT:",
-    chunk.text,
+    body,
   ].join("\n");
 }
 

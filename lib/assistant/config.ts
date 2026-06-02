@@ -5,6 +5,12 @@ export const ASSISTANT_VECTORS_URL = "/assistant/vectors.json";
 export const ASSISTANT_REFUSE_BELOW_SCORE = 0.12;
 export const ASSISTANT_TOP_K = 5;
 
+/** Max chunks passed into Gemma (Gemma 2 2B context window is 4096 tokens). */
+export const GEMMA_CONTEXT_TOP_K = 3;
+
+/** Max new tokens per answer — leave room for system + retrieved context in 4096 window. */
+export const GEMMA_MAX_NEW_TOKENS = 384;
+
 export const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";
 
 export const GEMMA_MODEL_FALLBACK_CHAIN = [
@@ -28,8 +34,11 @@ export const GEMMA_GENERATE_ERROR_HEADING = "Local Gemma failed while generating
 export const WEBGPU_UNSUPPORTED_MESSAGE =
   "Local Gemma requires WebGPU support in this browser. Try Chrome or Edge with WebGPU enabled.";
 
-/** Rough character budget for retrieved context passed to Gemma. */
-export const MAX_CONTEXT_CHARS = 12_000;
+/** Character budget for retrieved TEXT passed to Gemma (~3k tokens with system + question). */
+export const MAX_CONTEXT_CHARS = 5_000;
+
+/** Per-chunk body cap so one filmstrip day does not dominate the window. */
+export const MAX_CHUNK_BODY_CHARS = 1_800;
 
 export const CHUNK_TARGET_MIN_WORDS = 500;
 export const CHUNK_TARGET_MAX_WORDS = 900;

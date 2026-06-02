@@ -1,4 +1,8 @@
-import { GEMMA_LOAD_ERROR_HEADING, GEMMA_MODEL_FALLBACK_CHAIN } from "@/lib/assistant/config";
+import {
+  GEMMA_LOAD_ERROR_HEADING,
+  GEMMA_MAX_NEW_TOKENS,
+  GEMMA_MODEL_FALLBACK_CHAIN,
+} from "@/lib/assistant/config";
 import { ASK_ANKI_SYSTEM_PROMPT, buildUserPrompt } from "@/lib/assistant/prompt";
 
 export type LocalModelInput = {
@@ -105,7 +109,7 @@ export function createGemmaWebLLMProvider(): LocalChatModel {
       const stream = await engine.chat.completions.create({
         messages,
         temperature: 0.2,
-        max_tokens: 512,
+        max_tokens: GEMMA_MAX_NEW_TOKENS,
         stream: true,
         stream_options: { include_usage: false },
       });

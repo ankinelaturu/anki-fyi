@@ -1,4 +1,5 @@
 import {
+  GEMMA_CONTEXT_TOP_K,
   GEMMA_GENERATE_ERROR_HEADING,
   GEMMA_LOAD_ERROR_HEADING,
   REFUSAL_MESSAGE,
@@ -21,6 +22,15 @@ function formatGemmaFailure(heading: string, error: unknown): string {
   const detail =
     error instanceof Error ? error.message : typeof error === "string" ? error : String(error);
   return detail && !heading.includes(detail) ? `${heading}\n\n${detail}` : heading;
+}
+
+function isContextWindowExceeded(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  return (
+    error.name === "ContextWindowSizeExceededError" ||
+    error.message.includes("context window size") ||
+    error.message.includes("Prompt tokens exceed")
+  );
 }
 
 function logGemmaFailure(phase: "load" | "generate", error: unknown, question: string): void {
@@ -75,7 +85,7 @@ export async function askAnki(
     };
   }
 
-  const chunks = results.map((r) => r.chunk);
+  const contextChunks = results.slice(0, GEMMA_CONTEXT_TOP_K).map((r) => r.chunk);
   const sources = dedupeSourcesByPath(
     results.map((r) => ({
       path: r.chunk.path,
@@ -106,7 +116,7 @@ export async function askAnki(
   }
 
   callbacks?.onStatus?.("Answering from local context...");
-  const context = buildContextFromChunks(chunks);
+  const context = buildContextFromChunks(contextChunks);
 
   try {
     const answer = await chatModel.generate(
@@ -125,8 +135,11 @@ export async function askAnki(
     };
   } catch (error) {
     logGemmaFailure("generate", error, q);
+    const heading = isContextWindowExceeded(error)
+      ? "The retrieved context was too large for the local Gemma model (4096 token window). Try a more specific question."
+      : GEMMA_GENERATE_ERROR_HEADING;
     return {
-      answer: formatGemmaFailure(GEMMA_GENERATE_ERROR_HEADING, error),
+      answer: formatGemmaFailure(heading, error),
       sources,
       refused: false,
     };
