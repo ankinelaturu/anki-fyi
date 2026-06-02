@@ -1,11 +1,7 @@
-import {
-  ASSISTANT_CORPUS_URL,
-  ASSISTANT_MIN_SCORE,
-  ASSISTANT_TOP_K,
-  ASSISTANT_VECTORS_URL,
-} from "@/lib/assistant/config";
+import { ASSISTANT_CORPUS_URL, ASSISTANT_TOP_K, ASSISTANT_VECTORS_URL } from "@/lib/assistant/config";
 import { createEmbeddingProvider } from "@/lib/assistant/embeddings";
 import { cosineSimilarity } from "@/lib/assistant/math";
+import { mergeRetrievalWithBoost } from "@/lib/assistant/retrievalBoost";
 import type {
   CorpusChunk,
   CorpusFile,
@@ -79,10 +75,14 @@ export async function searchSimilar(
       chunk: chunk as CorpusChunk,
       score: cosineSimilarity(queryEmbedding, chunk.embedding),
     }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, topK);
+    .sort((a, b) => b.score - a.score);
 
-  return scored.filter((item) => item.score >= ASSISTANT_MIN_SCORE * 0.5);
+  const chunksByPath = new Map<string, CorpusChunk>();
+  for (const item of indexed) {
+    if (!chunksByPath.has(item.path)) {
+      chunksByPath.set(item.path, item as CorpusChunk);
+    }
+  }
+
+  return mergeRetrievalWithBoost(question, scored, chunksByPath, topK);
 }
-
-export { ASSISTANT_MIN_SCORE };

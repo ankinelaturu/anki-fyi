@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 const CLI_COMMANDS = new Set(["help", "resume", "contact", "projects"]);
 
 const SUGGESTED_PROMPTS = [
-  "Tell me about your self.",
+  "Tell me about yourself.",
   "Tell me about Lintern.",
   "What is AstroValley?",
   "What is ZeroFabric?",
@@ -255,7 +255,7 @@ export function AskAnkiTerminal({
             )}
 
             {currentQuestion && (
-              <p className="mt-2 whitespace-pre-wrap text-ide-blue">› {currentQuestion}</p>
+              <p className="mt-2 whitespace-pre-wrap text-[12px] text-[#f87171]">› {currentQuestion}</p>
             )}
 
             {status && <p className="mt-1 text-ide-yellow">{status}</p>}
@@ -299,8 +299,7 @@ export function AskAnkiTerminal({
           </div>
 
           <div className="flex shrink-0 items-center gap-1 border-t border-ide-border px-3 py-2 text-xs">
-            <span className="shrink-0 text-[13px] text-[#f87171]">Ask Anki</span>
-            <span className="shrink-0 text-[13px] text-ide-muted">›</span>
+            <span className="shrink-0 text-[13px] text-[#f87171]">Ask Anki ›</span>
             <Input
               value={query}
               onChange={(event) => setQuery(event.target.value)}

@@ -1,4 +1,5 @@
 import { ASSISTANT_REFUSE_BELOW_SCORE } from "@/lib/assistant/config";
+import { isAboutMeQuestion } from "@/lib/assistant/retrievalBoost";
 import type { RetrievalResult } from "@/lib/assistant/types";
 
 const BLOCKLIST: RegExp[] = [
@@ -29,5 +30,6 @@ export function isRelevantRetrieval(results: RetrievalResult[]): boolean {
 
 export function shouldRefuseQuestion(question: string, results: RetrievalResult[]): boolean {
   if (isBlocklistedQuestion(question)) return true;
+  if (isAboutMeQuestion(question) && results.length > 0) return false;
   return !isRelevantRetrieval(results);
 }
