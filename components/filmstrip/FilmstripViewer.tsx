@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
@@ -26,6 +26,7 @@ export function FilmstripViewer({ title, description, markdown, imagePattern, to
   const [viewMode, setViewMode] = useState<ViewMode>("filmstrip");
   const [selectedDay, setSelectedDay] = useState(0);
   const [search, setSearch] = useState("");
+  const selectedThumbnailRef = useRef<HTMLButtonElement>(null);
 
   const filteredFrames = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -71,6 +72,15 @@ export function FilmstripViewer({ title, description, markdown, imagePattern, to
     if (filteredFrames.some((frame) => frame.day === selectedDay)) return;
     if (filteredFrames[0]) setSelectedDay(filteredFrames[0].day);
   }, [filteredFrames, search, selectedDay]);
+
+  useEffect(() => {
+    if (viewMode !== "filmstrip") return;
+    selectedThumbnailRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [selectedDay, viewMode, filteredFrames]);
 
   useEffect(() => {
     if (viewMode !== "filmstrip") return;
@@ -173,6 +183,7 @@ export function FilmstripViewer({ title, description, markdown, imagePattern, to
             filteredFrames.map((frame) => (
               <FilmstripThumbnail
                 key={frame.day}
+                ref={frame.day === selectedDay ? selectedThumbnailRef : undefined}
                 frame={frame}
                 selected={frame.day === selectedDay}
                 onSelect={() => goToDay(frame.day)}

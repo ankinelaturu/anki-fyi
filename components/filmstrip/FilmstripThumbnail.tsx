@@ -1,5 +1,6 @@
 "use client";
 
+import { forwardRef } from "react";
 import Image from "next/image";
 import type { FilmstripFrame } from "@/lib/filmstrip";
 import { cn } from "@/lib/utils";
@@ -10,9 +11,11 @@ type FilmstripThumbnailProps = {
   onSelect: () => void;
 };
 
-export function FilmstripThumbnail({ frame, selected, onSelect }: FilmstripThumbnailProps) {
+export const FilmstripThumbnail = forwardRef<HTMLButtonElement, FilmstripThumbnailProps>(
+  function FilmstripThumbnail({ frame, selected, onSelect }, ref) {
   return (
     <button
+      ref={ref}
       type="button"
       onClick={onSelect}
       className={cn(
@@ -39,4 +42,4 @@ export function FilmstripThumbnail({ frame, selected, onSelect }: FilmstripThumb
       </span>
     </button>
   );
-}
+});
