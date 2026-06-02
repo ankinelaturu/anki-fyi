@@ -35,6 +35,46 @@ function pathToSlug(filePath: string): string {
   return filePath.replace(/\.md$/i, "");
 }
 
+const STATUS_DOT_INTERVAL_MS = 450;
+
+/** Three fixed slots — hidden dots stay in layout so the line never shifts. */
+function StatusDots({ visibleCount }: { visibleCount: number }) {
+  return (
+    <span className="inline-flex font-mono" aria-hidden>
+      {[0, 1, 2].map((index) => (
+        <span key={index} className={index < visibleCount ? undefined : "invisible"}>
+          .
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function AnimatedStatusLine({ status, animate }: { status: string; animate: boolean }) {
+  const [dotCount, setDotCount] = useState(1);
+  const base = status.replace(/\.+$/, "");
+  const staticDotCount = status.match(/\.+$/)?.[0]?.length ?? 0;
+
+  useEffect(() => {
+    if (!animate) return;
+    const id = window.setInterval(() => {
+      setDotCount((count) => (count % 3) + 1);
+    }, STATUS_DOT_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [animate, status]);
+
+  return (
+    <p className="mt-1 text-ide-yellow">
+      {base}
+      {animate ? (
+        <StatusDots visibleCount={dotCount} />
+      ) : staticDotCount > 0 ? (
+        <StatusDots visibleCount={staticDotCount} />
+      ) : null}
+    </p>
+  );
+}
+
 export function AskAnkiTerminal({
   files,
   portraitPanelWidth,
@@ -258,7 +298,9 @@ export function AskAnkiTerminal({
               <p className="mt-2 whitespace-pre-wrap text-[12px] text-[#f87171]">› {currentQuestion}</p>
             )}
 
-            {status && <p className="mt-1 text-ide-yellow">{status}</p>}
+            {status && (
+              <AnimatedStatusLine key={status} status={status} animate={loading} />
+            )}
 
             {answer && <pre className="mt-2 whitespace-pre-wrap text-ide-text">{answer}</pre>}
 
