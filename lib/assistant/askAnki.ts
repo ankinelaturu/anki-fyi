@@ -8,6 +8,7 @@ import {
   ANKI_MISSING_INFO_REPLY,
   ASK_ANKI_SYSTEM_PROMPT,
   buildContextFromChunks,
+  buildUserPrompt,
 } from "@/lib/assistant/prompt";
 import { shouldRefuseQuestion } from "@/lib/assistant/profileGuard";
 import type { AskAnkiCallbacks, AskAnkiResponse, AskAnkiSource } from "@/lib/assistant/types";
@@ -82,10 +83,12 @@ export async function askAnki(
   const context = buildContextFromChunks(chunks);
 
   try {
+    const groundedQuestion = buildUserPrompt(q, context);
+
     const answer = await chatModel.generate(
       {
         system: ASK_ANKI_SYSTEM_PROMPT,
-        question: q,
+        question: groundedQuestion,
         context,
       },
       { onToken: callbacks?.onToken }

@@ -14,7 +14,7 @@ export const GEMMA_MODEL_FALLBACK_CHAIN = [
 ] as const;
 
 export const REFUSAL_MESSAGE =
-  "I only answer questions about my work, projects, experience, writing, and this portfolio site.";
+  "I only answer questions about my profile, projects, experience, writing, and portfolio workspace.";
 
 export const PRIVACY_NOTE =
   "Runs locally in your browser. Model weights may download on first use. Answers are grounded in this workspace.";
