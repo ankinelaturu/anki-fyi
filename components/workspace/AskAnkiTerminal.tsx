@@ -178,6 +178,7 @@ export function AskAnkiTerminal({
           },
           onToken: (token) => {
             if (askAbortRef.current !== askId) return;
+            setStatus((prev) => (prev ? null : prev));
             setAnswer((prev) => prev + token);
           },
         });
