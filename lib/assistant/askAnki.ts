@@ -6,11 +6,22 @@ import {
 import { createGemmaWebLLMProvider } from "@/lib/assistant/modelProvider";
 import { ASK_ANKI_SYSTEM_PROMPT, buildContextFromChunks } from "@/lib/assistant/prompt";
 import { shouldRefuseQuestion } from "@/lib/assistant/profileGuard";
-import type { AskAnkiCallbacks, AskAnkiResponse } from "@/lib/assistant/types";
+import type { AskAnkiCallbacks, AskAnkiResponse, AskAnkiSource } from "@/lib/assistant/types";
 import { ensureVectorIndex, searchSimilar } from "@/lib/assistant/vectorIndex";
 import { isWebGPUAvailable } from "@/lib/assistant/webgpu";
 
 const chatModel = createGemmaWebLLMProvider();
+
+function dedupeSourcesByPath(sources: AskAnkiSource[]): AskAnkiSource[] {
+  const byPath = new Map<string, AskAnkiSource>();
+  for (const source of sources) {
+    const existing = byPath.get(source.path);
+    if (!existing || source.score > existing.score) {
+      byPath.set(source.path, source);
+    }
+  }
+  return [...byPath.values()].sort((a, b) => b.score - a.score);
+}
 
 export async function askAnki(
   question: string,
@@ -35,11 +46,13 @@ export async function askAnki(
   }
 
   const chunks = results.map((r) => r.chunk);
-  const sources = results.map((r) => ({
-    path: r.chunk.path,
-    title: r.chunk.title,
-    score: r.score,
-  }));
+  const sources = dedupeSourcesByPath(
+    results.map((r) => ({
+      path: r.chunk.path,
+      title: r.chunk.title,
+      score: r.score,
+    }))
+  );
 
   const webgpu = await isWebGPUAvailable();
   if (!webgpu) {
