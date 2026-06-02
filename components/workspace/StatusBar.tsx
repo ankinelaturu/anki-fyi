@@ -29,6 +29,7 @@ function StatusBarItem({
   icon: LucideIcon;
   href?: string;
 }) {
+  const tip = href?.startsWith("http") ? href : text;
   const inner = (
     <span
       className={cn(
@@ -48,6 +49,7 @@ function StatusBarItem({
         {href ? (
           <a
             href={href}
+            aria-label={text}
             className="flex h-full items-center outline-none"
             {...(href.startsWith("http")
               ? { target: "_blank", rel: "noopener noreferrer" }
@@ -61,7 +63,9 @@ function StatusBarItem({
           </button>
         )}
       </TooltipTrigger>
-      <TooltipContent side="top">{text}</TooltipContent>
+      <TooltipContent side="top" className="max-w-xs break-all">
+        {tip}
+      </TooltipContent>
     </Tooltip>
   );
 }

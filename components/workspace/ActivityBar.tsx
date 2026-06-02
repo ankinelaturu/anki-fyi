@@ -1,10 +1,23 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import type { ReactElement } from "react";
 import { Files, Search, Linkedin, Github, Youtube, Mail } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { PdfIcon } from "@/components/workspace/PdfIcon";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 import { cn } from "@/lib/utils";
+
+function ActivityBarTooltip({ tip, children }: { tip: string; children: ReactElement }) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent side="right" className="max-w-xs break-all">
+        {tip}
+      </TooltipContent>
+    </Tooltip>
+  );
+}
 
 export type SidePanelView = "explorer" | "search";
 
@@ -25,19 +38,20 @@ function ActivityBarButton({
   onClick?: () => void;
 }) {
   return (
-    <button
-      type="button"
-      title={label}
-      aria-label={label}
-      aria-current={active ? "page" : undefined}
-      onClick={onClick}
-      className={cn(
-        "relative flex h-14 w-14 items-center justify-center text-ide-muted transition-colors hover:text-ide-text",
-        active && "text-ide-text before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-ide-blue"
-      )}
-    >
-      <Icon className="h-6 w-6" strokeWidth={1.75} />
-    </button>
+    <ActivityBarTooltip tip={label}>
+      <button
+        type="button"
+        aria-label={label}
+        aria-current={active ? "page" : undefined}
+        onClick={onClick}
+        className={cn(
+          "relative flex h-14 w-14 items-center justify-center text-ide-muted transition-colors hover:text-ide-text",
+          active && "text-ide-text before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-ide-blue"
+        )}
+      >
+        <Icon className="h-6 w-6" strokeWidth={1.75} />
+      </button>
+    </ActivityBarTooltip>
   );
 }
 
@@ -55,16 +69,17 @@ function ActivityBarLink({
   const external = href.startsWith("http");
 
   return (
-    <a
-      href={href}
-      title={label}
-      aria-label={label}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      className="flex h-11 w-14 items-center justify-center text-ide-muted transition-colors hover:bg-ide-active hover:text-ide-text"
-    >
-      {Icon === PdfIcon ? <PdfIcon className="h-5 w-5" /> : <Icon className="h-5 w-5" strokeWidth={1.75} />}
-    </a>
+    <ActivityBarTooltip tip={href}>
+      <a
+        href={href}
+        aria-label={label}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="flex h-11 w-14 items-center justify-center text-ide-muted transition-colors hover:bg-ide-active hover:text-ide-text"
+      >
+        {Icon === PdfIcon ? <PdfIcon className="h-5 w-5" /> : <Icon className="h-5 w-5" strokeWidth={1.75} />}
+      </a>
+    </ActivityBarTooltip>
   );
 }
 
