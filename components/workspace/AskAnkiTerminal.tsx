@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 const CLI_COMMANDS = new Set(["help", "resume", "contact", "projects"]);
 
 const SUGGESTED_PROMPTS = [
-  "What did you do at Oracle?",
+  "Tell me about your self.",
   "Tell me about Lintern.",
   "What is AstroValley?",
   "What is ZeroFabric?",
@@ -304,7 +304,7 @@ export function AskAnkiTerminal({
             <Input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="What did you do at Oracle?"
+              placeholder="Ask a question…"
               aria-label="Ask Anki a question"
               disabled={loading}
               className="h-7 px-1 text-xs"
