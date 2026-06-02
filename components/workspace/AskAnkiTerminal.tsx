@@ -244,10 +244,9 @@ export function AskAnkiTerminal({
       style={{ height: terminalHeaderHeight + terminalBodyHeight }}
     >
       <div className="flex h-8 shrink-0 items-center justify-between border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2">
           <Terminal className="h-3.5 w-3.5 shrink-0" />
           <span>Terminal</span>
-          <span className="normal-case text-ide-green">Ask Anki</span>
         </div>
         <button
           type="button"
@@ -349,7 +348,6 @@ export function AskAnkiTerminal({
             <Input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Ask a question…"
               aria-label="Ask Anki a question"
               disabled={loading}
               className="h-7 px-1 text-xs"
