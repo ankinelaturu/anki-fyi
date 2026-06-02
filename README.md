@@ -9,14 +9,20 @@ This is not a generic portfolio template. It is a markdown-backed workspace:
 - Explorer is generated from `/content/**/*.md`
 - Center pane renders the selected markdown file
 - Right pane shows file metadata, tags, and related files
-- Bottom terminal supports simple commands
-- Terminal AI assistant is a placeholder for local Gemma/WebLLM + embeddings in v2
+- Bottom terminal supports CLI commands and **Ask Anki** (local RAG)
+- Ask Anki uses build-time semantic embeddings + browser Gemma (WebLLM) — no cloud LLM APIs
 
 ## Run locally
 
 ```bash
 pnpm install
 pnpm dev
+```
+
+Ask Anki loads `public/assistant/corpus.json` and `vectors.json`. Regenerate after content changes:
+
+```bash
+pnpm build:corpus
 ```
 
 Open http://localhost:3000
@@ -49,13 +55,12 @@ The Explorer, editor, related files, and terminal search will pick it up automat
 - `contact`
 - `open lintern.md`
 - `search orchestration`
-- `ask "What is ZeroFabric?"`
+- Ask a natural question (e.g. `What is ZeroFabric?`) or `ask "..."`
 
-## Suggested v2
+Ask Anki requires **WebGPU** (Chrome/Edge recommended). First use downloads model weights into the browser cache.
 
-- Browser-side embedding index over markdown files
-- Local Gemma/WebLLM answer generation
-- Source citations in terminal answers
+## Suggested next
+
 - Video/GIF support in content files
 - Optional tabs
 - Mobile-friendly command palette

@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { FileText, Sparkles, Terminal, Trash2, Circle } from "lucide-react";
+import { FileText, Sparkles, Circle } from "lucide-react";
+import { AskAnkiTerminal } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import { ActivityBar, type SidePanelView } from "@/components/workspace/ActivityBar";
@@ -15,8 +15,6 @@ import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
 import { FOLDER_LABELS } from "@/lib/folders";
 import { usePanelResize } from "@/lib/use-panel-resize";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 
 type WorkspaceProps = {
   folders: ContentFolder[];
@@ -39,27 +37,6 @@ const MAX_INSIGHTS_WIDTH = 520;
 const PORTRAIT_WIDTH = 712;
 const PORTRAIT_HEIGHT = 882;
 
-function promptAnswer(question: string, files: ContentFile[]) {
-  const q = question.toLowerCase();
-  const matches = files.filter((file) => {
-    const haystack = `${file.title} ${file.summary ?? ""} ${file.tags.join(" ")} ${file.content}`.toLowerCase();
-    return q.split(/\s+/).filter(Boolean).some((term) => term.length > 3 && haystack.includes(term));
-  }).slice(0, 3);
-
-  if (matches.length === 0) {
-    return {
-      answer: "I do not have a grounded answer yet. Try asking about Oracle, Action Chain Editor, Lintern, ZeroFabric, AI orchestration, or developer platforms.",
-      sources: [] as ContentFile[],
-    };
-  }
-
-  const summary = matches.map((file) => `• ${file.title.replace(/\.md$/, "")}: ${file.summary}`).join("\n");
-  return {
-    answer: `Searching local knowledge base...\n\nFound relevant files:\n${summary}\n\nThis is a placeholder terminal assistant for v1. In v2, this will use local embeddings + Gemma/WebLLM to answer from the markdown corpus with source citations.`,
-    sources: matches,
-  };
-}
-
 export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   const allFiles = useMemo(() => folders.flatMap((folder) => folder.files), [folders]);
   const [activeSlug, setActiveSlug] = useState(initialSlug);
@@ -74,19 +51,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     "creative-systems": true,
   });
   const [sidePanelView, setSidePanelView] = useState<SidePanelView>("explorer");
-  const [query, setQuery] = useState("");
-  const [terminalHistory, setTerminalHistory] = useState<string[]>([
-    "Workspace ready.",
-    `Indexed ${folders.flatMap((f) => f.files).length} workspace files.`,
-    "Type help, open lintern.md, search orchestration, or ask \"What is ZeroFabric?\"",
-  ]);
-  const terminalOutputRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = terminalOutputRef.current;
-    if (!el) return;
-    el.scrollTop = el.scrollHeight;
-  }, [terminalHistory]);
   const getMaxTerminalBodyHeight = useCallback(
     () => Math.max(MIN_TERMINAL_BODY_HEIGHT, Math.floor(window.innerHeight * MAX_TERMINAL_BODY_RATIO)),
     []
@@ -147,48 +111,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     .sort((a, b) => b.score - a.score)
     .slice(0, 4)
     .map((item) => item.file);
-
-  function runCommand(raw: string) {
-    const command = raw.trim();
-    if (!command) return;
-
-    let output = "";
-    if (command === "help") {
-      output = `Available commands:\n\nopen <file>\nsearch <topic>\nask "<question>"\nresume\ncontact\nprojects`;
-    } else if (command === "projects") {
-      output = allFiles.filter((file) => file.path.startsWith("projects/")).map((file) => file.path).join("\n");
-    } else if (command === "resume") {
-      const resume = allFiles.find((file) => file.path === "about/resume.md");
-      if (resume) setActiveSlug(resume.slug);
-      output = "Opening resume.md";
-    } else if (command === "contact") {
-      const contact = allFiles.find((file) => file.path === "about/contact.md");
-      if (contact) setActiveSlug(contact.slug);
-      output = "Opening contact.md";
-    } else if (command.startsWith("open ")) {
-      const target = command.replace(/^open\s+/, "").replace(/^\//, "").toLowerCase();
-      const match = allFiles.find((file) => file.path.toLowerCase().includes(target) || file.title.toLowerCase().includes(target));
-      if (match) {
-        setActiveSlug(match.slug);
-        output = `Opening ${match.path}`;
-      } else {
-        output = `File not found: ${target}`;
-      }
-    } else if (command.startsWith("search ")) {
-      const term = command.replace(/^search\s+/, "").toLowerCase();
-      const matches = allFiles.filter((file) => `${file.title} ${file.summary} ${file.tags.join(" ")} ${file.content}`.toLowerCase().includes(term)).slice(0, 8);
-      output = matches.length ? matches.map((file) => file.path).join("\n") : `No results for ${term}`;
-    } else if (command.startsWith("ask ")) {
-      const question = command.replace(/^ask\s+/, "").replace(/^"|"$/g, "");
-      const result = promptAnswer(question, allFiles);
-      output = `${result.answer}${result.sources.length ? `\n\nSources:\n${result.sources.map((file) => `✓ ${file.path}`).join("\n")}` : ""}`;
-    } else {
-      output = `Unknown command: ${command}\nType help for available commands.`;
-    }
-
-    setTerminalHistory((history) => [...history, `> ${command}`, output]);
-    setQuery("");
-  }
 
   return (
     <TooltipProvider delayDuration={400}>
@@ -332,68 +254,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         onDoubleClick={terminal.reset}
       />
 
-      <footer
-        className="flex shrink-0 flex-col bg-[#111]"
-        style={{ height: TERMINAL_HEADER_HEIGHT + terminal.size }}
-      >
-        <div className="flex h-8 shrink-0 items-center justify-between border-b border-ide-border px-3 text-[11px] uppercase tracking-wider text-ide-muted">
-          <div className="flex min-w-0 items-center gap-3">
-            <Terminal className="h-3.5 w-3.5 shrink-0" />
-            <span>Terminal</span>
-            <span className="text-ide-green">local knowledge mode</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setTerminalHistory([])}
-            className="shrink-0 rounded p-1 text-ide-muted hover:bg-ide-active hover:text-ide-text"
-            aria-label="Clear terminal"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-          </button>
-        </div>
-        <div className="flex min-h-0 flex-1">
-          <div
-            className="flex h-full shrink-0 items-center border-r border-ide-border bg-[#0d0d0d] pl-2 pr-0 max-md:hidden"
-            style={{ width: portraitPanelWidth }}
-          >
-            <Image
-              src="/anki.png"
-              alt="Anki Nelaturu"
-              width={PORTRAIT_WIDTH}
-              height={PORTRAIT_HEIGHT}
-              className="h-full w-auto object-contain"
-              sizes="(max-width: 768px) 0px, 200px"
-            />
-          </div>
-          <form
-            className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden"
-            onSubmit={(event) => {
-              event.preventDefault();
-              runCommand(query);
-            }}
-          >
-            <div
-              ref={terminalOutputRef}
-              className="min-h-0 flex-1 overflow-y-auto px-3 py-2 text-xs leading-relaxed"
-            >
-              {terminalHistory.map((line, index) => (
-                <pre key={index} className={cn("whitespace-pre-wrap", line.startsWith(">") ? "text-ide-blue" : "text-ide-muted")}>{line}</pre>
-              ))}
-            </div>
-            <div className="flex shrink-0 items-center gap-1 px-3 pb-2 pt-1 text-xs">
-              <span className="shrink-0 text-[13px] text-[#f87171]">Ask Anki</span>
-              <span className="shrink-0 text-[13px] text-ide-muted">›</span>
-              <Input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder='What is ZeroFabric?'
-                aria-label="Terminal command"
-                className="h-7 px-1 text-xs"
-              />
-            </div>
-          </form>
-        </div>
-      </footer>
+      <AskAnkiTerminal
+        files={allFiles}
+        portraitPanelWidth={portraitPanelWidth}
+        portraitWidth={PORTRAIT_WIDTH}
+        portraitHeight={PORTRAIT_HEIGHT}
+        terminalHeaderHeight={TERMINAL_HEADER_HEIGHT}
+        terminalBodyHeight={terminal.size}
+        onOpenFile={setActiveSlug}
+      />
       </div>
 
       <StatusBar />

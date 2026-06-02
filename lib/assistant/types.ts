@@ -1,0 +1,62 @@
+export type CorpusChunk = {
+  id: string;
+  documentId: string;
+  path: string;
+  title: string;
+  kind: string;
+  section: string;
+  text: string;
+  chunkIndex: number;
+};
+
+export type CorpusDocument = {
+  id: string;
+  path: string;
+  title: string;
+  kind: string;
+  summary?: string;
+  tags: string[];
+  content: string;
+  chunks: CorpusChunk[];
+};
+
+export type CorpusFile = {
+  version: number;
+  corpusHash: string;
+  generatedAt: string;
+  documents: CorpusDocument[];
+  chunks: CorpusChunk[];
+};
+
+export type VectorsFile = {
+  version: number;
+  corpusHash: string;
+  embeddingModel: string;
+  vectors: { chunkId: string; embedding: number[] }[];
+};
+
+export type IndexedChunk = CorpusChunk & {
+  embedding: number[];
+};
+
+export type RetrievalResult = {
+  chunk: CorpusChunk;
+  score: number;
+};
+
+export type AskAnkiSource = {
+  path: string;
+  title: string;
+  score: number;
+};
+
+export type AskAnkiResponse = {
+  answer: string;
+  sources: AskAnkiSource[];
+  refused: boolean;
+};
+
+export type AskAnkiCallbacks = {
+  onStatus?: (message: string) => void;
+  onToken?: (token: string) => void;
+};

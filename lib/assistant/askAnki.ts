@@ -1,0 +1,89 @@
+import {
+  GEMMA_LOAD_ERROR,
+  REFUSAL_MESSAGE,
+  WEBGPU_UNSUPPORTED_MESSAGE,
+} from "@/lib/assistant/config";
+import { createGemmaWebLLMProvider } from "@/lib/assistant/modelProvider";
+import { ASK_ANKI_SYSTEM_PROMPT, buildContextFromChunks } from "@/lib/assistant/prompt";
+import { shouldRefuseQuestion } from "@/lib/assistant/profileGuard";
+import type { AskAnkiCallbacks, AskAnkiResponse } from "@/lib/assistant/types";
+import { ensureVectorIndex, searchSimilar } from "@/lib/assistant/vectorIndex";
+import { isWebGPUAvailable } from "@/lib/assistant/webgpu";
+
+const chatModel = createGemmaWebLLMProvider();
+
+export async function askAnki(
+  question: string,
+  callbacks?: AskAnkiCallbacks
+): Promise<AskAnkiResponse> {
+  const q = question.trim();
+  if (!q) {
+    return { answer: "", sources: [], refused: false };
+  }
+
+  callbacks?.onStatus?.("Loading corpus...");
+  await ensureVectorIndex();
+
+  const results = await searchSimilar(q, undefined, callbacks?.onStatus);
+
+  if (shouldRefuseQuestion(q, results)) {
+    return {
+      answer: REFUSAL_MESSAGE,
+      sources: [],
+      refused: true,
+    };
+  }
+
+  const chunks = results.map((r) => r.chunk);
+  const sources = results.map((r) => ({
+    path: r.chunk.path,
+    title: r.chunk.title,
+    score: r.score,
+  }));
+
+  const webgpu = await isWebGPUAvailable();
+  if (!webgpu) {
+    return {
+      answer: WEBGPU_UNSUPPORTED_MESSAGE,
+      sources: [],
+      refused: false,
+    };
+  }
+
+  callbacks?.onStatus?.("Loading Gemma (first use downloads model weights)...");
+  try {
+    await chatModel.load((message) => callbacks?.onStatus?.(message));
+  } catch {
+    return {
+      answer: GEMMA_LOAD_ERROR,
+      sources: [],
+      refused: false,
+    };
+  }
+
+  callbacks?.onStatus?.("Answering from local context...");
+  const context = buildContextFromChunks(chunks);
+
+  try {
+    const answer = await chatModel.generate(
+      {
+        system: ASK_ANKI_SYSTEM_PROMPT,
+        question: q,
+        context,
+      },
+      { onToken: callbacks?.onToken }
+    );
+
+    return {
+      answer: answer || "I don't have that information in the portfolio yet.",
+      sources,
+      refused: false,
+    };
+  } catch {
+    return {
+      answer: GEMMA_LOAD_ERROR,
+      sources: [],
+      refused: false,
+    };
+  }
+}
