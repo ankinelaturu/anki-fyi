@@ -13,12 +13,12 @@ import { cn } from "@/lib/utils";
 const CLI_COMMANDS = new Set(["help", "resume", "contact", "projects"]);
 
 const SUGGESTED_PROMPTS = [
-  "What did Anki do at Oracle?",
+  "What did you do at Oracle?",
   "Tell me about Lintern.",
   "What is AstroValley?",
   "What is ZeroFabric?",
-  "What projects show local AI?",
-  "What is Aimless Dude & Hyper Dog?",
+  "Which of your projects use local AI?",
+  "Tell me about Aimless Dude & Hyper Dog.",
 ];
 
 type AskAnkiTerminalProps = {
@@ -49,7 +49,7 @@ export function AskAnkiTerminal({
     "Workspace ready.",
     `Indexed ${files.length} workspace files.`,
     "Commands: help, open <file>, search <topic>, resume, contact, projects",
-    "Or ask a question about Anki's portfolio.",
+    "Ask me anything about my work, projects, and writing.",
   ]);
   const [previousQuestion, setPreviousQuestion] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState<string | null>(null);
@@ -71,7 +71,7 @@ export function AskAnkiTerminal({
       let output = "";
 
       if (command === "help") {
-        output = `Available commands:\n\nopen <file>\nsearch <topic>\nresume\ncontact\nprojects\n\nAsk any other question about Anki's portfolio at the prompt below.`;
+        output = `Available commands:\n\nopen <file>\nsearch <topic>\nresume\ncontact\nprojects\n\nAsk me anything else at the prompt below.`;
       } else if (command === "projects") {
         output = files
           .filter((file) => file.path.startsWith("projects/"))
@@ -304,8 +304,8 @@ export function AskAnkiTerminal({
             <Input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="What is ZeroFabric?"
-              aria-label="Ask Anki"
+              placeholder="What did you do at Oracle?"
+              aria-label="Ask Anki a question"
               disabled={loading}
               className="h-7 px-1 text-xs"
             />

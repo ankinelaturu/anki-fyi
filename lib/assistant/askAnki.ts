@@ -4,7 +4,11 @@ import {
   WEBGPU_UNSUPPORTED_MESSAGE,
 } from "@/lib/assistant/config";
 import { createGemmaWebLLMProvider } from "@/lib/assistant/modelProvider";
-import { ASK_ANKI_SYSTEM_PROMPT, buildContextFromChunks } from "@/lib/assistant/prompt";
+import {
+  ANKI_MISSING_INFO_REPLY,
+  ASK_ANKI_SYSTEM_PROMPT,
+  buildContextFromChunks,
+} from "@/lib/assistant/prompt";
 import { shouldRefuseQuestion } from "@/lib/assistant/profileGuard";
 import type { AskAnkiCallbacks, AskAnkiResponse, AskAnkiSource } from "@/lib/assistant/types";
 import { ensureVectorIndex, searchSimilar } from "@/lib/assistant/vectorIndex";
@@ -88,7 +92,7 @@ export async function askAnki(
     );
 
     return {
-      answer: answer || "I don't have that information in the portfolio yet.",
+      answer: answer || ANKI_MISSING_INFO_REPLY,
       sources,
       refused: false,
     };

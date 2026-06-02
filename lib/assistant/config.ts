@@ -14,7 +14,7 @@ export const GEMMA_MODEL_FALLBACK_CHAIN = [
 ] as const;
 
 export const REFUSAL_MESSAGE =
-  "This assistant only answers questions about Anki\u2019s profile, projects, experience, writing, and portfolio workspace.";
+  "I only answer questions about my work, projects, experience, writing, and this portfolio site.";
 
 export const PRIVACY_NOTE =
   "Runs locally in your browser. Model weights may download on first use. Answers are grounded in this workspace.";
