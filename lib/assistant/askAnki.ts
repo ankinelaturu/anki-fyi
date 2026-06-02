@@ -1,5 +1,6 @@
 import {
-  GEMMA_LOAD_ERROR,
+  GEMMA_GENERATE_ERROR_HEADING,
+  GEMMA_LOAD_ERROR_HEADING,
   REFUSAL_MESSAGE,
   WEBGPU_UNSUPPORTED_MESSAGE,
 } from "@/lib/assistant/config";
@@ -15,6 +16,21 @@ import { ensureVectorIndex, searchSimilar } from "@/lib/assistant/vectorIndex";
 import { isWebGPUAvailable } from "@/lib/assistant/webgpu";
 
 const chatModel = createGemmaWebLLMProvider();
+
+function formatGemmaFailure(heading: string, error: unknown): string {
+  const detail =
+    error instanceof Error ? error.message : typeof error === "string" ? error : String(error);
+  return detail && !heading.includes(detail) ? `${heading}\n\n${detail}` : heading;
+}
+
+function logGemmaFailure(phase: "load" | "generate", error: unknown, question: string): void {
+  console.error(`[Ask Anki] Gemma ${phase} failed`, {
+    question,
+    error,
+    message: error instanceof Error ? error.message : String(error),
+    stack: error instanceof Error ? error.stack : undefined,
+  });
+}
 
 function dedupeSourcesByPath(sources: AskAnkiSource[]): AskAnkiSource[] {
   const byPath = new Map<string, AskAnkiSource>();
@@ -80,10 +96,11 @@ export async function askAnki(
   callbacks?.onStatus?.("Loading Gemma (first use downloads model weights)...");
   try {
     await chatModel.load((message) => callbacks?.onStatus?.(message));
-  } catch {
+  } catch (error) {
+    logGemmaFailure("load", error, q);
     return {
-      answer: GEMMA_LOAD_ERROR,
-      sources: [],
+      answer: formatGemmaFailure(GEMMA_LOAD_ERROR_HEADING, error),
+      sources,
       refused: false,
     };
   }
@@ -106,10 +123,11 @@ export async function askAnki(
       sources,
       refused: false,
     };
-  } catch {
+  } catch (error) {
+    logGemmaFailure("generate", error, q);
     return {
-      answer: GEMMA_LOAD_ERROR,
-      sources: [],
+      answer: formatGemmaFailure(GEMMA_GENERATE_ERROR_HEADING, error),
+      sources,
       refused: false,
     };
   }

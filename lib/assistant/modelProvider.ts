@@ -1,4 +1,4 @@
-import { GEMMA_LOAD_ERROR, GEMMA_MODEL_FALLBACK_CHAIN } from "@/lib/assistant/config";
+import { GEMMA_LOAD_ERROR_HEADING, GEMMA_MODEL_FALLBACK_CHAIN } from "@/lib/assistant/config";
 import { ASK_ANKI_SYSTEM_PROMPT, buildUserPrompt } from "@/lib/assistant/prompt";
 
 export type LocalModelInput = {
@@ -80,17 +80,18 @@ export function createGemmaWebLLMProvider(): LocalChatModel {
           lastError = error;
           engine = null;
           loadedModelId = null;
+          console.warn(`[Ask Anki] Gemma load failed for ${modelId}:`, error);
         }
       }
 
       throw new Error(
-        `${GEMMA_LOAD_ERROR}\n${lastError instanceof Error ? lastError.message : String(lastError)}`
+        `${GEMMA_LOAD_ERROR_HEADING}\n${lastError instanceof Error ? lastError.message : String(lastError)}`
       );
     },
 
     async generate(input, callbacks) {
       if (!engine) {
-        throw new Error(GEMMA_LOAD_ERROR);
+        throw new Error(GEMMA_LOAD_ERROR_HEADING);
       }
 
       await engine.resetChat();

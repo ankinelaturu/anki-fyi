@@ -20,8 +20,10 @@ export const REFUSAL_MESSAGE =
 export const PRIVACY_NOTE =
   "Runs locally in your browser. Model weights may download on first use. Answers are grounded in this workspace.";
 
-export const GEMMA_LOAD_ERROR =
+export const GEMMA_LOAD_ERROR_HEADING =
   "Local Gemma model failed to load. Please check browser WebGPU/WebAssembly support.";
+
+export const GEMMA_GENERATE_ERROR_HEADING = "Local Gemma failed while generating an answer.";
 
 export const WEBGPU_UNSUPPORTED_MESSAGE =
   "Local Gemma requires WebGPU support in this browser. Try Chrome or Edge with WebGPU enabled.";
