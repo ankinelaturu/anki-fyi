@@ -1,47 +1,231 @@
+# Anki Nelaturu Resume
+
+ANKI NELATURU 
+SANTA CLARA, CA 95054 | (408) 431-3061 | anki.r.nelaturu@gmail.com | linkedin.com/in/ankinelaturu  
+PRINCIPAL ENGINEER | AI ORCHESTRATION, AGENTIC WORKFLOWS & DEVELOPER PLATFORMS 
+Principal engineer specializing in AI-native orchestration systems, developer platforms, and runtime workflows. 
+20+ years building scalable execution platforms and developer tooling across enterprise and embedded 
+environments, with recent focus on AI-driven workflows combining deterministic execution models with 
+adaptive LLM capabilities. Deep expertise spanning TypeScript platform architecture, asynchronous systems, and 
+AI-assisted developer tooling. 
+Skills 
+AI orchestration workflows, LLM APIs, embeddings, retrieval workflows, function calling, agentic workflows, 
+TypeScript, JavaScript (ES6+), Node.js, React, Next.js, runtime systems, asynchronous execution, execution 
+pipelines, WebSockets, ONNX, REST APIs, CI/CD, Babel, Rollup, testing (Jasmine/Karma) 
+Selected Projects 
+Once Upon a GPT (Storybook Arcade) | https://youtu.be/ZOrma2xMTy8 
+• Engineered a multimodal orchestration pipeline combining LLM reasoning, image generation, and TTS systems 
+into synchronized story-generation workflows with streaming execution and low-latency feedback. 
+Work History 
+Independent Product Engineer | AI Systems & Developer Tools	
+ Oct 2025 - Current 
+• Built AI-driven systems across developer tooling, learning orchestration, and content workflows, emphasizing 
+low-latency execution, streaming interactions, and iterative human-in-the-loop refinement. 
+• OzMap (AI-Powered Learning Trails) | https://ozmap.app: Architected a graph-based learning orchestration 
+system enabling dynamic topic generation, branching exploration paths, and synchronized execution state 
+across interactive sessions. 
+• Lintern (Local-First Data Guardrails for AI Workflows) | https://lintern.app: Built a local-first data inspection 
+system for AI workflows using heuristic and embedding-based semantic detection pipelines to identify 
+sensitive information with low-latency, in-browser execution. 
+• Crafticle (AI-powered Idea-to-Article Composer) | https://crafticle.app: Built an AI-assisted content 
+orchestration system enabling structured idea extraction, transformation pipelines, and iterative human-
+guided article composition. 
+Consulting Member of Technical Staff 	
+ Sep 2024 - Sep 2025  
+Oracle 	
+ 
+Technical Lead – TypeScript Enablement & Generative AI Integration (Oracle Visual Builder) 
+• Led end-to-end TypeScript enablement across runtime, build systems, and tooling—modernizing 
+enterprise-scale web application frameworks and improving developer productivity. 
+• Built an LLM-driven orchestration engine using function-calling APIs to synthesize deterministic multi-step 
+action sequences directly from natural language instructions. 
+• Built an on-the-fly Babel transpilation pipeline and integrated Jasmine/Karma-based unit testing into CI 
+workflows to ensure stability and backward compatibility. 
+
+Principal Member of Technical Staff 	
+ Jul 2018 - Aug 2024 
+Oracle 	
+ 
+Technical Lead – Visual Builder Design-Time & Action Chain Framework 
+• Led a team of 4–5 engineers in designing and delivering core platform features for Oracle Visual Builder. 
+• Architected a runtime execution framework and dependency-driven orchestration graph for asynchronous 
+action workflows with deterministic state propagation and execution sequencing. 
+• Contributed across front-end (JavaScript/ES6, SCSS, HTML) and server-side components to enhance 
+performance, usability, and maintainability. 
+• Partnered with product and UX teams to improve developer productivity and application consistency. 
+• Conducted code reviews and established architectural guidelines for scalable web application development. 
+Principal Member of Technical Staff 	
+ Dec 2013 - Jul 2018  
+Oracle 	
+ 
+Architect – Oracle Mobile Application Framework (MAF) 
+• Contributed to architecture and development of a cross-platform mobile framework supporting iOS, 
+Android, and Windows platforms. 
+• Led migration to Java 8 and modern runtime integrations. 
+• Designed and integrated runtime components across Java, C/C++, and native mobile layers, focusing on 
+performance optimization and cross-platform reliability. 
+• Delivered technical sessions at JavaOne and Oracle OpenWorld. 
+Principal Member of Technical Staff 	
+ Feb 2011 - Dec 2013  
+Oracle 	
+ 
+• Contributed to Java Embedded Suite (JES), designing and developing RESTful services and runtime 
+components for embedded and distributed IoT environments. 
+Principal Member of Technical Staff 	
+ Jan 2004 - Feb 2011  
+Sun Microsystems 	
+ 
+• Contributed to resource-constrained JVM runtime systems focused on synchronization, execution 
+performance, portability, and secure embedded execution environments. 
+• Delivered technical sessions and workshops at JavaOne. 
+Education 
+MS, Computer Science — 1999 
+National Institute of Electronics & Information Technology (NIELIT), India 
+Patents 
+• US US10198279B2 - Thread synchronization for platform neutrality 
+• US 8978023 - Virtual channel for embedded process communication 
+• US 8863126 - Canonical mechanism for securely assembling features into a mobile application 
+• US 8856805 - Java virtual machine embedded in a native mobile application
+
+
+# Resume
+
+## Anki Nelaturu
+
+**Santa Clara, CA**  
+(408) 431-3061  
+anki.r.nelaturu@gmail.com  
+linkedin.com/in/ankinelaturu
+
+### Principal AI Product Engineer | AI Orchestration, Agentic Workflows & Developer Platforms
+
+Principal engineer specializing in AI-native orchestration systems, developer platforms, and runtime workflows. Over 20 years building scalable execution platforms, developer tooling, embedded runtimes, and enterprise application platforms. Recent focus includes AI-assisted engineering workflows, local-first AI systems, retrieval pipelines, semantic orchestration, and human-in-the-loop execution models.
+
 ---
-title: Resume
-category: ABOUT
-order: 2
-summary: 'Resume summary, skills, selected projects, and career history.'
-tags:
-  - resume
-  - Oracle
-  - Sun Microsystems
-  - AI systems
-kind: profile
-icon: file-user
-featured: false
----
-# RESUME.md
-
-## Headline
-
-**Principal Engineer | AI Orchestration, Agentic Workflows & Developer Platforms**
-
-## Summary
-
-Principal engineer specializing in AI-native orchestration systems, developer platforms, and runtime workflows. 20+ years building scalable execution platforms and developer tooling across enterprise and embedded environments, with recent focus on AI-driven workflows combining deterministic execution models with adaptive LLM capabilities.
 
 ## Skills
 
 - AI orchestration workflows
-- LLM APIs, embeddings, retrieval workflows
-- Function calling and agentic workflows
-- TypeScript, JavaScript, Node.js, React, Next.js
-- Runtime systems and asynchronous execution
-- Execution pipelines and WebSockets
-- ONNX, REST APIs, CI/CD
-- Babel, Rollup, Jasmine/Karma testing
+- Agentic systems
+- LLM APIs
+- Function calling
+- Retrieval workflows
+- Embeddings
+- TypeScript
+- JavaScript (ES6+)
+- React
+- Next.js
+- Node.js
+- Runtime systems
+- Asynchronous execution
+- Execution pipelines
+- WebSockets
+- ONNX
+- REST APIs
+- CI/CD
+- Babel
+- Rollup
+- Jasmine
+- Karma
 
-## Selected Project
+---
 
-**Once Upon a GPT / Storybook Arcade**  
-Engineered a multimodal orchestration pipeline combining LLM reasoning, image generation, and TTS systems into synchronized story-generation workflows with streaming execution and low-latency feedback.
+## Selected Projects
 
-## Career Snapshot
+### Storybook Arcade (Once Upon a GPT)
+https://youtu.be/ZOrma2xMTy8
 
-- Independent Product Engineer — AI Systems & Developer Tools
-- Oracle Consulting Member of Technical Staff — TypeScript Enablement & Generative AI Integration
-- Oracle Principal Member of Technical Staff — Visual Builder Design-Time & Action Chain Framework
-- Oracle Architect — Mobile Application Framework
-- Oracle / Sun Microsystems — Java Embedded, Java Card VM, secure embedded runtime systems
+Engineered a multimodal orchestration pipeline combining LLM reasoning, image generation, and text-to-speech systems into synchronized story-generation workflows with streaming execution and low-latency feedback.
+
+---
+
+## Professional Experience
+
+### Independent Product Engineer — AI Systems & Developer Tools
+**Oct 2025 – Present**
+
+Built AI-driven systems across developer tooling, learning orchestration, and content workflows, emphasizing low-latency execution, streaming interactions, and iterative human-in-the-loop refinement.
+
+#### OzMap
+https://ozmap.app
+
+Architected a graph-based learning orchestration system enabling dynamic topic generation, branching exploration paths, and synchronized execution state across interactive sessions.
+
+#### Lintern
+https://lintern.app
+
+Built a local-first data inspection system for AI workflows using heuristic and embedding-based semantic detection pipelines to identify sensitive information with low-latency, in-browser execution.
+
+#### Crafticle
+https://crafticle.app
+
+Built an AI-assisted content orchestration system enabling structured idea extraction, transformation pipelines, and iterative human-guided article composition.
+
+---
+
+### Oracle
+
+#### Consulting Member of Technical Staff
+**Sep 2024 – Sep 2025**
+
+**Technical Lead – TypeScript Enablement & Generative AI Integration (Oracle Visual Builder)**
+
+- Led end-to-end TypeScript enablement across runtime, build systems, and tooling.
+- Built an LLM-driven orchestration engine using function-calling APIs to synthesize deterministic multi-step action sequences from natural language instructions.
+- Built an on-the-fly Babel transpilation pipeline and integrated Jasmine/Karma testing into CI workflows.
+
+#### Principal Member of Technical Staff
+**Jul 2018 – Aug 2024**
+
+**Technical Lead – Visual Builder Design-Time & Action Chain Framework**
+
+- Led a team of 4–5 engineers delivering core Oracle Visual Builder platform features.
+- Architected a runtime execution framework and dependency-driven orchestration graph for asynchronous workflows.
+- Contributed across frontend and server-side components.
+- Partnered with Product and UX teams to improve developer productivity.
+- Established architectural guidelines and conducted code reviews.
+
+#### Principal Member of Technical Staff
+**Dec 2013 – Jul 2018**
+
+**Architect – Oracle Mobile Application Framework (MAF)**
+
+- Contributed to architecture and development of a cross-platform mobile framework supporting iOS, Android, and Windows.
+- Led migration to Java 8 and modern runtime integrations.
+- Designed runtime components across Java, C/C++, and native mobile layers.
+- Presented at JavaOne and Oracle OpenWorld.
+
+#### Principal Member of Technical Staff
+**Feb 2011 – Dec 2013**
+
+- Contributed to Java Embedded Suite (JES).
+- Designed and developed REST services and runtime components for embedded and distributed IoT environments.
+
+---
+
+### Sun Microsystems
+
+#### Principal Member of Technical Staff
+**Jan 2004 – Feb 2011**
+
+- Contributed to resource-constrained JVM runtime systems.
+- Focused on synchronization, execution performance, portability, and secure embedded execution.
+- Delivered technical sessions and workshops at JavaOne.
+
+---
+
+## Education
+
+### Master of Science, Computer Science
+**1999**
+
+National Institute of Electronics & Information Technology (NIELIT), India
+
+---
+
+## Patents
+
+- US10198279B2 — Thread synchronization for platform neutrality
+- US8978023 — Virtual channel for embedded process communication
+- US8863126 — Canonical mechanism for securely assembling features into a mobile application
+- US8856805 — Java virtual machine embedded in a native mobile application
