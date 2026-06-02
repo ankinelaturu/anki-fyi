@@ -261,7 +261,10 @@ export function AskAnkiTerminal({
 
       <div className="flex min-h-0 flex-1">
         <div
-          className="flex h-full shrink-0 items-end justify-start border-r border-ide-border bg-[#0d0d0d] max-md:hidden"
+          className={cn(
+            "flex h-full shrink-0 items-end justify-start border-r border-ide-border bg-[#0d0d0d] max-md:hidden",
+            loading && "ask-anki-portrait-active"
+          )}
           style={{ width: portraitPanelWidth }}
         >
           <Image

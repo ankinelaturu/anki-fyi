@@ -47,3 +47,24 @@ body {
 }
 .prose-ide blockquote { border-left: 3px solid #569cd6; padding-left: 1rem; color: #b5cea8; }
 .prose-ide hr { border-color: #333; margin: 1.5rem 0; }
+
+/* Ask Anki portrait — subtle “thinking” glow while a question is in flight */
+@keyframes ask-anki-portrait-glow {
+  0%,
+  100% {
+    background-color: #0d0d0d;    
+  }
+  75% {
+    background-color: #141414;
+  }
+}
+
+.ask-anki-portrait-active {
+  animation: ask-anki-portrait-glow 0.75s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ask-anki-portrait-active {
+    animation: none;
+  }
+}
