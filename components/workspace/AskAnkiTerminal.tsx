@@ -248,6 +248,8 @@ export function AskAnkiTerminal({
         <div className="flex min-w-0 items-center gap-2">
           <Terminal className="h-3.5 w-3.5 shrink-0" />
           <span>Terminal</span>
+          <span className="text-ide-muted">●</span>
+          <span className="text-[#f87171]">Grounded Responses</span>
         </div>
         <button
           type="button"

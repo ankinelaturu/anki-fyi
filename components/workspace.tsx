@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { FileText, Sparkles, Circle } from "lucide-react";
+import { FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
 import { AskAnkiTerminal } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
@@ -128,7 +128,9 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-muted">●</span>
           <span className="text-ide-yellow">Portfolio Assistant</span>
           <span className="text-ide-muted">●</span>
-          <span className="text-[#f87171]">Grounded Responses</span>
+          <TriangleAlert className="h-3 w-3 text-ide-yellow" />
+     
+          <span className="text-ide-yellow">Work in progress</span>
         </div>
       </header>
 
