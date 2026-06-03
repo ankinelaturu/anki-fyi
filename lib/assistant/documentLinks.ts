@@ -5,6 +5,17 @@ export type DocumentLink = {
   url: string;
 };
 
+const DISPLAY_LABELS: Record<string, string> = {
+  website: "Website",
+  demo: "Demo",
+  linkedin: "LinkedIn",
+  link: "Link",
+};
+
+export function linkDisplayLabel(label: string): string {
+  return DISPLAY_LABELS[label.toLowerCase()] ?? label.charAt(0).toUpperCase() + label.slice(1);
+}
+
 const PLACEHOLDER_RE = /anki-fixme/i;
 
 function isUsableUrl(value: unknown): value is string {

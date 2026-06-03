@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
+import { ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
+import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { AskAnkiTerminal } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
@@ -133,7 +134,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-yellow">Portfolio Assistant</span>
           <span className="text-ide-muted">●</span>
           <TriangleAlert className="h-3 w-3 text-ide-yellow" />
-     
           <span className="text-ide-yellow">Work in progress</span>
         </div>
       </header>
@@ -215,10 +215,36 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         >
           <div className={WORKSPACE_PANEL_TITLE_CLASS}>Insights</div>
           <div className="space-y-4 p-4 text-xs">
-            {(activeFile.elevatorPitch || activeFile.summary) && (
-              <p className="italic leading-relaxed text-ide-muted">
-                {activeFile.elevatorPitch || activeFile.summary}
-              </p>
+            {((activeFile.elevatorPitch || activeFile.summary) || activeFile.links.length > 0) && (
+              <div className="space-y-2">
+                {(activeFile.elevatorPitch || activeFile.summary) && (
+                  <p className="italic leading-relaxed text-ide-muted">
+                    {activeFile.elevatorPitch || activeFile.summary}
+                  </p>
+                )}
+                {activeFile.links.length > 0 && (
+                  <ul className="flex flex-col gap-1.5">
+                    {activeFile.links.map((link) => (
+                      <li key={`${link.label}-${link.url}`}>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-ide-blue hover:underline"
+                        >
+                          {linkDisplayLabel(link.label)}
+                          <ExternalLink
+                            className="h-3 w-3 shrink-0 opacity-80"
+                            strokeWidth={2}
+                            aria-hidden
+                          />
+                          <span className="sr-only"> (opens in new tab)</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             )}
             <div>
               <div className="mb-2 text-ide-yellow">Tags</div>

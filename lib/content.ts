@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { extractDocumentLinks } from "@/lib/assistant/documentLinks";
 import { FOLDER_ORDER } from "@/lib/folders";
 
 export type { ContentFile, ContentFolder, ContentKind, WorkspaceFile } from "@/lib/content-types";
@@ -39,6 +40,7 @@ function parseFile(filePath: string): ContentFile {
       typeof data.elevator_pitch === "string" ? data.elevator_pitch : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     technologies: Array.isArray(data.technologies) ? data.technologies.map(String) : [],
+    links: extractDocumentLinks(data as Record<string, unknown>),
     content,
     path: relative,
     type: typeof data.type === "string" ? data.type : undefined,

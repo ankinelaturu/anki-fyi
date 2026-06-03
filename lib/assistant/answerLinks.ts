@@ -1,4 +1,4 @@
-import { LINK_FIELDS } from "@/lib/assistant/documentLinks";
+import { LINK_FIELDS, linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { ANKI_MISSING_INFO_REPLY } from "@/lib/assistant/prompt";
 import type { CorpusChunk } from "@/lib/assistant/types";
 
@@ -15,19 +15,8 @@ const LINK_LINE_LABELED_RE = new RegExp(
 );
 const LINK_LINE_BARE_RE = /^-\s+(https?:\/\/\S+)\s*$/;
 
-const DISPLAY_LABELS: Record<string, string> = {
-  website: "Website",
-  demo: "Demo",
-  linkedin: "LinkedIn",
-  link: "Link",
-};
-
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-export function linkDisplayLabel(label: string): string {
-  return DISPLAY_LABELS[label.toLowerCase()] ?? label.charAt(0).toUpperCase() + label.slice(1);
 }
 
 /** Labeled URLs under ## Links in retrieved chunk text (from project frontmatter). */

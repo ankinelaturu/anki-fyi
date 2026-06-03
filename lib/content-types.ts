@@ -1,3 +1,5 @@
+import type { DocumentLink } from "@/lib/assistant/documentLinks";
+
 export type ContentKind =
   | "profile"
   | "experience"
@@ -21,6 +23,7 @@ export type ContentFile = {
   elevatorPitch?: string;
   tags: string[];
   technologies: string[];
+  links: DocumentLink[];
   content: string;
   path: string;
   type?: string;
