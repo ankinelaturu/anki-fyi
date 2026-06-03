@@ -126,7 +126,9 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         <div className="hidden items-center gap-3 md:flex">
           <span className="text-ide-green">main</span>
           <span className="text-ide-muted">●</span>
-          <span className="text-ide-yellow">Building AI-native systems</span>
+          <span className="text-ide-yellow">Portfolio Assistant</span>
+          <span className="text-ide-muted">●</span>
+          <span className="text-[#f87171]">Grounded Responses</span>
         </div>
       </header>
 

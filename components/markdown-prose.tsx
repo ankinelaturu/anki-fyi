@@ -5,6 +5,11 @@ import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 
 const markdownComponents: Components = {
+  a: ({ href, children }) => (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  ),
   strong: ({ children }) => <strong className="prose-strong">{children}</strong>,
   em: ({ children }) => <em className="prose-em">{children}</em>,
   code: ({ className, children, ...props }) => {

@@ -7,6 +7,7 @@ import { askAnki } from "@/lib/assistant/askAnki";
 import { PRIVACY_NOTE } from "@/lib/assistant/config";
 import type { AskAnkiSource } from "@/lib/assistant/types";
 import type { ContentFile } from "@/lib/content-types";
+import { MarkdownProse } from "@/components/markdown-prose";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -305,7 +306,11 @@ export function AskAnkiTerminal({
               <AnimatedStatusLine key={status} status={status} animate={loading} />
             )}
 
-            {answer && <pre className="mt-2 whitespace-pre-wrap text-ide-text">{answer}</pre>}
+            {answer && (
+              <MarkdownProse className="prose-ide mt-2 text-xs leading-relaxed [&_p]:my-1.5 [&_ul]:my-1.5">
+                {answer}
+              </MarkdownProse>
+            )}
 
             {sources.length > 0 && (
               <div className="mt-3 border-t border-ide-border pt-2">

@@ -15,6 +15,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { buildCorpusDocument } from "../lib/assistant/chunking";
+import { formatDocumentLinksBlock } from "../lib/assistant/documentLinks";
 import { CORPUS_FOLDERS, EMBEDDING_MODEL } from "../lib/assistant/config";
 import { embedText } from "../lib/assistant/embeddings";
 import type { CorpusDocument, CorpusFile, VectorsFile } from "../lib/assistant/types";
@@ -51,6 +52,7 @@ function parseMarkdownFile(filePath: string) {
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     content,
     type: typeof data.type === "string" ? data.type : undefined,
+    linksBlock: formatDocumentLinksBlock(data as Record<string, unknown>),
   });
 }
 

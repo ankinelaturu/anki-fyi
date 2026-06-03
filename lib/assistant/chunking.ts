@@ -198,22 +198,29 @@ export function chunkDocument(doc: {
   kind: string;
   content: string;
   type?: string;
+  linksBlock?: string;
 }): CorpusChunk[] {
   const markdown = stripFrontmatterBody(doc.content);
   const filmstrip = doc.type === "filmstrip";
   const sections = splitByHeadings(markdown, filmstrip);
   const packed = applyOverlap(packSections(sections));
 
-  return packed.map((section, index) => ({
-    id: `${doc.id}::${index}`,
-    documentId: doc.id,
-    path: doc.path,
-    title: doc.title,
-    kind: doc.kind,
-    section: section.heading,
-    text: formatChunkText(doc.title, doc.path, section.heading, section.body),
-    chunkIndex: index,
-  }));
+  return packed.map((section, index) => {
+    let body = section.body;
+    if (index === 0 && doc.linksBlock) {
+      body = `${doc.linksBlock}\n\n${body}`;
+    }
+    return {
+      id: `${doc.id}::${index}`,
+      documentId: doc.id,
+      path: doc.path,
+      title: doc.title,
+      kind: doc.kind,
+      section: section.heading,
+      text: formatChunkText(doc.title, doc.path, section.heading, body),
+      chunkIndex: index,
+    };
+  });
 }
 
 export function buildCorpusDocument(input: {
@@ -224,6 +231,7 @@ export function buildCorpusDocument(input: {
   tags: string[];
   content: string;
   type?: string;
+  linksBlock?: string;
 }): CorpusDocument {
   const id = input.path.replace(/\.md$/, "");
   const chunks = chunkDocument({
@@ -233,6 +241,7 @@ export function buildCorpusDocument(input: {
     kind: input.kind,
     content: input.content,
     type: input.type,
+    linksBlock: input.linksBlock,
   });
 
   return {

@@ -24,7 +24,7 @@ export const REFUSAL_MESSAGE =
   "I only answer questions about my profile, projects, experience, writing, and portfolio workspace.";
 
 export const PRIVACY_NOTE =
-  "Runs locally in your browser. Model weights may download on first use. Answers are grounded in this workspace.";
+  "Runs locally in your browser. Model weights may download on first use. Responses are AI-generated and grounded in this workspace.";
 
 export const GEMMA_LOAD_ERROR_HEADING =
   "Local Gemma model failed to load. Please check browser WebGPU/WebAssembly support.";
