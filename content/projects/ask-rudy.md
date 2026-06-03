@@ -18,6 +18,7 @@ tags:
 technologies:
   - TypeScript
   - React
+  - Cursor
   - Browser APIs
   - Retrieval workflows
   - Embeddings

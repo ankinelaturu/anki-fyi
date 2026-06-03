@@ -16,6 +16,7 @@ featured: false
 technologies:
   - TypeScript
   - React
+  - Cursor
   - Next.js
   - TipTap
   - Rich text editing

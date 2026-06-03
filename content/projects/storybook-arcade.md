@@ -14,6 +14,7 @@ tags:
 technologies:
   - TypeScript
   - React
+  - Cursor
   - LLM APIs
   - Image generation
   - Text-to-speech

@@ -17,6 +17,7 @@ technologies:
   - TypeScript
   - React
   - Next.js
+  - Cursor
   - Graph modeling
   - AI-assisted topic generation
   - Interactive navigation

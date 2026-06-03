@@ -17,6 +17,7 @@ technologies:
   - TypeScript
   - React
   - Next.js
+  - Cursor
   - Chrome Extension APIs
   - DOM interception
   - Embeddings

@@ -10,11 +10,12 @@ tags:
 kind: patent
 icon: cpu
 featured: false
+url: https://patents.google.com/patent/US8856805
 ---
 # embedded-jvm.md
 
 ## Patent
 
-**US 8856805 — Java virtual machine embedded in a native mobile application**
+**US 8856805 — Virtual channel for embedded process communication**
 
-This patent reflects work at the intersection of Java runtime systems and native mobile application execution.
+A native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.

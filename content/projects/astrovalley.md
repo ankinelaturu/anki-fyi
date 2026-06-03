@@ -18,6 +18,7 @@ technologies:
   - TypeScript
   - React
   - Next.js
+  - Cursor
   - React Three Fiber
   - Three.js
   - WebGPU

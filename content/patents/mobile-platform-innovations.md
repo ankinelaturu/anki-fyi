@@ -10,11 +10,12 @@ tags:
 kind: patent
 icon: layers
 featured: false
+url: https://patents.google.com/patent/US8863126
 ---
 # mobile-application-features.md
 
 ## Patent
 
-**US 8863126 — Canonical mechanism for securely assembling features into a mobile application**
+**US 8863126 — Java virtual machine embedded in a native mobile application**
 
-This patent reflects work in mobile application framework architecture and secure feature assembly.
+A native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.
