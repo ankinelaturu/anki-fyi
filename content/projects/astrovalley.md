@@ -29,7 +29,7 @@ status: active prototype
 year: 2026
 website: https://astrovalley.app
 demo: https://anki-fixme/here
-linkedin: https://anki-fixme/here
+linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8
 screenshot: /images/projects/astrovalley-placeholder.png
 ---
 

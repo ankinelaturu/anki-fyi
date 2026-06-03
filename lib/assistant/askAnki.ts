@@ -5,6 +5,7 @@ import {
   REFUSAL_MESSAGE,
   WEBGPU_UNSUPPORTED_MESSAGE,
 } from "@/lib/assistant/config";
+import { enrichAnswerWithContextLinks } from "@/lib/assistant/answerLinks";
 import { createGemmaWebLLMProvider } from "@/lib/assistant/modelProvider";
 import {
   ANKI_MISSING_INFO_REPLY,
@@ -119,7 +120,7 @@ export async function askAnki(
   const context = buildContextFromChunks(contextChunks);
 
   try {
-    const answer = await chatModel.generate(
+    const generated = await chatModel.generate(
       {
         system: ASK_ANKI_SYSTEM_PROMPT,
         question: q,
@@ -128,8 +129,11 @@ export async function askAnki(
       { onToken: callbacks?.onToken }
     );
 
+    const baseAnswer = generated || ANKI_MISSING_INFO_REPLY;
+    const answer = enrichAnswerWithContextLinks(baseAnswer, contextChunks);
+
     return {
-      answer: answer || ANKI_MISSING_INFO_REPLY,
+      answer,
       sources,
       refused: false,
     };

@@ -1,8 +1,9 @@
-const LINK_FIELDS: { key: string; label: string }[] = [
-  { key: "website", label: "Website" },
-  { key: "demo", label: "Demo" },
-  { key: "linkedin", label: "LinkedIn" },
-];
+export const LINK_FIELDS = ["website", "demo", "linkedin"] as const;
+
+export type DocumentLink = {
+  label: (typeof LINK_FIELDS)[number];
+  url: string;
+};
 
 const PLACEHOLDER_RE = /anki-fixme/i;
 
@@ -14,15 +15,22 @@ function isUsableUrl(value: unknown): value is string {
   return true;
 }
 
-/** Markdown block injected into corpus chunks so RAG can surface project links. */
-export function formatDocumentLinksBlock(data: Record<string, unknown>): string {
-  const lines: string[] = [];
+export function extractDocumentLinks(data: Record<string, unknown>): DocumentLink[] {
+  const links: DocumentLink[] = [];
 
-  for (const { key, label } of LINK_FIELDS) {
-    const url = data[key];
-    if (isUsableUrl(url)) lines.push(`- ${label}: ${url}`);
+  for (const label of LINK_FIELDS) {
+    const url = data[label];
+    if (isUsableUrl(url)) links.push({ label, url });
   }
 
-  if (lines.length === 0) return "";
+  return links;
+}
+
+/** Markdown block injected into corpus chunks so RAG can surface project links. */
+export function formatDocumentLinksBlock(data: Record<string, unknown>): string {
+  const links = extractDocumentLinks(data);
+  if (links.length === 0) return "";
+
+  const lines = links.map(({ label, url }) => `- ${label}: ${url}`);
   return `## Links\n\n${lines.join("\n")}`;
 }

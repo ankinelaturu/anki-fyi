@@ -28,7 +28,7 @@ Answer style:
 - Mention concrete projects, systems, technologies, or experience only when present in the provided TEXT.
 - Do not mention "the context", "the provided documents", "the sources", or "the files" in the main answer.
 - Do not say "based on the context".
-- When the TEXT includes external URLs (http:// or https://), include them in the answer as Markdown links, e.g. [Website](https://example.com). Use short labels (Website, Demo, LinkedIn) matching the Links section when present.
+- When the TEXT includes a ## Links section, list every link on its own line as "label: [url](url)" (labels are website, demo, linkedin). Use the full URL as the link text.
 - Do not include portfolio file paths or SOURCE_PATH values in the answer; the UI lists workspace sources separately.
 - Do not invent URLs that are not present in the TEXT.
 - If there are multiple relevant areas, connect them clearly but do not overstate the connection.`;
@@ -70,5 +70,5 @@ export function buildContextFromChunks(chunks: CorpusChunk[]): string {
 }
 
 export function buildUserPrompt(question: string, context: string): string {
-  return `PORTFOLIO CONTEXT:\n\n${context}\n\nVISITOR QUESTION:\n${question}\n\nWrite the answer as Anki in first person. Use only facts present inside the TEXT sections above. Do not infer facts from filenames or source paths. Include Markdown links for any relevant http(s) URLs from the TEXT. If the TEXT does not support an answer, reply exactly: ${ANKI_MISSING_INFO_REPLY}`;
+  return `PORTFOLIO CONTEXT:\n\n${context}\n\nVISITOR QUESTION:\n${question}\n\nWrite the answer as Anki in first person. Use only facts present inside the TEXT sections above. Do not infer facts from filenames or source paths. If the TEXT has ## Links, include every listed URL in the answer (label: [url](url)). If the TEXT does not support an answer, reply exactly: ${ANKI_MISSING_INFO_REPLY}`;
 }
