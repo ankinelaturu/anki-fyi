@@ -3,6 +3,7 @@ title: Lintern
 category: PROJECTS
 order: 10
 summary: Local-first data guardrails for AI workflows.
+elevator_pitch: Local-first AI guardrails that detect sensitive information before it reaches external AI systems.
 tags:
   - local-first AI
   - data guardrails
@@ -34,36 +35,47 @@ screenshot: /images/projects/lintern-placeholder.png
 
 ## Project Snapshot
 
-**Status:** Active Prototype  
-**Website:** https://lintern.app  
-**Demo:** https://anki-fixme/here  
-**LinkedIn Post:** https://anki-fixme/here
-
-| Story | Visual |
-| --- | --- |
-| **What It Is**<br>Lintern is a local-first web application and browser extension that detects sensitive information before it is pasted into AI systems or external services.<br><br>**Why I Built It**<br>As AI tools become part of everyday workflows, accidental disclosure of internal or personal information becomes easier. I wanted to explore whether meaningful AI guardrails could run directly in the browser without requiring another cloud service.<br><br>**Technical Highlights**<br>Local-first processing, browser integration, heuristic detection, semantic matching, and low-latency feedback. | ![Placeholder](/images/projects/lintern-placeholder.png) |
-
 ## What It Is
 
-Lintern explores what privacy-first AI safety looks like when the protection layer lives on the user's device. Rather than sending content elsewhere for inspection, Lintern performs analysis locally and provides immediate feedback before content is submitted.
+Lintern is a local-first data guardrail system designed for modern AI workflows. It started from a simple observation: people routinely paste internal information into AI tools without realizing how much context they are exposing. Customer information, source code, log files, internal project names, screenshots, support tickets, infrastructure details, and proprietary business information all become part of the prompt.
+
+Lintern explores whether that risk can be reduced before the prompt is ever submitted.
+
+The project combines browser-based inspection, sensitive-data detection, semantic analysis, and explainable feedback into a workflow that runs close to the user. Instead of routing content through another cloud service for inspection, the goal is to keep analysis local whenever possible.
+
+The long-term vision is a privacy-first safety layer that can sit between users and AI systems, helping them understand what they are sharing and why it may matter.
 
 ## Why I Built It
 
-Many enterprise AI discussions focus on the model, but the risk often starts much earlier: users copying logs, customer information, internal documents, screenshots, or emails into AI systems. Lintern explores how those risks can be reduced at the interaction layer.
+Most discussions around AI safety focus on model behavior. I became interested in a different question: what happens before the model sees the prompt?
+
+Enterprise users frequently interact with AI systems while working inside browsers, support tools, developer environments, CRMs, ticketing systems, documentation portals, and internal dashboards. In those environments, accidental disclosure is often a workflow problem rather than a model problem.
+
+Lintern is my attempt to explore that space. The project investigates whether AI governance can become proactive, lightweight, and integrated into everyday work instead of existing only as policy documentation.
 
 ## Technical Highlights
 
-- Local-first architecture
-- Chrome extension integration
-- DOM-level interception and inspection
-- Heuristic and semantic detection pipelines
-- Low-latency browser execution
-- Foundation for future policy packs, redaction workflows, and explainable detection
+- Local-first execution model.
+- Browser-extension-friendly architecture.
+- DOM-level inspection concepts.
+- Sensitive data detection pipelines.
+- Semantic matching and contextual classification.
+- Explainable findings instead of opaque scores.
+- Low-latency execution designed to feel native to user workflows.
+- Architecture designed for future policy packs, custom detectors, redaction helpers, and organization-specific rules.
 
 ## Technical Challenges
 
-The interesting challenge is not finding obvious patterns like email addresses. The harder problem is identifying information that is sensitive because of meaning and context while keeping false positives low enough that users trust the tool.
+The challenge is not detecting obvious items such as email addresses or phone numbers. The difficult part is identifying information that becomes sensitive because of context.
+
+For example, a project codename, an internal customer reference, or a partial log snippet may not match traditional PII patterns yet may still be inappropriate to share externally.
+
+Another challenge is user trust. A tool that flags too much becomes noise. A tool that misses important information becomes unreliable. The detection pipeline must balance recall, precision, transparency, and usability.
 
 ## Why It Matters
 
-Lintern represents my interest in practical AI adoption. The goal is not simply detecting data. The goal is helping organizations move faster with AI while maintaining privacy, governance, and operational safety.
+Lintern reflects several themes that appear throughout my work: local-first AI, browser-native tooling, explainable systems, and practical AI adoption.
+
+More broadly, it explores a question I expect many organizations will face over the next decade:
+
+How do we help people move faster with AI while maintaining privacy, governance, and operational safety?

@@ -3,6 +3,7 @@ title: Crafticle
 category: PROJECTS
 order: 70
 summary: Authoring and publishing tools for structured creative writing.
+elevator_pitch: Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.
 tags:
   - AI writing
   - TipTap
@@ -32,36 +33,47 @@ screenshot: /images/projects/crafticle-placeholder.png
 
 ## Project Snapshot
 
-**Status:** Prototype  
-**Website:** https://crafticle.app  
-**Demo:** https://anki-fixme/here  
-**LinkedIn Post:** https://anki-fixme/here
-
-| Story | Visual |
-| --- | --- |
-| **What It Is**<br>Crafticle helps transform rough ideas into structured articles through a guided writing workflow.<br><br>**Why I Built It**<br>I wanted a writing experience where AI acts as a collaborator rather than a one-shot content generator.<br><br>**Technical Highlights**<br>React, TipTap, structured idea extraction, content transformation pipelines, and human-in-the-loop editing. | ![Placeholder](/images/projects/crafticle-placeholder.png) |
-
 ## What It Is
 
-Crafticle is an AI-assisted authoring environment focused on helping users move from notes and rough thoughts to complete articles. The emphasis is on iterative refinement rather than instant generation.
+Crafticle is an AI-assisted authoring environment focused on helping users transform rough ideas into structured, publishable content.
+
+Rather than treating writing as a single prompt-and-response interaction, Crafticle treats writing as a workflow. Notes become themes. Themes become outlines. Outlines become sections. Sections become articles. The user remains in control throughout the process.
+
+The project focuses on collaboration between the author and AI instead of complete automation.
 
 ## Why I Built It
 
-Most AI writing tools optimize for producing a finished article as quickly as possible. I was more interested in the creative process itself: organizing ideas, refining structure, expanding sections, and preserving the author's intent.
+Many AI writing tools optimize for speed. Enter a prompt, receive an article.
+
+While that can be useful, I became more interested in the creative process itself. Most writing starts with incomplete thoughts, scattered notes, references, examples, and partially formed ideas.
+
+Crafticle explores how AI can help organize, refine, expand, and improve those ideas without replacing the author's voice.
+
+The goal is to make writing easier while preserving ownership and intent.
 
 ## Technical Highlights
 
-- React-based writing experience
-- TipTap editor integration
-- Structured idea extraction workflows
-- AI-assisted outlining and drafting
-- Human-in-the-loop editing and refinement
-- Content transformation pipelines
+- React-based authoring experience.
+- TipTap editor integration.
+- Structured idea extraction.
+- Outline generation workflows.
+- Content transformation pipelines.
+- Human-in-the-loop editing.
+- Iterative refinement workflows.
+- Foundation for future publishing, templating, and content management capabilities.
 
 ## Technical Challenges
 
-The challenge is helping without taking over. If AI becomes too aggressive, the author's voice disappears. If it is too passive, the tool adds little value. Crafticle explores that balance.
+The hardest problem is preserving intent.
+
+If the AI becomes too aggressive, the resulting article no longer feels like it belongs to the author. If the AI is too passive, the workflow provides little value.
+
+Crafticle explores the balance between guidance and control, helping users move forward without taking ownership of the creative process away from them.
 
 ## Why It Matters
 
-Crafticle reflects my interest in AI-native productivity tools that augment human creativity instead of replacing it. The most interesting part is not generation itself, but the workflow that surrounds it.
+Crafticle reflects my broader interest in AI-native productivity tools.
+
+The most interesting part of the project is not text generation itself. It is the workflow around generation: planning, refinement, organization, iteration, and collaboration.
+
+That philosophy appears across many of my projects where AI acts as an accelerator for human work rather than a replacement for human decision-making.
