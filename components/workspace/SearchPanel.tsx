@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile } from "@/lib/content-types";
 import { searchContentFiles } from "@/lib/search-content";
+import { WORKSPACE_PANEL_TITLE_CLASS } from "@/lib/workspace-chrome";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -39,9 +40,7 @@ export function SearchPanel({ files, activeSlug, onSelectFile }: SearchPanelProp
 
   return (
     <>
-      <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">
-        Search
-      </div>
+      <div className={WORKSPACE_PANEL_TITLE_CLASS}>Search</div>
       <div className="border-b border-ide-border p-2">
         <Input
           value={searchQuery}

@@ -15,6 +15,10 @@ import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
 import { FOLDER_LABELS } from "@/lib/folders";
 import { usePanelResize } from "@/lib/use-panel-resize";
+import {
+  WORKSPACE_EDITOR_TAB_BAR_CLASS,
+  WORKSPACE_PANEL_TITLE_CLASS,
+} from "@/lib/workspace-chrome";
 
 type WorkspaceProps = {
   folders: ContentFolder[];
@@ -167,7 +171,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         />
 
         <section className="flex min-h-0 min-w-0 flex-1 flex-col bg-ide-bg">
-          <div className="flex h-9 shrink-0 items-center border-b border-ide-border bg-[#202020] text-xs">
+          <div className={WORKSPACE_EDITOR_TAB_BAR_CLASS}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className="flex h-full cursor-default items-center border-r border-ide-border bg-ide-bg px-3 text-ide-text">
@@ -209,10 +213,10 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           className="flex min-h-0 shrink-0 flex-col bg-ide-panel max-lg:hidden"
           style={{ width: insights.size }}
         >
-          <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">Insights</div>
+          <div className={WORKSPACE_PANEL_TITLE_CLASS}>Insights</div>
           <div className="space-y-4 p-4 text-xs">
             {(activeFile.elevatorPitch || activeFile.summary) && (
-              <p className="leading-relaxed text-ide-text">
+              <p className="italic leading-relaxed text-ide-muted">
                 {activeFile.elevatorPitch || activeFile.summary}
               </p>
             )}

@@ -4,6 +4,7 @@ import { ChevronDown, ChevronRight, Folder, FolderOpen } from "lucide-react";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
 import { FOLDER_LABELS } from "@/lib/folders";
+import { WORKSPACE_PANEL_TITLE_CLASS } from "@/lib/workspace-chrome";
 import { cn } from "@/lib/utils";
 
 type ExplorerPanelProps = {
@@ -23,9 +24,7 @@ export function ExplorerPanel({
 }: ExplorerPanelProps) {
   return (
     <>
-      <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">
-        Explorer
-      </div>
+      <div className={WORKSPACE_PANEL_TITLE_CLASS}>Explorer</div>
       <div className="min-h-0 flex-1 overflow-auto p-2 text-xs">
         {folders.map((folder) => {
           const isOpen = expanded[folder.name] ?? true;
