@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
-import { AskAnkiTerminal } from "@/components/workspace/AskAnkiTerminal";
+import { AskAnkiTerminal, type AskAnkiTerminalHandle } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import { ActivityBar, type SidePanelView } from "@/components/workspace/ActivityBar";
@@ -56,6 +56,16 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     "creative-systems": true,
   });
   const [sidePanelView, setSidePanelView] = useState<SidePanelView>("explorer");
+  const terminalRef = useRef<AskAnkiTerminalHandle>(null);
+
+  const openFile = useCallback(
+    (slug: string) => {
+      const file = allFiles.find((item) => item.slug === slug);
+      if (!file) return;
+      terminalRef.current?.runOpenCommand(file.path);
+    },
+    [allFiles]
+  );
   const getMaxTerminalBodyHeight = useCallback(
     () => Math.max(MIN_TERMINAL_BODY_HEIGHT, Math.floor(window.innerHeight * MAX_TERMINAL_BODY_RATIO)),
     []
@@ -154,10 +164,10 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               onToggleFolder={(folder) =>
                 setExpanded((state) => ({ ...state, [folder]: !(state[folder] ?? true) }))
               }
-              onSelectFile={setActiveSlug}
+              onSelectFile={openFile}
             />
           ) : (
-            <SearchPanel files={allFiles} activeSlug={activeSlug} onSelectFile={setActiveSlug} />
+            <SearchPanel files={allFiles} activeSlug={activeSlug} onSelectFile={openFile} />
           )}
         </aside>
 
@@ -278,7 +288,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               <div className="mb-2 text-ide-yellow">Related Files</div>
               <div className="space-y-1">
                 {relatedFiles.length ? relatedFiles.map((file) => (
-                  <button key={file.slug} onClick={() => setActiveSlug(file.slug)} className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left hover:bg-ide-active">
+                  <button key={file.slug} onClick={() => openFile(file.slug)} className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left hover:bg-ide-active">
                     <FileText className="h-3.5 w-3.5 text-ide-blue" />
                     <span className="truncate">{file.path}</span>
                   </button>
@@ -307,6 +317,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
       />
 
       <AskAnkiTerminal
+        ref={terminalRef}
         files={allFiles}
         portraitPanelWidth={portraitPanelWidth}
         portraitWidth={PORTRAIT_WIDTH}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import Image from "next/image";
 import { Terminal, Trash2 } from "lucide-react";
 import { askAnki } from "@/lib/assistant/askAnki";
@@ -32,9 +32,10 @@ type AskAnkiTerminalProps = {
   onOpenFile: (slug: string) => void;
 };
 
-function pathToSlug(filePath: string): string {
-  return filePath.replace(/\.md$/i, "");
-}
+export type AskAnkiTerminalHandle = {
+  /** Run `open <target>` in the terminal (path, slug, or title fragment). */
+  runOpenCommand: (target: string) => void;
+};
 
 const STATUS_DOT_INTERVAL_MS = 450;
 
@@ -76,15 +77,19 @@ function AnimatedStatusLine({ status, animate }: { status: string; animate: bool
   );
 }
 
-export function AskAnkiTerminal({
-  files,
-  portraitPanelWidth,
-  portraitWidth,
-  portraitHeight,
-  terminalHeaderHeight,
-  terminalBodyHeight,
-  onOpenFile,
-}: AskAnkiTerminalProps) {
+export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminalProps>(
+  function AskAnkiTerminal(
+    {
+      files,
+      portraitPanelWidth,
+      portraitWidth,
+      portraitHeight,
+      terminalHeaderHeight,
+      terminalBodyHeight,
+      onOpenFile,
+    },
+    ref
+  ) {
   const [query, setQuery] = useState("");
   const [cliLines, setCliLines] = useState<string[]>([
     "Workspace ready.",
@@ -156,6 +161,16 @@ export function AskAnkiTerminal({
       setCliLines((lines) => [...lines, `> ${command}`, output]);
     },
     [files, onOpenFile]
+  );
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      runOpenCommand(target: string) {
+        runCliCommand(`open ${target}`);
+      },
+    }),
+    [runCliCommand]
   );
 
   const runAsk = useCallback(
@@ -325,7 +340,7 @@ export function AskAnkiTerminal({
                     <li key={source.path}>
                       <button
                         type="button"
-                        onClick={() => onOpenFile(pathToSlug(source.path))}
+                        onClick={() => runCliCommand(`open ${source.path}`)}
                         className="text-left text-ide-green hover:underline"
                       >
                         ✓ {source.path} — {source.score.toFixed(2)}
@@ -367,4 +382,7 @@ export function AskAnkiTerminal({
       </div>
     </footer>
   );
-}
+  }
+);
+
+AskAnkiTerminal.displayName = "AskAnkiTerminal";
