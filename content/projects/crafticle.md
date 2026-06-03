@@ -10,6 +10,7 @@ tags:
   - React
   - human-in-the-loop
 kind: project
+importance: major
 icon: pen-tool
 featured: false
 technologies:
@@ -30,8 +31,6 @@ screenshot: /images/projects/crafticle-placeholder.png
 # Crafticle
 
 > An AI-assisted idea-to-article composer built around iterative human-AI collaboration.
-
-## Project Snapshot
 
 ## What It Is
 
@@ -61,6 +60,16 @@ The goal is to make writing easier while preserving ownership and intent.
 - Human-in-the-loop editing.
 - Iterative refinement workflows.
 - Foundation for future publishing, templating, and content management capabilities.
+
+## Key Features
+
+- Convert rough notes into structured outlines.
+- Generate article frameworks and section plans.
+- Expand ideas through iterative refinement.
+- Human-in-the-loop editing workflows.
+- Rich text authoring with TipTap.
+- AI-assisted drafting while preserving author intent.
+- Foundation for publishing and content-management workflows.
 
 ## Technical Challenges
 

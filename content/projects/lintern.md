@@ -10,6 +10,7 @@ tags:
   - browser extension
   - embeddings
 kind: project
+importance: flagship
 icon: lintern-logo
 featured: true
 technologies:
@@ -32,8 +33,6 @@ screenshot: /images/projects/lintern-placeholder.png
 # Lintern
 
 > Local-first data guardrails for AI workflows.
-
-## Project Snapshot
 
 ## What It Is
 
@@ -63,6 +62,16 @@ Lintern is my attempt to explore that space. The project investigates whether AI
 - Explainable findings instead of opaque scores.
 - Low-latency execution designed to feel native to user workflows.
 - Architecture designed for future policy packs, custom detectors, redaction helpers, and organization-specific rules.
+
+## Key Features
+
+- Scan content before it is submitted to AI systems.
+- Detect common sensitive-data patterns.
+- Explore semantic detection beyond simple regex matching.
+- Browser-extension-friendly workflow integration.
+- Local-first processing and analysis.
+- Explainable findings instead of black-box scores.
+- Foundation for policy packs and organization-specific rules.
 
 ## Technical Challenges
 

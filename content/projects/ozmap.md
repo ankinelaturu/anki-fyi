@@ -2,7 +2,7 @@
 title: OzMap
 category: PROJECTS
 order: 30
-summary: Interactive mapping and spatial exploration project.
+summary: AI-powered learning trails that turn topics into navigable knowledge maps.
 elevator_pitch: AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.
 tags:
   - learning systems
@@ -10,6 +10,7 @@ tags:
   - AI
   - interactive systems
 kind: project
+importance: flagship
 icon: map
 featured: false
 technologies:
@@ -30,8 +31,6 @@ screenshot: /images/projects/ozmap-placeholder.png
 # OzMap
 
 > AI-powered learning trails that turn topics into structured exploration maps.
-
-## Project Snapshot
 
 ## What It Is
 
@@ -61,6 +60,15 @@ The goal is not simply to answer questions. The goal is to help users build ment
 - Interactive navigation and discovery.
 - Structured progression through related concepts.
 - Foundation for future quizzes, reviews, summaries, and learning recommendations.
+
+## Key Features
+
+- Generate learning maps from a starting topic.
+- Visualize concept relationships and dependencies.
+- Discover prerequisites and related concepts.
+- Create branching learning trails.
+- Support progressive exploration and knowledge discovery.
+- Foundation for quizzes, summaries, and review workflows.
 
 ## Technical Challenges
 
