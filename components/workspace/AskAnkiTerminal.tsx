@@ -307,7 +307,10 @@ export function AskAnkiTerminal({
             )}
 
             {answer && (
-              <MarkdownProse className="prose-ide mt-2 text-xs leading-relaxed [&_p]:my-1.5 [&_ul]:my-1.5">
+              <MarkdownProse
+                externalLinkIcon
+                className="prose-ide mt-2 text-xs leading-relaxed [&_p]:my-1.5 [&_ul]:my-1.5"
+              >
                 {answer}
               </MarkdownProse>
             )}

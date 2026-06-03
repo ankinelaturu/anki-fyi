@@ -15,6 +15,21 @@ const LINK_LINE_LABELED_RE = new RegExp(
 );
 const LINK_LINE_BARE_RE = /^-\s+(https?:\/\/\S+)\s*$/;
 
+const DISPLAY_LABELS: Record<string, string> = {
+  website: "Website",
+  demo: "Demo",
+  linkedin: "LinkedIn",
+  link: "Link",
+};
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+export function linkDisplayLabel(label: string): string {
+  return DISPLAY_LABELS[label.toLowerCase()] ?? label.charAt(0).toUpperCase() + label.slice(1);
+}
+
 /** Labeled URLs under ## Links in retrieved chunk text (from project frontmatter). */
 export function extractLinksFromChunkText(text: string): ContextLink[] {
   const section = text.match(LINKS_SECTION_RE)?.[1];
@@ -62,24 +77,57 @@ function shouldEnrichAnswer(answer: string): boolean {
   return true;
 }
 
-function formatLinkLine({ label, url }: ContextLink): string {
-  return `${label}: [${url}](${url})`;
+export function formatMarkdownLink({ label, url }: ContextLink): string {
+  return `[${linkDisplayLabel(label)}](${url})`;
 }
 
-function answerIncludesLink(answer: string, { url }: ContextLink): boolean {
-  return answer.includes(url);
+function formatLinkBullet(link: ContextLink): string {
+  return `- ${formatMarkdownLink(link)}`;
 }
 
-/** Append labeled markdown links Gemma omitted, from retrieved context. */
+/** Remove Gemma "Links:" blocks and raw URLs before we append labeled markdown links. */
+function stripRawLinksFromAnswer(answer: string, links: ContextLink[]): string {
+  let text = answer;
+
+  text = text.replace(/^\s*#*\s*Links:\s*$/gim, "");
+
+  for (const link of links) {
+    const label = link.label;
+    const display = linkDisplayLabel(label);
+    const urlBase = link.url.split("?")[0] ?? link.url;
+
+    text = text.replace(new RegExp(`^\\s*${label}\\s*:\\s*https?:\\/\\/\\S+\\s*$`, "gim"), "");
+    text = text.replace(
+      new RegExp(`^\\s*${label}\\s*:\\s*\\[${escapeRegExp(display)}\\]\\([^)]+\\)\\s*$`, "gim"),
+      ""
+    );
+    text = text.replace(
+      new RegExp(`^\\s*-\\s*\\[${escapeRegExp(display)}\\]\\([^)]+\\)\\s*$`, "gim"),
+      ""
+    );
+    text = text.replace(
+      new RegExp(
+        `^\\s*-\\s*${label}\\s*:\\s*\\[${escapeRegExp(label)}\\]\\([^)]+\\)\\s*$`,
+        "gim"
+      ),
+      ""
+    );
+    text = text.replace(new RegExp(`^\\s*${escapeRegExp(link.url)}\\s*$`, "gim"), "");
+    text = text.replace(new RegExp(`^\\s*${escapeRegExp(urlBase)}\\S*\\s*$`, "gim"), "");
+  }
+
+  return text.replace(/\n{3,}/g, "\n\n").trim();
+}
+
+/** Append clickable link labels only (Website, Demo, LinkedIn) from retrieved context. */
 export function enrichAnswerWithContextLinks(answer: string, chunks: CorpusChunk[]): string {
   if (!shouldEnrichAnswer(answer)) return answer;
 
   const links = extractLinksFromChunks(chunks);
   if (links.length === 0) return answer;
 
-  const missing = links.filter((link) => !answerIncludesLink(answer, link));
-  if (missing.length === 0) return answer;
+  const cleaned = stripRawLinksFromAnswer(answer, links);
+  const block = links.map((link) => formatLinkBullet(link)).join("\n");
 
-  const block = missing.map((link) => `- ${formatLinkLine(link)}`).join("\n");
-  return `${answer.trim()}\n\n${block}`;
+  return cleaned ? `${cleaned}\n\n${block}` : block;
 }
