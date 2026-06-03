@@ -214,7 +214,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           style={{ width: insights.size }}
         >
           <div className={WORKSPACE_PANEL_TITLE_CLASS}>Insights</div>
-          <div className="space-y-4 p-4 text-xs">
+          <div className="min-h-0 flex-1 space-y-4 overflow-auto p-4 text-xs">
             {((activeFile.elevatorPitch || activeFile.summary) || activeFile.links.length > 0) && (
               <div className="space-y-2">
                 {(activeFile.elevatorPitch || activeFile.summary) && (
