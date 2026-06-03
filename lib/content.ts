@@ -35,7 +35,10 @@ function parseFile(filePath: string): ContentFile {
     featured: data.featured === true,
     order: typeof data.order === "number" ? data.order : 100,
     summary: typeof data.summary === "string" ? data.summary : "",
-    tags: Array.isArray(data.tags) ? data.tags : [],
+    elevatorPitch:
+      typeof data.elevator_pitch === "string" ? data.elevator_pitch : undefined,
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    technologies: Array.isArray(data.technologies) ? data.technologies.map(String) : [],
     content,
     path: relative,
     type: typeof data.type === "string" ? data.type : undefined,

@@ -18,7 +18,9 @@ export type ContentFile = {
   featured: boolean;
   order: number;
   summary?: string;
+  elevatorPitch?: string;
   tags: string[];
+  technologies: string[];
   content: string;
   path: string;
   type?: string;

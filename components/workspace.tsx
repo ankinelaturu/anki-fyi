@@ -30,7 +30,7 @@ const DEFAULT_SIDEBAR_WIDTH = 280;
 const MIN_SIDEBAR_WIDTH = 180;
 const MAX_SIDEBAR_WIDTH = 520;
 
-const DEFAULT_INSIGHTS_WIDTH = 300;
+const DEFAULT_INSIGHTS_WIDTH = 360;
 const MIN_INSIGHTS_WIDTH = 200;
 const MAX_INSIGHTS_WIDTH = 520;
 
@@ -211,21 +211,39 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         >
           <div className="border-b border-ide-border px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-ide-muted">Insights</div>
           <div className="space-y-4 p-4 text-xs">
-            <div>
-              <div className="mb-2 text-ide-yellow">Current File</div>
-              <div className="rounded border border-ide-border bg-[#1b1b1b] p-3">
-                <div className="text-ide-blue">{activeFile.title}</div>
-                <p className="mt-2 leading-relaxed text-ide-muted">{activeFile.summary}</p>
-              </div>
-            </div>
+            {(activeFile.elevatorPitch || activeFile.summary) && (
+              <p className="leading-relaxed text-ide-text">
+                {activeFile.elevatorPitch || activeFile.summary}
+              </p>
+            )}
             <div>
               <div className="mb-2 text-ide-yellow">Tags</div>
               <div className="flex flex-wrap gap-2">
                 {activeFile.tags.map((tag) => (
-                  <span key={tag} className="rounded border border-ide-border bg-[#1b1b1b] px-2 py-1 text-ide-green">{tag}</span>
+                  <span
+                    key={tag}
+                    className="rounded border border-ide-border bg-[#1b1b1b] px-2 py-1 text-ide-green"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
+            {activeFile.technologies.length > 0 && (
+              <div>
+                <div className="mb-2 text-ide-yellow">Technologies</div>
+                <div className="flex flex-wrap gap-2">
+                  {activeFile.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded border border-ide-border bg-[#1b1b1b] px-2 py-1 text-ide-blue"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div>
               <div className="mb-2 text-ide-yellow">Related Files</div>
               <div className="space-y-1">
