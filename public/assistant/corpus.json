@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "corpusHash": "1e297f87f0daf5b6",
-  "generatedAt": "2026-06-03T07:34:35.699Z",
+  "corpusHash": "8f4e6c871f22dd2d",
+  "generatedAt": "2026-06-03T07:55:01.743Z",
   "documents": [
     {
       "id": "about/about-anki",
@@ -461,7 +461,7 @@
         "synchronization",
         "runtime"
       ],
-      "content": "# thread-synchronization.md\n\n## Patent\n\n**US10198279B2 — Thread synchronization for platform neutrality**\n\nThis patent reflects earlier work in runtime systems, portability, synchronization, and platform-neutral execution.\n",
+      "content": "# thread-synchronization.md\n\n## Patent\n\n**US10198279B2 — Thread synchronization for platform neutrality**\n\nA system performs thread synchronization across layers of code that implement an application, including native code, system code, and code in a virtual machine (“VM”). The system makes a call by the native code to the system code; and sends a message by the system code to the code in the VM. The system then sends a first response by the code in the VM to the system code; and sends a second response by the system code to the native code, where each one of the native code, the system code, and the code in the VM implements wait and notify functionality for communication with other codes that implement the application.\n\n\n",
       "chunks": [
         {
           "id": "patents/concurrency-systems::0",
@@ -470,7 +470,7 @@
           "title": "Concurrency Systems",
           "kind": "patent",
           "section": "Patent",
-          "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Patent\n\n**US10198279B2 — Thread synchronization for platform neutrality**\n\nThis patent reflects earlier work in runtime systems, portability, synchronization, and platform-neutral execution.",
+          "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US10198279B2\n\n**US10198279B2 — Thread synchronization for platform neutrality**\n\nA system performs thread synchronization across layers of code that implement an application, including native code, system code, and code in a virtual machine (“VM”). The system makes a call by the native code to the system code; and sends a message by the system code to the code in the VM. The system then sends a first response by the code in the VM to the system code; and sends a second response by the system code to the native code, where each one of the native code, the system code, and the code in the VM implements wait and notify functionality for communication with other codes that implement the application.",
           "chunkIndex": 0
         }
       ]
@@ -486,7 +486,7 @@
         "JVM",
         "mobile"
       ],
-      "content": "# embedded-jvm.md\n\n## Patent\n\n**US 8856805 — Java virtual machine embedded in a native mobile application**\n\nThis patent reflects work at the intersection of Java runtime systems and native mobile application execution.\n",
+      "content": "# embedded-jvm.md\n\n## Patent\n\n**US 8856805 — Virtual channel for embedded process communication**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.\n",
       "chunks": [
         {
           "id": "patents/embedded-jvm-runtime::0",
@@ -495,7 +495,7 @@
           "title": "Embedded JVM Runtime",
           "kind": "patent",
           "section": "Patent",
-          "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Patent\n\n**US 8856805 — Java virtual machine embedded in a native mobile application**\n\nThis patent reflects work at the intersection of Java runtime systems and native mobile application execution.",
+          "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US8856805\n\n**US 8856805 — Virtual channel for embedded process communication**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.",
           "chunkIndex": 0
         }
       ]
@@ -511,7 +511,7 @@
         "embedded",
         "communication"
       ],
-      "content": "# embedded-process-communication.md\n\n## Patent\n\n**US 8978023 — Virtual channel for embedded process communication**\n\nThis patent relates to communication mechanisms in embedded runtime environments.\n",
+      "content": "# embedded-process-communication.md\n\n## Patent\n\n**US 8978023 — Canonical mechanism for securely assembling features into a mobile application**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.\n",
       "chunks": [
         {
           "id": "patents/embedded-process-communication::0",
@@ -520,7 +520,7 @@
           "title": "Embedded Process Communication",
           "kind": "patent",
           "section": "Patent",
-          "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Patent\n\n**US 8978023 — Virtual channel for embedded process communication**\n\nThis patent relates to communication mechanisms in embedded runtime environments.",
+          "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US8978023\n\n**US 8978023 — Canonical mechanism for securely assembling features into a mobile application**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.",
           "chunkIndex": 0
         }
       ]
@@ -536,7 +536,7 @@
         "mobile",
         "application framework"
       ],
-      "content": "# mobile-application-features.md\n\n## Patent\n\n**US 8863126 — Canonical mechanism for securely assembling features into a mobile application**\n\nThis patent reflects work in mobile application framework architecture and secure feature assembly.\n",
+      "content": "# mobile-application-features.md\n\n## Patent\n\n**US 8863126 — Java virtual machine embedded in a native mobile application**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.\n",
       "chunks": [
         {
           "id": "patents/mobile-platform-innovations::0",
@@ -545,7 +545,7 @@
           "title": "Mobile Platform Innovations",
           "kind": "patent",
           "section": "Patent",
-          "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Patent\n\n**US 8863126 — Canonical mechanism for securely assembling features into a mobile application**\n\nThis patent reflects work in mobile application framework architecture and secure feature assembly.",
+          "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US8863126\n\n**US 8863126 — Java virtual machine embedded in a native mobile application**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.",
           "chunkIndex": 0
         }
       ]
@@ -1049,7 +1049,7 @@
       "title": "Concurrency Systems",
       "kind": "patent",
       "section": "Patent",
-      "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Patent\n\n**US10198279B2 — Thread synchronization for platform neutrality**\n\nThis patent reflects earlier work in runtime systems, portability, synchronization, and platform-neutral execution.",
+      "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US10198279B2\n\n**US10198279B2 — Thread synchronization for platform neutrality**\n\nA system performs thread synchronization across layers of code that implement an application, including native code, system code, and code in a virtual machine (“VM”). The system makes a call by the native code to the system code; and sends a message by the system code to the code in the VM. The system then sends a first response by the code in the VM to the system code; and sends a second response by the system code to the native code, where each one of the native code, the system code, and the code in the VM implements wait and notify functionality for communication with other codes that implement the application.",
       "chunkIndex": 0
     },
     {
@@ -1059,7 +1059,7 @@
       "title": "Embedded JVM Runtime",
       "kind": "patent",
       "section": "Patent",
-      "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Patent\n\n**US 8856805 — Java virtual machine embedded in a native mobile application**\n\nThis patent reflects work at the intersection of Java runtime systems and native mobile application execution.",
+      "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US8856805\n\n**US 8856805 — Virtual channel for embedded process communication**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.",
       "chunkIndex": 0
     },
     {
@@ -1069,7 +1069,7 @@
       "title": "Embedded Process Communication",
       "kind": "patent",
       "section": "Patent",
-      "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Patent\n\n**US 8978023 — Virtual channel for embedded process communication**\n\nThis patent relates to communication mechanisms in embedded runtime environments.",
+      "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US8978023\n\n**US 8978023 — Canonical mechanism for securely assembling features into a mobile application**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.",
       "chunkIndex": 0
     },
     {
@@ -1079,7 +1079,7 @@
       "title": "Mobile Platform Innovations",
       "kind": "patent",
       "section": "Patent",
-      "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Patent\n\n**US 8863126 — Canonical mechanism for securely assembling features into a mobile application**\n\nThis patent reflects work in mobile application framework architecture and secure feature assembly.",
+      "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Patent\n\n## Links\n\n- url: https://patents.google.com/patent/US8863126\n\n**US 8863126 — Java virtual machine embedded in a native mobile application**\n\nA native application built for a mobile device can embed non-native JAVA code that may be executed by a JAVA virtual machine also embedded as a library within the native application. Enterprise applications may be extended for use by mobile devices. Business logic for an application may be constructed just once and then used in both enterprise applications and mobile device applications.",
       "chunkIndex": 0
     },
     {

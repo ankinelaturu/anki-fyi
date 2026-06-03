@@ -1,4 +1,4 @@
-export const LINK_FIELDS = ["website", "demo", "linkedin"] as const;
+export const LINK_FIELDS = ["website", "demo", "linkedin", "url"] as const;
 
 export type DocumentLink = {
   label: (typeof LINK_FIELDS)[number];
@@ -9,6 +9,7 @@ const DISPLAY_LABELS: Record<string, string> = {
   website: "Website",
   demo: "Demo",
   linkedin: "LinkedIn",
+  url: "URL",
   link: "Link",
 };
 
@@ -28,10 +29,13 @@ function isUsableUrl(value: unknown): value is string {
 
 export function extractDocumentLinks(data: Record<string, unknown>): DocumentLink[] {
   const links: DocumentLink[] = [];
+  const seenUrls = new Set<string>();
 
   for (const label of LINK_FIELDS) {
     const url = data[label];
-    if (isUsableUrl(url)) links.push({ label, url });
+    if (!isUsableUrl(url) || seenUrls.has(url)) continue;
+    seenUrls.add(url);
+    links.push({ label, url });
   }
 
   return links;
