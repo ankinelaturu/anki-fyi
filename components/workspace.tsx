@@ -132,9 +132,9 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-green">main</span>
           <span className="text-ide-muted">●</span>
           <span className="text-ide-yellow">Portfolio Assistant</span>
-          <span className="text-ide-muted">●</span>
-          <TriangleAlert className="h-3 w-3 text-ide-yellow" />
-          <span className="text-ide-yellow">Work in progress</span>
+          <span className="text-ide-muted">●</span>  
+          <TriangleAlert className="h-3 w-3 text-[#fbbf24]" />
+          <span className="text-[#fbbf24]">Work in progress</span>
         </div>
       </header>
 
