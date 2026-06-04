@@ -7,8 +7,8 @@ export type PlacedBubble = {
   r: number;
 };
 
-const PADDING = 12;
-const GAP = 8;
+const GAP = 10;
+export const BUBBLE_SIZE_MULTIPLIER = 1.5;
 
 function scaledRadius(
   value: number,
@@ -28,17 +28,85 @@ function scaledRadius(
   return minR + (maxR - minR) * Math.min(1, Math.max(0, t));
 }
 
-/** Pack proportional circles into a square without D3. */
+function inBounds(x: number, y: number, r: number, width: number, height: number, padding: number): boolean {
+  return (
+    x - r >= padding &&
+    x + r <= width - padding &&
+    y - r >= padding &&
+    y + r <= height - padding
+  );
+}
+
+function hasOverlap(
+  x: number,
+  y: number,
+  r: number,
+  placed: PlacedBubble[],
+  gap: number
+): boolean {
+  for (const other of placed) {
+    const separation = Math.hypot(x - other.x, y - other.y) - (r + other.r);
+    if (separation < gap) return true;
+  }
+  return false;
+}
+
+function findPosition(
+  bubble: { item: AnalyticsBubbleItem; r: number },
+  placed: PlacedBubble[],
+  width: number,
+  height: number,
+  padding: number
+): { x: number; y: number } | null {
+  let best: { x: number; y: number; score: number } | null = null;
+
+  const anchors =
+    placed.length > 0
+      ? placed
+      : [{ item: bubble.item, x: width / 2, y: height / 2, r: 0 }];
+
+  for (const anchor of anchors) {
+    for (let step = 0; step < 48; step++) {
+      const angle = (step / 48) * Math.PI * 2;
+      const dist = (anchor.r || 0) + bubble.r + GAP;
+      const x = anchor.x + Math.cos(angle) * dist;
+      const y = anchor.y + Math.sin(angle) * dist;
+
+      if (!inBounds(x, y, bubble.r, width, height, padding)) continue;
+      if (hasOverlap(x, y, bubble.r, placed, GAP)) continue;
+
+      let minGap = Number.POSITIVE_INFINITY;
+      for (const other of placed) {
+        minGap = Math.min(
+          minGap,
+          Math.hypot(x - other.x, y - other.y) - (bubble.r + other.r)
+        );
+      }
+
+      const score = minGap;
+      if (!best || score > best.score) {
+        best = { x, y, score };
+      }
+    }
+  }
+
+  return best ? { x: best.x, y: best.y } : null;
+}
+
+/** Pack proportional circles into a rectangle without D3. */
 export function packBubbles(
   items: AnalyticsBubbleItem[],
-  boxSize: number,
+  width: number,
+  height: number,
   scale: AnalyticsBubbleScale = "sqrt"
 ): PlacedBubble[] {
-  if (items.length === 0) return [];
+  if (items.length === 0 || width <= 0 || height <= 0) return [];
 
+  const padding = 14;
   const maxValue = Math.max(...items.map((item) => item.value));
-  const maxR = boxSize * 0.22;
-  const minR = Math.max(boxSize * 0.09, 28);
+  const minDim = Math.min(width, height);
+  const maxR = minDim * 0.21 * BUBBLE_SIZE_MULTIPLIER;
+  const minR = Math.max(minDim * 0.085, 26) * BUBBLE_SIZE_MULTIPLIER;
 
   const bubbles = items
     .map((item) => ({
@@ -47,57 +115,27 @@ export function packBubbles(
     }))
     .sort((a, b) => b.r - a.r);
 
-  const center = boxSize / 2;
-  const placed: PlacedBubble[] = [{ ...bubbles[0]!, x: center, y: center }];
+  const placed: PlacedBubble[] = [];
+  const first = bubbles[0]!;
+  placed.push({ ...first, x: width / 2, y: height / 2 });
 
   for (let i = 1; i < bubbles.length; i++) {
-    const bubble = bubbles[i]!;
-    let best: { x: number; y: number; score: number } | null = null;
+    let bubble = bubbles[i]!;
+    let position = findPosition(bubble, placed, width, height, padding);
 
-    for (const anchor of placed) {
-      for (let step = 0; step < 24; step++) {
-        const angle = (step / 24) * Math.PI * 2;
-        const dist = anchor.r + bubble.r + GAP;
-        const x = anchor.x + Math.cos(angle) * dist;
-        const y = anchor.y + Math.sin(angle) * dist;
-
-        if (
-          x - bubble.r < PADDING ||
-          x + bubble.r > boxSize - PADDING ||
-          y - bubble.r < PADDING ||
-          y + bubble.r > boxSize - PADDING
-        ) {
-          continue;
-        }
-
-        let valid = true;
-        let minGap = Number.POSITIVE_INFINITY;
-        for (const other of placed) {
-          const separation = Math.hypot(x - other.x, y - other.y) - (bubble.r + other.r);
-          if (separation < GAP) {
-            valid = false;
-            break;
-          }
-          minGap = Math.min(minGap, separation);
-        }
-
-        if (!valid) continue;
-
-        const score = minGap;
-        if (!best || score > best.score) {
-          best = { x, y, score };
-        }
-      }
+    if (!position && bubble.r > minR) {
+      bubble = { ...bubble, r: bubble.r * 0.9 };
+      position = findPosition(bubble, placed, width, height, padding);
     }
 
-    if (best) {
-      placed.push({ ...bubble, x: best.x, y: best.y });
+    if (position) {
+      placed.push({ ...bubble, x: position.x, y: position.y });
     } else {
-      placed.push({
-        ...bubble,
-        x: center + ((i % 3) - 1) * (maxR + GAP),
-        y: center + (Math.floor(i / 3) - 1) * (maxR + GAP),
-      });
+      const row = Math.floor(i / 3);
+      const col = i % 3;
+      const x = padding + bubble.r + col * (bubble.r * 2 + GAP);
+      const y = padding + bubble.r + row * (bubble.r * 2 + GAP);
+      placed.push({ ...bubble, x, y });
     }
   }
 

@@ -36,11 +36,11 @@ screenshot: /images/chatgpt-export-summary-placeholder.png
   "title": "ChatGPT Usage Snapshot",
   "scale": "sqrt",
   "items": [
-    { "label": "Total Tokens", "value": 17116709, "display": "17.1M", "emphasis": "primary" },
+    { "label": "Tokens", "value": 17116709, "display": "17.1M", "emphasis": "primary" },
     { "label": "Assistant Tokens", "value": 14409662, "display": "14.4M" },
     { "label": "User Tokens", "value": 2707047, "display": "2.7M" },
     { "label": "Messages", "value": 48525, "display": "48.5K" },
-    { "label": "Conversations", "value": 1231, "display": "1,231" }
+    { "label": "Chats", "value": 1231, "display": "1,231" }
   ]
 }
 ```
