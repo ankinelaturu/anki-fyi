@@ -19,6 +19,14 @@ import { MarkdownProse } from "@/components/markdown-prose";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
+  appendCommandHistory,
+  createHistoryNavigator,
+  loadCommandHistory,
+  navigateCommandHistory,
+  saveCommandHistory,
+  type CommandHistoryNavigator,
+} from "@/lib/terminal/commandHistory";
+import {
   acceptNextOpenGhostChar,
   buildOpenCommand,
   getOpenGhostSuffix,
@@ -123,7 +131,37 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
   const outputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const askAbortRef = useRef(0);
+  const commandHistoryRef = useRef<string[]>([]);
+  const historyNavRef = useRef<CommandHistoryNavigator>(createHistoryNavigator());
+  const queryRef = useRef(query);
   const [openSuggestionIndex, setOpenSuggestionIndex] = useState(0);
+
+  queryRef.current = query;
+
+  useEffect(() => {
+    commandHistoryRef.current = loadCommandHistory();
+  }, []);
+
+  const recordCommand = useCallback((command: string) => {
+    const next = appendCommandHistory(commandHistoryRef.current, command);
+    commandHistoryRef.current = next;
+    saveCommandHistory(next);
+    historyNavRef.current = createHistoryNavigator();
+  }, []);
+
+  const navigateHistory = useCallback((direction: "up" | "down") => {
+    const result = navigateCommandHistory(
+      commandHistoryRef.current,
+      historyNavRef.current,
+      queryRef.current,
+      direction
+    );
+    if (!result) return;
+    historyNavRef.current = result.nav;
+    setQuery(result.nextQuery);
+  }, []);
+
+  const isBrowsingHistory = () => historyNavRef.current.index !== -1;
 
   const openPathPrefix = useMemo(() => getOpenPathPrefix(query), [query]);
 
@@ -269,6 +307,8 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
       const input = raw.trim();
       if (!input) return;
 
+      recordCommand(input);
+
       const lower = input.toLowerCase();
       const firstWord = lower.split(/\s+/)[0] ?? "";
 
@@ -288,26 +328,58 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
       void runAsk(question);
       setQuery("");
     },
-    [runAsk, runCliCommand]
+    [recordCommand, runAsk, runCliCommand]
   );
+
+  const clearInput = useCallback(() => {
+    setQuery("");
+    historyNavRef.current = createHistoryNavigator();
+    setOpenSuggestionIndex(0);
+  }, []);
 
   const handleInputKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!openCompletionActive) return;
-
-      if (event.key === "ArrowDown") {
+      if (event.key === "Escape") {
         event.preventDefault();
-        setOpenSuggestionIndex((index) => (index + 1) % openCandidates.length);
+        clearInput();
         return;
       }
 
       if (event.key === "ArrowUp") {
+        if (isBrowsingHistory()) {
+          event.preventDefault();
+          navigateHistory("up");
+          return;
+        }
+        if (openCompletionActive) {
+          event.preventDefault();
+          setOpenSuggestionIndex(
+            (index) => (index - 1 + openCandidates.length) % openCandidates.length
+          );
+          return;
+        }
         event.preventDefault();
-        setOpenSuggestionIndex(
-          (index) => (index - 1 + openCandidates.length) % openCandidates.length
-        );
+        navigateHistory("up");
         return;
       }
+
+      if (event.key === "ArrowDown") {
+        if (isBrowsingHistory()) {
+          event.preventDefault();
+          navigateHistory("down");
+          return;
+        }
+        if (openCompletionActive) {
+          event.preventDefault();
+          setOpenSuggestionIndex((index) => (index + 1) % openCandidates.length);
+          return;
+        }
+        event.preventDefault();
+        navigateHistory("down");
+        return;
+      }
+
+      if (!openCompletionActive) return;
 
       if (event.key === "Tab") {
         event.preventDefault();
@@ -332,6 +404,8 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
       }
     },
     [
+      clearInput,
+      navigateHistory,
       openCompletionActive,
       openCandidates,
       openGhostSuffix,
@@ -339,6 +413,13 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
       query,
     ]
   );
+
+  const handleInputChange = useCallback((value: string) => {
+    if (historyNavRef.current.index !== -1) {
+      historyNavRef.current = createHistoryNavigator();
+    }
+    setQuery(value);
+  }, []);
 
   const clearTerminal = () => {
     askAbortRef.current += 1;
@@ -486,7 +567,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
               <Input
                 ref={inputRef}
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => handleInputChange(event.target.value)}
                 onKeyDown={handleInputKeyDown}
                 aria-label="Ask Anki a question"
                 aria-autocomplete={openCompletionActive ? "list" : undefined}

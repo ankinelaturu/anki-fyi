@@ -30,20 +30,6 @@ screenshot: /images/chatgpt-export-summary-placeholder.png
 ---
 # ChatGPT Export Summary
 
-```analytics
-{
-  "type": "bubble-metrics",
-  "title": "ChatGPT Usage Snapshot",
-  "scale": "sqrt",
-  "items": [
-    { "label": "Tokens", "value": 17116709, "display": "17.1M", "emphasis": "primary" },
-    { "label": "Assistant Tokens", "value": 14409662, "display": "14.4M" },
-    { "label": "User Tokens", "value": 2707047, "display": "2.7M" },
-    { "label": "Messages", "value": 48525, "display": "48.5K" },
-    { "label": "Chats", "value": 1231, "display": "1,231" }
-  ]
-}
-```
 
 ## What It Is
 
@@ -55,6 +41,33 @@ The resulting dataset contains more than 1,200 conversations, nearly 50,000 mess
 
 Rather than treating ChatGPT as a search engine replacement, the data shows how I increasingly used it as a thinking partner, design reviewer, coding assistant, research companion, brainstorming tool, and project collaborator.
 
+```analytics
+{
+  "type": "bubble-metrics",
+  "title": "ChatGPT Usage Snapshot [Jun 02, 2026]",
+  "scale": "sqrt",
+  "items": [
+    { "label": "Tokens", "value": 17116709, "display": "17.1M", "emphasis": "primary" },
+    { "label": "Assistant Tokens", "value": 14409662, "display": "14.4M" },
+    { "label": "User Tokens", "value": 2707047, "display": "2.7M" },
+    { "label": "Messages", "value": 48525, "display": "48.5K" },
+    { "label": "Chats", "value": 1231, "display": "1,231" }
+  ]
+}
+```
+```analytics
+{
+  "type": "bubble-metrics",
+  "title": "ChatGPT Tokens by Year [un 02, 2026]",
+  "scale": "sqrt",
+  "items": [
+    { "label": "2023", "value": 576348, "display": "576K" },
+    { "label": "2024", "value": 2390255, "display": "2.4M" },
+    { "label": "2025", "value": 6723370, "display": "6.7M" },
+    { "label": "2026", "value": 7416172, "display": "7.4M" }
+  ]
+}
+```
 ## Why I Built It
 
 After requesting my ChatGPT export, I initially expected a few interesting statistics.
