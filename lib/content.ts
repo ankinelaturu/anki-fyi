@@ -38,6 +38,10 @@ function parseFile(filePath: string): ContentFile {
     summary: typeof data.summary === "string" ? data.summary : "",
     elevatorPitch:
       typeof data.elevator_pitch === "string" ? data.elevator_pitch : undefined,
+    company: typeof data.company === "string" ? data.company : undefined,
+    role: typeof data.role === "string" ? data.role : undefined,
+    startDate: typeof data.start_date === "string" ? data.start_date : undefined,
+    endDate: typeof data.end_date === "string" ? data.end_date : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     technologies: Array.isArray(data.technologies) ? data.technologies.map(String) : [],
     links: extractDocumentLinks(data as Record<string, unknown>),

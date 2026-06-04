@@ -9,6 +9,7 @@ import { AskAnkiTerminal, type AskAnkiTerminalHandle } from "@/components/worksp
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
 import { ActivityBar, type SidePanelView } from "@/components/workspace/ActivityBar";
+import { ExperienceInsightsMeta } from "@/components/workspace/ExperienceInsightsMeta";
 import { ExplorerPanel } from "@/components/workspace/ExplorerPanel";
 import { SearchPanel } from "@/components/workspace/SearchPanel";
 import { StatusBar } from "@/components/workspace/StatusBar";
@@ -227,13 +228,19 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         >
           <div className={WORKSPACE_PANEL_TITLE_CLASS}>Insights</div>
           <div className="min-h-0 flex-1 space-y-4 overflow-auto p-4 text-xs">
-            {((activeFile.elevatorPitch || activeFile.summary) || activeFile.links.length > 0) && (
+            {((activeFile.elevatorPitch || activeFile.summary) ||
+              activeFile.links.length > 0 ||
+              (activeFile.kind === "experience" &&
+                (activeFile.company || activeFile.startDate || activeFile.endDate))) && (
               <div className="space-y-2">
                 {(activeFile.elevatorPitch || activeFile.summary) && (
                   <p className="italic leading-relaxed text-ide-muted">
                     {activeFile.elevatorPitch || activeFile.summary}
                   </p>
                 )}
+                {activeFile.kind === "experience" ? (
+                  <ExperienceInsightsMeta file={activeFile} />
+                ) : null}
                 {activeFile.links.length > 0 && (
                   <ul className="flex flex-wrap gap-2">
                     {activeFile.links.map((link) => (

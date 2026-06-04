@@ -22,6 +22,10 @@ export type ContentFile = {
   order: number;
   summary?: string;
   elevatorPitch?: string;
+  company?: string;
+  role?: string;
+  startDate?: string;
+  endDate?: string;
   tags: string[];
   technologies: string[];
   links: DocumentLink[];
