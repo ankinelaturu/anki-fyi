@@ -1,6 +1,7 @@
 import { ASSISTANT_REFUSE_BELOW_SCORE } from "@/lib/assistant/config";
+import { isActiveFileReference } from "@/lib/assistant/activeFileReference";
 import { isAboutMeQuestion } from "@/lib/assistant/retrievalBoost";
-import type { RetrievalResult } from "@/lib/assistant/types";
+import type { AskAnkiActiveFile, RetrievalResult } from "@/lib/assistant/types";
 
 const BLOCKLIST: RegExp[] = [
   /\bweather\b/i,
@@ -28,8 +29,17 @@ export function isRelevantRetrieval(results: RetrievalResult[]): boolean {
   return results[0]!.score >= ASSISTANT_REFUSE_BELOW_SCORE;
 }
 
-export function shouldRefuseQuestion(question: string, results: RetrievalResult[]): boolean {
+export type RefuseQuestionOptions = {
+  activeFile?: AskAnkiActiveFile;
+};
+
+export function shouldRefuseQuestion(
+  question: string,
+  results: RetrievalResult[],
+  options?: RefuseQuestionOptions
+): boolean {
   if (isBlocklistedQuestion(question)) return true;
   if (isAboutMeQuestion(question) && results.length > 0) return false;
+  if (options?.activeFile && isActiveFileReference(question)) return false;
   return !isRelevantRetrieval(results);
 }

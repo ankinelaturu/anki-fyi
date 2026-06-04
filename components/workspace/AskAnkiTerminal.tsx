@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Terminal, Trash2 } from "lucide-react";
 import { askAnki } from "@/lib/assistant/askAnki";
 import { PRIVACY_NOTE } from "@/lib/assistant/config";
-import type { AskAnkiSource } from "@/lib/assistant/types";
+import type { AskAnkiActiveFile, AskAnkiSource } from "@/lib/assistant/types";
 import type { ContentFile } from "@/lib/content-types";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { Input } from "@/components/ui/input";
@@ -24,6 +24,7 @@ const SUGGESTED_PROMPTS = [
 
 type AskAnkiTerminalProps = {
   files: ContentFile[];
+  activeFile?: AskAnkiActiveFile | null;
   portraitPanelWidth: number;
   portraitWidth: number;
   portraitHeight: number;
@@ -81,6 +82,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
   function AskAnkiTerminal(
     {
       files,
+      activeFile,
       portraitPanelWidth,
       portraitWidth,
       portraitHeight,
@@ -187,17 +189,23 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
       setLoading(true);
 
       try {
-        const response = await askAnki(q, {
-          onStatus: (message) => {
-            if (askAbortRef.current !== askId) return;
-            setStatus(message);
+        const response = await askAnki(
+          {
+            question: q,
+            activeFile: activeFile ?? undefined,
           },
-          onToken: (token) => {
-            if (askAbortRef.current !== askId) return;
-            setStatus((prev) => (prev ? null : prev));
-            setAnswer((prev) => prev + token);
-          },
-        });
+          {
+            onStatus: (message) => {
+              if (askAbortRef.current !== askId) return;
+              setStatus(message);
+            },
+            onToken: (token) => {
+              if (askAbortRef.current !== askId) return;
+              setStatus((prev) => (prev ? null : prev));
+              setAnswer((prev) => prev + token);
+            },
+          }
+        );
 
         if (askAbortRef.current !== askId) return;
 
@@ -213,7 +221,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
         if (askAbortRef.current === askId) setLoading(false);
       }
     },
-    [currentQuestion]
+    [activeFile, currentQuestion]
   );
 
   const handleSubmit = useCallback(
@@ -367,6 +375,12 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
               ))}
             </div>
           </div>
+
+          {activeFile ? (
+            <p className="shrink-0 border-t border-ide-border px-3 py-1.5 text-[10px] text-ide-muted">
+              Current context: <span className="text-ide-text">{activeFile.title}</span>
+            </p>
+          ) : null}
 
           <div className="flex shrink-0 items-center gap-1 border-t border-ide-border px-3 py-2 text-xs">
             <span className="shrink-0 text-[13px] text-[#f87171]">Ask Anki ›</span>

@@ -3,6 +3,10 @@ import type { CorpusChunk } from "@/lib/assistant/types";
 
 export const ANKI_MISSING_INFO_REPLY = "I don't have that in my portfolio yet.";
 
+export const ASK_ANKI_ACTIVE_FILE_ADDENDUM = `When ACTIVE EDITOR FILE is provided, treat it as the visitor's current working context.
+If the visitor says "this", "here", "this project", "this role", "this file", or similar, interpret it as referring to the active editor file.
+Use the active editor file as the primary source, and use retrieved workspace context only to supplement or connect related details.`;
+
 export const ASK_ANKI_SYSTEM_PROMPT = `You are Ask Anki, a local portfolio assistant running inside anki.fyi.
 You speak as Anki Nelaturu in first person.
 Use "I", "my", and "me" when describing the portfolio owner.
@@ -49,26 +53,73 @@ function formatSourceBlock(chunk: CorpusChunk): string {
   ].join("\n");
 }
 
-export function buildContextFromChunks(chunks: CorpusChunk[]): string {
-  const blocks: string[] = [];
-  let total = 0;
+function appendBlocksWithinBudget(
+  blocks: string[],
+  chunks: CorpusChunk[],
+  maxChars: number
+): number {
+  let total = blocks.join("\n\n").length;
 
   for (const chunk of chunks) {
     const block = formatSourceBlock(chunk);
-    if (total + block.length > MAX_CONTEXT_CHARS) {
-      const remaining = MAX_CONTEXT_CHARS - total;
+    const separator = blocks.length > 0 ? 2 : 0;
+    if (total + separator + block.length > maxChars) {
+      const remaining = maxChars - total - separator;
       if (remaining > 200) {
         blocks.push(`${block.slice(0, remaining)}\n...[truncated]`);
       }
-      break;
+      return maxChars;
     }
     blocks.push(block);
-    total += block.length + 2;
+    total += separator + block.length;
   }
 
+  return total;
+}
+
+export function buildContextFromChunks(chunks: CorpusChunk[]): string {
+  const blocks: string[] = [];
+  appendBlocksWithinBudget(blocks, chunks, MAX_CONTEXT_CHARS);
   return blocks.join("\n\n");
 }
 
+export function buildHybridContext(
+  activeChunks: CorpusChunk[],
+  retrievedChunks: CorpusChunk[]
+): string {
+  if (activeChunks.length === 0) {
+    return buildContextFromChunks(retrievedChunks);
+  }
+
+  const activeBudget = Math.floor(MAX_CONTEXT_CHARS * 0.55);
+  const retrievedBudget = MAX_CONTEXT_CHARS - activeBudget;
+
+  const activeBlocks: string[] = [];
+  appendBlocksWithinBudget(activeBlocks, activeChunks, activeBudget);
+
+  const retrievedBlocks: string[] = [];
+  appendBlocksWithinBudget(retrievedBlocks, retrievedChunks, retrievedBudget);
+
+  const parts: string[] = [];
+  if (activeBlocks.length > 0) {
+    parts.push(`ACTIVE EDITOR FILE:\n\n${activeBlocks.join("\n\n")}`);
+  }
+  if (retrievedBlocks.length > 0) {
+    parts.push(`RETRIEVED WORKSPACE CONTEXT:\n\n${retrievedBlocks.join("\n\n")}`);
+  }
+
+  return parts.join("\n\n");
+}
+
 export function buildUserPrompt(question: string, context: string): string {
-  return `PORTFOLIO CONTEXT:\n\n${context}\n\nVISITOR QUESTION:\n${question}\n\nWrite the answer as Anki in first person. Use only facts present inside the TEXT sections above. Do not infer facts from filenames or source paths. Do not include URLs in your reply. If the TEXT does not support an answer, reply exactly: ${ANKI_MISSING_INFO_REPLY}`;
+  const contextLabel = context.includes("ACTIVE EDITOR FILE:")
+    ? "CONTEXT"
+    : "PORTFOLIO CONTEXT";
+
+  return `${contextLabel}:\n\n${context}\n\nVISITOR QUESTION:\n${question}\n\nWrite the answer as Anki in first person. Use only facts present inside the TEXT sections above. Do not infer facts from filenames or source paths. Do not include URLs in your reply. If the TEXT does not support an answer, reply exactly: ${ANKI_MISSING_INFO_REPLY}`;
+}
+
+export function buildAskAnkiSystemPrompt(hasActiveFile: boolean): string {
+  if (!hasActiveFile) return ASK_ANKI_SYSTEM_PROMPT;
+  return `${ASK_ANKI_SYSTEM_PROMPT}\n\n${ASK_ANKI_ACTIVE_FILE_ADDENDUM}`;
 }

@@ -8,6 +8,18 @@ export const ASSISTANT_TOP_K = 5;
 /** Max chunks passed into Gemma (Gemma 2 2B context window is 4096 tokens). */
 export const GEMMA_CONTEXT_TOP_K = 3;
 
+/** Max pinned chunks from the active editor file. */
+export const GEMMA_ACTIVE_FILE_MAX_CHUNKS = 3;
+
+/** Filmstrip: max day sections included with the active-file overview. */
+export const FILMSTRIP_ACTIVE_DAY_CHUNKS = 2;
+
+/** Retrieved chunks when an active file is open (supplemental context). */
+export const GEMMA_RETRIEVED_WITH_ACTIVE_K = 3;
+
+/** Fewer global hits when the question refers to the active file ("here", "this"). */
+export const GEMMA_RETRIEVED_ACTIVE_REF_K = 2;
+
 /** Max new tokens per answer — leave room for system + retrieved context in 4096 window. */
 export const GEMMA_MAX_NEW_TOKENS = 384;
 

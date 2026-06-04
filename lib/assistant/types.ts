@@ -44,6 +44,22 @@ export type RetrievalResult = {
   score: number;
 };
 
+export type AskAnkiActiveFile = {
+  slug: string;
+  path: string;
+  title: string;
+  kind?: string;
+  summary?: string;
+  tags?: string[];
+  content: string;
+  type?: string;
+};
+
+export type AskAnkiRequest = {
+  question: string;
+  activeFile?: AskAnkiActiveFile;
+};
+
 export type AskAnkiSource = {
   path: string;
   title: string;

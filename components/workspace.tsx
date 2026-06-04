@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
+import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { AskAnkiTerminal, type AskAnkiTerminalHandle } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
@@ -113,6 +114,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   }, [getMaxTerminalBodyHeight, setTerminalHeight, clampTerminalHeight]);
 
   const activeFile = allFiles.find((file) => file.slug === activeSlug) ?? allFiles[0];
+  const askAnkiActiveFile = useMemo(() => toAskAnkiActiveFile(activeFile), [activeFile]);
   const activeTabTooltip = useMemo(() => {
     const parts = activeFile.path.split("/");
     if (parts.length === 1) return activeFile.path;
@@ -319,6 +321,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
       <AskAnkiTerminal
         ref={terminalRef}
         files={allFiles}
+        activeFile={askAnkiActiveFile}
         portraitPanelWidth={portraitPanelWidth}
         portraitWidth={PORTRAIT_WIDTH}
         portraitHeight={PORTRAIT_HEIGHT}
