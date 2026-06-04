@@ -1,6 +1,7 @@
 "use client";
 
 import { AnalyticsBarChartView } from "@/components/analytics/AnalyticsBarChartView";
+import { AnalyticsBubbleMetrics } from "@/components/analytics/AnalyticsBubbleMetrics";
 import { AnalyticsMetrics } from "@/components/analytics/AnalyticsMetrics";
 import { parseAnalyticsBlock } from "@/lib/analytics/types";
 
@@ -25,6 +26,8 @@ export function AnalyticsBlock({ source }: AnalyticsBlockProps) {
       return <AnalyticsMetrics block={parsed} />;
     case "bar-chart":
       return <AnalyticsBarChartView block={parsed} />;
+    case "bubble-metrics":
+      return <AnalyticsBubbleMetrics block={parsed} />;
     default:
       return <AnalyticsFallback source={source} />;
   }

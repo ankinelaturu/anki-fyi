@@ -32,13 +32,15 @@ screenshot: /images/chatgpt-export-summary-placeholder.png
 
 ```analytics
 {
-  "type": "metrics",
+  "type": "bubble-metrics",
+  "title": "ChatGPT Usage Snapshot",
+  "scale": "sqrt",
   "items": [
-    { "label": "Conversations", "value": 1231 },
-    { "label": "Messages", "value": 48525 },
-    { "label": "User Tokens", "value": 2707047 },
-    { "label": "Assistant Tokens", "value": 14409662 },
-    { "label": "Total Tokens", "value": 17116709 }
+    { "label": "Total Tokens", "value": 17116709, "display": "17.1M", "emphasis": "primary" },
+    { "label": "Assistant Tokens", "value": 14409662, "display": "14.4M" },
+    { "label": "User Tokens", "value": 2707047, "display": "2.7M" },
+    { "label": "Messages", "value": 48525, "display": "48.5K" },
+    { "label": "Conversations", "value": 1231, "display": "1,231" }
   ]
 }
 ```
@@ -124,19 +126,6 @@ The numbers themselves are less interesting than what they represent.
 The dataset captures years of experimentation, learning, building, researching, writing, planning, and problem solving. It documents how AI evolved from an occasional tool into a regular collaborator across many different activities.
 
 For me, the project serves as both a personal reflection and a practical example of using data analysis to better understand how emerging tools influence day-to-day work.
-
-```analytics
-{
-  "type": "bar-chart",
-  "title": "ChatGPT Usage Metrics",
-  "data": [
-    { "label": "Conversations", "value": 1231 },
-    { "label": "Messages", "value": 48525 },
-    { "label": "User Tokens", "value": 2707047 },
-    { "label": "Assistant Tokens", "value": 14409662 }
-  ]
-}
-```
 
 ## Totals
 

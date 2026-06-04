@@ -19,7 +19,27 @@ export type AnalyticsBarChartBlock = {
   data: AnalyticsBarChartDataPoint[];
 };
 
-export type AnalyticsBlockData = AnalyticsMetricsBlock | AnalyticsBarChartBlock;
+export type AnalyticsBubbleScale = "sqrt" | "linear" | "log";
+
+export type AnalyticsBubbleItem = {
+  label: string;
+  value: number;
+  display?: string;
+  emphasis?: "primary" | string;
+};
+
+export type AnalyticsBubbleMetricsBlock = {
+  type: "bubble-metrics";
+  title?: string;
+  description?: string;
+  scale?: AnalyticsBubbleScale;
+  items: AnalyticsBubbleItem[];
+};
+
+export type AnalyticsBlockData =
+  | AnalyticsMetricsBlock
+  | AnalyticsBarChartBlock
+  | AnalyticsBubbleMetricsBlock;
 
 export type AnalyticsBlockType = AnalyticsBlockData["type"];
 
@@ -39,6 +59,38 @@ function parseMetricsBlock(raw: Record<string, unknown>): AnalyticsMetricsBlock 
   const items = raw.items.map(parseMetricItem).filter((item): item is AnalyticsMetricItem => item !== null);
   if (items.length === 0) return null;
   return { type: "metrics", items };
+}
+
+function parseBubbleItem(value: unknown): AnalyticsBubbleItem | null {
+  if (!isRecord(value)) return null;
+  if (typeof value.label !== "string") return null;
+  if (typeof value.value !== "number" || Number.isNaN(value.value)) return null;
+  return {
+    label: value.label,
+    value: value.value,
+    display: typeof value.display === "string" ? value.display : undefined,
+    emphasis: typeof value.emphasis === "string" ? value.emphasis : undefined,
+  };
+}
+
+function parseBubbleScale(value: unknown): AnalyticsBubbleScale {
+  if (value === "linear" || value === "log" || value === "sqrt") return value;
+  return "sqrt";
+}
+
+function parseBubbleMetricsBlock(raw: Record<string, unknown>): AnalyticsBubbleMetricsBlock | null {
+  if (!Array.isArray(raw.items)) return null;
+  const items = raw.items
+    .map(parseBubbleItem)
+    .filter((item): item is AnalyticsBubbleItem => item !== null);
+  if (items.length === 0) return null;
+  return {
+    type: "bubble-metrics",
+    title: typeof raw.title === "string" ? raw.title : undefined,
+    description: typeof raw.description === "string" ? raw.description : undefined,
+    scale: parseBubbleScale(raw.scale),
+    items,
+  };
 }
 
 function parseBarChartBlock(raw: Record<string, unknown>): AnalyticsBarChartBlock | null {
@@ -68,6 +120,8 @@ export function parseAnalyticsBlock(source: string): AnalyticsBlockData | null {
         return parseMetricsBlock(raw);
       case "bar-chart":
         return parseBarChartBlock(raw);
+      case "bubble-metrics":
+        return parseBubbleMetricsBlock(raw);
       default:
         return null;
     }
