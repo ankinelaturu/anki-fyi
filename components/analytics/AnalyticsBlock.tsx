@@ -3,6 +3,7 @@
 import { AnalyticsBarChartView } from "@/components/analytics/AnalyticsBarChartView";
 import { AnalyticsBubbleMetrics } from "@/components/analytics/AnalyticsBubbleMetrics";
 import { AnalyticsMetrics } from "@/components/analytics/AnalyticsMetrics";
+import { AnalyticsPieChartView } from "@/components/analytics/AnalyticsPieChartView";
 import { parseAnalyticsBlock } from "@/lib/analytics/types";
 
 type AnalyticsBlockProps = {
@@ -28,6 +29,8 @@ export function AnalyticsBlock({ source }: AnalyticsBlockProps) {
       return <AnalyticsBarChartView block={parsed} />;
     case "bubble-metrics":
       return <AnalyticsBubbleMetrics block={parsed} />;
+    case "pie-chart":
+      return <AnalyticsPieChartView block={parsed} />;
     default:
       return <AnalyticsFallback source={source} />;
   }

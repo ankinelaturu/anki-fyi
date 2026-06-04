@@ -36,10 +36,25 @@ export type AnalyticsBubbleMetricsBlock = {
   items: AnalyticsBubbleItem[];
 };
 
+export type AnalyticsPieItem = {
+  label: string;
+  value: number;
+  display?: string;
+  emphasis?: "primary" | string;
+};
+
+export type AnalyticsPieChartBlock = {
+  type: "pie-chart";
+  title?: string;
+  description?: string;
+  items: AnalyticsPieItem[];
+};
+
 export type AnalyticsBlockData =
   | AnalyticsMetricsBlock
   | AnalyticsBarChartBlock
-  | AnalyticsBubbleMetricsBlock;
+  | AnalyticsBubbleMetricsBlock
+  | AnalyticsPieChartBlock;
 
 export type AnalyticsBlockType = AnalyticsBlockData["type"];
 
@@ -61,7 +76,7 @@ function parseMetricsBlock(raw: Record<string, unknown>): AnalyticsMetricsBlock 
   return { type: "metrics", items };
 }
 
-function parseBubbleItem(value: unknown): AnalyticsBubbleItem | null {
+function parseSeriesItem(value: unknown): AnalyticsBubbleItem | null {
   if (!isRecord(value)) return null;
   if (typeof value.label !== "string") return null;
   if (typeof value.value !== "number" || Number.isNaN(value.value)) return null;
@@ -71,6 +86,14 @@ function parseBubbleItem(value: unknown): AnalyticsBubbleItem | null {
     display: typeof value.display === "string" ? value.display : undefined,
     emphasis: typeof value.emphasis === "string" ? value.emphasis : undefined,
   };
+}
+
+function parseBubbleItem(value: unknown): AnalyticsBubbleItem | null {
+  return parseSeriesItem(value);
+}
+
+function parsePieItem(value: unknown): AnalyticsPieItem | null {
+  return parseSeriesItem(value);
 }
 
 function parseBubbleScale(value: unknown): AnalyticsBubbleScale {
@@ -89,6 +112,18 @@ function parseBubbleMetricsBlock(raw: Record<string, unknown>): AnalyticsBubbleM
     title: typeof raw.title === "string" ? raw.title : undefined,
     description: typeof raw.description === "string" ? raw.description : undefined,
     scale: parseBubbleScale(raw.scale),
+    items,
+  };
+}
+
+function parsePieChartBlock(raw: Record<string, unknown>): AnalyticsPieChartBlock | null {
+  if (!Array.isArray(raw.items)) return null;
+  const items = raw.items.map(parsePieItem).filter((item): item is AnalyticsPieItem => item !== null);
+  if (items.length === 0) return null;
+  return {
+    type: "pie-chart",
+    title: typeof raw.title === "string" ? raw.title : undefined,
+    description: typeof raw.description === "string" ? raw.description : undefined,
     items,
   };
 }
@@ -122,6 +157,8 @@ export function parseAnalyticsBlock(source: string): AnalyticsBlockData | null {
         return parseBarChartBlock(raw);
       case "bubble-metrics":
         return parseBubbleMetricsBlock(raw);
+      case "pie-chart":
+        return parsePieChartBlock(raw);
       default:
         return null;
     }

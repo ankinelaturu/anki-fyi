@@ -57,14 +57,13 @@ Rather than treating ChatGPT as a search engine replacement, the data shows how 
 ```
 ```analytics
 {
-  "type": "bubble-metrics",
-  "title": "ChatGPT Tokens by Year [un 02, 2026]",
-  "scale": "sqrt",
+  "type": "pie-chart",
+  "title": "ChatGPT Tokens by Year [Jun 02, 2026]",
   "items": [
     { "label": "2023", "value": 576348, "display": "576K" },
     { "label": "2024", "value": 2390255, "display": "2.4M" },
     { "label": "2025", "value": 6723370, "display": "6.7M" },
-    { "label": "2026", "value": 7416172, "display": "7.4M" }
+    { "label": "2026", "value": 7416172, "display": "7.4M", "emphasis": "primary" }
   ]
 }
 ```
