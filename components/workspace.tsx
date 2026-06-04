@@ -233,18 +233,18 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   </p>
                 )}
                 {activeFile.links.length > 0 && (
-                  <ul className="flex flex-col gap-1.5">
+                  <ul className="flex flex-wrap gap-2">
                     {activeFile.links.map((link) => (
                       <li key={`${link.label}-${link.url}`}>
                         <a
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-ide-blue hover:underline"
+                          className="inline-flex items-center gap-1 rounded border border-[#f87171]/45 bg-[#f87171]/10 px-2 py-1 text-ide-text transition-colors hover:border-[#f87171]/70 hover:bg-[#f87171]/20"
                         >
                           {linkDisplayLabel(link.label)}
                           <ExternalLink
-                            className="h-3 w-3 shrink-0 opacity-80"
+                            className="h-3 w-3 shrink-0 opacity-90"
                             strokeWidth={2}
                             aria-hidden
                           />
