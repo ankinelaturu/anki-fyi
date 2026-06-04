@@ -19,6 +19,7 @@ import { MarkdownProse } from "@/components/markdown-prose";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
+  acceptNextOpenGhostChar,
   buildOpenCommand,
   getOpenGhostSuffix,
   getOpenPathPrefix,
@@ -312,9 +313,31 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
         event.preventDefault();
         const path = openCandidates[openSuggestionIndexSafe];
         if (path) setQuery(buildOpenCommand(path));
+        return;
+      }
+
+      if (event.key === "ArrowRight" && openGhostSuffix) {
+        const input = inputRef.current;
+        const atEnd =
+          input &&
+          input.selectionStart === query.length &&
+          input.selectionEnd === query.length;
+        if (!atEnd) return;
+
+        const nextQuery = acceptNextOpenGhostChar(query, openGhostSuffix);
+        if (nextQuery) {
+          event.preventDefault();
+          setQuery(nextQuery);
+        }
       }
     },
-    [openCompletionActive, openCandidates, openSuggestionIndexSafe]
+    [
+      openCompletionActive,
+      openCandidates,
+      openGhostSuffix,
+      openSuggestionIndexSafe,
+      query,
+    ]
   );
 
   const clearTerminal = () => {

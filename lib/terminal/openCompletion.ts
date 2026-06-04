@@ -39,3 +39,10 @@ export function getOpenGhostSuffix(query: string, selectedPath: string | undefin
 export function buildOpenCommand(path: string): string {
   return `open ${path}`;
 }
+
+/** Append the next ghost character to the query (Right Arrow acceptance). */
+export function acceptNextOpenGhostChar(query: string, ghostSuffix: string): string | null {
+  const nextChar = ghostSuffix[0];
+  if (!nextChar) return null;
+  return `${query}${nextChar}`;
+}
