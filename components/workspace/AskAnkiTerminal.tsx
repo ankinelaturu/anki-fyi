@@ -1,6 +1,14 @@
 "use client";
 
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { Terminal, Trash2 } from "lucide-react";
 import { askAnki } from "@/lib/assistant/askAnki";
@@ -10,6 +18,12 @@ import type { ContentFile } from "@/lib/content-types";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import {
+  buildOpenCommand,
+  getOpenGhostSuffix,
+  getOpenPathPrefix,
+  listOpenCandidates,
+} from "@/lib/terminal/openCompletion";
 
 const CLI_COMMANDS = new Set(["help", "resume", "contact", "projects"]);
 
@@ -106,7 +120,32 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const outputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const askAbortRef = useRef(0);
+  const [openSuggestionIndex, setOpenSuggestionIndex] = useState(0);
+
+  const openPathPrefix = useMemo(() => getOpenPathPrefix(query), [query]);
+
+  const openCandidates = useMemo(() => {
+    if (openPathPrefix === null) return [];
+    return listOpenCandidates(files, openPathPrefix);
+  }, [files, openPathPrefix]);
+
+  const openCompletionActive = openPathPrefix !== null && openCandidates.length > 0;
+
+  const openSuggestionIndexSafe =
+    openCandidates.length > 0 ? openSuggestionIndex % openCandidates.length : 0;
+
+  const openSelectedPath = openCandidates[openSuggestionIndexSafe];
+
+  const openGhostSuffix = useMemo(
+    () => getOpenGhostSuffix(query, openSelectedPath),
+    [query, openSelectedPath]
+  );
+
+  useEffect(() => {
+    setOpenSuggestionIndex(0);
+  }, [openPathPrefix]);
 
   useEffect(() => {
     const el = outputRef.current;
@@ -251,6 +290,33 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
     [runAsk, runCliCommand]
   );
 
+  const handleInputKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!openCompletionActive) return;
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setOpenSuggestionIndex((index) => (index + 1) % openCandidates.length);
+        return;
+      }
+
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        setOpenSuggestionIndex(
+          (index) => (index - 1 + openCandidates.length) % openCandidates.length
+        );
+        return;
+      }
+
+      if (event.key === "Tab") {
+        event.preventDefault();
+        const path = openCandidates[openSuggestionIndexSafe];
+        if (path) setQuery(buildOpenCommand(path));
+      }
+    },
+    [openCompletionActive, openCandidates, openSuggestionIndexSafe]
+  );
+
   const clearTerminal = () => {
     askAbortRef.current += 1;
     setCliLines([]);
@@ -384,13 +450,28 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
 
           <div className="flex shrink-0 items-center gap-1 border-t border-ide-border px-3 py-2 text-xs">
             <span className="shrink-0 text-[13px] text-[#f87171]">Ask Anki ›</span>
-            <Input
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              aria-label="Ask Anki a question"
-              disabled={loading}
-              className="h-7 px-1 text-xs"
-            />
+            <div className="relative min-w-0 flex-1">
+              {openCompletionActive && openGhostSuffix ? (
+                <div
+                  className="pointer-events-none absolute inset-0 flex h-7 items-center overflow-hidden px-1 font-mono text-xs"
+                  aria-hidden
+                >
+                  <span className="invisible whitespace-pre">{query}</span>
+                  <span className="whitespace-pre text-ide-muted/45">{openGhostSuffix}</span>
+                </div>
+              ) : null}
+              <Input
+                ref={inputRef}
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                onKeyDown={handleInputKeyDown}
+                aria-label="Ask Anki a question"
+                aria-autocomplete={openCompletionActive ? "list" : undefined}
+                aria-expanded={openCompletionActive ? true : undefined}
+                disabled={loading}
+                className="relative h-7 w-full px-1 font-mono text-xs"
+              />
+            </div>
           </div>
         </form>
       </div>
