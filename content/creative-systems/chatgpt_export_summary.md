@@ -1,8 +1,4 @@
-# ChatGPT Export Stats
-
-Source files:
-
-`13 conversation JSON file(s)`
+# ChatGPT Export Stats as of Jun 2, 2026
 
 ## Totals
 
@@ -22,9 +18,3 @@ Source files:
 ## Notes
 
 Token count is an estimate. ChatGPT’s internal token accounting may differ because:
-- Different models use different tokenizers.
-- System messages and hidden metadata are not fully visible in the export.
-- Uploaded files, images, tool calls, and generated artifacts may not be represented as normal text.
-- Some structured message parts may be serialized differently.
-
-Still, this should give a very good directional estimate.
