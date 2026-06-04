@@ -8,7 +8,8 @@ export type ContentKind =
   | "writing"
   | "patent"
   | "lab"
-  | "creative";
+  | "creative"
+  | "analytics";
 
 export type ContentFile = {
   slug: string;

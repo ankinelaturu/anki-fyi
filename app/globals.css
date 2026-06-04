@@ -48,6 +48,16 @@ body {
 .prose-ide blockquote { border-left: 3px solid #569cd6; padding-left: 1rem; color: #b5cea8; }
 .prose-ide hr { border-color: #333; margin: 1.5rem 0; }
 
+/* Analytics blocks render outside default fenced-code chrome */
+.prose-ide .analytics-fallback {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  background: #252526;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
 /* Ask Anki portrait — subtle “thinking” glow while a question is in flight */
 @keyframes ask-anki-portrait-glow {
   0%,

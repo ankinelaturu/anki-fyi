@@ -36,6 +36,7 @@ export const ICON_BY_KEY = {
   film: "film",
   markdown: "markdown",
   "lintern-logo": "lintern-logo",
+  "bar-chart-3": "bar-chart-3",
 } as const;
 
 const FILENAME_ICON: Record<string, string> = {
@@ -73,6 +74,7 @@ const FILENAME_ICON: Record<string, string> = {
   "zerofabric-runtime-simulator.md": "route",
   "future-experiments.md": "flask-conical",
   "aimless-dude-hyper-dog.md": "film",
+  "chatgpt_export_summary.md": "bar-chart-3",
 };
 
 const KIND_ICON: Record<string, string> = {
@@ -84,6 +86,7 @@ const KIND_ICON: Record<string, string> = {
   patent: "badge",
   lab: "flask-conical",
   creative: "film",
+  analytics: "bar-chart-3",
 };
 
 export function resolveIconKey(file: WorkspaceFile): string {

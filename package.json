@@ -22,6 +22,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.1.0",
+    "recharts": "^3.8.1",
     "remark-gfm": "^4.0.0",
     "sharp": "^0.34.5",
     "tailwind-merge": "^2.5.5",
@@ -40,7 +41,11 @@
     "typescript": "^5.7.2"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["sharp", "esbuild", "protobufjs"],
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild",
+      "protobufjs"
+    ],
     "overrides": {
       "sharp": "$sharp"
     }

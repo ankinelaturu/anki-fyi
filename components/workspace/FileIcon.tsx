@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import {
   Badge,
+  BarChart3,
   Blocks,
   Brain,
   Cpu,
@@ -67,6 +68,7 @@ const LUCIDE_ICONS: Record<string, LucideIcon> = {
   brain: Brain,
   timer: Timer,
   badge: Badge,
+  "bar-chart-3": BarChart3,
   "git-branch": GitBranch,
   radio: Radio,
   layers: Layers,
