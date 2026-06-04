@@ -29,13 +29,13 @@ status: prototype
 year: 2026
 website: https://anki-fixme/here
 demo: https://youtu.be/ZOrma2xMTy8
-linkedin: https://anki-fixme/here
+linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-genai-raspberrypi-ugcPost-7449479750080692224-ABGN/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8
 screenshot: /images/projects/storybook-arcade-placeholder.png
 ---
 
 # Storybook Arcade
 
-Once Upon a GPT / Storybook Arcade is a multimodal storytelling system that generates narrated, illustrated stories in real time.
+> Once Upon a GPT / Storybook Arcade is a multimodal storytelling system that generates narrated, illustrated stories in real time.
 
 ## What It Is
 

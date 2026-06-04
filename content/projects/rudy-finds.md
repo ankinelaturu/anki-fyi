@@ -34,15 +34,15 @@ featured: false
 
 status: prototype
 year: 2026
-website: https://anki-fixme/here
+website: https://github.com/ankinelaturu/rudy-monorepo
 demo: https://anki-fixme/here
-linkedin: https://anki-fixme/here
+linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457784846191546368-7HNh/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8
 screenshot: /images/projects/rudy-finds-placeholder.png
 ---
 
 # Rudy Finds
 
-A browser-native semantic search experiment focused on helping users rediscover information using meaning instead of exact keyword matching.
+> A browser-native semantic search experiment focused on helping users rediscover information using meaning instead of exact keyword matching.
 
 ## What It Is
 

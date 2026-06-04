@@ -36,7 +36,7 @@ screenshot: /images/projects/astrovalley-placeholder.png
 
 # AstroValley
 
-A browser-native AI sandbox disguised as an astrology application.
+> A browser-native AI sandbox disguised as an astrology application.
 
 ## What It Is
 

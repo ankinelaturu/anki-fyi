@@ -34,15 +34,15 @@ featured: false
 
 status: prototype
 year: 2026
-website: https://anki-fixme/here
+website: https://github.com/ankinelaturu/rudy-monorepo
 demo: https://anki-fixme/here
-linkedin: https://anki-fixme/here
+linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457002618771361792--XXa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8
 screenshot: /images/projects/ask-rudy-placeholder.png
 ---
 
 # Ask Rudy
 
-A conversational assistant for asking grounded questions about the content already in front of the user.
+> A conversational assistant for asking grounded questions about the content already in front of the user.
 
 ## What It Is
 
