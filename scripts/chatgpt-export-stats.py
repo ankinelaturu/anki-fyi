@@ -78,18 +78,33 @@ def load_json(path: Path) -> Any | None:
         return None
 
 
-def find_conversations_json(root: Path) -> Path | None:
-    candidates = list(root.rglob("conversations.json"))
-    if candidates:
-        return candidates[0]
+def find_conversation_json_files(root: Path) -> list[Path]:
+    """Find all ChatGPT conversation JSON files in an export folder.
 
-    # fallback: find JSON files that look like a list of conversations
-    for p in root.rglob("*.json"):
-        data = load_json(p)
+    Newer/larger exports may be split across files such as:
+    - conversations.json
+    - conversations-001.json
+    - conversations-002.json
+    """
+    candidates = sorted(root.rglob("conversations*.json"))
+    conversation_files: list[Path] = []
+
+    for path in candidates:
+        data = load_json(path)
+        if isinstance(data, list) and (not data or isinstance(data[0], dict)):
+            conversation_files.append(path)
+
+    if conversation_files:
+        return conversation_files
+
+    # Fallback: find JSON files that look like a list of conversations.
+    for path in sorted(root.rglob("*.json")):
+        data = load_json(path)
         if isinstance(data, list) and data and isinstance(data[0], dict):
             if "mapping" in data[0] or "title" in data[0]:
-                return p
-    return None
+                conversation_files.append(path)
+
+    return conversation_files
 
 
 def get_text_from_content(content: Any) -> str:
@@ -230,15 +245,24 @@ def main() -> None:
     if not root.exists():
         raise SystemExit(f"Folder does not exist: {root}")
 
-    conversations_path = find_conversations_json(root)
-    if not conversations_path:
-        raise SystemExit("Could not find conversations.json or a conversation-like JSON file.")
+    conversation_files = find_conversation_json_files(root)
+    if not conversation_files:
+        raise SystemExit("Could not find conversations.json, conversations-*.json, or conversation-like JSON files.")
 
-    print(f"Using: {conversations_path}")
+    print("Using conversation files:")
+    for path in conversation_files:
+        print(f"  - {path}")
 
-    data = load_json(conversations_path)
-    if not isinstance(data, list):
-        raise SystemExit("Conversation file did not contain a list of conversations.")
+    data: list[dict[str, Any]] = []
+    for path in conversation_files:
+        loaded = load_json(path)
+        if isinstance(loaded, list):
+            data.extend(item for item in loaded if isinstance(item, dict))
+        else:
+            print(f"Skipping non-list JSON file: {path}")
+
+    if not data:
+        raise SystemExit("No conversations found in conversation JSON files.")
 
     encoder = make_encoder(args.model)
 
@@ -300,9 +324,9 @@ def main() -> None:
 
     summary = f"""# ChatGPT Export Stats
 
-Source file:
+Source files:
 
-`{conversations_path}`
+`{len(conversation_files)} conversation JSON file(s)`
 
 ## Totals
 
@@ -350,6 +374,7 @@ Still, this should give a very good directional estimate.
     print()
     print("Done.")
     print(f"Output folder: {out_dir}")
+    print(f"Conversation JSON files processed: {len(conversation_files):,}")
     print(f"Estimated total tokens: {total_tokens:,}")
     print(f"Total conversations: {total_conversations:,}")
     print(f"Total messages: {total_messages:,}")
