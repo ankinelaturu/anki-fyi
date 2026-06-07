@@ -5,6 +5,7 @@ import { MarkdownProse } from "@/components/markdown-prose";
 import { ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
 import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
+import { EmbeddingVectorIcon } from "@/components/workspace/EmbeddingVectorIcon";
 import { AskAnkiTerminal, type AskAnkiTerminalHandle } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
@@ -13,11 +14,13 @@ import { ExperienceInsightsMeta } from "@/components/workspace/ExperienceInsight
 import { ExplorerPanel } from "@/components/workspace/ExplorerPanel";
 import { SearchPanel } from "@/components/workspace/SearchPanel";
 import { StatusBar } from "@/components/workspace/StatusBar";
+import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
 import { FOLDER_LABELS } from "@/lib/folders";
 import { usePanelResize } from "@/lib/use-panel-resize";
+import { useEditorChunkEmbeddings } from "@/lib/use-editor-chunk-embeddings";
 import {
   WORKSPACE_EDITOR_TAB_BAR_CLASS,
   WORKSPACE_PANEL_TITLE_CLASS,
@@ -58,6 +61,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
     "creative-systems": true,
   });
   const [sidePanelView, setSidePanelView] = useState<SidePanelView>("explorer");
+  const [showEmbeddingVectors, setShowEmbeddingVectors] = useState(false);
   const terminalRef = useRef<AskAnkiTerminalHandle>(null);
 
   const openFile = useCallback(
@@ -116,6 +120,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
 
   const activeFile = allFiles.find((file) => file.slug === activeSlug) ?? allFiles[0];
   const askAnkiActiveFile = useMemo(() => toAskAnkiActiveFile(activeFile), [activeFile]);
+  const chunkEmbeddings = useEditorChunkEmbeddings(activeFile.path, showEmbeddingVectors);
   const activeTabTooltip = useMemo(() => {
     const parts = activeFile.path.split("/");
     if (parts.length === 1) return activeFile.path;
@@ -142,6 +147,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-muted">— Principal AI Product Engineer</span>
         </div>
         <div className="hidden items-center gap-3 md:flex">
+          <label className="flex cursor-pointer items-center gap-2 text-ide-muted">
+            <Switch
+              checked={showEmbeddingVectors}
+              onCheckedChange={setShowEmbeddingVectors}
+              aria-label="Show embedding vectors"
+            />
+            <span className="text-[10px] uppercase tracking-wide">Vectors</span>
+          </label>
+          <span className="text-ide-muted">●</span>
           <span className="text-ide-green">main</span>
           <span className="text-ide-muted">●</span>
           <span className="text-ide-yellow">Portfolio Assistant</span>
@@ -185,15 +199,24 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
 
         <section className="flex min-h-0 min-w-0 flex-1 flex-col bg-ide-bg">
           <div className={WORKSPACE_EDITOR_TAB_BAR_CLASS}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div className="flex h-full cursor-default items-center border-r border-ide-border bg-ide-bg px-3 text-ide-text">
-                  <FileIcon file={activeFile} selected className="mr-1 text-ide-green" />
-                  {activeFile.filename}
-                </div>
-              </TooltipTrigger>
-              <TooltipContent side="bottom">{activeTabTooltip}</TooltipContent>
-            </Tooltip>
+            <div className="flex h-full items-center border-r border-ide-border bg-ide-bg">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex h-full cursor-default items-center px-3 text-ide-text">
+                    <FileIcon file={activeFile} selected className="mr-1 text-ide-green" />
+                    {activeFile.filename}
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">{activeTabTooltip}</TooltipContent>
+              </Tooltip>
+              {showEmbeddingVectors && chunkEmbeddings?.metadata ? (
+                <EmbeddingVectorIcon
+                  embedding={chunkEmbeddings.metadata}
+                  label="Metadata"
+                  className="mr-2"
+                />
+              ) : null}
+            </div>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">
             {activeFile.type === "filmstrip" ? (
@@ -204,10 +227,13 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                 markdown={activeFile.content}
                 imagePattern={activeFile.imagePattern}
                 totalFrames={activeFile.totalFrames}
+                chunkEmbeddings={chunkEmbeddings?.bySection}
               />
             ) : (
               <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
-                <MarkdownProse>{activeFile.content}</MarkdownProse>
+                <MarkdownProse chunkEmbeddings={chunkEmbeddings?.bySection}>
+                  {activeFile.content}
+                </MarkdownProse>
               </div>
             )}
           </div>

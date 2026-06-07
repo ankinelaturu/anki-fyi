@@ -17,9 +17,17 @@ type FilmstripViewerProps = {
   markdown: string;
   imagePattern?: string;
   totalFrames?: number;
+  chunkEmbeddings?: Map<string, number[]> | null;
 };
 
-export function FilmstripViewer({ title, description, markdown, imagePattern, totalFrames }: FilmstripViewerProps) {
+export function FilmstripViewer({
+  title,
+  description,
+  markdown,
+  imagePattern,
+  totalFrames,
+  chunkEmbeddings = null,
+}: FilmstripViewerProps) {
   const frames = useMemo(() => parseFilmstripFrames(markdown, imagePattern), [markdown, imagePattern]);
   const maxDay = useMemo(() => getFilmstripMaxDay(frames, totalFrames), [frames, totalFrames]);
 
@@ -113,7 +121,7 @@ export function FilmstripViewer({ title, description, markdown, imagePattern, to
           showSearch={false}
         />
         <div className="min-h-0 flex-1 overflow-auto px-8 py-6 max-md:px-4">
-          <MarkdownProse>{markdown}</MarkdownProse>
+          <MarkdownProse chunkEmbeddings={chunkEmbeddings}>{markdown}</MarkdownProse>
         </div>
       </div>
     );
