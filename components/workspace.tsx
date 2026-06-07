@@ -6,6 +6,7 @@ import { Binary, ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from 
 import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { EmbeddingVectorIcon } from "@/components/workspace/EmbeddingVectorIcon";
+import { SemanticEditorView } from "@/components/workspace/SemanticEditorView";
 import { AskAnkiTerminal, type AskAnkiTerminalHandle } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
@@ -62,6 +63,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   });
   const [sidePanelView, setSidePanelView] = useState<SidePanelView>("explorer");
   const [showEmbeddingVectors, setShowEmbeddingVectors] = useState(false);
+  const [editorViewMode, setEditorViewMode] = useState<"normal" | "semantic">("normal");
   const terminalRef = useRef<AskAnkiTerminalHandle>(null);
 
   const openFile = useCallback(
@@ -120,7 +122,11 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
 
   const activeFile = allFiles.find((file) => file.slug === activeSlug) ?? allFiles[0];
   const askAnkiActiveFile = useMemo(() => toAskAnkiActiveFile(activeFile), [activeFile]);
-  const chunkEmbeddings = useEditorChunkEmbeddings(activeFile.path, showEmbeddingVectors);
+  const chunkEmbeddings = useEditorChunkEmbeddings(
+    activeFile.path,
+    showEmbeddingVectors || editorViewMode === "semantic"
+  );
+  const isFilmstripFile = activeFile.type === "filmstrip";
   const activeTabTooltip = useMemo(() => {
     const parts = activeFile.path.split("/");
     if (parts.length === 1) return activeFile.path;
@@ -147,34 +153,68 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-muted">— Principal AI Product Engineer</span>
         </div>
         <div className="hidden items-center gap-3 md:flex">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                type="button"
-                aria-pressed={showEmbeddingVectors}
-                onClick={() => setShowEmbeddingVectors((on) => !on)}
-                className={cn(
-                  "inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[10px] tracking-wide transition-colors",
-                  showEmbeddingVectors
-                    ? "border-ide-border bg-ide-active text-[#c586c0]"
-                    : "border-transparent text-ide-muted hover:border-ide-border hover:bg-ide-active/50 hover:text-ide-text"
-                )}
-              >
-                <Binary className="h-3 w-3 shrink-0" strokeWidth={2} aria-hidden />
-                Embeddings
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom" className="max-w-xs">
-              <p>
-                Show corpus embedding icons on each chunk. Hover for a genome preview; click an
-                icon to open the Embedding Inspector.
-              </p>
-              <p className="mt-1 text-ide-muted">
-                Currently {showEmbeddingVectors ? "ON" : "OFF"}. Click to turn{" "}
-                {showEmbeddingVectors ? "OFF" : "ON"}.
-              </p>
-            </TooltipContent>
-          </Tooltip>
+          <div
+            className="inline-flex rounded border border-ide-border p-0.5"
+            role="group"
+            aria-label="Editor view mode"
+          >
+            <button
+              type="button"
+              aria-pressed={editorViewMode === "normal"}
+              onClick={() => setEditorViewMode("normal")}
+              className={cn(
+                "rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
+                editorViewMode === "normal"
+                  ? "bg-ide-active text-ide-text"
+                  : "text-ide-muted hover:text-ide-text"
+              )}
+            >
+              Normal
+            </button>
+            <button
+              type="button"
+              aria-pressed={editorViewMode === "semantic"}
+              onClick={() => setEditorViewMode("semantic")}
+              className={cn(
+                "rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
+                editorViewMode === "semantic"
+                  ? "bg-ide-active text-[#c586c0]"
+                  : "text-ide-muted hover:text-ide-text"
+              )}
+            >
+              Semantic
+            </button>
+          </div>
+          <div className="hidden" aria-hidden>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  aria-pressed={showEmbeddingVectors}
+                  onClick={() => setShowEmbeddingVectors((on) => !on)}
+                  className={cn(
+                    "inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[10px] tracking-wide transition-colors",
+                    showEmbeddingVectors
+                      ? "border-ide-border bg-ide-active text-[#c586c0]"
+                      : "border-transparent text-ide-muted hover:border-ide-border hover:bg-ide-active/50 hover:text-ide-text"
+                  )}
+                >
+                  <Binary className="h-3 w-3 shrink-0" strokeWidth={2} aria-hidden />
+                  Embeddings
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="max-w-xs">
+                <p>
+                  Show corpus embedding icons on each chunk. Hover for a genome preview; click an
+                  icon to open the Embedding Inspector.
+                </p>
+                <p className="mt-1 text-ide-muted">
+                  Currently {showEmbeddingVectors ? "ON" : "OFF"}. Click to turn{" "}
+                  {showEmbeddingVectors ? "OFF" : "ON"}.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <span className="text-ide-muted">●</span>
           <span className="text-ide-green">main</span>
           <span className="text-ide-muted">●</span>
@@ -239,7 +279,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
             </div>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">
-            {activeFile.type === "filmstrip" ? (
+            {editorViewMode === "semantic" ? (
+              <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
+                <SemanticEditorView
+                  markdown={activeFile.content}
+                  chunks={chunkEmbeddings?.ordered ?? []}
+                  isFilmstrip={isFilmstripFile}
+                />
+              </div>
+            ) : isFilmstripFile ? (
               <FilmstripViewer
                 key={activeFile.slug}
                 title={activeFile.title}

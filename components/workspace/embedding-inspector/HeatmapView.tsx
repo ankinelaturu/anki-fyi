@@ -1,11 +1,13 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   EMBEDDING_DIMENSIONS,
   HEATMAP_COLS,
   HEATMAP_ROWS,
 } from "@/lib/assistant/embeddingVisualizations";
+
+const CELL_GAP = 1;
 
 type HeatmapViewProps = {
   normalized: number[];
@@ -19,20 +21,51 @@ type HoverCell = {
   y: number;
 };
 
+type HeatmapLayout = {
+  cellSize: number;
+  gap: number;
+  width: number;
+  height: number;
+};
+
+function computeLayout(containerWidth: number): HeatmapLayout {
+  const gap = CELL_GAP;
+  const cellSize = Math.max(
+    2,
+    Math.floor((containerWidth - (HEATMAP_COLS - 1) * gap) / HEATMAP_COLS)
+  );
+  const width = HEATMAP_COLS * cellSize + (HEATMAP_COLS - 1) * gap;
+  const height = HEATMAP_ROWS * cellSize + (HEATMAP_ROWS - 1) * gap;
+  return { cellSize, gap, width, height };
+}
+
 export function HeatmapView({ normalized, embedding }: HeatmapViewProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const layoutRef = useRef<HeatmapLayout>(computeLayout(256));
   const [hover, setHover] = useState<HoverCell | null>(null);
 
   const draw = useCallback(
-    (canvas: HTMLCanvasElement) => {
+    (canvas: HTMLCanvasElement, layout: HeatmapLayout) => {
+      const dpr = window.devicePixelRatio || 1;
+      const bitmapWidth = Math.round(layout.width * dpr);
+      const bitmapHeight = Math.round(layout.height * dpr);
+
+      canvas.width = bitmapWidth;
+      canvas.height = bitmapHeight;
+      canvas.style.width = `${layout.width}px`;
+      canvas.style.height = `${layout.height}px`;
+
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const cellW = canvas.width / HEATMAP_COLS;
-      const cellH = canvas.height / HEATMAP_ROWS;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.imageSmoothingEnabled = false;
 
       ctx.fillStyle = "#1e1e1e";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, layout.width, layout.height);
+
+      const stride = layout.cellSize + layout.gap;
 
       for (let dimension = 0; dimension < EMBEDDING_DIMENSIONS; dimension++) {
         const row = Math.floor(dimension / HEATMAP_COLS);
@@ -40,50 +73,72 @@ export function HeatmapView({ normalized, embedding }: HeatmapViewProps) {
         const intensity = normalized[dimension] ?? 0;
         const gray = Math.round(40 + intensity * 180);
         ctx.fillStyle = `rgb(${gray}, ${gray}, ${gray})`;
-        ctx.fillRect(col * cellW, row * cellH, cellW - 0.5, cellH - 0.5);
+        ctx.fillRect(col * stride, row * stride, layout.cellSize, layout.cellSize);
       }
     },
     [normalized]
   );
 
-  const handleRef = useCallback(
-    (node: HTMLCanvasElement | null) => {
-      canvasRef.current = node;
-      if (node) draw(node);
-    },
-    [draw]
-  );
+  const redraw = useCallback(() => {
+    const container = containerRef.current;
+    const canvas = canvasRef.current;
+    if (!container || !canvas) return;
+
+    const layout = computeLayout(container.clientWidth);
+    layoutRef.current = layout;
+    draw(canvas, layout);
+  }, [draw]);
+
+  useEffect(() => {
+    redraw();
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(() => redraw());
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [redraw]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const layout = layoutRef.current;
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const x = (event.clientX - rect.left) * scaleX;
-    const y = (event.clientY - rect.top) * scaleY;
-    const cellW = canvas.width / HEATMAP_COLS;
-    const cellH = canvas.height / HEATMAP_ROWS;
-    const col = Math.min(HEATMAP_COLS - 1, Math.floor(x / cellW));
-    const row = Math.min(HEATMAP_ROWS - 1, Math.floor(y / cellH));
-    const dimension = row * HEATMAP_COLS + col;
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const stride = layout.cellSize + layout.gap;
+    const col = Math.floor(x / stride);
+    const row = Math.floor(y / stride);
 
+    if (col < 0 || col >= HEATMAP_COLS || row < 0 || row >= HEATMAP_ROWS) {
+      setHover(null);
+      return;
+    }
+
+    const localX = x - col * stride;
+    const localY = y - row * stride;
+    if (localX >= layout.cellSize || localY >= layout.cellSize) {
+      setHover(null);
+      return;
+    }
+
+    const dimension = row * HEATMAP_COLS + col;
     setHover({
       dimension,
       value: embedding[dimension] ?? 0,
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
+      x,
+      y,
     });
   };
 
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative w-full">
       <canvas
-        ref={handleRef}
-        width={HEATMAP_COLS * 4}
-        height={HEATMAP_ROWS * 4}
-        className="w-full rounded border border-ide-border"
+        ref={canvasRef}
+        className="block max-w-full rounded border border-ide-border"
+        style={{ imageRendering: "pixelated" }}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setHover(null)}
       />

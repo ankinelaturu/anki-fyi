@@ -11,8 +11,10 @@ type FingerprintViewProps = {
   size?: number;
 };
 
+const DESIGN_SIZE = 160;
 const RING_BASE_RADIUS = [18, 32, 46, 60];
 const RING_THICKNESS = 10;
+const MAX_BUMP = 5;
 
 function polarToCartesian(cx: number, cy: number, radius: number, angle: number) {
   return {
@@ -45,24 +47,38 @@ function describeArc(
 }
 
 export function FingerprintView({ segments, size = 160 }: FingerprintViewProps) {
-  const cx = size / 2;
-  const cy = size / 2;
+  const scale = size / DESIGN_SIZE;
+  const ringThickness = RING_THICKNESS * scale;
+  const maxBump = MAX_BUMP * scale;
+  const ringRadii = RING_BASE_RADIUS.map((radius) => radius * scale);
+  const outerExtent =
+    ringRadii[FINGERPRINT_RING_COUNT - 1]! + ringThickness / 2 + maxBump;
+  const padding = 2 * scale;
+  const viewSize = (outerExtent + padding) * 2;
+  const cx = viewSize / 2;
+  const cy = viewSize / 2;
   const segmentAngle = (2 * Math.PI) / FINGERPRINT_SEGMENTS_PER_RING;
   const gap = 0.02;
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="mx-auto block">
-      <circle cx={cx} cy={cy} r={RING_BASE_RADIUS[0]! - 6} fill="#1e1e1e" />
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${viewSize} ${viewSize}`}
+      className="block shrink-0"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <circle cx={cx} cy={cy} r={ringRadii[0]! - 6 * scale} fill="#1e1e1e" />
       {Array.from({ length: FINGERPRINT_RING_COUNT }, (_, ring) => {
         const ringSegments = segments.filter((segment) => segment.ring === ring);
-        const baseRadius = RING_BASE_RADIUS[ring]!;
+        const baseRadius = ringRadii[ring]!;
 
         return ringSegments.map((segment) => {
           const startAngle = segment.segment * segmentAngle - Math.PI / 2 + gap;
           const endAngle = (segment.segment + 1) * segmentAngle - Math.PI / 2 - gap;
-          const bump = segment.intensity * 5;
-          const innerR = baseRadius - RING_THICKNESS / 2;
-          const outerR = baseRadius + RING_THICKNESS / 2 + bump;
+          const bump = segment.intensity * maxBump;
+          const innerR = baseRadius - ringThickness / 2;
+          const outerR = baseRadius + ringThickness / 2 + bump;
           const opacity = 0.35 + segment.intensity * 0.65;
 
           return (
@@ -74,7 +90,14 @@ export function FingerprintView({ segments, size = 160 }: FingerprintViewProps) 
           );
         });
       })}
-      <circle cx={cx} cy={cy} r={10} fill="#252526" stroke="#3c3c3c" strokeWidth={1} />
+      <circle
+        cx={cx}
+        cy={cy}
+        r={10 * scale}
+        fill="#252526"
+        stroke="#3c3c3c"
+        strokeWidth={1 * scale}
+      />
     </svg>
   );
 }

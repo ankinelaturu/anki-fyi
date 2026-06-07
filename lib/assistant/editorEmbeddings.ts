@@ -21,6 +21,8 @@ export type EmbeddingIndexMeta = {
 export type FileChunkEmbeddings = {
   metadata: ChunkEmbeddingInfo | null;
   bySection: Map<string, ChunkEmbeddingInfo>;
+  /** Corpus chunks for this file in chunkIndex order (includes Metadata). */
+  ordered: ChunkEmbeddingInfo[];
   indexMeta: EmbeddingIndexMeta;
 };
 
@@ -94,8 +96,11 @@ export async function ensureEditorEmbeddingIndex(): Promise<void> {
 export async function getFileChunkEmbeddings(path: string): Promise<FileChunkEmbeddings> {
   await ensureEditorEmbeddingIndex();
 
-  const chunks = chunksByPath?.get(path) ?? [];
+  const chunks = [...(chunksByPath?.get(path) ?? [])].sort(
+    (a, b) => a.chunkIndex - b.chunkIndex
+  );
   const bySection = new Map<string, ChunkEmbeddingInfo>();
+  const ordered: ChunkEmbeddingInfo[] = [];
   let metadata: ChunkEmbeddingInfo | null = null;
 
   for (const chunk of chunks) {
@@ -103,6 +108,7 @@ export async function getFileChunkEmbeddings(path: string): Promise<FileChunkEmb
     if (!embedding) continue;
 
     const info = toChunkEmbeddingInfo(chunk, embedding);
+    ordered.push(info);
 
     if (chunk.section === "Metadata") {
       metadata = info;
@@ -115,6 +121,7 @@ export async function getFileChunkEmbeddings(path: string): Promise<FileChunkEmb
   return {
     metadata,
     bySection,
+    ordered,
     indexMeta: indexMeta ?? {
       modelShortName: embeddingModelShortName(),
       generatedAt: "",
