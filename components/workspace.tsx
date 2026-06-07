@@ -193,35 +193,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-muted">— Principal AI Product Engineer</span>
         </div>
         <div className="hidden items-center gap-3 md:flex">
-          <div
-            className="inline-flex rounded border border-ide-border p-0.5"
-            role="group"
-            aria-label="Editor view mode"
-          >
-            <EditorViewModeButton
-              pressed={editorViewMode === "normal"}
-              onClick={() => setEditorViewMode("normal")}
-              icon={FileText}
-              label="Text"
-              tooltip="Read the markdown source for this file."
-            />
-            <EditorViewModeButton
-              pressed={editorViewMode === "semantic"}
-              onClick={() => setEditorViewMode("semantic")}
-              icon={Fingerprint}
-              label="Semantic"
-              tooltip="View corpus chunk embeddings as fingerprint, genome, and heatmap visualizations."
-              pressedClassName="bg-ide-active text-[#c586c0]"
-            />
-            <EditorViewModeButton
-              pressed={editorViewMode === "vectors"}
-              onClick={() => setEditorViewMode("vectors")}
-              icon={Binary}
-              label="Vectors"
-              tooltip="View the raw embedding vector values for each section."
-              pressedClassName="bg-ide-active text-[#c586c0]"
-            />
-          </div>
           <div className="hidden" aria-hidden>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -295,8 +266,8 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
         />
 
         <section className="flex min-h-0 min-w-0 flex-1 flex-col bg-ide-bg">
-          <div className={WORKSPACE_EDITOR_TAB_BAR_CLASS}>
-            <div className="flex h-full items-center border-r border-ide-border bg-ide-bg">
+          <div className={cn(WORKSPACE_EDITOR_TAB_BAR_CLASS, "justify-between gap-2")}>
+            <div className="flex h-full min-w-0 items-center border-r border-ide-border bg-ide-bg">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="flex h-full cursor-default items-center px-3 text-ide-text">
@@ -313,6 +284,33 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   className="mr-2"
                 />
               ) : null}
+            </div>
+            <div className="mr-2 flex h-full shrink-0 items-center border-l border-ide-border pl-2">
+              <div className="inline-flex" role="group" aria-label="Editor view mode">
+                <EditorViewModeButton
+                  pressed={editorViewMode === "normal"}
+                  onClick={() => setEditorViewMode("normal")}
+                  icon={FileText}
+                  label="Text"
+                  tooltip="Read the markdown source for this file."
+                />
+                <EditorViewModeButton
+                  pressed={editorViewMode === "semantic"}
+                  onClick={() => setEditorViewMode("semantic")}
+                  icon={Fingerprint}
+                  label="Semantic"
+                  tooltip="View corpus chunk embeddings as fingerprint, genome, and heatmap visualizations."
+                  pressedClassName="bg-ide-active text-[#c586c0]"
+                />
+                <EditorViewModeButton
+                  pressed={editorViewMode === "vectors"}
+                  onClick={() => setEditorViewMode("vectors")}
+                  icon={Binary}
+                  label="Vectors"
+                  tooltip="View the raw embedding vector values for each section."
+                  pressedClassName="bg-ide-active text-[#c586c0]"
+                />
+              </div>
             </div>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">
