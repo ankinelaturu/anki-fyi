@@ -57,6 +57,26 @@ export function formatEmbeddingForTooltip(embedding: number[]): string {
   return `[${embedding.map((value) => value.toFixed(6)).join(", ")}]`;
 }
 
+function formatAlignedEmbeddingValue(value: number, precision: number): string {
+  const sign = value < 0 ? "-" : " ";
+  return sign + Math.abs(value).toFixed(precision);
+}
+
+export function formatEmbeddingLines(
+  embedding: number[],
+  valuesPerLine = 8,
+  precision = 8
+): string {
+  const lines: string[] = [];
+  for (let index = 0; index < embedding.length; index += valuesPerLine) {
+    const slice = embedding
+      .slice(index, index + valuesPerLine)
+      .map((value) => formatAlignedEmbeddingValue(value, precision));
+    lines.push(slice.join(" "));
+  }
+  return lines.join("\n");
+}
+
 function toChunkEmbeddingInfo(chunk: CorpusChunk, embedding: number[]): ChunkEmbeddingInfo {
   return {
     chunkId: chunk.id,

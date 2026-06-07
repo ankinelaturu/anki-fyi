@@ -7,6 +7,7 @@ import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { EmbeddingVectorIcon } from "@/components/workspace/EmbeddingVectorIcon";
 import { SemanticEditorView } from "@/components/workspace/SemanticEditorView";
+import { VectorsEditorView } from "@/components/workspace/VectorsEditorView";
 import { AskAnkiTerminal, type AskAnkiTerminalHandle } from "@/components/workspace/AskAnkiTerminal";
 import { FilmstripViewer } from "@/components/filmstrip/FilmstripViewer";
 import { PanelResizeHandle } from "@/components/panel-resize-handle";
@@ -63,7 +64,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   });
   const [sidePanelView, setSidePanelView] = useState<SidePanelView>("explorer");
   const [showEmbeddingVectors, setShowEmbeddingVectors] = useState(false);
-  const [editorViewMode, setEditorViewMode] = useState<"normal" | "semantic">("normal");
+  const [editorViewMode, setEditorViewMode] = useState<"normal" | "semantic" | "vectors">("normal");
   const terminalRef = useRef<AskAnkiTerminalHandle>(null);
 
   const openFile = useCallback(
@@ -124,7 +125,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   const askAnkiActiveFile = useMemo(() => toAskAnkiActiveFile(activeFile), [activeFile]);
   const chunkEmbeddings = useEditorChunkEmbeddings(
     activeFile.path,
-    showEmbeddingVectors || editorViewMode === "semantic"
+    showEmbeddingVectors || editorViewMode === "semantic" || editorViewMode === "vectors"
   );
   const isFilmstripFile = activeFile.type === "filmstrip";
   const activeTabTooltip = useMemo(() => {
@@ -183,6 +184,19 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               )}
             >
               Semantic
+            </button>
+            <button
+              type="button"
+              aria-pressed={editorViewMode === "vectors"}
+              onClick={() => setEditorViewMode("vectors")}
+              className={cn(
+                "rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
+                editorViewMode === "vectors"
+                  ? "bg-ide-active text-[#c586c0]"
+                  : "text-ide-muted hover:text-ide-text"
+              )}
+            >
+              Vectors
             </button>
           </div>
           <div className="hidden" aria-hidden>
@@ -282,6 +296,15 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
             {editorViewMode === "semantic" ? (
               <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
                 <SemanticEditorView
+                  markdown={activeFile.content}
+                  chunks={chunkEmbeddings?.ordered ?? []}
+                  indexMeta={chunkEmbeddings?.indexMeta}
+                  isFilmstrip={isFilmstripFile}
+                />
+              </div>
+            ) : editorViewMode === "vectors" ? (
+              <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
+                <VectorsEditorView
                   markdown={activeFile.content}
                   chunks={chunkEmbeddings?.ordered ?? []}
                   indexMeta={chunkEmbeddings?.indexMeta}
