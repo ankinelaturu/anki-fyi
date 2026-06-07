@@ -43,7 +43,10 @@ export function extractDocumentLinks(data: Record<string, unknown>): DocumentLin
 
 /** Markdown block injected into corpus chunks so RAG can surface project links. */
 export function formatDocumentLinksBlock(data: Record<string, unknown>): string {
-  const links = extractDocumentLinks(data);
+  return formatLinksBlockFromDocumentLinks(extractDocumentLinks(data));
+}
+
+export function formatLinksBlockFromDocumentLinks(links: DocumentLink[]): string {
   if (links.length === 0) return "";
 
   const lines = links.map(({ label, url }) => `- ${label}: ${url}`);

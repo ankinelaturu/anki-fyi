@@ -31,6 +31,8 @@ export type ContentFile = {
   links: DocumentLink[];
   content: string;
   path: string;
+  year?: string | number;
+  status?: string;
   type?: string;
   description?: string;
   imagePattern?: string;

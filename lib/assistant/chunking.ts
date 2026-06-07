@@ -1,14 +1,34 @@
-import {
-  CHUNK_OVERLAP_WORDS,
-  CHUNK_TARGET_MAX_WORDS,
-  CHUNK_TARGET_MIN_WORDS,
-} from "@/lib/assistant/config";
+import { CHUNK_TARGET_MAX_WORDS } from "@/lib/assistant/config";
 import type { CorpusChunk, CorpusDocument } from "@/lib/assistant/types";
 
 const DAY_HEADING_RE = /^##\s+Day\s+\d+/im;
-const HEADING_RE = /^(#{1,3})\s+(.+)$/gm;
 const IMAGE_LINE_RE = /!\[[^\]]*\]\([^)]+\)/g;
 const IMAGE_PATH_LINE_RE = /^.*\.(png|jpe?g|gif|webp|svg)(\?.*)?\s*$/im;
+
+export type DocumentChunkMetadata = {
+  title: string;
+  path: string;
+  kind: string;
+  summary?: string;
+  elevatorPitch?: string;
+  tags?: string[];
+  technologies?: string[];
+  company?: string;
+  role?: string;
+  startDate?: string;
+  endDate?: string;
+  year?: string | number;
+  status?: string;
+  linksBlock?: string;
+};
+
+export type ChunkDocumentInput = DocumentChunkMetadata & {
+  id: string;
+  content: string;
+  type?: string;
+};
+
+type Section = { heading: string; body: string };
 
 export function stripFrontmatterBody(raw: string): string {
   if (!raw.startsWith("---")) return raw;
@@ -39,52 +59,30 @@ function takeWords(text: string, maxWords: number): { head: string; rest: string
   return { head, rest };
 }
 
-function takeLastWords(text: string, wordCount: number): string {
-  const words = text.trim().split(/\s+/);
-  if (words.length <= wordCount) return text.trim();
-  return words.slice(-wordCount).join(" ");
-}
+/** Serialize frontmatter fields for the dedicated metadata chunk. */
+export function formatMetadataChunkBody(meta: DocumentChunkMetadata): string {
+  const lines: string[] = [
+    `Title: ${meta.title}`,
+    `Path: ${meta.path}`,
+    `Kind: ${meta.kind}`,
+  ];
 
-type Section = { heading: string; body: string };
+  if (meta.summary) lines.push(`Summary: ${meta.summary}`);
+  if (meta.elevatorPitch) lines.push(`Elevator pitch: ${meta.elevatorPitch}`);
+  if (meta.tags?.length) lines.push(`Tags: ${meta.tags.join(", ")}`);
+  if (meta.technologies?.length) lines.push(`Technologies: ${meta.technologies.join(", ")}`);
+  if (meta.company) lines.push(`Company: ${meta.company}`);
+  if (meta.role) lines.push(`Role: ${meta.role}`);
+  if (meta.startDate) lines.push(`Start date: ${meta.startDate}`);
+  if (meta.endDate) lines.push(`End date: ${meta.endDate}`);
+  if (meta.year != null && meta.year !== "") lines.push(`Year: ${meta.year}`);
+  if (meta.status) lines.push(`Status: ${meta.status}`);
 
-function splitByHeadings(markdown: string, filmstrip: boolean): Section[] {
-  const body = sanitizeChunkBody(markdown);
-  if (!body) return [];
-
-  if (filmstrip && DAY_HEADING_RE.test(body)) {
-    const parts = body.split(/(?=^##\s+Day\s+\d+)/im).filter(Boolean);
-    return parts.map((part) => {
-      const lines = part.trim().split("\n");
-      const first = lines[0] ?? "";
-      const heading = first.match(/^##\s+(.+)$/i)?.[1]?.trim() ?? "Day";
-      const sectionBody = lines.slice(1).join("\n").trim();
-      return { heading, body: sectionBody };
-    });
+  if (meta.linksBlock) {
+    lines.push("", meta.linksBlock);
   }
 
-  const sections: Section[] = [];
-  let lastIndex = 0;
-  let currentHeading = "Introduction";
-  const matches = [...body.matchAll(HEADING_RE)];
-
-  if (matches.length === 0) {
-    return [{ heading: "Introduction", body }];
-  }
-
-  for (const match of matches) {
-    const index = match.index ?? 0;
-    if (index > lastIndex) {
-      const slice = body.slice(lastIndex, index).trim();
-      if (slice) sections.push({ heading: currentHeading, body: slice });
-    }
-    currentHeading = match[2]?.trim() ?? "Section";
-    lastIndex = index + match[0].length;
-  }
-
-  const tail = body.slice(lastIndex).trim();
-  if (tail) sections.push({ heading: currentHeading, body: tail });
-
-  return sections.filter((s) => s.body.length > 0);
+  return lines.join("\n");
 }
 
 function splitLargeSection(section: Section, maxWords: number): Section[] {
@@ -115,65 +113,59 @@ function splitLargeSection(section: Section, maxWords: number): Section[] {
   return parts;
 }
 
-function packSections(sections: Section[]): { heading: string; body: string }[] {
-  const packed: { heading: string; body: string }[] = [];
-  let bufferHeading = "";
-  let bufferBody = "";
+/** `#` headings as separate chunks; `##` as separate chunks; `###+` nested under parent `##`. */
+function splitNormalBodySections(markdown: string): Section[] {
+  const body = sanitizeChunkBody(markdown);
+  if (!body) return [];
+
+  const sections: Section[] = [];
+  let heading = "Introduction";
+  let buffer: string[] = [];
 
   const flush = () => {
-    if (!bufferBody.trim()) return;
-    packed.push({ heading: bufferHeading || "Introduction", body: bufferBody.trim() });
-    bufferHeading = "";
-    bufferBody = "";
+    const text = buffer.join("\n").trim();
+    if (text) sections.push({ heading, body: text });
+    buffer = [];
   };
 
-  for (const section of sections) {
-    const pieces = splitLargeSection(section, CHUNK_TARGET_MAX_WORDS);
-    for (const piece of pieces) {
-      const pieceWords = countWords(piece.body);
-      const bufferWords = countWords(bufferBody);
+  for (const line of body.split("\n")) {
+    const isH1 = /^#\s+/.test(line) && !/^##/.test(line);
+    const isH2 = /^##\s+/.test(line) && !/^###/.test(line);
 
-      if (!bufferBody) {
-        bufferHeading = piece.heading;
-        bufferBody = piece.body;
-        continue;
-      }
-
-      if (bufferWords + pieceWords <= CHUNK_TARGET_MAX_WORDS) {
-        bufferBody = `${bufferBody}\n\n## ${piece.heading}\n\n${piece.body}`;
-        continue;
-      }
-
-      if (bufferWords >= CHUNK_TARGET_MIN_WORDS) {
-        flush();
-        bufferHeading = piece.heading;
-        bufferBody = piece.body;
-      } else {
-        bufferBody = `${bufferBody}\n\n## ${piece.heading}\n\n${piece.body}`;
-        if (countWords(bufferBody) >= CHUNK_TARGET_MAX_WORDS) flush();
-      }
+    if (isH1) {
+      flush();
+      heading = line.replace(/^#\s+/, "").trim();
+    } else if (isH2) {
+      flush();
+      heading = line.replace(/^##\s+/, "").trim();
+    } else {
+      buffer.push(line);
     }
   }
 
   flush();
-  return packed;
+  return sections;
 }
 
-function applyOverlap(chunks: { heading: string; body: string }[]): { heading: string; body: string }[] {
-  if (chunks.length <= 1) return chunks;
+/** Filmstrip: split on `## Day N` (unchanged from prior behavior). */
+function splitFilmstripSections(markdown: string): Section[] {
+  const body = sanitizeChunkBody(markdown);
+  if (!body) return [];
 
-  const withOverlap: { heading: string; body: string }[] = [];
-  for (let i = 0; i < chunks.length; i++) {
-    const chunk = chunks[i]!;
-    let body = chunk.body;
-    if (i > 0) {
-      const prev = chunks[i - 1]!.body;
-      const overlap = takeLastWords(prev, CHUNK_OVERLAP_WORDS);
-      if (overlap) body = `${overlap}\n\n${body}`;
-    }
-    withOverlap.push({ heading: chunk.heading, body });
+  if (!DAY_HEADING_RE.test(body)) {
+    return splitNormalBodySections(markdown);
   }
-  return withOverlap;
+
+  const parts = body.split(/(?=^##\s+Day\s+\d+)/im).filter(Boolean);
+  return parts
+    .map((part) => {
+      const lines = part.trim().split("\n");
+      const first = lines[0] ?? "";
+      const heading = first.match(/^##\s+(.+)$/i)?.[1]?.trim() ?? "Day";
+      const sectionBody = lines.slice(1).join("\n").trim();
+      return { heading, body: sectionBody };
+    })
+    .filter((section) => section.body.length > 0);
 }
 
 function formatChunkText(
@@ -191,58 +183,42 @@ function formatChunkText(
   ].join("\n");
 }
 
-export function chunkDocument(doc: {
-  id: string;
-  path: string;
-  title: string;
-  kind: string;
-  content: string;
-  type?: string;
-  linksBlock?: string;
-}): CorpusChunk[] {
-  const markdown = stripFrontmatterBody(doc.content);
-  const filmstrip = doc.type === "filmstrip";
-  const sections = splitByHeadings(markdown, filmstrip);
-  const packed = applyOverlap(packSections(sections));
+function buildBodySections(markdown: string, filmstrip: boolean): Section[] {
+  const sections = filmstrip
+    ? splitFilmstripSections(markdown)
+    : splitNormalBodySections(markdown);
 
-  return packed.map((section, index) => {
-    let body = section.body;
-    if (index === 0 && doc.linksBlock) {
-      body = `${doc.linksBlock}\n\n${body}`;
-    }
-    return {
-      id: `${doc.id}::${index}`,
-      documentId: doc.id,
-      path: doc.path,
-      title: doc.title,
-      kind: doc.kind,
-      section: section.heading,
-      text: formatChunkText(doc.title, doc.path, section.heading, body),
-      chunkIndex: index,
-    };
-  });
+  return sections.flatMap((section) => splitLargeSection(section, CHUNK_TARGET_MAX_WORDS));
 }
 
-export function buildCorpusDocument(input: {
-  path: string;
-  title: string;
-  kind: string;
-  summary?: string;
-  tags: string[];
-  content: string;
-  type?: string;
-  linksBlock?: string;
-}): CorpusDocument {
+export function chunkDocument(doc: ChunkDocumentInput): CorpusChunk[] {
+  const markdown = stripFrontmatterBody(doc.content);
+  const filmstrip = doc.type === "filmstrip";
+
+  const metadataBody = formatMetadataChunkBody(doc);
+  const sections: Section[] = [{ heading: "Metadata", body: metadataBody }];
+
+  sections.push(...buildBodySections(markdown, filmstrip));
+
+  return sections.map((section, index) => ({
+    id: `${doc.id}::${index}`,
+    documentId: doc.id,
+    path: doc.path,
+    title: doc.title,
+    kind: doc.kind,
+    section: section.heading,
+    text: formatChunkText(doc.title, doc.path, section.heading, section.body),
+    chunkIndex: index,
+  }));
+}
+
+export function buildCorpusDocument(
+  input: Omit<ChunkDocumentInput, "id"> & {
+    tags: string[];
+  }
+): CorpusDocument {
   const id = input.path.replace(/\.md$/, "");
-  const chunks = chunkDocument({
-    id,
-    path: input.path,
-    title: input.title,
-    kind: input.kind,
-    content: input.content,
-    type: input.type,
-    linksBlock: input.linksBlock,
-  });
+  const chunks = chunkDocument({ ...input, id });
 
   return {
     id,

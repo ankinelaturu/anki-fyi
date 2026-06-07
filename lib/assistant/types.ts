@@ -50,7 +50,16 @@ export type AskAnkiActiveFile = {
   title: string;
   kind?: string;
   summary?: string;
+  elevatorPitch?: string;
   tags?: string[];
+  technologies?: string[];
+  company?: string;
+  role?: string;
+  startDate?: string;
+  endDate?: string;
+  year?: string | number;
+  status?: string;
+  linksBlock?: string;
   content: string;
   type?: string;
 };

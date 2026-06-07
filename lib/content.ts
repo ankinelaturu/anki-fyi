@@ -47,6 +47,9 @@ function parseFile(filePath: string): ContentFile {
     links: extractDocumentLinks(data as Record<string, unknown>),
     content,
     path: relative,
+    year:
+      typeof data.year === "number" || typeof data.year === "string" ? data.year : undefined,
+    status: typeof data.status === "string" ? data.status : undefined,
     type: typeof data.type === "string" ? data.type : undefined,
     description: typeof data.description === "string" ? data.description : undefined,
     imagePattern: typeof data.imagePattern === "string" ? data.imagePattern : undefined,

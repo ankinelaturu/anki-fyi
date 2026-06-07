@@ -49,7 +49,17 @@ function parseMarkdownFile(filePath: string) {
     title: typeof data.title === "string" ? data.title : path.basename(filePath, ".md"),
     kind: typeof data.kind === "string" ? data.kind : folder,
     summary: typeof data.summary === "string" ? data.summary : undefined,
+    elevatorPitch:
+      typeof data.elevator_pitch === "string" ? data.elevator_pitch : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    technologies: Array.isArray(data.technologies) ? data.technologies.map(String) : [],
+    company: typeof data.company === "string" ? data.company : undefined,
+    role: typeof data.role === "string" ? data.role : undefined,
+    startDate: typeof data.start_date === "string" ? data.start_date : undefined,
+    endDate: typeof data.end_date === "string" ? data.end_date : undefined,
+    year:
+      typeof data.year === "number" || typeof data.year === "string" ? data.year : undefined,
+    status: typeof data.status === "string" ? data.status : undefined,
     content,
     type: typeof data.type === "string" ? data.type : undefined,
     linksBlock: formatDocumentLinksBlock(data as Record<string, unknown>),
