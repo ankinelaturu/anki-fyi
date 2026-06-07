@@ -182,7 +182,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   : "text-ide-muted hover:text-ide-text"
               )}
             >
-              Embeddings
+              Semantic
             </button>
           </div>
           <div className="hidden" aria-hidden>
