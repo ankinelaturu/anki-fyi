@@ -169,7 +169,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   : "text-ide-muted hover:text-ide-text"
               )}
             >
-              Normal
+              Text
             </button>
             <button
               type="button"
@@ -182,7 +182,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   : "text-ide-muted hover:text-ide-text"
               )}
             >
-              Semantic
+              Embeddings
             </button>
           </div>
           <div className="hidden" aria-hidden>
@@ -284,6 +284,7 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                 <SemanticEditorView
                   markdown={activeFile.content}
                   chunks={chunkEmbeddings?.ordered ?? []}
+                  indexMeta={chunkEmbeddings?.indexMeta}
                   isFilmstrip={isFilmstripFile}
                 />
               </div>

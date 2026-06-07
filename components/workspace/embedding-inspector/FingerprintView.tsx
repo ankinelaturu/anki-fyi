@@ -4,6 +4,7 @@ import type { FingerprintSegment } from "@/lib/assistant/embeddingVisualizations
 import {
   FINGERPRINT_RING_COUNT,
   FINGERPRINT_SEGMENTS_PER_RING,
+  fingerprintSegmentColor,
 } from "@/lib/assistant/embeddingVisualizations";
 
 type FingerprintViewProps = {
@@ -79,13 +80,11 @@ export function FingerprintView({ segments, size = 160 }: FingerprintViewProps) 
           const bump = segment.intensity * maxBump;
           const innerR = baseRadius - ringThickness / 2;
           const outerR = baseRadius + ringThickness / 2 + bump;
-          const opacity = 0.35 + segment.intensity * 0.65;
-
           return (
             <path
               key={`${ring}-${segment.segment}`}
               d={describeArc(cx, cy, innerR, outerR, startAngle, endAngle)}
-              fill={`rgba(204, 204, 204, ${opacity})`}
+              fill={fingerprintSegmentColor(ring, segment.intensity)}
             />
           );
         });

@@ -5,6 +5,7 @@ import {
   EMBEDDING_DIMENSIONS,
   HEATMAP_COLS,
   HEATMAP_ROWS,
+  heatmapColor,
 } from "@/lib/assistant/embeddingVisualizations";
 
 const CELL_GAP = 1;
@@ -71,8 +72,7 @@ export function HeatmapView({ normalized, embedding }: HeatmapViewProps) {
         const row = Math.floor(dimension / HEATMAP_COLS);
         const col = dimension % HEATMAP_COLS;
         const intensity = normalized[dimension] ?? 0;
-        const gray = Math.round(40 + intensity * 180);
-        ctx.fillStyle = `rgb(${gray}, ${gray}, ${gray})`;
+        ctx.fillStyle = heatmapColor(intensity);
         ctx.fillRect(col * stride, row * stride, layout.cellSize, layout.cellSize);
       }
     },

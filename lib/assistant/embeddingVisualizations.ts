@@ -1,3 +1,12 @@
+import {
+  ANALYTICS_CHART_BACKGROUND,
+  ANALYTICS_CHART_COLORS,
+  analyticsColorWithIntensity,
+  FINGERPRINT_RING_TEAL,
+  FINGERPRINT_RING_YELLOW,
+  lerpHexColor,
+} from "@/lib/analytics/chartColors";
+
 export const EMBEDDING_DIMENSIONS = 384;
 export const GENOME_CELL_COUNT = 96;
 export const GENOME_BUCKET_COUNT = 8;
@@ -53,6 +62,26 @@ export function computeGenome(normalized: number[]): number[] {
 
 export function genomeIntensityLevel(value: number): number {
   return Math.min(GENOME_BUCKET_COUNT - 1, Math.floor(value * GENOME_BUCKET_COUNT));
+}
+
+/** Genome ramp — fingerprint yellow (ring 3). */
+export function genomeColor(level: number): string {
+  const clamped = Math.min(GENOME_BUCKET_COUNT - 1, Math.max(0, level));
+  const t = clamped / (GENOME_BUCKET_COUNT - 1);
+  return lerpHexColor(ANALYTICS_CHART_BACKGROUND, FINGERPRINT_RING_YELLOW, 0.3 + t * 0.7);
+}
+
+/** Fingerprint rings: blue → teal → purple → yellow (bubble snapshot alts). */
+export function fingerprintSegmentColor(ring: number, intensity: number): string {
+  const hex = ANALYTICS_CHART_COLORS[ring % 4] ?? ANALYTICS_CHART_COLORS[0];
+  return analyticsColorWithIntensity(hex, intensity);
+}
+
+/** Heatmap — snapshot teal (fingerprint ring 1) on dark base. */
+export function heatmapColor(intensity: number): string {
+  const t = Math.max(0, Math.min(1, intensity));
+  if (t < 0.04) return "#1e1e1e";
+  return lerpHexColor(ANALYTICS_CHART_BACKGROUND, FINGERPRINT_RING_TEAL, t);
 }
 
 export function computeFingerprint(normalized: number[]): FingerprintSegment[] {

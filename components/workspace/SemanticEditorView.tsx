@@ -1,9 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
-import type { ChunkEmbeddingInfo } from "@/lib/assistant/editorEmbeddings";
-import { extractChunkBody } from "@/lib/assistant/editorEmbeddings";
-import { getEmbeddingVisualizations } from "@/lib/assistant/embeddingVisualizations";
+import type { ChunkEmbeddingInfo, EmbeddingIndexMeta } from "@/lib/assistant/editorEmbeddings";
+import { extractChunkBody, formatEmbeddingForTooltip, embeddingModelShortName } from "@/lib/assistant/editorEmbeddings";
+import {
+  EMBEDDING_DIMENSIONS,
+  getEmbeddingVisualizations,
+} from "@/lib/assistant/embeddingVisualizations";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { FingerprintView } from "@/components/workspace/embedding-inspector/FingerprintView";
 import { GenomeStrip } from "@/components/workspace/embedding-inspector/GenomeStrip";
@@ -14,12 +17,14 @@ import { cn } from "@/lib/utils";
 type SemanticEditorViewProps = {
   markdown: string;
   chunks: ChunkEmbeddingInfo[];
+  indexMeta?: EmbeddingIndexMeta | null;
   isFilmstrip?: boolean;
   className?: string;
 };
 
 type ChunkVisualizationPanelProps = {
   chunk: ChunkEmbeddingInfo;
+  indexMeta: EmbeddingIndexMeta;
   layout: "horizontal" | "vertical";
 };
 
@@ -91,16 +96,46 @@ function ChunkLengthPill({ chunk }: { chunk: ChunkEmbeddingInfo }) {
   );
 }
 
-function ChunkStats({ chunk, norm }: { chunk: ChunkEmbeddingInfo; norm: number }) {
+function EmbeddingPill({ embedding }: { embedding: number[] }) {
+  const formatted = useMemo(() => formatEmbeddingForTooltip(embedding), [embedding]);
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          className="inline-flex cursor-default items-center gap-1 rounded-full border border-ide-border bg-[#1b1b1b] px-2 py-0.5 text-[9px]"
+        >
+          <span className="text-ide-muted">Embedding</span>
+          <span className="font-mono text-ide-text">{EMBEDDING_DIMENSIONS}D</span>
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="top" align="start" className="max-w-md p-0">
+        <pre className="max-h-64 overflow-auto whitespace-pre-wrap break-all p-3 font-mono text-[9px] leading-snug text-ide-text">
+          {formatted}
+        </pre>
+      </TooltipContent>
+    </Tooltip>
+  );
+}
+
+function ChunkStats({
+  chunk,
+  indexMeta,
+}: {
+  chunk: ChunkEmbeddingInfo;
+  indexMeta: EmbeddingIndexMeta;
+}) {
   return (
     <div className="mt-2 flex flex-wrap gap-1.5">
       <ChunkLengthPill chunk={chunk} />
-      <StatPill label="Norm" value={norm.toFixed(6)} />
+      <EmbeddingPill embedding={chunk.embedding} />
+      <StatPill label="Model" value={indexMeta.modelShortName} />
     </div>
   );
 }
 
-function ChunkVisualizationPanel({ chunk, layout }: ChunkVisualizationPanelProps) {
+function ChunkVisualizationPanel({ chunk, indexMeta, layout }: ChunkVisualizationPanelProps) {
   const visualizations = useMemo(
     () => getEmbeddingVisualizations(chunk.chunkId, chunk.embedding),
     [chunk.chunkId, chunk.embedding]
@@ -123,7 +158,7 @@ function ChunkVisualizationPanel({ chunk, layout }: ChunkVisualizationPanelProps
             <HeatmapView normalized={visualizations.normalized} embedding={chunk.embedding} />
           </div>
         </div>
-        <ChunkStats chunk={chunk} norm={visualizations.norm} />
+        <ChunkStats chunk={chunk} indexMeta={indexMeta} />
       </div>
     );
   }
@@ -146,7 +181,7 @@ function ChunkVisualizationPanel({ chunk, layout }: ChunkVisualizationPanelProps
           </div>
         </div>
       </div>
-      <ChunkStats chunk={chunk} norm={visualizations.norm} />
+      <ChunkStats chunk={chunk} indexMeta={indexMeta} />
     </div>
   );
 }
@@ -173,10 +208,15 @@ function SectionChrome({
 export function SemanticEditorView({
   markdown,
   chunks,
+  indexMeta,
   isFilmstrip = false,
   className,
 }: SemanticEditorViewProps) {
   const layout = isFilmstrip ? "vertical" : "horizontal";
+  const resolvedIndexMeta = indexMeta ?? {
+    modelShortName: embeddingModelShortName(),
+    generatedAt: "",
+  };
 
   if (chunks.length === 0) {
     return (
@@ -198,7 +238,7 @@ export function SemanticEditorView({
       {bodyChunks.map((chunk) => (
         <section key={chunk.chunkId} className="mb-8 last:mb-0">
           <SectionChrome section={chunk.section} markdown={markdown} isFilmstrip={isFilmstrip} />
-          <ChunkVisualizationPanel chunk={chunk} layout={layout} />
+          <ChunkVisualizationPanel chunk={chunk} indexMeta={resolvedIndexMeta} layout={layout} />
         </section>
       ))}
     </div>

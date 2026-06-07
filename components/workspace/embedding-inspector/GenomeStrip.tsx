@@ -1,18 +1,7 @@
 "use client";
 
-import { genomeIntensityLevel } from "@/lib/assistant/embeddingVisualizations";
+import { genomeColor, genomeIntensityLevel } from "@/lib/assistant/embeddingVisualizations";
 import { cn } from "@/lib/utils";
-
-const INTENSITY_FILL = [
-  "#2a2a2a",
-  "#3a3a3a",
-  "#4a4a4a",
-  "#5c5c5c",
-  "#707070",
-  "#8a8a8a",
-  "#a8a8a8",
-  "#cccccc",
-];
 
 type GenomeStripProps = {
   genome: number[];
@@ -46,7 +35,7 @@ export function GenomeStrip({ genome, compact = false, className }: GenomeStripP
             width={cellWidth}
             height={cellHeight}
             rx={compact ? 0.25 : 0.5}
-            fill={INTENSITY_FILL[level]}
+            fill={genomeColor(level)}
           />
         );
       })}
