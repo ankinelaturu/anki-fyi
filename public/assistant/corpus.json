@@ -1,7 +1,7 @@
 {
   "version": 1,
   "corpusHash": "0d163e9df2aeee27",
-  "generatedAt": "2026-06-07T03:32:13.858Z",
+  "generatedAt": "2026-06-07T03:52:05.594Z",
   "documents": [
     {
       "id": "about/about-anki",
@@ -515,6 +515,7 @@
       "kind": "creative",
       "summary": "Daily illustrated diary with Caiku micro-poems and filmstrip viewer.",
       "order": 10,
+      "type": "filmstrip",
       "tags": [
         "caiku",
         "visual storytelling",
@@ -1815,6 +1816,13 @@
       "elevatorPitch": "A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.",
       "order": 90,
       "importance": "major",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "ChatGPT Export Processing",
+        "CSV Analysis",
+        "Data Visualization"
+      ],
       "tags": [
         "ChatGPT",
         "AI workflows",
@@ -1937,6 +1945,14 @@
       "order": 40,
       "importance": "supporting",
       "startDate": "2011-02",
+      "company": "Oracle",
+      "technologies": [
+        "Java",
+        "REST APIs",
+        "Embedded Systems",
+        "Distributed Systems",
+        "IoT Runtime Components"
+      ],
       "tags": [
         "Oracle",
         "Java Embedded Suite",
@@ -2049,6 +2065,17 @@
       "order": 30,
       "importance": "major",
       "startDate": "2013-12",
+      "company": "Oracle",
+      "technologies": [
+        "Java",
+        "Java 8",
+        "C/C++",
+        "iOS",
+        "Android",
+        "Windows",
+        "Mobile Runtime",
+        "Cross-platform Frameworks"
+      ],
       "tags": [
         "Oracle",
         "mobile frameworks",
@@ -2161,6 +2188,18 @@
       "order": 10,
       "importance": "flagship",
       "startDate": "2024-09",
+      "company": "Oracle",
+      "technologies": [
+        "TypeScript",
+        "JavaScript",
+        "Babel",
+        "Jasmine",
+        "Karma",
+        "LLM APIs",
+        "Function Calling",
+        "CI/CD",
+        "Oracle Visual Builder"
+      ],
       "tags": [
         "Oracle",
         "Visual Builder",
@@ -2273,6 +2312,18 @@
       "order": 20,
       "importance": "flagship",
       "startDate": "2018-07",
+      "company": "Oracle",
+      "technologies": [
+        "JavaScript",
+        "ES6",
+        "SCSS",
+        "HTML",
+        "Runtime Execution",
+        "Dependency Graphs",
+        "Asynchronous Workflows",
+        "Web Application Platforms",
+        "Server-side Components"
+      ],
       "tags": [
         "Oracle",
         "Visual Builder",
@@ -2385,6 +2436,16 @@
       "order": 50,
       "importance": "flagship",
       "startDate": "2004-01",
+      "company": "Sun Microsystems",
+      "technologies": [
+        "Java",
+        "JVM",
+        "Embedded Runtime",
+        "Synchronization",
+        "Performance Optimization",
+        "Portability",
+        "Secure Execution"
+      ],
       "tags": [
         "Sun Microsystems",
         "JVM",
@@ -2823,6 +2884,17 @@
       "elevatorPitch": "Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.",
       "order": 60,
       "importance": "major",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Cursor",
+        "Browser APIs",
+        "Retrieval workflows",
+        "Embeddings",
+        "Semantic Search",
+        "Local Knowledge Concepts",
+        "Context-Aware AI"
+      ],
       "tags": [
         "retrieval",
         "local AI",
@@ -2924,6 +2996,19 @@
       "elevatorPitch": "Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.",
       "order": 20,
       "importance": "flagship",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Cursor",
+        "React Three Fiber",
+        "Three.js",
+        "WebGPU",
+        "WebLLM",
+        "Gemma",
+        "astronomy-engine",
+        "IndexedDB"
+      ],
       "tags": [
         "local LLM",
         "browser runtimes",
@@ -3025,6 +3110,16 @@
       "elevatorPitch": "Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.",
       "order": 70,
       "importance": "major",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Cursor",
+        "Next.js",
+        "TipTap",
+        "Rich text editing",
+        "LLM APIs",
+        "Structured content workflows"
+      ],
       "tags": [
         "AI writing",
         "TipTap",
@@ -3124,6 +3219,15 @@
       "elevatorPitch": "Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.",
       "order": 25,
       "importance": "flagship",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Scheduling Algorithms",
+        "Adaptive Learning",
+        "Calendar Systems",
+        "Learning Analytics"
+      ],
       "tags": [
         "spaced repetition",
         "learning",
@@ -3245,6 +3349,17 @@
       "elevatorPitch": "Local-first AI guardrails that detect sensitive information before it reaches external AI systems.",
       "order": 10,
       "importance": "flagship",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Cursor",
+        "Chrome Extension APIs",
+        "DOM interception",
+        "Embeddings",
+        "Semantic detection",
+        "Local browser storage"
+      ],
       "tags": [
         "local-first AI",
         "data guardrails",
@@ -3344,6 +3459,15 @@
       "elevatorPitch": "AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.",
       "order": 30,
       "importance": "flagship",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Cursor",
+        "Graph modeling",
+        "AI-assisted topic generation",
+        "Interactive navigation"
+      ],
       "tags": [
         "learning systems",
         "graph orchestration",
@@ -3443,6 +3567,17 @@
       "elevatorPitch": "Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.",
       "order": 50,
       "importance": "major",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Cursor",
+        "Chrome Extension APIs",
+        "Embeddings",
+        "Semantic Search",
+        "Browser APIs",
+        "Local Storage",
+        "Vector Retrieval"
+      ],
       "tags": [
         "semantic search",
         "browser extension",
@@ -3544,6 +3679,17 @@
       "elevatorPitch": "AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.",
       "order": 40,
       "importance": "flagship",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Cursor",
+        "LLM APIs",
+        "Image generation",
+        "Text-to-speech",
+        "Streaming workflows",
+        "Raspberry Pi",
+        "Prompt orchestration"
+      ],
       "tags": [
         "multimodal AI",
         "storytelling",
@@ -3655,6 +3801,16 @@
       "elevatorPitch": "A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.",
       "order": 15,
       "importance": "flagship",
+      "technologies": [
+        "TypeScript",
+        "Runtime Systems",
+        "AI Agents",
+        "Capability Modeling",
+        "Policy Engines",
+        "Event-Driven Architecture",
+        "Semantic Routing",
+        "Workflow Orchestration"
+      ],
       "tags": [
         "AI orchestration",
         "agentic workflows",

@@ -19,6 +19,9 @@ export type CorpusDocument = {
   order?: number;
   importance?: string;
   startDate?: string;
+  company?: string;
+  technologies?: string[];
+  type?: string;
   tags: string[];
   content: string;
   chunks: CorpusChunk[];
