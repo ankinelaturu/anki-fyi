@@ -7,7 +7,11 @@ import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 import { AnalyticsBlock } from "@/components/analytics/AnalyticsBlock";
 import { EmbeddingVectorIcon } from "@/components/workspace/EmbeddingVectorIcon";
-import { normalizeSectionKey } from "@/lib/assistant/editorEmbeddings";
+import {
+  normalizeSectionKey,
+  type ChunkEmbeddingInfo,
+  type EmbeddingIndexMeta,
+} from "@/lib/assistant/editorEmbeddings";
 
 function getAnalyticsSource(child: ReactNode): string | null {
   if (!isValidElement<{ children?: ReactNode }>(child)) return null;
@@ -32,9 +36,10 @@ function headingText(children: ReactNode): string {
 
 function createMarkdownComponents(
   externalLinkIcon: boolean,
-  chunkEmbeddings?: Map<string, number[]> | null
+  chunkEmbeddings?: Map<string, ChunkEmbeddingInfo> | null,
+  indexMeta?: EmbeddingIndexMeta | null
 ): Components {
-  const showChunkEmbeddings = Boolean(chunkEmbeddings);
+  const showChunkEmbeddings = Boolean(chunkEmbeddings && indexMeta);
 
   const renderHeading = (
     Tag: "h1" | "h2",
@@ -42,7 +47,7 @@ function createMarkdownComponents(
     props: React.HTMLAttributes<HTMLHeadingElement>
   ) => {
     const text = headingText(children);
-    const embedding =
+    const chunk =
       showChunkEmbeddings && text
         ? chunkEmbeddings?.get(normalizeSectionKey(text))
         : undefined;
@@ -50,7 +55,9 @@ function createMarkdownComponents(
     return (
       <Tag {...props} className={`flex items-center gap-2 ${props.className ?? ""}`.trim()}>
         <span>{children}</span>
-        {embedding ? <EmbeddingVectorIcon embedding={embedding} label={text} /> : null}
+        {chunk && indexMeta ? (
+          <EmbeddingVectorIcon chunk={chunk} indexMeta={indexMeta} />
+        ) : null}
       </Tag>
     );
   };
@@ -120,8 +127,9 @@ type MarkdownProseProps = {
   className?: string;
   /** Show external-link icon after http(s) links (e.g. Ask Anki project links). */
   externalLinkIcon?: boolean;
-  /** Section name → embedding vector (from corpus index). */
-  chunkEmbeddings?: Map<string, number[]> | null;
+  /** Section name → chunk embedding info (from corpus index). */
+  chunkEmbeddings?: Map<string, ChunkEmbeddingInfo> | null;
+  indexMeta?: EmbeddingIndexMeta | null;
 };
 
 export function MarkdownProse({
@@ -129,10 +137,11 @@ export function MarkdownProse({
   className,
   externalLinkIcon = false,
   chunkEmbeddings = null,
+  indexMeta = null,
 }: MarkdownProseProps) {
   const components =
     externalLinkIcon || chunkEmbeddings
-      ? createMarkdownComponents(externalLinkIcon, chunkEmbeddings)
+      ? createMarkdownComponents(externalLinkIcon, chunkEmbeddings, indexMeta)
       : defaultMarkdownComponents;
 
   return (

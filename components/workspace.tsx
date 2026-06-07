@@ -211,8 +211,8 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
               </Tooltip>
               {showEmbeddingVectors && chunkEmbeddings?.metadata ? (
                 <EmbeddingVectorIcon
-                  embedding={chunkEmbeddings.metadata}
-                  label="Metadata"
+                  chunk={chunkEmbeddings.metadata}
+                  indexMeta={chunkEmbeddings.indexMeta}
                   className="mr-2"
                 />
               ) : null}
@@ -228,10 +228,14 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                 imagePattern={activeFile.imagePattern}
                 totalFrames={activeFile.totalFrames}
                 chunkEmbeddings={chunkEmbeddings?.bySection}
+                indexMeta={chunkEmbeddings?.indexMeta}
               />
             ) : (
               <div className="h-full overflow-auto px-8 py-6 max-md:px-4">
-                <MarkdownProse chunkEmbeddings={chunkEmbeddings?.bySection}>
+                <MarkdownProse
+                  chunkEmbeddings={chunkEmbeddings?.bySection}
+                  indexMeta={chunkEmbeddings?.indexMeta}
+                >
                   {activeFile.content}
                 </MarkdownProse>
               </div>

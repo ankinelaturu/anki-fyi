@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { FilmstripThumbnail } from "@/components/filmstrip/FilmstripThumbnail";
 import { Input } from "@/components/ui/input";
 import { getFilmstripMaxDay, parseFilmstripFrames } from "@/lib/filmstrip";
+import type { ChunkEmbeddingInfo, EmbeddingIndexMeta } from "@/lib/assistant/editorEmbeddings";
 import { cn } from "@/lib/utils";
 
 type ViewMode = "filmstrip" | "markdown";
@@ -17,7 +18,8 @@ type FilmstripViewerProps = {
   markdown: string;
   imagePattern?: string;
   totalFrames?: number;
-  chunkEmbeddings?: Map<string, number[]> | null;
+  chunkEmbeddings?: Map<string, ChunkEmbeddingInfo> | null;
+  indexMeta?: EmbeddingIndexMeta | null;
 };
 
 export function FilmstripViewer({
@@ -27,6 +29,7 @@ export function FilmstripViewer({
   imagePattern,
   totalFrames,
   chunkEmbeddings = null,
+  indexMeta = null,
 }: FilmstripViewerProps) {
   const frames = useMemo(() => parseFilmstripFrames(markdown, imagePattern), [markdown, imagePattern]);
   const maxDay = useMemo(() => getFilmstripMaxDay(frames, totalFrames), [frames, totalFrames]);
@@ -121,7 +124,9 @@ export function FilmstripViewer({
           showSearch={false}
         />
         <div className="min-h-0 flex-1 overflow-auto px-8 py-6 max-md:px-4">
-          <MarkdownProse chunkEmbeddings={chunkEmbeddings}>{markdown}</MarkdownProse>
+          <MarkdownProse chunkEmbeddings={chunkEmbeddings} indexMeta={indexMeta}>
+            {markdown}
+          </MarkdownProse>
         </div>
       </div>
     );
