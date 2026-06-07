@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
+import { Binary, ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
 import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { EmbeddingVectorIcon } from "@/components/workspace/EmbeddingVectorIcon";
@@ -14,7 +14,6 @@ import { ExperienceInsightsMeta } from "@/components/workspace/ExperienceInsight
 import { ExplorerPanel } from "@/components/workspace/ExplorerPanel";
 import { SearchPanel } from "@/components/workspace/SearchPanel";
 import { StatusBar } from "@/components/workspace/StatusBar";
-import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
@@ -25,6 +24,7 @@ import {
   WORKSPACE_EDITOR_TAB_BAR_CLASS,
   WORKSPACE_PANEL_TITLE_CLASS,
 } from "@/lib/workspace-chrome";
+import { cn } from "@/lib/utils";
 
 type WorkspaceProps = {
   folders: ContentFolder[];
@@ -147,14 +147,34 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
           <span className="text-ide-muted">— Principal AI Product Engineer</span>
         </div>
         <div className="hidden items-center gap-3 md:flex">
-          <label className="flex cursor-pointer items-center gap-2 text-ide-muted">
-            <Switch
-              checked={showEmbeddingVectors}
-              onCheckedChange={setShowEmbeddingVectors}
-              aria-label="Show embedding vectors"
-            />
-            <span className="text-[10px] uppercase tracking-wide">Vectors</span>
-          </label>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                aria-pressed={showEmbeddingVectors}
+                onClick={() => setShowEmbeddingVectors((on) => !on)}
+                className={cn(
+                  "inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[10px] tracking-wide transition-colors",
+                  showEmbeddingVectors
+                    ? "border-ide-border bg-ide-active text-[#c586c0]"
+                    : "border-transparent text-ide-muted hover:border-ide-border hover:bg-ide-active/50 hover:text-ide-text"
+                )}
+              >
+                <Binary className="h-3 w-3 shrink-0" strokeWidth={2} aria-hidden />
+                Embeddings
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs">
+              <p>
+                Show corpus embedding icons on each chunk. Hover for a genome preview; click an
+                icon to open the Embedding Inspector.
+              </p>
+              <p className="mt-1 text-ide-muted">
+                Currently {showEmbeddingVectors ? "ON" : "OFF"}. Click to turn{" "}
+                {showEmbeddingVectors ? "OFF" : "ON"}.
+              </p>
+            </TooltipContent>
+          </Tooltip>
           <span className="text-ide-muted">●</span>
           <span className="text-ide-green">main</span>
           <span className="text-ide-muted">●</span>

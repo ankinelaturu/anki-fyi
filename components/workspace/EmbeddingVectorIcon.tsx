@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 type EmbeddingVectorIconProps = {
   chunk: ChunkEmbeddingInfo;
   indexMeta: EmbeddingIndexMeta;
+  /** Size icon to 1em — use beside section headings. */
+  matchFontSize?: boolean;
   className?: string;
 };
 
@@ -40,7 +42,12 @@ function computePanelPosition(anchor: DOMRect, panelWidth: number, panelHeight: 
   return { top, left };
 }
 
-export function EmbeddingVectorIcon({ chunk, indexMeta, className }: EmbeddingVectorIconProps) {
+export function EmbeddingVectorIcon({
+  chunk,
+  indexMeta,
+  matchFontSize = false,
+  className,
+}: EmbeddingVectorIconProps) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const inspectorRef = useRef<HTMLDivElement>(null);
   const [inspectorOpen, setInspectorOpen] = useState(false);
@@ -122,8 +129,8 @@ export function EmbeddingVectorIcon({ chunk, indexMeta, className }: EmbeddingVe
         ref={triggerRef}
         type="button"
         className={cn(
-          "inline-flex shrink-0 items-center justify-center rounded p-0.5 text-[#c586c0] opacity-80 transition-opacity hover:bg-ide-active hover:opacity-100",
-          inspectorOpen && "bg-ide-active opacity-100",
+          "inline-flex shrink-0 items-center justify-center rounded text-[#c586c0] opacity-80 transition-opacity hover:bg-ide-active hover:opacity-100",
+          matchFontSize ? "p-0 leading-none" : "p-0.5",
           className
         )}
         aria-label={`Embedding vector for ${chunk.section}`}
@@ -132,7 +139,10 @@ export function EmbeddingVectorIcon({ chunk, indexMeta, className }: EmbeddingVe
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
       >
-        <Binary className="h-3.5 w-3.5" strokeWidth={2} />
+        <Binary
+          className={cn("shrink-0", matchFontSize ? "h-[1em] w-[1em]" : "h-3.5 w-3.5")}
+          strokeWidth={2}
+        />
       </button>
 
       {mounted && showHover && hoverPos

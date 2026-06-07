@@ -56,7 +56,7 @@ function createMarkdownComponents(
       <Tag {...props} className={`flex items-center gap-2 ${props.className ?? ""}`.trim()}>
         <span>{children}</span>
         {chunk && indexMeta ? (
-          <EmbeddingVectorIcon chunk={chunk} indexMeta={indexMeta} />
+          <EmbeddingVectorIcon chunk={chunk} indexMeta={indexMeta} matchFontSize />
         ) : null}
       </Tag>
     );
