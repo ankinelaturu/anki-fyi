@@ -10,8 +10,21 @@ export type ChunkEmbeddingInfo = {
   section: string;
   filePath: string;
   textLength: number;
+  /** Full corpus chunk text (Title/Path/Section header + body). */
+  text: string;
   embedding: number[];
 };
+
+/** Body markdown after corpus chunk header lines. */
+export function extractChunkBody(text: string): string {
+  const lines = text.split("\n");
+  let index = 0;
+  if (lines[index]?.startsWith("Title:")) index++;
+  if (lines[index]?.startsWith("Path:")) index++;
+  if (lines[index]?.startsWith("Section:")) index++;
+  while (lines[index] === "") index++;
+  return lines.slice(index).join("\n").trim();
+}
 
 export type EmbeddingIndexMeta = {
   modelShortName: string;
@@ -50,6 +63,7 @@ function toChunkEmbeddingInfo(chunk: CorpusChunk, embedding: number[]): ChunkEmb
     section: chunk.section,
     filePath: chunk.path,
     textLength: chunk.text.length,
+    text: chunk.text,
     embedding,
   };
 }

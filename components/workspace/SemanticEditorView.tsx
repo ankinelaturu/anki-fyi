@@ -2,10 +2,13 @@
 
 import { useMemo } from "react";
 import type { ChunkEmbeddingInfo } from "@/lib/assistant/editorEmbeddings";
+import { extractChunkBody } from "@/lib/assistant/editorEmbeddings";
 import { getEmbeddingVisualizations } from "@/lib/assistant/embeddingVisualizations";
+import { MarkdownProse } from "@/components/markdown-prose";
 import { FingerprintView } from "@/components/workspace/embedding-inspector/FingerprintView";
 import { GenomeStrip } from "@/components/workspace/embedding-inspector/GenomeStrip";
 import { HeatmapView } from "@/components/workspace/embedding-inspector/HeatmapView";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 type SemanticEditorViewProps = {
@@ -56,15 +59,43 @@ function VizLabel({ children }: { children: string }) {
   return <div className="mb-1 text-[9px] font-medium uppercase tracking-wide text-ide-muted">{children}</div>;
 }
 
+function StatPill({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-ide-border bg-[#1b1b1b] px-2 py-0.5 text-[9px]">
+      <span className="text-ide-muted">{label}</span>
+      <span className="font-mono text-ide-text">{value}</span>
+    </span>
+  );
+}
+
+function ChunkLengthPill({ chunk }: { chunk: ChunkEmbeddingInfo }) {
+  const body = useMemo(() => extractChunkBody(chunk.text), [chunk.text]);
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          className="inline-flex cursor-default items-center gap-1 rounded-full border border-ide-border bg-[#1b1b1b] px-2 py-0.5 text-[9px]"
+        >
+          <span className="text-ide-muted">Chunk Length</span>
+          <span className="font-mono text-ide-text">{chunk.textLength} chars</span>
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="top" align="start" className="max-w-md p-0">
+        <div className="max-h-64 overflow-auto p-3">
+          <MarkdownProse className="prose-ide max-w-none text-[10px]">{body}</MarkdownProse>
+        </div>
+      </TooltipContent>
+    </Tooltip>
+  );
+}
+
 function ChunkStats({ chunk, norm }: { chunk: ChunkEmbeddingInfo; norm: number }) {
   return (
-    <div className="mt-2 flex gap-4 text-[9px] text-ide-muted">
-      <span>
-        <span className="text-ide-text/60">Chunk Length:</span> {chunk.textLength} chars
-      </span>
-      <span>
-        <span className="text-ide-text/60">Norm:</span> {norm.toFixed(6)}
-      </span>
+    <div className="mt-2 flex flex-wrap gap-1.5">
+      <ChunkLengthPill chunk={chunk} />
+      <StatPill label="Norm" value={norm.toFixed(6)} />
     </div>
   );
 }
