@@ -26,6 +26,11 @@ import type {
   CorpusChunk,
   RetrievalResult,
 } from "@/lib/assistant/types";
+import { loadCorpus } from "@/lib/assistant/corpus";
+import {
+  answerStructuredIntent,
+  detectStructuredIntent,
+} from "@/lib/assistant/structuredIntents";
 import { ensureVectorIndex, searchSimilar } from "@/lib/assistant/vectorIndex";
 import { isWebGPUAvailable } from "@/lib/assistant/webgpu";
 
@@ -143,6 +148,15 @@ export async function askAnki(
   const activeChunks = activeFile ? buildActiveFileChunks(activeFile) : [];
 
   callbacks?.onStatus?.("Loading corpus...");
+  const corpus = await loadCorpus();
+
+  const structuredIntent = detectStructuredIntent(q);
+  if (structuredIntent.type !== "none") {
+    callbacks?.onStatus?.("Answering from workspace catalog...");
+    const structured = answerStructuredIntent(structuredIntent, corpus);
+    if (structured) return structured;
+  }
+
   await ensureVectorIndex();
 
   const results = await searchSimilar(q, undefined, callbacks?.onStatus);

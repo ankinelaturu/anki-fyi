@@ -51,6 +51,8 @@ function parseMarkdownFile(filePath: string) {
     summary: typeof data.summary === "string" ? data.summary : undefined,
     elevatorPitch:
       typeof data.elevator_pitch === "string" ? data.elevator_pitch : undefined,
+    order: typeof data.order === "number" ? data.order : undefined,
+    importance: typeof data.importance === "string" ? data.importance : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     technologies: Array.isArray(data.technologies) ? data.technologies.map(String) : [],
     company: typeof data.company === "string" ? data.company : undefined,

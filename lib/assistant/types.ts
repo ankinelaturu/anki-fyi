@@ -15,6 +15,10 @@ export type CorpusDocument = {
   title: string;
   kind: string;
   summary?: string;
+  elevatorPitch?: string;
+  order?: number;
+  importance?: string;
+  startDate?: string;
   tags: string[];
   content: string;
   chunks: CorpusChunk[];

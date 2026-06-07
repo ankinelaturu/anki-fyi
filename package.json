@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build:corpus": "tsx scripts/build-corpus.ts",
+    "test:structured-intents": "tsx scripts/test-structured-intents.ts",
     "build": "pnpm build:corpus && next build",
     "start": "next start",
     "lint": "next lint"

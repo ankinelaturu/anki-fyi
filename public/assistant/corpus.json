@@ -1,7 +1,7 @@
 {
   "version": 1,
   "corpusHash": "0d163e9df2aeee27",
-  "generatedAt": "2026-06-07T03:07:38.206Z",
+  "generatedAt": "2026-06-07T03:32:13.858Z",
   "documents": [
     {
       "id": "about/about-anki",
@@ -9,6 +9,7 @@
       "title": "About Anki",
       "kind": "profile",
       "summary": "Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.",
+      "order": 1,
       "tags": [
         "AI orchestration",
         "developer platforms",
@@ -75,6 +76,7 @@
       "title": "Contact",
       "kind": "profile",
       "summary": "Ways to reach Anki for collaboration, consulting, and professional inquiries.",
+      "order": 3,
       "tags": [
         "contact",
         "LinkedIn",
@@ -200,6 +202,7 @@
       "title": "AI Orchestration",
       "kind": "capability",
       "summary": "Agentic workflows, governed execution paths, and capability coordination.",
+      "order": 10,
       "tags": [
         "orchestration",
         "LLMs",
@@ -256,6 +259,7 @@
       "title": "Browser Runtimes",
       "kind": "capability",
       "summary": "Browser-native AI, WebLLM, and local-first execution models.",
+      "order": 30,
       "tags": [
         "browser",
         "local-first",
@@ -312,6 +316,7 @@
       "title": "Developer Platforms",
       "kind": "capability",
       "summary": "Tools and platforms that make complex systems usable for builders.",
+      "order": 20,
       "tags": [
         "developer platforms",
         "tooling",
@@ -368,6 +373,7 @@
       "title": "Human–AI Interaction",
       "kind": "capability",
       "summary": "Iterative collaboration patterns between humans and AI systems.",
+      "order": 60,
       "tags": [],
       "content": "# Human–AI Interaction\n\nDesigning products where humans steer, correct, and co-create with AI — not one-shot generation, but durable collaboration loops.\n\n## Patterns\n\n- Iterative authoring with grounded context\n- Inspectable intermediate states\n- Clear handoff between human intent and machine execution\n",
       "chunks": [
@@ -409,6 +415,7 @@
       "title": "Interactive Systems",
       "kind": "capability",
       "summary": "Low-latency, human-in-the-loop interactive products and authoring tools.",
+      "order": 40,
       "tags": [
         "interactive systems",
         "frontend",
@@ -465,6 +472,7 @@
       "title": "Local-First AI",
       "kind": "capability",
       "summary": "Privacy-preserving AI workflows that run close to the user.",
+      "order": 50,
       "tags": [],
       "content": "# Local-First AI\n\nSystems where inference, retrieval, and guardrails run on-device or in the browser — minimizing data exposure while preserving useful AI assistance.\n\n## Themes\n\n- Browser extensions and in-tab inspection\n- Embeddings and retrieval without cloud dependency\n- Governance-friendly AI workflows for enterprises\n",
       "chunks": [
@@ -506,6 +514,7 @@
       "title": "Aimless Dude & Hyper Dog",
       "kind": "creative",
       "summary": "Daily illustrated diary with Caiku micro-poems and filmstrip viewer.",
+      "order": 10,
       "tags": [
         "caiku",
         "visual storytelling",
@@ -1803,6 +1812,9 @@
       "title": "ChatGPT Export Summary",
       "kind": "analytics",
       "summary": "Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.",
+      "elevatorPitch": "A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.",
+      "order": 90,
+      "importance": "major",
       "tags": [
         "ChatGPT",
         "AI workflows",
@@ -1921,6 +1933,10 @@
       "title": "Java Embedded Suite",
       "kind": "experience",
       "summary": "Designed REST services and runtime components for embedded and distributed IoT environments.",
+      "elevatorPitch": "Built Java Embedded Suite components for RESTful services and distributed embedded systems.",
+      "order": 40,
+      "importance": "supporting",
+      "startDate": "2011-02",
       "tags": [
         "Oracle",
         "Java Embedded Suite",
@@ -2029,6 +2045,10 @@
       "title": "Oracle Mobile Application Framework",
       "kind": "experience",
       "summary": "Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.",
+      "elevatorPitch": "Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.",
+      "order": 30,
+      "importance": "major",
+      "startDate": "2013-12",
       "tags": [
         "Oracle",
         "mobile frameworks",
@@ -2137,6 +2157,10 @@
       "title": "TypeScript Enablement & Generative AI Integration",
       "kind": "experience",
       "summary": "Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.",
+      "elevatorPitch": "Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.",
+      "order": 10,
+      "importance": "flagship",
+      "startDate": "2024-09",
       "tags": [
         "Oracle",
         "Visual Builder",
@@ -2245,6 +2269,10 @@
       "title": "Visual Builder Design-Time & Action Chain Framework",
       "kind": "experience",
       "summary": "Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.",
+      "elevatorPitch": "Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.",
+      "order": 20,
+      "importance": "flagship",
+      "startDate": "2018-07",
       "tags": [
         "Oracle",
         "Visual Builder",
@@ -2353,6 +2381,10 @@
       "title": "Embedded JVM Runtime Systems",
       "kind": "experience",
       "summary": "Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.",
+      "elevatorPitch": "Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.",
+      "order": 50,
+      "importance": "flagship",
+      "startDate": "2004-01",
       "tags": [
         "Sun Microsystems",
         "JVM",
@@ -2461,6 +2493,7 @@
       "title": "Future Experiments",
       "kind": "lab",
       "summary": "In-progress experiments in browser AI, orchestration, and tooling.",
+      "order": 30,
       "tags": [],
       "content": "# Future Experiments\n\nScratchpad for upcoming lab work:\n\n- Browser-side embedding indexes over markdown corpora\n- Local Gemma/WebLLM terminal assistant for anki.fyi\n- Filmstrip variants for other creative series\n- ZeroFabric path visualizer improvements\n",
       "chunks": [
@@ -2492,6 +2525,7 @@
       "title": "Portfolio Workspace",
       "kind": "lab",
       "summary": "The anki.fyi IDE-style knowledge workspace concept.",
+      "order": 10,
       "tags": [
         "portfolio",
         "knowledge base",
@@ -2548,6 +2582,7 @@
       "title": "ZeroFabric Runtime Simulator",
       "kind": "lab",
       "summary": "Interactive simulator for governed capability paths and intent routing.",
+      "order": 20,
       "tags": [],
       "content": "# ZeroFabric Runtime Simulator\n\nLab experiment: an interactive simulator for **ZeroFabric** — exploring how intent maps to governed capability paths with policies, constraints, and observable execution.\n\n## Goals\n\n- Visualize active intent paths\n- Compare deterministic vs adaptive routing\n- Debug capability matching in real time\n\n## Status\n\nPrototype / work in progress. See **writing/zerofabric.md** for the conceptual model.\n",
       "chunks": [
@@ -2599,6 +2634,7 @@
       "title": "Concurrency Systems",
       "kind": "patent",
       "summary": "Thread synchronization and concurrent execution innovations.",
+      "order": 20,
       "tags": [
         "patent",
         "synchronization",
@@ -2634,6 +2670,7 @@
       "title": "Embedded JVM Runtime",
       "kind": "patent",
       "summary": "Embedded JVM architecture and runtime optimizations.",
+      "order": 50,
       "tags": [
         "patent",
         "JVM",
@@ -2669,6 +2706,7 @@
       "title": "Embedded Process Communication",
       "kind": "patent",
       "summary": "Inter-process communication for embedded and mobile runtimes.",
+      "order": 30,
       "tags": [
         "patent",
         "embedded",
@@ -2704,6 +2742,7 @@
       "title": "Mobile Platform Innovations",
       "kind": "patent",
       "summary": "Mobile application platform features and runtime enhancements.",
+      "order": 40,
       "tags": [
         "patent",
         "mobile",
@@ -2739,6 +2778,7 @@
       "title": "Patent Portfolio",
       "kind": "patent",
       "summary": "Overview of issued patents across runtime, mobile, and embedded systems.",
+      "order": 10,
       "tags": [],
       "content": "# Patent Portfolio\n\nFour issued patents spanning embedded JVM runtimes, mobile platform features, inter-process communication, and concurrency systems — primarily from Sun Microsystems and related platform work.\n\n## Themes\n\n- Runtime efficiency on constrained devices\n- Mobile application platform innovations\n- Safe concurrent execution models\n\nSee individual patent entries in this folder for summaries.\n",
       "chunks": [
@@ -2780,6 +2820,9 @@
       "title": "Ask Rudy",
       "kind": "project",
       "summary": "Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.",
+      "elevatorPitch": "Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.",
+      "order": 60,
+      "importance": "major",
       "tags": [
         "retrieval",
         "local AI",
@@ -2878,6 +2921,9 @@
       "title": "AstroValley",
       "kind": "project",
       "summary": "Browser-native AI sandbox disguised as an astrology application.",
+      "elevatorPitch": "Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.",
+      "order": 20,
+      "importance": "flagship",
       "tags": [
         "local LLM",
         "browser runtimes",
@@ -2976,6 +3022,9 @@
       "title": "Crafticle",
       "kind": "project",
       "summary": "Authoring and publishing tools for structured creative writing.",
+      "elevatorPitch": "Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.",
+      "order": 70,
+      "importance": "major",
       "tags": [
         "AI writing",
         "TipTap",
@@ -3072,6 +3121,9 @@
       "title": "Florow",
       "kind": "concept",
       "summary": "Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.",
+      "elevatorPitch": "Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.",
+      "order": 25,
+      "importance": "flagship",
       "tags": [
         "spaced repetition",
         "learning",
@@ -3190,6 +3242,9 @@
       "title": "Lintern",
       "kind": "project",
       "summary": "Local-first data guardrails for AI workflows.",
+      "elevatorPitch": "Local-first AI guardrails that detect sensitive information before it reaches external AI systems.",
+      "order": 10,
+      "importance": "flagship",
       "tags": [
         "local-first AI",
         "data guardrails",
@@ -3286,6 +3341,9 @@
       "title": "OzMap",
       "kind": "project",
       "summary": "AI-powered learning trails that turn topics into navigable knowledge maps.",
+      "elevatorPitch": "AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.",
+      "order": 30,
+      "importance": "flagship",
       "tags": [
         "learning systems",
         "graph orchestration",
@@ -3382,6 +3440,9 @@
       "title": "Rudy Finds",
       "kind": "project",
       "summary": "Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.",
+      "elevatorPitch": "Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.",
+      "order": 50,
+      "importance": "major",
       "tags": [
         "semantic search",
         "browser extension",
@@ -3480,6 +3541,9 @@
       "title": "Storybook Arcade",
       "kind": "project",
       "summary": "Multimodal storytelling system combining language, images, narration, and interaction.",
+      "elevatorPitch": "AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.",
+      "order": 40,
+      "importance": "flagship",
       "tags": [
         "multimodal AI",
         "storytelling",
@@ -3588,6 +3652,9 @@
       "title": "ZeroFabric",
       "kind": "concept",
       "summary": "Runtime semantic capability coordination for agentic workflows.",
+      "elevatorPitch": "A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.",
+      "order": 15,
+      "importance": "flagship",
       "tags": [
         "AI orchestration",
         "agentic workflows",
@@ -3696,6 +3763,7 @@
       "title": "Lessons from Six in Twelve",
       "kind": "writing",
       "summary": "Reflections on shipping many experiments in a compressed timeframe.",
+      "order": 40,
       "tags": [],
       "content": "# Lessons from Six in Twelve\n\nReflections on building multiple AI and developer-tool experiments in a short cycle — what scaled, what did not, and what to keep.\n\n## Takeaways\n\n- Favor composable primitives over monolithic demos\n- Local-first constraints sharpen product thinking\n- Explorer-style knowledge bases accelerate iteration\n",
       "chunks": [
@@ -3737,6 +3805,7 @@
       "title": "Local LLM Orchestration",
       "kind": "writing",
       "summary": "Patterns for orchestrating local models with deterministic guardrails.",
+      "order": 30,
       "tags": [],
       "content": "# Local LLM Orchestration\n\nNotes on combining small local models, retrieval, and rule-based guardrails — without sending sensitive context to the cloud.\n\n## Topics\n\n- WebLLM and in-browser inference\n- Embedding indexes over local corpora\n- Hybrid deterministic + generative paths\n",
       "chunks": [
@@ -3778,6 +3847,7 @@
       "title": "Stop Building Static Agents",
       "kind": "writing",
       "summary": "Why governed capability spaces matter more than one-shot agent demos.",
+      "order": 20,
       "tags": [],
       "content": "# Stop Building Static Agents\n\nMost \"agent\" demos are frozen graphs with a chat wrapper. Production systems need governed capability spaces, inspectable paths, and deterministic boundaries.\n\n## Core argument\n\n- Intent routing is not enough without constraints\n- Capabilities should be explicit, versioned, and observable\n- Humans need override and audit surfaces\n\n## Related work\n\nSee **ZeroFabric** for a runtime coordination model and **Lintern** for local-first guardrails.\n",
       "chunks": [

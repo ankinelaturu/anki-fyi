@@ -11,6 +11,8 @@ export type DocumentChunkMetadata = {
   kind: string;
   summary?: string;
   elevatorPitch?: string;
+  order?: number;
+  importance?: string;
   tags?: string[];
   technologies?: string[];
   company?: string;
@@ -226,6 +228,10 @@ export function buildCorpusDocument(
     title: input.title,
     kind: input.kind,
     summary: input.summary,
+    elevatorPitch: input.elevatorPitch,
+    order: typeof input.order === "number" ? input.order : undefined,
+    importance: typeof input.importance === "string" ? input.importance : undefined,
+    startDate: input.startDate,
     tags: input.tags,
     content: stripFrontmatterBody(input.content),
     chunks,
