@@ -32,7 +32,7 @@ function ChunkVectorPanel({
     <div className="my-2">
       <ChunkEmbeddingStats chunk={chunk} indexMeta={indexMeta} className="mb-2" />
       <div className="w-fit max-w-full rounded border border-ide-border bg-[#1e1e1e] px-4 py-3">
-        <div className="whitespace-pre font-mono text-[11px] leading-[1.65] tabular-nums text-[#d4d4d4]">
+        <div className="whitespace-pre font-mono text-[9px] leading-[1.65] tabular-nums text-[#d4d4d4]">
           {text}
         </div>
       </div>

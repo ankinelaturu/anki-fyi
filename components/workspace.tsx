@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
-import { Binary, ExternalLink, FileText, Sparkles, Circle, TriangleAlert } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Binary, ExternalLink, FileText, Fingerprint, Sparkles, Circle, TriangleAlert } from "lucide-react";
 import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
 import { EmbeddingVectorIcon } from "@/components/workspace/EmbeddingVectorIcon";
@@ -48,6 +49,44 @@ const MAX_INSIGHTS_WIDTH = 520;
 
 const PORTRAIT_WIDTH = 668;
 const PORTRAIT_HEIGHT = 882;
+
+function EditorViewModeButton({
+  pressed,
+  onClick,
+  icon: Icon,
+  label,
+  tooltip,
+  pressedClassName = "bg-ide-active text-ide-text",
+}: {
+  pressed: boolean;
+  onClick: () => void;
+  icon: LucideIcon;
+  label: string;
+  tooltip: string;
+  pressedClassName?: string;
+}) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          aria-pressed={pressed}
+          onClick={onClick}
+          className={cn(
+            "inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
+            pressed ? pressedClassName : "text-ide-muted hover:text-ide-text"
+          )}
+        >
+          <Icon className="h-3 w-3 shrink-0" strokeWidth={2} aria-hidden />
+          {label}
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom" className="max-w-xs">
+        {tooltip}
+      </TooltipContent>
+    </Tooltip>
+  );
+}
 
 export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   const allFiles = useMemo(() => folders.flatMap((folder) => folder.files), [folders]);
@@ -159,45 +198,29 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
             role="group"
             aria-label="Editor view mode"
           >
-            <button
-              type="button"
-              aria-pressed={editorViewMode === "normal"}
+            <EditorViewModeButton
+              pressed={editorViewMode === "normal"}
               onClick={() => setEditorViewMode("normal")}
-              className={cn(
-                "rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
-                editorViewMode === "normal"
-                  ? "bg-ide-active text-ide-text"
-                  : "text-ide-muted hover:text-ide-text"
-              )}
-            >
-              Text
-            </button>
-            <button
-              type="button"
-              aria-pressed={editorViewMode === "semantic"}
+              icon={FileText}
+              label="Text"
+              tooltip="Read the markdown source for this file."
+            />
+            <EditorViewModeButton
+              pressed={editorViewMode === "semantic"}
               onClick={() => setEditorViewMode("semantic")}
-              className={cn(
-                "rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
-                editorViewMode === "semantic"
-                  ? "bg-ide-active text-[#c586c0]"
-                  : "text-ide-muted hover:text-ide-text"
-              )}
-            >
-              Semantic
-            </button>
-            <button
-              type="button"
-              aria-pressed={editorViewMode === "vectors"}
+              icon={Fingerprint}
+              label="Semantic"
+              tooltip="View corpus chunk embeddings as fingerprint, genome, and heatmap visualizations."
+              pressedClassName="bg-ide-active text-[#c586c0]"
+            />
+            <EditorViewModeButton
+              pressed={editorViewMode === "vectors"}
               onClick={() => setEditorViewMode("vectors")}
-              className={cn(
-                "rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
-                editorViewMode === "vectors"
-                  ? "bg-ide-active text-[#c586c0]"
-                  : "text-ide-muted hover:text-ide-text"
-              )}
-            >
-              Vectors
-            </button>
+              icon={Binary}
+              label="Vectors"
+              tooltip="View the raw embedding vector values for each section."
+              pressedClassName="bg-ide-active text-[#c586c0]"
+            />
           </div>
           <div className="hidden" aria-hidden>
             <Tooltip>
