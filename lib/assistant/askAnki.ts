@@ -1,3 +1,10 @@
+/**
+ * Ask Anki orchestration — end-to-end question answering pipeline.
+ *
+ * Coordinates metadata shortcuts, vector retrieval, refusal guardrails, active-file
+ * context pinning, local Gemma generation, and post-answer link enrichment.
+ */
+
 import {
   GEMMA_CONTEXT_TOP_K,
   GEMMA_GENERATE_ERROR_HEADING,
@@ -33,6 +40,9 @@ import { isWebGPUAvailable } from "@/lib/assistant/webgpu";
 
 const chatModel = createGemmaWebLLMProvider();
 
+/**
+ * Normalize a bare question string or full request object into `AskAnkiRequest`.
+ */
 export function normalizeAskAnkiRequest(input: string | AskAnkiRequest): AskAnkiRequest {
   if (typeof input === "string") {
     return { question: input };
@@ -40,12 +50,18 @@ export function normalizeAskAnkiRequest(input: string | AskAnkiRequest): AskAnki
   return input;
 }
 
+/**
+ * Format a user-facing error heading with optional underlying error detail.
+ */
 function formatGemmaFailure(heading: string, error: unknown): string {
   const detail =
     error instanceof Error ? error.message : typeof error === "string" ? error : String(error);
   return detail && !heading.includes(detail) ? `${heading}\n\n${detail}` : heading;
 }
 
+/**
+ * Detect Gemma/WebLLM context-window overflow errors for a tailored message.
+ */
 function isContextWindowExceeded(error: unknown): boolean {
   if (!(error instanceof Error)) return false;
   return (
@@ -55,6 +71,9 @@ function isContextWindowExceeded(error: unknown): boolean {
   );
 }
 
+/**
+ * Structured console error for Gemma load/generate failures in development.
+ */
 function logGemmaFailure(phase: "load" | "generate", error: unknown, question: string): void {
   console.error(`[Ask Anki] Gemma ${phase} failed`, {
     question,
@@ -64,6 +83,9 @@ function logGemmaFailure(phase: "load" | "generate", error: unknown, question: s
   });
 }
 
+/**
+ * Deduplicate citation sources by path, keeping the highest similarity score.
+ */
 function dedupeSourcesByPath(sources: AskAnkiSource[]): AskAnkiSource[] {
   const byPath = new Map<string, AskAnkiSource>();
   for (const source of sources) {
@@ -75,6 +97,9 @@ function dedupeSourcesByPath(sources: AskAnkiSource[]): AskAnkiSource[] {
   return [...byPath.values()].sort((a, b) => b.score - a.score);
 }
 
+/**
+ * Deduplicate chunks by id while preserving first-seen order.
+ */
 function dedupeChunksById(chunks: CorpusChunk[]): CorpusChunk[] {
   const seen = new Set<string>();
   const out: CorpusChunk[] = [];
@@ -86,6 +111,9 @@ function dedupeChunksById(chunks: CorpusChunk[]): CorpusChunk[] {
   return out;
 }
 
+/**
+ * Select up to `limit` retrieved chunks, optionally excluding the active file path.
+ */
 function selectRetrievedChunks(
   results: RetrievalResult[],
   activePath: string | undefined,
@@ -100,6 +128,11 @@ function selectRetrievedChunks(
   return chunks;
 }
 
+/**
+ * Build UI citation sources from active file and retrieval results.
+ *
+ * Pins the active file at score 1 when present and deduplicates by path.
+ */
 function buildSources(
   activeFile: AskAnkiRequest["activeFile"],
   results: RetrievalResult[]
@@ -131,6 +164,12 @@ function buildSources(
   return active ? [active, ...rest] : deduped;
 }
 
+/**
+ * Answer a portfolio question using retrieval-augmented local generation.
+ *
+ * Short-circuits empty input, metadata list queries, off-topic refusals, and
+ * missing WebGPU. Streams status/token callbacks when provided.
+ */
 export async function askAnki(
   input: string | AskAnkiRequest,
   callbacks?: AskAnkiCallbacks

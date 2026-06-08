@@ -1,11 +1,23 @@
 "use client";
 
+/**
+ * React hook for loading precomputed corpus embeddings for the active editor file.
+ *
+ * Fetches chunk vectors from the assistant index when enabled and cancels
+ * in-flight requests on path change or unmount.
+ */
+
 import { useEffect, useState } from "react";
 import {
   getFileChunkEmbeddings,
   type FileChunkEmbeddings,
 } from "@/lib/assistant/editorEmbeddings";
 
+/**
+ * Load `FileChunkEmbeddings` for a workspace file path.
+ *
+ * Returns `null` while loading, when disabled, or on fetch error.
+ */
 export function useEditorChunkEmbeddings(
   path: string,
   enabled: boolean

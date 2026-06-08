@@ -1,3 +1,10 @@
+/**
+ * Deictic phrase detection for questions that refer to the active editor file.
+ *
+ * Used to relax retrieval refusal thresholds and reduce supplemental global
+ * context when the visitor clearly means "this file" rather than the portfolio.
+ */
+
 /** Deictic phrases that refer to the active editor file, not the whole portfolio. */
 const ACTIVE_FILE_REFERENCE_PATTERNS: RegExp[] = [
   /\bhere\b/i,
@@ -28,6 +35,12 @@ const ACTIVE_FILE_REFERENCE_PATTERNS: RegExp[] = [
   /\bthis\b/i,
 ];
 
+/**
+ * Returns true when the question likely refers to the file open in the editor.
+ *
+ * Patterns are ordered from specific multi-word phrases to a final broad `\bthis\b`
+ * match; any single pattern hit is sufficient.
+ */
 export function isActiveFileReference(question: string): boolean {
   const q = question.trim();
   if (!q) return false;

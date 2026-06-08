@@ -1,3 +1,10 @@
+/**
+ * Pre-generation guardrails that refuse clearly off-topic questions.
+ *
+ * Runs after vector retrieval so "about me" and active-file questions can bypass
+ * low similarity scores when context is otherwise available.
+ */
+
 import { ASSISTANT_REFUSE_BELOW_SCORE } from "@/lib/assistant/config";
 import { isActiveFileReference } from "@/lib/assistant/activeFileReference";
 import { isAboutMeQuestion } from "@/lib/assistant/retrievalBoost";
@@ -18,21 +25,36 @@ const BLOCKLIST: RegExp[] = [
   /\bgeneric coding help\b/i,
 ];
 
+/**
+ * Returns true when the question matches a hard-coded off-topic blocklist pattern.
+ */
 export function isBlocklistedQuestion(question: string): boolean {
   const q = question.trim();
   if (!q) return true;
   return BLOCKLIST.some((pattern) => pattern.test(q));
 }
 
+/**
+ * Returns true when the top retrieval hit meets the minimum similarity threshold.
+ */
 export function isRelevantRetrieval(results: RetrievalResult[]): boolean {
   if (results.length === 0) return false;
   return results[0]!.score >= ASSISTANT_REFUSE_BELOW_SCORE;
 }
 
+/**
+ * Optional context passed to refusal logic for active-editor exceptions.
+ */
 export type RefuseQuestionOptions = {
   activeFile?: AskAnkiActiveFile;
 };
 
+/**
+ * Decide whether to refuse a question before calling Gemma.
+ *
+ * Refuses blocklisted questions and low-similarity retrieval unless the
+ * question is an about-me intro or deictically refers to the active file.
+ */
 export function shouldRefuseQuestion(
   question: string,
   results: RetrievalResult[],

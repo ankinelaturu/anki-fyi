@@ -1,3 +1,10 @@
+/**
+ * On-device embedding inference via Transformers.js (`@xenova/transformers`).
+ *
+ * Loads `Xenova/all-MiniLM-L6-v2` for query-time vectorization in the browser
+ * and during the offline `build:corpus` script in Node.
+ */
+
 import { EMBEDDING_MODEL } from "@/lib/assistant/config";
 import { normalizeVector } from "@/lib/assistant/math";
 
@@ -8,6 +15,12 @@ type FeatureExtractionPipeline = (
 
 let pipelinePromise: Promise<FeatureExtractionPipeline> | null = null;
 
+/**
+ * Configure the Transformers.js environment for browser vs Node execution.
+ *
+ * Models are always fetched from Hugging Face — local `/models` paths are
+ * disabled because weights are not bundled under `public/`.
+ */
 function configureTransformersEnv(env: {
   allowLocalModels: boolean;
   allowRemoteModels: boolean;
@@ -33,6 +46,11 @@ function configureTransformersEnv(env: {
   }
 }
 
+/**
+ * Eagerly download and warm the embedding pipeline.
+ *
+ * Reports progress through an optional callback suitable for terminal status lines.
+ */
 export async function loadEmbeddingModel(onProgress?: (message: string) => void): Promise<void> {
   onProgress?.(
     typeof window !== "undefined"
@@ -43,6 +61,9 @@ export async function loadEmbeddingModel(onProgress?: (message: string) => void)
   onProgress?.("Embedding model ready.");
 }
 
+/**
+ * Lazily create and memoize the feature-extraction pipeline singleton.
+ */
 async function getPipeline(): Promise<FeatureExtractionPipeline> {
   if (!pipelinePromise) {
     pipelinePromise = (async () => {
@@ -56,6 +77,9 @@ async function getPipeline(): Promise<FeatureExtractionPipeline> {
   return pipelinePromise;
 }
 
+/**
+ * Embed a single string and return a L2-normalized dense vector.
+ */
 export async function embedText(text: string): Promise<number[]> {
   const extractor = await getPipeline();
   const output = await extractor(text, { pooling: "mean", normalize: true });
@@ -63,11 +87,17 @@ export async function embedText(text: string): Promise<number[]> {
   return normalizeVector(data);
 }
 
+/**
+ * Minimal interface for code that needs load-once, embed-many semantics.
+ */
 export type EmbeddingProvider = {
   load(onProgress?: (message: string) => void): Promise<void>;
   embed(text: string): Promise<number[]>;
 };
 
+/**
+ * Factory for a stateful embedding provider that skips redundant loads.
+ */
 export function createEmbeddingProvider(): EmbeddingProvider {
   let loaded = false;
   return {

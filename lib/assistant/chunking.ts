@@ -1,3 +1,10 @@
+/**
+ * Markdown document chunking for the assistant corpus and live editor context.
+ *
+ * Splits workspace files into metadata + section chunks with size limits,
+ * filmstrip-specific day boundaries, and image stripping for cleaner embeddings.
+ */
+
 import { CHUNK_TARGET_MAX_WORDS } from "@/lib/assistant/config";
 import type { CorpusChunk, CorpusDocument } from "@/lib/assistant/types";
 
@@ -5,6 +12,9 @@ const DAY_HEADING_RE = /^##\s+Day\s+\d+/im;
 const IMAGE_LINE_RE = /!\[[^\]]*\]\([^)]+\)/g;
 const IMAGE_PATH_LINE_RE = /^.*\.(png|jpe?g|gif|webp|svg)(\?.*)?\s*$/im;
 
+/**
+ * Frontmatter and document fields carried into the metadata chunk body.
+ */
 export type DocumentChunkMetadata = {
   title: string;
   path: string;
@@ -24,6 +34,9 @@ export type DocumentChunkMetadata = {
   linksBlock?: string;
 };
 
+/**
+ * Input required to chunk a single markdown document into `CorpusChunk` records.
+ */
 export type ChunkDocumentInput = DocumentChunkMetadata & {
   id: string;
   content: string;
@@ -32,6 +45,9 @@ export type ChunkDocumentInput = DocumentChunkMetadata & {
 
 type Section = { heading: string; body: string };
 
+/**
+ * Remove YAML frontmatter delimiters and return the markdown body only.
+ */
 export function stripFrontmatterBody(raw: string): string {
   if (!raw.startsWith("---")) return raw;
   const end = raw.indexOf("---", 3);
@@ -39,6 +55,11 @@ export function stripFrontmatterBody(raw: string): string {
   return raw.slice(end + 3).replace(/^\s+/, "");
 }
 
+/**
+ * Strip image markdown and bare image path lines from chunk bodies.
+ *
+ * Collapses excessive blank lines so embeddings focus on textual content.
+ */
 export function sanitizeChunkBody(body: string): string {
   return body
     .split("\n")
@@ -49,10 +70,16 @@ export function sanitizeChunkBody(body: string): string {
     .trim();
 }
 
+/**
+ * Count whitespace-delimited words in a string.
+ */
 function countWords(text: string): number {
   return text.trim() ? text.trim().split(/\s+/).length : 0;
 }
 
+/**
+ * Split text at a word boundary, returning head and remainder segments.
+ */
 function takeWords(text: string, maxWords: number): { head: string; rest: string } {
   const words = text.trim().split(/\s+/);
   if (words.length <= maxWords) return { head: text.trim(), rest: "" };
@@ -61,7 +88,9 @@ function takeWords(text: string, maxWords: number): { head: string; rest: string
   return { head, rest };
 }
 
-/** Serialize frontmatter fields for the dedicated metadata chunk. */
+/**
+ * Serialize frontmatter fields into the dedicated metadata chunk body.
+ */
 export function formatMetadataChunkBody(meta: DocumentChunkMetadata): string {
   const lines: string[] = [
     `Title: ${meta.title}`,
@@ -87,6 +116,11 @@ export function formatMetadataChunkBody(meta: DocumentChunkMetadata): string {
   return lines.join("\n");
 }
 
+/**
+ * Split an oversized section into multiple parts at word boundaries.
+ *
+ * Continuation parts receive a `(continued)` suffix on the section heading.
+ */
 function splitLargeSection(section: Section, maxWords: number): Section[] {
   const words = countWords(section.body);
   if (words <= maxWords) return [section];
@@ -115,7 +149,11 @@ function splitLargeSection(section: Section, maxWords: number): Section[] {
   return parts;
 }
 
-/** `#` headings as separate chunks; `##` as separate chunks; `###+` nested under parent `##`. */
+/**
+ * Split markdown on `#` and `##` headings into section chunks.
+ *
+ * `###+` headings remain nested under their parent `##` section body.
+ */
 function splitNormalBodySections(markdown: string): Section[] {
   const body = sanitizeChunkBody(markdown);
   if (!body) return [];
@@ -149,7 +187,11 @@ function splitNormalBodySections(markdown: string): Section[] {
   return sections;
 }
 
-/** Filmstrip: split on `## Day N` (unchanged from prior behavior). */
+/**
+ * Split filmstrip markdown on `## Day N` headings.
+ *
+ * Falls back to normal heading splits when no day headings are detected.
+ */
 function splitFilmstripSections(markdown: string): Section[] {
   const body = sanitizeChunkBody(markdown);
   if (!body) return [];
@@ -170,6 +212,9 @@ function splitFilmstripSections(markdown: string): Section[] {
     .filter((section) => section.body.length > 0);
 }
 
+/**
+ * Format a chunk's searchable text with Title/Path/Section headers.
+ */
 function formatChunkText(
   title: string,
   path: string,
@@ -185,6 +230,9 @@ function formatChunkText(
   ].join("\n");
 }
 
+/**
+ * Choose filmstrip vs normal section splitting and apply max-word splitting.
+ */
 function buildBodySections(markdown: string, filmstrip: boolean): Section[] {
   const sections = filmstrip
     ? splitFilmstripSections(markdown)
@@ -193,6 +241,9 @@ function buildBodySections(markdown: string, filmstrip: boolean): Section[] {
   return sections.flatMap((section) => splitLargeSection(section, CHUNK_TARGET_MAX_WORDS));
 }
 
+/**
+ * Chunk one document into metadata + body sections ready for embedding.
+ */
 export function chunkDocument(doc: ChunkDocumentInput): CorpusChunk[] {
   const markdown = stripFrontmatterBody(doc.content);
   const filmstrip = doc.type === "filmstrip";
@@ -214,6 +265,11 @@ export function chunkDocument(doc: ChunkDocumentInput): CorpusChunk[] {
   }));
 }
 
+/**
+ * Build a full `CorpusDocument` with derived chunks from chunking input.
+ *
+ * Assigns document id from path and strips frontmatter from stored content.
+ */
 export function buildCorpusDocument(
   input: Omit<ChunkDocumentInput, "id"> & {
     tags: string[];

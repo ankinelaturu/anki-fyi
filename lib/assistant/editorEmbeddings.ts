@@ -1,3 +1,10 @@
+/**
+ * Corpus embedding lookup for the workspace embedding inspector.
+ *
+ * Loads precomputed vectors alongside chunk text and exposes per-file,
+ * per-section views for the semantic editor and visualization panels.
+ */
+
 import {
   ASSISTANT_CORPUS_URL,
   ASSISTANT_VECTORS_URL,
@@ -5,17 +12,26 @@ import {
 } from "@/lib/assistant/config";
 import type { CorpusChunk, CorpusFile, VectorsFile } from "@/lib/assistant/types";
 
+/**
+ * One chunk's embedding plus display metadata for the inspector UI.
+ */
 export type ChunkEmbeddingInfo = {
   chunkId: string;
   section: string;
   filePath: string;
   textLength: number;
-  /** Full corpus chunk text (Title/Path/Section header + body). */
+  /**
+   * Full corpus chunk text including Title/Path/Section header lines.
+   */
   text: string;
   embedding: number[];
 };
 
-/** Body markdown after corpus chunk header lines. */
+/**
+ * Strip the Title/Path/Section header prefix from formatted chunk text.
+ *
+ * Returns the markdown body used for editor display and stats.
+ */
 export function extractChunkBody(text: string): string {
   const lines = text.split("\n");
   let index = 0;
@@ -26,15 +42,23 @@ export function extractChunkBody(text: string): string {
   return lines.slice(index).join("\n").trim();
 }
 
+/**
+ * Index-level metadata shown in the embedding inspector footer.
+ */
 export type EmbeddingIndexMeta = {
   modelShortName: string;
   generatedAt: string;
 };
 
+/**
+ * All chunk embeddings for one workspace file, indexed by section key.
+ */
 export type FileChunkEmbeddings = {
   metadata: ChunkEmbeddingInfo | null;
   bySection: Map<string, ChunkEmbeddingInfo>;
-  /** Corpus chunks for this file in chunkIndex order (includes Metadata). */
+  /**
+   * Corpus chunks for this file in chunkIndex order (includes Metadata).
+   */
   ordered: ChunkEmbeddingInfo[];
   indexMeta: EmbeddingIndexMeta;
 };
@@ -44,24 +68,39 @@ let chunksByPath: Map<string, CorpusChunk[]> | null = null;
 let vectorsByChunkId: Map<string, number[]> | null = null;
 let indexMeta: EmbeddingIndexMeta | null = null;
 
+/**
+ * Normalize a section heading for case-insensitive map lookups.
+ */
 export function normalizeSectionKey(section: string): string {
   return section.trim().toLowerCase();
 }
 
+/**
+ * Return the short model name after the Hugging Face org prefix.
+ */
 export function embeddingModelShortName(model = EMBEDDING_MODEL): string {
   const slash = model.lastIndexOf("/");
   return slash >= 0 ? model.slice(slash + 1) : model;
 }
 
+/**
+ * Format an embedding vector as a compact bracketed string for tooltips.
+ */
 export function formatEmbeddingForTooltip(embedding: number[]): string {
   return `[${embedding.map((value) => value.toFixed(6)).join(", ")}]`;
 }
 
+/**
+ * Format one aligned floating-point value with fixed width for monospace display.
+ */
 function formatAlignedEmbeddingValue(value: number, precision: number): string {
   const sign = value < 0 ? "-" : " ";
   return sign + Math.abs(value).toFixed(precision);
 }
 
+/**
+ * Format an embedding as multiple lines of space-separated aligned values.
+ */
 export function formatEmbeddingLines(
   embedding: number[],
   valuesPerLine = 8,
@@ -77,6 +116,9 @@ export function formatEmbeddingLines(
   return lines.join("\n");
 }
 
+/**
+ * Map a corpus chunk and embedding array into `ChunkEmbeddingInfo`.
+ */
 function toChunkEmbeddingInfo(chunk: CorpusChunk, embedding: number[]): ChunkEmbeddingInfo {
   return {
     chunkId: chunk.id,
@@ -88,6 +130,9 @@ function toChunkEmbeddingInfo(chunk: CorpusChunk, embedding: number[]): ChunkEmb
   };
 }
 
+/**
+ * Fetch corpus + vectors and build in-memory path/chunk indexes.
+ */
 async function loadEditorEmbeddingIndex(): Promise<void> {
   const [corpusRes, vectorsRes] = await Promise.all([
     fetch(ASSISTANT_CORPUS_URL),
@@ -120,6 +165,9 @@ async function loadEditorEmbeddingIndex(): Promise<void> {
   }
 }
 
+/**
+ * Ensure the editor embedding index is loaded once per session.
+ */
 export async function ensureEditorEmbeddingIndex(): Promise<void> {
   if (!indexPromise) {
     indexPromise = loadEditorEmbeddingIndex();
@@ -127,6 +175,12 @@ export async function ensureEditorEmbeddingIndex(): Promise<void> {
   await indexPromise;
 }
 
+/**
+ * Return all chunk embeddings for a workspace file path.
+ *
+ * Chunks without a matching vector entry are omitted. Results are sorted by
+ * `chunkIndex` with a separate metadata entry when present.
+ */
 export async function getFileChunkEmbeddings(path: string): Promise<FileChunkEmbeddings> {
   await ensureEditorEmbeddingIndex();
 

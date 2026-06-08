@@ -1,0 +1,63 @@
+---
+description: Require multiline TSDoc on new TypeScript exports and important blocks
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# TSDoc for new TypeScript code
+
+When adding or materially extending TypeScript code, add **multiline TSDoc** (`/** … */`). Do not use single-line `/** one line */` comments.
+
+## What to document
+
+Add TSDoc for:
+
+- Modules (file-level, before imports or after imports as a block comment at top)
+- Exported functions, classes, types, interfaces, and constants
+- Non-exported helpers that encode non-obvious business logic
+- React components and custom hooks that are exported or reused
+
+Skip TSDoc for:
+
+- Trivial one-liners whose name and signature are self-explanatory
+- Pure re-exports with no added behavior
+- Test-only scaffolding unless it clarifies a complex setup
+
+## Style
+
+- Use complete sentences; explain **why** and **when**, not just **what**
+- Use `@param`, `@returns`, and `@throws` when they add clarity
+- Keep comments accurate—update TSDoc when behavior changes
+- Match the tone and depth of existing docs in `lib/assistant/`
+
+## Examples
+
+```typescript
+// ❌ BAD — single-line
+/** Load the corpus. */
+export async function loadCorpus(): Promise<CorpusFile> { … }
+
+// ❌ BAD — no docs on a new exported API
+export function searchSimilar(question: string): Promise<RetrievalResult[]> { … }
+
+// ✅ GOOD — multiline module + export
+/**
+ * In-browser vector index for Ask Anki retrieval.
+ *
+ * Joins precomputed corpus embeddings with live query embeddings.
+ */
+
+/**
+ * Embed the question, score indexed chunks, and return the top-K results.
+ */
+export async function searchSimilar(
+  question: string,
+  topK?: number
+): Promise<RetrievalResult[]> { … }
+```
+
+## When editing existing files
+
+- New exports: add TSDoc in the same change
+- Significantly changed behavior: update existing TSDoc
+- Do not add drive-by TSDoc-only refactors unless asked

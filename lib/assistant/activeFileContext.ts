@@ -1,3 +1,10 @@
+/**
+ * Active editor file context for Ask Anki.
+ *
+ * Chunks live editor content on the fly (mirroring corpus chunking rules) and
+ * maps workspace `ContentFile` records into the `AskAnkiActiveFile` shape.
+ */
+
 import { chunkDocument } from "@/lib/assistant/chunking";
 import { formatLinksBlockFromDocumentLinks } from "@/lib/assistant/documentLinks";
 import { GEMMA_ACTIVE_FILE_MAX_CHUNKS, FILMSTRIP_ACTIVE_DAY_CHUNKS } from "@/lib/assistant/config";
@@ -5,15 +12,26 @@ import type { AskAnkiActiveFile } from "@/lib/assistant/types";
 import type { CorpusChunk } from "@/lib/assistant/types";
 import type { ContentFile } from "@/lib/content-types";
 
+/**
+ * Derive a stable document id from a workspace-relative markdown path.
+ */
 function documentIdFromPath(path: string): string {
   return path.replace(/\.md$/, "");
 }
 
+/**
+ * Returns true for filmstrip day section headings like "Day 12".
+ */
 function isFilmstripDaySection(section: string): boolean {
   return /^day\s+\d+/i.test(section);
 }
 
-/** Chunk the active editor file for pinned prompt context. */
+/**
+ * Chunk the active editor file for pinned Gemma prompt context.
+ *
+ * For filmstrips, includes metadata plus the first N day sections. For other
+ * documents, takes the first `GEMMA_ACTIVE_FILE_MAX_CHUNKS` chunks in order.
+ */
 export function buildActiveFileChunks(activeFile: AskAnkiActiveFile): CorpusChunk[] {
   const id = documentIdFromPath(activeFile.path);
   const chunks = chunkDocument({
@@ -48,6 +66,9 @@ export function buildActiveFileChunks(activeFile: AskAnkiActiveFile): CorpusChun
   return chunks.slice(0, GEMMA_ACTIVE_FILE_MAX_CHUNKS);
 }
 
+/**
+ * Convert a workspace `ContentFile` into the shape expected by `askAnki`.
+ */
 export function toAskAnkiActiveFile(file: ContentFile): AskAnkiActiveFile {
   return {
     slug: file.slug,

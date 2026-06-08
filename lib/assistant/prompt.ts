@@ -1,12 +1,31 @@
+/**
+ * Prompt templates and context assembly for Ask Anki / local Gemma.
+ *
+ * Formats retrieved corpus chunks into bounded TEXT blocks, builds hybrid
+ * active-file + retrieval context, and defines the system persona rules.
+ */
+
 import { MAX_CHUNK_BODY_CHARS, MAX_CONTEXT_CHARS } from "@/lib/assistant/config";
 import type { CorpusChunk } from "@/lib/assistant/types";
 
+/**
+ * Exact fallback reply when the model cannot ground an answer in provided TEXT.
+ */
 export const ANKI_MISSING_INFO_REPLY = "I don't have that in my portfolio yet.";
 
+/**
+ * System-prompt addendum when an active editor file is included in context.
+ *
+ * Instructs the model to treat deictic references ("this", "here") as the
+ * open file and to prefer that content over supplemental retrieval.
+ */
 export const ASK_ANKI_ACTIVE_FILE_ADDENDUM = `When ACTIVE EDITOR FILE is provided, treat it as the visitor's current working context.
 If the visitor says "this", "here", "this project", "this role", "this file", or similar, interpret it as referring to the active editor file.
 Use the active editor file as the primary source, and use retrieved workspace context only to supplement or connect related details.`;
 
+/**
+ * Base system prompt defining Ask Anki's persona, grounding rules, and style.
+ */
 export const ASK_ANKI_SYSTEM_PROMPT = `You are Ask Anki, a local portfolio assistant running inside anki.fyi.
 You speak as Anki Nelaturu in first person.
 Use "I", "my", and "me" when describing the portfolio owner.
@@ -37,11 +56,17 @@ Answer style:
 - Do not invent URLs that are not present in the TEXT.
 - If there are multiple relevant areas, connect them clearly but do not overstate the connection.`;
 
+/**
+ * Truncate chunk body text to a maximum character length with an ellipsis marker.
+ */
 function truncateChunkBody(text: string, maxChars: number): string {
   if (text.length <= maxChars) return text;
   return `${text.slice(0, maxChars)}\n...[truncated]`;
 }
 
+/**
+ * Format one corpus chunk as a labeled SOURCE block for the user prompt.
+ */
 function formatSourceBlock(chunk: CorpusChunk): string {
   const body = truncateChunkBody(chunk.text, MAX_CHUNK_BODY_CHARS);
   return [
@@ -53,6 +78,12 @@ function formatSourceBlock(chunk: CorpusChunk): string {
   ].join("\n");
 }
 
+/**
+ * Append chunk source blocks until the combined character budget is exhausted.
+ *
+ * Returns the total character count after appending (may equal `maxChars` when
+ * truncated mid-block).
+ */
 function appendBlocksWithinBudget(
   blocks: string[],
   chunks: CorpusChunk[],
@@ -77,12 +108,24 @@ function appendBlocksWithinBudget(
   return total;
 }
 
+/**
+ * Build retrieval-only context from an ordered list of chunks.
+ *
+ * Respects `MAX_CONTEXT_CHARS` by truncating or dropping tail chunks.
+ */
 export function buildContextFromChunks(chunks: CorpusChunk[]): string {
   const blocks: string[] = [];
   appendBlocksWithinBudget(blocks, chunks, MAX_CONTEXT_CHARS);
   return blocks.join("\n\n");
 }
 
+/**
+ * Build hybrid context with separate budgets for active-file and retrieved chunks.
+ *
+ * Allocates ~55% of `MAX_CONTEXT_CHARS` to the active editor file and the
+ * remainder to supplemental workspace retrieval. Sections are labeled so the
+ * model can distinguish pinned vs retrieved content.
+ */
 export function buildHybridContext(
   activeChunks: CorpusChunk[],
   retrievedChunks: CorpusChunk[]
@@ -111,6 +154,12 @@ export function buildHybridContext(
   return parts.join("\n\n");
 }
 
+/**
+ * Assemble the Gemma user message from context and the visitor question.
+ *
+ * Chooses "CONTEXT" vs "PORTFOLIO CONTEXT" label based on hybrid layout and
+ * reiterates grounding and missing-info rules inline.
+ */
 export function buildUserPrompt(question: string, context: string): string {
   const contextLabel = context.includes("ACTIVE EDITOR FILE:")
     ? "CONTEXT"
@@ -119,6 +168,9 @@ export function buildUserPrompt(question: string, context: string): string {
   return `${contextLabel}:\n\n${context}\n\nVISITOR QUESTION:\n${question}\n\nWrite the answer as Anki in first person. Use only facts present inside the TEXT sections above. Do not infer facts from filenames or source paths. Do not include URLs in your reply. If the TEXT does not support an answer, reply exactly: ${ANKI_MISSING_INFO_REPLY}`;
 }
 
+/**
+ * Return the full system prompt, optionally including the active-file addendum.
+ */
 export function buildAskAnkiSystemPrompt(hasActiveFile: boolean): string {
   if (!hasActiveFile) return ASK_ANKI_SYSTEM_PROMPT;
   return `${ASK_ANKI_SYSTEM_PROMPT}\n\n${ASK_ANKI_ACTIVE_FILE_ADDENDUM}`;

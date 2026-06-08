@@ -1,3 +1,10 @@
+/**
+ * Local Gemma chat model provider backed by WebLLM (`@mlc-ai/web-llm`).
+ *
+ * Handles model fallback selection, weight download progress, and streaming
+ * token generation within the browser's WebGPU runtime.
+ */
+
 import {
   GEMMA_LOAD_ERROR_HEADING,
   GEMMA_MAX_NEW_TOKENS,
@@ -5,12 +12,18 @@ import {
 } from "@/lib/assistant/config";
 import { ASK_ANKI_SYSTEM_PROMPT, buildUserPrompt } from "@/lib/assistant/prompt";
 
+/**
+ * Inputs assembled by `askAnki` for a single generation turn.
+ */
 export type LocalModelInput = {
   system: string;
   question: string;
   context: string;
 };
 
+/**
+ * Abstraction over a locally loaded chat model with streaming support.
+ */
 export type LocalChatModel = {
   load(onProgress?: (message: string) => void): Promise<void>;
   generate(
@@ -22,10 +35,16 @@ export type LocalChatModel = {
 
 type WebLLMModule = typeof import("@mlc-ai/web-llm");
 
+/**
+ * Case-insensitive check that a WebLLM model id refers to Gemma.
+ */
 function isGemmaModelId(modelId: string): boolean {
   return modelId.toLowerCase().includes("gemma");
 }
 
+/**
+ * List all Gemma model ids advertised in the WebLLM prebuilt app config.
+ */
 function listGemmaModelIds(webllm: WebLLMModule): string[] {
   const config = webllm.prebuiltAppConfig;
   return config.model_list
@@ -33,6 +52,12 @@ function listGemmaModelIds(webllm: WebLLMModule): string[] {
     .filter((id) => isGemmaModelId(id));
 }
 
+/**
+ * Build an ordered fallback chain intersecting config preferences with availability.
+ *
+ * Falls back to the shortest low-resource Gemma ids if none of the preferred
+ * chain entries are present. Throws if no Gemma model exists at all.
+ */
 function buildFallbackChain(webllm: WebLLMModule): string[] {
   const available = new Set(listGemmaModelIds(webllm));
   const ordered: string[] = [];
@@ -54,6 +79,12 @@ function buildFallbackChain(webllm: WebLLMModule): string[] {
   );
 }
 
+/**
+ * Create a singleton-style Gemma WebLLM provider for Ask Anki.
+ *
+ * Tries each candidate model id in the fallback chain on load failure.
+ * Generation resets chat state, streams tokens, and trims the final string.
+ */
 export function createGemmaWebLLMProvider(): LocalChatModel {
   let engine: import("@mlc-ai/web-llm").MLCEngineInterface | null = null;
   let loadedModelId: string | null = null;

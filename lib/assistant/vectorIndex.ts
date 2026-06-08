@@ -1,3 +1,10 @@
+/**
+ * In-browser vector index for Ask Anki retrieval.
+ *
+ * Joins precomputed corpus chunk embeddings with live query embeddings,
+ * ranks by cosine similarity, and applies intent-based retrieval boosts.
+ */
+
 import { ASSISTANT_CORPUS_URL, ASSISTANT_TOP_K, ASSISTANT_VECTORS_URL } from "@/lib/assistant/config";
 import { createEmbeddingProvider } from "@/lib/assistant/embeddings";
 import { cosineSimilarity } from "@/lib/assistant/math";
@@ -15,6 +22,11 @@ const embeddingProvider = createEmbeddingProvider();
 let indexPromise: Promise<IndexedChunk[]> | null = null;
 let corpusHash: string | null = null;
 
+/**
+ * Fetch corpus and vectors JSON, verify hash alignment, and build indexed chunks.
+ *
+ * @throws On fetch failure, hash mismatch, or an empty index.
+ */
 async function loadIndexedChunks(): Promise<IndexedChunk[]> {
   const [corpusRes, vectorsRes] = await Promise.all([
     fetch(ASSISTANT_CORPUS_URL),
@@ -49,6 +61,9 @@ async function loadIndexedChunks(): Promise<IndexedChunk[]> {
   return indexed;
 }
 
+/**
+ * Ensure the vector index is loaded exactly once per page session.
+ */
 export async function ensureVectorIndex(): Promise<IndexedChunk[]> {
   if (!indexPromise) {
     indexPromise = loadIndexedChunks();
@@ -56,10 +71,18 @@ export async function ensureVectorIndex(): Promise<IndexedChunk[]> {
   return indexPromise;
 }
 
+/**
+ * Return the corpus content hash from the last successful index load, if any.
+ */
 export function getCorpusHash(): string | null {
   return corpusHash;
 }
 
+/**
+ * Embed the question, score all indexed chunks, and return the top-K results.
+ *
+ * Applies retrieval boosts (e.g. pinning about-me sources) before truncating.
+ */
 export async function searchSimilar(
   question: string,
   topK: number = ASSISTANT_TOP_K,
