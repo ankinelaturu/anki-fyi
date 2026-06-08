@@ -7,6 +7,7 @@
 
 import { chunkDocument } from "@/lib/assistant/chunking";
 import { formatLinksBlockFromDocumentLinks } from "@/lib/assistant/documentLinks";
+import { parseCorpusFrontMatter } from "@/lib/assistant/frontMatter";
 import { GEMMA_ACTIVE_FILE_MAX_CHUNKS, FILMSTRIP_ACTIVE_DAY_CHUNKS } from "@/lib/assistant/config";
 import type { AskAnkiActiveFile } from "@/lib/assistant/types";
 import type { CorpusChunk } from "@/lib/assistant/types";
@@ -34,11 +35,34 @@ function isFilmstripDaySection(section: string): boolean {
  */
 export function buildActiveFileChunks(activeFile: AskAnkiActiveFile): CorpusChunk[] {
   const id = documentIdFromPath(activeFile.path);
+  const folder = activeFile.path.includes("/") ? activeFile.path.split("/")[0]! : "about";
+  const frontMatter = parseCorpusFrontMatter(
+    {
+      title: activeFile.title,
+      kind: activeFile.kind,
+      summary: activeFile.summary,
+      elevator_pitch: activeFile.elevatorPitch,
+      tags: activeFile.tags,
+      technologies: activeFile.technologies,
+      company: activeFile.company,
+      role: activeFile.role,
+      start_date: activeFile.startDate,
+      end_date: activeFile.endDate,
+      year: activeFile.year,
+      status: activeFile.status,
+      type: activeFile.type,
+    },
+    {
+      relativePath: activeFile.path,
+      folder,
+      fallbackTitle: activeFile.title,
+    }
+  );
   const chunks = chunkDocument({
     id,
     path: activeFile.path,
     title: activeFile.title,
-    kind: activeFile.kind ?? "document",
+    kind: activeFile.kind ?? frontMatter.kind,
     content: activeFile.content,
     type: activeFile.type,
     summary: activeFile.summary,
@@ -52,6 +76,7 @@ export function buildActiveFileChunks(activeFile: AskAnkiActiveFile): CorpusChun
     year: activeFile.year,
     status: activeFile.status,
     linksBlock: activeFile.linksBlock,
+    frontMatter,
   });
 
   if (activeFile.type === "filmstrip") {

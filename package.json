@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:corpus": "tsx scripts/build-corpus.ts",
+    "derive:frontmatter-schema": "tsx scripts/derive-frontmatter-schema.ts",
+    "build:corpus": "pnpm derive:frontmatter-schema && tsx scripts/build-corpus.ts",
     "test:structured-intents": "tsx scripts/test-structured-intents.ts",
+    "test:metadata-evaluate": "tsx scripts/test-metadata-query-evaluate.ts",
     "build": "pnpm build:corpus && next build",
     "start": "next start",
     "lint": "next lint"

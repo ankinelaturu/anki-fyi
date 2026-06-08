@@ -6,6 +6,10 @@
  */
 
 import { CHUNK_TARGET_MAX_WORDS } from "@/lib/assistant/config";
+import {
+  formatFrontMatterForChunk,
+  type CorpusFrontMatter,
+} from "@/lib/assistant/frontMatter";
 import type { CorpusChunk, CorpusDocument } from "@/lib/assistant/types";
 
 const DAY_HEADING_RE = /^##\s+Day\s+\d+/im;
@@ -41,6 +45,7 @@ export type ChunkDocumentInput = DocumentChunkMetadata & {
   id: string;
   content: string;
   type?: string;
+  frontMatter: CorpusFrontMatter;
 };
 
 type Section = { heading: string; body: string };
@@ -248,7 +253,7 @@ export function chunkDocument(doc: ChunkDocumentInput): CorpusChunk[] {
   const markdown = stripFrontmatterBody(doc.content);
   const filmstrip = doc.type === "filmstrip";
 
-  const metadataBody = formatMetadataChunkBody(doc);
+  const metadataBody = formatFrontMatterForChunk(doc.frontMatter, doc.path, doc.linksBlock);
   const sections: Section[] = [{ heading: "Metadata", body: metadataBody }];
 
   sections.push(...buildBodySections(markdown, filmstrip));
@@ -281,17 +286,20 @@ export function buildCorpusDocument(
   return {
     id,
     path: input.path,
-    title: input.title,
-    kind: input.kind,
-    summary: input.summary,
-    elevatorPitch: input.elevatorPitch,
-    order: typeof input.order === "number" ? input.order : undefined,
-    importance: typeof input.importance === "string" ? input.importance : undefined,
-    startDate: input.startDate,
-    company: input.company,
-    technologies: input.technologies?.length ? input.technologies : undefined,
-    type: input.type,
-    tags: input.tags,
+    title: input.frontMatter.title,
+    kind: input.frontMatter.kind,
+    frontMatter: input.frontMatter,
+    summary: input.frontMatter.summary,
+    elevatorPitch: input.frontMatter.elevatorPitch,
+    order: input.frontMatter.order,
+    importance: input.frontMatter.importance,
+    startDate: input.frontMatter.startDate,
+    company: input.frontMatter.company,
+    technologies: input.frontMatter.technologies.length
+      ? input.frontMatter.technologies
+      : undefined,
+    type: input.frontMatter.type,
+    tags: input.frontMatter.tags,
     content: stripFrontmatterBody(input.content),
     chunks,
   };

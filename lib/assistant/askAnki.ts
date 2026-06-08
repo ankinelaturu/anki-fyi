@@ -34,7 +34,8 @@ import type {
   RetrievalResult,
 } from "@/lib/assistant/types";
 import { loadCorpus } from "@/lib/assistant/corpus";
-import { answerMetadataQuery, parseMetadataQuery } from "@/lib/assistant/metadataQuery";
+import { answerMetadataQuery } from "@/lib/assistant/metadataQuery";
+import { planMetadataQuery } from "@/lib/assistant/plannerLLM";
 import { ensureVectorIndex, searchSimilar } from "@/lib/assistant/vectorIndex";
 import { isWebGPUAvailable } from "@/lib/assistant/webgpu";
 
@@ -186,7 +187,7 @@ export async function askAnki(
   callbacks?.onStatus?.("Loading corpus...");
   const corpus = await loadCorpus();
 
-  const metadataQuery = parseMetadataQuery(q, corpus);
+  const metadataQuery = await planMetadataQuery(q, corpus, callbacks);
   if (metadataQuery.action !== "none") {
     callbacks?.onStatus?.("Answering from workspace metadata...");
     return answerMetadataQuery(metadataQuery, corpus);

@@ -1,13 +1,28 @@
 {
   "version": 1,
-  "corpusHash": "0d163e9df2aeee27",
-  "generatedAt": "2026-06-08T00:26:38.935Z",
+  "corpusHash": "b88293b65ba9b1fb",
+  "generatedAt": "2026-06-08T01:24:11.663Z",
   "documents": [
     {
       "id": "about/about-anki",
       "path": "about/about-anki.md",
       "title": "About Anki",
       "kind": "profile",
+      "frontMatter": {
+        "title": "About Anki",
+        "kind": "profile",
+        "category": "ABOUT",
+        "summary": "Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.",
+        "order": 1,
+        "tags": [
+          "AI orchestration",
+          "developer platforms",
+          "TypeScript",
+          "runtime systems"
+        ],
+        "technologies": [],
+        "icon": "user"
+      },
       "summary": "Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.",
       "order": 1,
       "tags": [
@@ -25,7 +40,7 @@
           "title": "About Anki",
           "kind": "profile",
           "section": "Metadata",
-          "text": "Title: About Anki\nPath: about/about-anki.md\nSection: Metadata\n\nTitle: About Anki\nPath: about/about-anki.md\nKind: profile\nSummary: Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.\nTags: AI orchestration, developer platforms, TypeScript, runtime systems",
+          "text": "Title: About Anki\nPath: about/about-anki.md\nSection: Metadata\n\nTitle: About Anki\nPath: about/about-anki.md\nKind: profile\nCategory: ABOUT\nSummary: Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.\nOrder: 1\nTags: AI orchestration, developer platforms, TypeScript, runtime systems\nIcon: user",
           "chunkIndex": 0
         },
         {
@@ -75,6 +90,20 @@
       "path": "about/contact.md",
       "title": "Contact",
       "kind": "profile",
+      "frontMatter": {
+        "title": "Contact",
+        "kind": "profile",
+        "category": "ABOUT",
+        "summary": "Ways to reach Anki for collaboration, consulting, and professional inquiries.",
+        "order": 3,
+        "tags": [
+          "contact",
+          "LinkedIn",
+          "email"
+        ],
+        "technologies": [],
+        "icon": "mail"
+      },
       "summary": "Ways to reach Anki for collaboration, consulting, and professional inquiries.",
       "order": 3,
       "tags": [
@@ -91,7 +120,7 @@
           "title": "Contact",
           "kind": "profile",
           "section": "Metadata",
-          "text": "Title: Contact\nPath: about/contact.md\nSection: Metadata\n\nTitle: Contact\nPath: about/contact.md\nKind: profile\nSummary: Ways to reach Anki for collaboration, consulting, and professional inquiries.\nTags: contact, LinkedIn, email",
+          "text": "Title: Contact\nPath: about/contact.md\nSection: Metadata\n\nTitle: Contact\nPath: about/contact.md\nKind: profile\nCategory: ABOUT\nSummary: Ways to reach Anki for collaboration, consulting, and professional inquiries.\nOrder: 3\nTags: contact, LinkedIn, email\nIcon: mail",
           "chunkIndex": 0
         },
         {
@@ -120,7 +149,13 @@
       "id": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
+      "frontMatter": {
+        "title": "resume",
+        "kind": "profile",
+        "tags": [],
+        "technologies": []
+      },
       "tags": [],
       "content": "# Resume\n\n## Anki Nelaturu\n\n**Santa Clara, CA**  \n(408) 431-3061  \nanki.r.nelaturu@gmail.com  \nlinkedin.com/in/ankinelaturu\n\n### Principal AI Product Engineer | AI Orchestration, Agentic Workflows & Developer Platforms\n\nPrincipal engineer specializing in AI-native orchestration systems, developer platforms, and runtime workflows. Over 20 years building scalable execution platforms, developer tooling, embedded runtimes, and enterprise application platforms. Recent focus includes AI-assisted engineering workflows, local-first AI systems, retrieval pipelines, semantic orchestration, and human-in-the-loop execution models.\n\n---\n\n## Skills\n\n- AI orchestration workflows\n- Agentic systems\n- LLM APIs\n- Function calling\n- Retrieval workflows\n- Embeddings\n- TypeScript\n- JavaScript (ES6+)\n- React\n- Next.js\n- Node.js\n- Runtime systems\n- Asynchronous execution\n- Execution pipelines\n- WebSockets\n- ONNX\n- REST APIs\n- CI/CD\n- Babel\n- Rollup\n- Jasmine\n- Karma\n\n---\n\n## Selected Projects\n\n### Storybook Arcade (Once Upon a GPT)\nhttps://youtu.be/ZOrma2xMTy8\n\nEngineered a multimodal orchestration pipeline combining LLM reasoning, image generation, and text-to-speech systems into synchronized story-generation workflows with streaming execution and low-latency feedback.\n\n---\n\n## Professional Experience\n\n### Independent Product Engineer — AI Systems & Developer Tools\n**Oct 2025 – Present**\n\nBuilt AI-driven systems across developer tooling, learning orchestration, and content workflows, emphasizing low-latency execution, streaming interactions, and iterative human-in-the-loop refinement.\n\n#### OzMap\nhttps://ozmap.app\n\nArchitected a graph-based learning orchestration system enabling dynamic topic generation, branching exploration paths, and synchronized execution state across interactive sessions.\n\n#### Lintern\nhttps://lintern.app\n\nBuilt a local-first data inspection system for AI workflows using heuristic and embedding-based semantic detection pipelines to identify sensitive information with low-latency, in-browser execution.\n\n#### Crafticle\nhttps://crafticle.app\n\nBuilt an AI-assisted content orchestration system enabling structured idea extraction, transformation pipelines, and iterative human-guided article composition.\n\n---\n\n### Oracle\n\n#### Consulting Member of Technical Staff\n**Sep 2024 – Sep 2025**\n\n**Technical Lead – TypeScript Enablement & Generative AI Integration (Oracle Visual Builder)**\n\n- Led end-to-end TypeScript enablement across runtime, build systems, and tooling.\n- Built an LLM-driven orchestration engine using function-calling APIs to synthesize deterministic multi-step action sequences from natural language instructions.\n- Built an on-the-fly Babel transpilation pipeline and integrated Jasmine/Karma testing into CI workflows.\n\n#### Principal Member of Technical Staff\n**Jul 2018 – Aug 2024**\n\n**Technical Lead – Visual Builder Design-Time & Action Chain Framework**\n\n- Led a team of 4–5 engineers delivering core Oracle Visual Builder platform features.\n- Architected a runtime execution framework and dependency-driven orchestration graph for asynchronous workflows.\n- Contributed across frontend and server-side components.\n- Partnered with Product and UX teams to improve developer productivity.\n- Established architectural guidelines and conducted code reviews.\n\n#### Principal Member of Technical Staff\n**Dec 2013 – Jul 2018**\n\n**Architect – Oracle Mobile Application Framework (MAF)**\n\n- Contributed to architecture and development of a cross-platform mobile framework supporting iOS, Android, and Windows.\n- Led migration to Java 8 and modern runtime integrations.\n- Designed runtime components across Java, C/C++, and native mobile layers.\n- Presented at JavaOne and Oracle OpenWorld.\n\n#### Principal Member of Technical Staff\n**Feb 2011 – Dec 2013**\n\n- Contributed to Java Embedded Suite (JES).\n- Designed and developed REST services and runtime components for embedded and distributed IoT environments.\n\n---\n\n### Sun Microsystems\n\n#### Principal Member of Technical Staff\n**Jan 2004 – Feb 2011**\n\n- Contributed to resource-constrained JVM runtime systems.\n- Focused on synchronization, execution performance, portability, and secure embedded execution.\n- Delivered technical sessions and workshops at JavaOne.\n\n---\n\n## Education\n\n### Master of Science, Computer Science\n**1999**\n\nNational Institute of Electronics & Information Technology (NIELIT), India\n\n---\n\n## Patents\n\n- US10198279B2 — Thread synchronization for platform neutrality\n- US8978023 — Virtual channel for embedded process communication\n- US8863126 — Canonical mechanism for securely assembling features into a mobile application\n- US8856805 — Java virtual machine embedded in a native mobile application",
       "chunks": [
@@ -129,9 +164,9 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Metadata",
-          "text": "Title: resume\nPath: about/resume.md\nSection: Metadata\n\nTitle: resume\nPath: about/resume.md\nKind: about",
+          "text": "Title: resume\nPath: about/resume.md\nSection: Metadata\n\nTitle: resume\nPath: about/resume.md\nKind: profile",
           "chunkIndex": 0
         },
         {
@@ -139,7 +174,7 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Anki Nelaturu",
           "text": "Title: resume\nPath: about/resume.md\nSection: Anki Nelaturu\n\n**Santa Clara, CA**  \n(408) 431-3061  \nanki.r.nelaturu@gmail.com  \nlinkedin.com/in/ankinelaturu\n\n### Principal AI Product Engineer | AI Orchestration, Agentic Workflows & Developer Platforms\n\nPrincipal engineer specializing in AI-native orchestration systems, developer platforms, and runtime workflows. Over 20 years building scalable execution platforms, developer tooling, embedded runtimes, and enterprise application platforms. Recent focus includes AI-assisted engineering workflows, local-first AI systems, retrieval pipelines, semantic orchestration, and human-in-the-loop execution models.\n\n---",
           "chunkIndex": 1
@@ -149,7 +184,7 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Skills",
           "text": "Title: resume\nPath: about/resume.md\nSection: Skills\n\n- AI orchestration workflows\n- Agentic systems\n- LLM APIs\n- Function calling\n- Retrieval workflows\n- Embeddings\n- TypeScript\n- JavaScript (ES6+)\n- React\n- Next.js\n- Node.js\n- Runtime systems\n- Asynchronous execution\n- Execution pipelines\n- WebSockets\n- ONNX\n- REST APIs\n- CI/CD\n- Babel\n- Rollup\n- Jasmine\n- Karma\n\n---",
           "chunkIndex": 2
@@ -159,7 +194,7 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Selected Projects",
           "text": "Title: resume\nPath: about/resume.md\nSection: Selected Projects\n\n### Storybook Arcade (Once Upon a GPT)\nhttps://youtu.be/ZOrma2xMTy8\n\nEngineered a multimodal orchestration pipeline combining LLM reasoning, image generation, and text-to-speech systems into synchronized story-generation workflows with streaming execution and low-latency feedback.\n\n---",
           "chunkIndex": 3
@@ -169,7 +204,7 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Professional Experience",
           "text": "Title: resume\nPath: about/resume.md\nSection: Professional Experience\n\n### Independent Product Engineer — AI Systems & Developer Tools\n**Oct 2025 – Present**\n\nBuilt AI-driven systems across developer tooling, learning orchestration, and content workflows, emphasizing low-latency execution, streaming interactions, and iterative human-in-the-loop refinement.\n\n#### OzMap\nhttps://ozmap.app\n\nArchitected a graph-based learning orchestration system enabling dynamic topic generation, branching exploration paths, and synchronized execution state across interactive sessions.\n\n#### Lintern\nhttps://lintern.app\n\nBuilt a local-first data inspection system for AI workflows using heuristic and embedding-based semantic detection pipelines to identify sensitive information with low-latency, in-browser execution.\n\n#### Crafticle\nhttps://crafticle.app\n\nBuilt an AI-assisted content orchestration system enabling structured idea extraction, transformation pipelines, and iterative human-guided article composition.\n\n---\n\n### Oracle\n\n#### Consulting Member of Technical Staff\n**Sep 2024 – Sep 2025**\n\n**Technical Lead – TypeScript Enablement & Generative AI Integration (Oracle Visual Builder)**\n\n- Led end-to-end TypeScript enablement across runtime, build systems, and tooling.\n- Built an LLM-driven orchestration engine using function-calling APIs to synthesize deterministic multi-step action sequences from natural language instructions.\n- Built an on-the-fly Babel transpilation pipeline and integrated Jasmine/Karma testing into CI workflows.\n\n#### Principal Member of Technical Staff\n**Jul 2018 – Aug 2024**\n\n**Technical Lead – Visual Builder Design-Time & Action Chain Framework**\n\n- Led a team of 4–5 engineers delivering core Oracle Visual Builder platform features.\n- Architected a runtime execution framework and dependency-driven orchestration graph for asynchronous workflows.\n- Contributed across frontend and server-side components.\n- Partnered with Product and UX teams to improve developer productivity.\n- Established architectural guidelines and conducted code reviews.\n\n#### Principal Member of Technical Staff\n**Dec 2013 – Jul 2018**\n\n**Architect – Oracle Mobile Application Framework (MAF)**\n\n- Contributed to architecture and development of a cross-platform mobile framework supporting iOS, Android, and Windows.\n- Led migration to Java 8 and modern runtime integrations.\n- Designed runtime components across Java, C/C++, and native mobile layers.\n- Presented at JavaOne and Oracle OpenWorld.\n\n#### Principal Member of Technical Staff\n**Feb 2011 – Dec 2013**\n\n- Contributed to Java Embedded Suite (JES).\n- Designed and developed REST services and runtime components for embedded and distributed IoT environments.\n\n---\n\n### Sun Microsystems\n\n#### Principal Member of Technical Staff\n**Jan 2004 – Feb 2011**\n\n- Contributed to resource-constrained JVM runtime systems.\n- Focused on synchronization, execution performance, portability, and secure embedded execution.\n- Delivered technical sessions and workshops at JavaOne.\n\n---",
           "chunkIndex": 4
@@ -179,7 +214,7 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Education",
           "text": "Title: resume\nPath: about/resume.md\nSection: Education\n\n### Master of Science, Computer Science\n**1999**\n\nNational Institute of Electronics & Information Technology (NIELIT), India\n\n---",
           "chunkIndex": 5
@@ -189,7 +224,7 @@
           "documentId": "about/resume",
           "path": "about/resume.md",
           "title": "resume",
-          "kind": "about",
+          "kind": "profile",
           "section": "Patents",
           "text": "Title: resume\nPath: about/resume.md\nSection: Patents\n\n- US10198279B2 — Thread synchronization for platform neutrality\n- US8978023 — Virtual channel for embedded process communication\n- US8863126 — Canonical mechanism for securely assembling features into a mobile application\n- US8856805 — Java virtual machine embedded in a native mobile application",
           "chunkIndex": 6
@@ -201,6 +236,22 @@
       "path": "capabilities/ai-orchestration.md",
       "title": "AI Orchestration",
       "kind": "capability",
+      "frontMatter": {
+        "title": "AI Orchestration",
+        "kind": "capability",
+        "category": "CAPABILITIES",
+        "summary": "Agentic workflows, governed execution paths, and capability coordination.",
+        "order": 10,
+        "tags": [
+          "orchestration",
+          "LLMs",
+          "workflows",
+          "function calling"
+        ],
+        "technologies": [],
+        "icon": "network",
+        "featured": true
+      },
       "summary": "Agentic workflows, governed execution paths, and capability coordination.",
       "order": 10,
       "tags": [
@@ -218,7 +269,7 @@
           "title": "AI Orchestration",
           "kind": "capability",
           "section": "Metadata",
-          "text": "Title: AI Orchestration\nPath: capabilities/ai-orchestration.md\nSection: Metadata\n\nTitle: AI Orchestration\nPath: capabilities/ai-orchestration.md\nKind: capability\nSummary: Agentic workflows, governed execution paths, and capability coordination.\nTags: orchestration, LLMs, workflows, function calling",
+          "text": "Title: AI Orchestration\nPath: capabilities/ai-orchestration.md\nSection: Metadata\n\nTitle: AI Orchestration\nPath: capabilities/ai-orchestration.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Agentic workflows, governed execution paths, and capability coordination.\nOrder: 10\nTags: orchestration, LLMs, workflows, function calling\nIcon: network\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -258,6 +309,21 @@
       "path": "capabilities/browser-runtimes.md",
       "title": "Browser Runtimes",
       "kind": "capability",
+      "frontMatter": {
+        "title": "Browser Runtimes",
+        "kind": "capability",
+        "category": "CAPABILITIES",
+        "summary": "Browser-native AI, WebLLM, and local-first execution models.",
+        "order": 30,
+        "tags": [
+          "browser",
+          "local-first",
+          "ONNX",
+          "extensions"
+        ],
+        "technologies": [],
+        "icon": "globe"
+      },
       "summary": "Browser-native AI, WebLLM, and local-first execution models.",
       "order": 30,
       "tags": [
@@ -275,7 +341,7 @@
           "title": "Browser Runtimes",
           "kind": "capability",
           "section": "Metadata",
-          "text": "Title: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nSection: Metadata\n\nTitle: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nKind: capability\nSummary: Browser-native AI, WebLLM, and local-first execution models.\nTags: browser, local-first, ONNX, extensions",
+          "text": "Title: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nSection: Metadata\n\nTitle: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Browser-native AI, WebLLM, and local-first execution models.\nOrder: 30\nTags: browser, local-first, ONNX, extensions\nIcon: globe",
           "chunkIndex": 0
         },
         {
@@ -315,6 +381,22 @@
       "path": "capabilities/developer-platforms.md",
       "title": "Developer Platforms",
       "kind": "capability",
+      "frontMatter": {
+        "title": "Developer Platforms",
+        "kind": "capability",
+        "category": "CAPABILITIES",
+        "summary": "Tools and platforms that make complex systems usable for builders.",
+        "order": 20,
+        "tags": [
+          "developer platforms",
+          "tooling",
+          "Visual Builder",
+          "authoring"
+        ],
+        "technologies": [],
+        "icon": "terminal",
+        "featured": true
+      },
       "summary": "Tools and platforms that make complex systems usable for builders.",
       "order": 20,
       "tags": [
@@ -332,7 +414,7 @@
           "title": "Developer Platforms",
           "kind": "capability",
           "section": "Metadata",
-          "text": "Title: Developer Platforms\nPath: capabilities/developer-platforms.md\nSection: Metadata\n\nTitle: Developer Platforms\nPath: capabilities/developer-platforms.md\nKind: capability\nSummary: Tools and platforms that make complex systems usable for builders.\nTags: developer platforms, tooling, Visual Builder, authoring",
+          "text": "Title: Developer Platforms\nPath: capabilities/developer-platforms.md\nSection: Metadata\n\nTitle: Developer Platforms\nPath: capabilities/developer-platforms.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Tools and platforms that make complex systems usable for builders.\nOrder: 20\nTags: developer platforms, tooling, Visual Builder, authoring\nIcon: terminal\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -372,6 +454,15 @@
       "path": "capabilities/human-ai-interaction.md",
       "title": "Human–AI Interaction",
       "kind": "capability",
+      "frontMatter": {
+        "title": "Human–AI Interaction",
+        "kind": "capability",
+        "summary": "Iterative collaboration patterns between humans and AI systems.",
+        "order": 60,
+        "tags": [],
+        "technologies": [],
+        "icon": "sparkles"
+      },
       "summary": "Iterative collaboration patterns between humans and AI systems.",
       "order": 60,
       "tags": [],
@@ -384,7 +475,7 @@
           "title": "Human–AI Interaction",
           "kind": "capability",
           "section": "Metadata",
-          "text": "Title: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nSection: Metadata\n\nTitle: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nKind: capability\nSummary: Iterative collaboration patterns between humans and AI systems.",
+          "text": "Title: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nSection: Metadata\n\nTitle: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nKind: capability\nSummary: Iterative collaboration patterns between humans and AI systems.\nOrder: 60\nIcon: sparkles",
           "chunkIndex": 0
         },
         {
@@ -414,6 +505,21 @@
       "path": "capabilities/interactive-systems.md",
       "title": "Interactive Systems",
       "kind": "capability",
+      "frontMatter": {
+        "title": "Interactive Systems",
+        "kind": "capability",
+        "category": "CAPABILITIES",
+        "summary": "Low-latency, human-in-the-loop interactive products and authoring tools.",
+        "order": 40,
+        "tags": [
+          "interactive systems",
+          "frontend",
+          "UX",
+          "real-time"
+        ],
+        "technologies": [],
+        "icon": "mouse-pointer"
+      },
       "summary": "Low-latency, human-in-the-loop interactive products and authoring tools.",
       "order": 40,
       "tags": [
@@ -431,7 +537,7 @@
           "title": "Interactive Systems",
           "kind": "capability",
           "section": "Metadata",
-          "text": "Title: Interactive Systems\nPath: capabilities/interactive-systems.md\nSection: Metadata\n\nTitle: Interactive Systems\nPath: capabilities/interactive-systems.md\nKind: capability\nSummary: Low-latency, human-in-the-loop interactive products and authoring tools.\nTags: interactive systems, frontend, UX, real-time",
+          "text": "Title: Interactive Systems\nPath: capabilities/interactive-systems.md\nSection: Metadata\n\nTitle: Interactive Systems\nPath: capabilities/interactive-systems.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Low-latency, human-in-the-loop interactive products and authoring tools.\nOrder: 40\nTags: interactive systems, frontend, UX, real-time\nIcon: mouse-pointer",
           "chunkIndex": 0
         },
         {
@@ -471,6 +577,16 @@
       "path": "capabilities/local-first-ai.md",
       "title": "Local-First AI",
       "kind": "capability",
+      "frontMatter": {
+        "title": "Local-First AI",
+        "kind": "capability",
+        "summary": "Privacy-preserving AI workflows that run close to the user.",
+        "order": 50,
+        "tags": [],
+        "technologies": [],
+        "icon": "shield",
+        "featured": true
+      },
       "summary": "Privacy-preserving AI workflows that run close to the user.",
       "order": 50,
       "tags": [],
@@ -483,7 +599,7 @@
           "title": "Local-First AI",
           "kind": "capability",
           "section": "Metadata",
-          "text": "Title: Local-First AI\nPath: capabilities/local-first-ai.md\nSection: Metadata\n\nTitle: Local-First AI\nPath: capabilities/local-first-ai.md\nKind: capability\nSummary: Privacy-preserving AI workflows that run close to the user.",
+          "text": "Title: Local-First AI\nPath: capabilities/local-first-ai.md\nSection: Metadata\n\nTitle: Local-First AI\nPath: capabilities/local-first-ai.md\nKind: capability\nSummary: Privacy-preserving AI workflows that run close to the user.\nOrder: 50\nIcon: shield\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -513,6 +629,24 @@
       "path": "creative-systems/aimless-dude-hyper-dog.md",
       "title": "Aimless Dude & Hyper Dog",
       "kind": "creative",
+      "frontMatter": {
+        "title": "Aimless Dude & Hyper Dog",
+        "kind": "creative",
+        "category": "Creative Systems",
+        "summary": "Daily illustrated diary with Caiku micro-poems and filmstrip viewer.",
+        "order": 10,
+        "tags": [
+          "caiku",
+          "visual storytelling",
+          "comic strip",
+          "creative systems",
+          "daily project"
+        ],
+        "technologies": [],
+        "type": "filmstrip",
+        "icon": "film",
+        "featured": true
+      },
       "summary": "Daily illustrated diary with Caiku micro-poems and filmstrip viewer.",
       "order": 10,
       "type": "filmstrip",
@@ -532,7 +666,7 @@
           "title": "Aimless Dude & Hyper Dog",
           "kind": "creative",
           "section": "Metadata",
-          "text": "Title: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nSection: Metadata\n\nTitle: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nKind: creative\nSummary: Daily illustrated diary with Caiku micro-poems and filmstrip viewer.\nTags: caiku, visual storytelling, comic strip, creative systems, daily project",
+          "text": "Title: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nSection: Metadata\n\nTitle: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nKind: creative\nCategory: Creative Systems\nSummary: Daily illustrated diary with Caiku micro-poems and filmstrip viewer.\nOrder: 10\nTags: caiku, visual storytelling, comic strip, creative systems, daily project\nType: filmstrip\nIcon: film\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -1812,6 +1946,33 @@
       "path": "creative-systems/chatgpt_export_summary.md",
       "title": "ChatGPT Export Summary",
       "kind": "analytics",
+      "frontMatter": {
+        "title": "ChatGPT Export Summary",
+        "kind": "analytics",
+        "category": "CREATIVE SYSTEMS",
+        "summary": "Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.",
+        "elevatorPitch": "A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.",
+        "order": 90,
+        "importance": "major",
+        "tags": [
+          "ChatGPT",
+          "AI workflows",
+          "productivity",
+          "analytics",
+          "personal knowledge",
+          "LLM usage"
+        ],
+        "technologies": [
+          "Python",
+          "Pandas",
+          "ChatGPT Export Processing",
+          "CSV Analysis",
+          "Data Visualization"
+        ],
+        "year": 2026,
+        "status": "active",
+        "icon": "bar-chart-3"
+      },
       "summary": "Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.",
       "elevatorPitch": "A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.",
       "order": 90,
@@ -1840,7 +2001,7 @@
           "title": "ChatGPT Export Summary",
           "kind": "analytics",
           "section": "Metadata",
-          "text": "Title: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nSection: Metadata\n\nTitle: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nKind: analytics\nSummary: Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.\nElevator pitch: A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.\nTags: ChatGPT, AI workflows, productivity, analytics, personal knowledge, LLM usage\nTechnologies: Python, Pandas, ChatGPT Export Processing, CSV Analysis, Data Visualization\nYear: 2026\nStatus: active",
+          "text": "Title: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nSection: Metadata\n\nTitle: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nKind: analytics\nCategory: CREATIVE SYSTEMS\nSummary: Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.\nElevator pitch: A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.\nOrder: 90\nImportance: major\nTags: ChatGPT, AI workflows, productivity, analytics, personal knowledge, LLM usage\nTechnologies: Python, Pandas, ChatGPT Export Processing, CSV Analysis, Data Visualization\nYear: 2026\nStatus: active\nIcon: bar-chart-3",
           "chunkIndex": 0
         },
         {
@@ -1940,6 +2101,37 @@
       "path": "experience/oracle-java-embedded-suite.md",
       "title": "Java Embedded Suite",
       "kind": "experience",
+      "frontMatter": {
+        "title": "Java Embedded Suite",
+        "kind": "experience",
+        "category": "EXPERIENCE",
+        "summary": "Designed REST services and runtime components for embedded and distributed IoT environments.",
+        "elevatorPitch": "Built Java Embedded Suite components for RESTful services and distributed embedded systems.",
+        "order": 40,
+        "importance": "supporting",
+        "tags": [
+          "Oracle",
+          "Java Embedded Suite",
+          "embedded systems",
+          "REST services",
+          "IoT",
+          "runtime systems"
+        ],
+        "technologies": [
+          "Java",
+          "REST APIs",
+          "Embedded Systems",
+          "Distributed Systems",
+          "IoT Runtime Components"
+        ],
+        "company": "Oracle",
+        "role": "Principal Member of Technical Staff",
+        "startDate": "2011-02",
+        "endDate": "2013-12",
+        "year": "2011-2013",
+        "status": "completed",
+        "icon": "radio"
+      },
       "summary": "Designed REST services and runtime components for embedded and distributed IoT environments.",
       "elevatorPitch": "Built Java Embedded Suite components for RESTful services and distributed embedded systems.",
       "order": 40,
@@ -1970,7 +2162,7 @@
           "title": "Java Embedded Suite",
           "kind": "experience",
           "section": "Metadata",
-          "text": "Title: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nSection: Metadata\n\nTitle: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nKind: experience\nSummary: Designed REST services and runtime components for embedded and distributed IoT environments.\nElevator pitch: Built Java Embedded Suite components for RESTful services and distributed embedded systems.\nTags: Oracle, Java Embedded Suite, embedded systems, REST services, IoT, runtime systems\nTechnologies: Java, REST APIs, Embedded Systems, Distributed Systems, IoT Runtime Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2011-02\nEnd date: 2013-12\nYear: 2011-2013\nStatus: completed",
+          "text": "Title: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nSection: Metadata\n\nTitle: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Designed REST services and runtime components for embedded and distributed IoT environments.\nElevator pitch: Built Java Embedded Suite components for RESTful services and distributed embedded systems.\nOrder: 40\nImportance: supporting\nTags: Oracle, Java Embedded Suite, embedded systems, REST services, IoT, runtime systems\nTechnologies: Java, REST APIs, Embedded Systems, Distributed Systems, IoT Runtime Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2011-02\nEnd date: 2013-12\nYear: 2011-2013\nStatus: completed\nIcon: radio",
           "chunkIndex": 0
         },
         {
@@ -2060,6 +2252,40 @@
       "path": "experience/oracle-mobile-application-framework.md",
       "title": "Oracle Mobile Application Framework",
       "kind": "experience",
+      "frontMatter": {
+        "title": "Oracle Mobile Application Framework",
+        "kind": "experience",
+        "category": "EXPERIENCE",
+        "summary": "Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.",
+        "elevatorPitch": "Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.",
+        "order": 30,
+        "importance": "major",
+        "tags": [
+          "Oracle",
+          "mobile frameworks",
+          "cross-platform runtime",
+          "Java",
+          "native mobile",
+          "runtime systems"
+        ],
+        "technologies": [
+          "Java",
+          "Java 8",
+          "C/C++",
+          "iOS",
+          "Android",
+          "Windows",
+          "Mobile Runtime",
+          "Cross-platform Frameworks"
+        ],
+        "company": "Oracle",
+        "role": "Principal Member of Technical Staff",
+        "startDate": "2013-12",
+        "endDate": "2018-07",
+        "year": "2013-2018",
+        "status": "completed",
+        "icon": "smartphone"
+      },
       "summary": "Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.",
       "elevatorPitch": "Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.",
       "order": 30,
@@ -2093,7 +2319,7 @@
           "title": "Oracle Mobile Application Framework",
           "kind": "experience",
           "section": "Metadata",
-          "text": "Title: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nSection: Metadata\n\nTitle: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nKind: experience\nSummary: Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.\nElevator pitch: Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.\nTags: Oracle, mobile frameworks, cross-platform runtime, Java, native mobile, runtime systems\nTechnologies: Java, Java 8, C/C++, iOS, Android, Windows, Mobile Runtime, Cross-platform Frameworks\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2013-12\nEnd date: 2018-07\nYear: 2013-2018\nStatus: completed",
+          "text": "Title: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nSection: Metadata\n\nTitle: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.\nElevator pitch: Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.\nOrder: 30\nImportance: major\nTags: Oracle, mobile frameworks, cross-platform runtime, Java, native mobile, runtime systems\nTechnologies: Java, Java 8, C/C++, iOS, Android, Windows, Mobile Runtime, Cross-platform Frameworks\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2013-12\nEnd date: 2018-07\nYear: 2013-2018\nStatus: completed\nIcon: smartphone",
           "chunkIndex": 0
         },
         {
@@ -2183,6 +2409,42 @@
       "path": "experience/oracle-typescript-genai-integration.md",
       "title": "TypeScript Enablement & Generative AI Integration",
       "kind": "experience",
+      "frontMatter": {
+        "title": "TypeScript Enablement & Generative AI Integration",
+        "kind": "experience",
+        "category": "EXPERIENCE",
+        "summary": "Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.",
+        "elevatorPitch": "Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.",
+        "order": 10,
+        "importance": "flagship",
+        "tags": [
+          "Oracle",
+          "Visual Builder",
+          "TypeScript",
+          "generative AI",
+          "action orchestration",
+          "developer platforms"
+        ],
+        "technologies": [
+          "TypeScript",
+          "JavaScript",
+          "Babel",
+          "Jasmine",
+          "Karma",
+          "LLM APIs",
+          "Function Calling",
+          "CI/CD",
+          "Oracle Visual Builder"
+        ],
+        "company": "Oracle",
+        "role": "Consulting Member of Technical Staff",
+        "startDate": "2024-09",
+        "endDate": "2025-09",
+        "year": "2024-2025",
+        "status": "completed",
+        "icon": "workflow",
+        "featured": true
+      },
       "summary": "Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.",
       "elevatorPitch": "Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.",
       "order": 10,
@@ -2217,7 +2479,7 @@
           "title": "TypeScript Enablement & Generative AI Integration",
           "kind": "experience",
           "section": "Metadata",
-          "text": "Title: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nSection: Metadata\n\nTitle: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nKind: experience\nSummary: Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.\nElevator pitch: Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.\nTags: Oracle, Visual Builder, TypeScript, generative AI, action orchestration, developer platforms\nTechnologies: TypeScript, JavaScript, Babel, Jasmine, Karma, LLM APIs, Function Calling, CI/CD, Oracle Visual Builder\nCompany: Oracle\nRole: Consulting Member of Technical Staff\nStart date: 2024-09\nEnd date: 2025-09\nYear: 2024-2025\nStatus: completed",
+          "text": "Title: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nSection: Metadata\n\nTitle: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.\nElevator pitch: Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.\nOrder: 10\nImportance: flagship\nTags: Oracle, Visual Builder, TypeScript, generative AI, action orchestration, developer platforms\nTechnologies: TypeScript, JavaScript, Babel, Jasmine, Karma, LLM APIs, Function Calling, CI/CD, Oracle Visual Builder\nCompany: Oracle\nRole: Consulting Member of Technical Staff\nStart date: 2024-09\nEnd date: 2025-09\nYear: 2024-2025\nStatus: completed\nIcon: workflow\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -2307,6 +2569,42 @@
       "path": "experience/oracle-visual-builder-action-chain-framework.md",
       "title": "Visual Builder Design-Time & Action Chain Framework",
       "kind": "experience",
+      "frontMatter": {
+        "title": "Visual Builder Design-Time & Action Chain Framework",
+        "kind": "experience",
+        "category": "EXPERIENCE",
+        "summary": "Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.",
+        "elevatorPitch": "Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.",
+        "order": 20,
+        "importance": "flagship",
+        "tags": [
+          "Oracle",
+          "Visual Builder",
+          "action chains",
+          "developer platforms",
+          "runtime systems",
+          "frontend architecture"
+        ],
+        "technologies": [
+          "JavaScript",
+          "ES6",
+          "SCSS",
+          "HTML",
+          "Runtime Execution",
+          "Dependency Graphs",
+          "Asynchronous Workflows",
+          "Web Application Platforms",
+          "Server-side Components"
+        ],
+        "company": "Oracle",
+        "role": "Principal Member of Technical Staff",
+        "startDate": "2018-07",
+        "endDate": "2024-08",
+        "year": "2018-2024",
+        "status": "completed",
+        "icon": "blocks",
+        "featured": true
+      },
       "summary": "Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.",
       "elevatorPitch": "Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.",
       "order": 20,
@@ -2341,7 +2639,7 @@
           "title": "Visual Builder Design-Time & Action Chain Framework",
           "kind": "experience",
           "section": "Metadata",
-          "text": "Title: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nSection: Metadata\n\nTitle: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nKind: experience\nSummary: Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.\nElevator pitch: Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.\nTags: Oracle, Visual Builder, action chains, developer platforms, runtime systems, frontend architecture\nTechnologies: JavaScript, ES6, SCSS, HTML, Runtime Execution, Dependency Graphs, Asynchronous Workflows, Web Application Platforms, Server-side Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2018-07\nEnd date: 2024-08\nYear: 2018-2024\nStatus: completed",
+          "text": "Title: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nSection: Metadata\n\nTitle: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.\nElevator pitch: Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.\nOrder: 20\nImportance: flagship\nTags: Oracle, Visual Builder, action chains, developer platforms, runtime systems, frontend architecture\nTechnologies: JavaScript, ES6, SCSS, HTML, Runtime Execution, Dependency Graphs, Asynchronous Workflows, Web Application Platforms, Server-side Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2018-07\nEnd date: 2024-08\nYear: 2018-2024\nStatus: completed\nIcon: blocks\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -2431,6 +2729,39 @@
       "path": "experience/sun-embedded-jvm-runtime.md",
       "title": "Embedded JVM Runtime Systems",
       "kind": "experience",
+      "frontMatter": {
+        "title": "Embedded JVM Runtime Systems",
+        "kind": "experience",
+        "category": "EXPERIENCE",
+        "summary": "Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.",
+        "elevatorPitch": "Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.",
+        "order": 50,
+        "importance": "flagship",
+        "tags": [
+          "Sun Microsystems",
+          "JVM",
+          "embedded systems",
+          "runtime systems",
+          "synchronization",
+          "performance"
+        ],
+        "technologies": [
+          "Java",
+          "JVM",
+          "Embedded Runtime",
+          "Synchronization",
+          "Performance Optimization",
+          "Portability",
+          "Secure Execution"
+        ],
+        "company": "Sun Microsystems",
+        "role": "Principal Member of Technical Staff",
+        "startDate": "2004-01",
+        "endDate": "2011-02",
+        "year": "2004-2011",
+        "status": "completed",
+        "icon": "cpu"
+      },
       "summary": "Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.",
       "elevatorPitch": "Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.",
       "order": 50,
@@ -2463,7 +2794,7 @@
           "title": "Embedded JVM Runtime Systems",
           "kind": "experience",
           "section": "Metadata",
-          "text": "Title: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nKind: experience\nSummary: Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.\nElevator pitch: Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.\nTags: Sun Microsystems, JVM, embedded systems, runtime systems, synchronization, performance\nTechnologies: Java, JVM, Embedded Runtime, Synchronization, Performance Optimization, Portability, Secure Execution\nCompany: Sun Microsystems\nRole: Principal Member of Technical Staff\nStart date: 2004-01\nEnd date: 2011-02\nYear: 2004-2011\nStatus: completed",
+          "text": "Title: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.\nElevator pitch: Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.\nOrder: 50\nImportance: flagship\nTags: Sun Microsystems, JVM, embedded systems, runtime systems, synchronization, performance\nTechnologies: Java, JVM, Embedded Runtime, Synchronization, Performance Optimization, Portability, Secure Execution\nCompany: Sun Microsystems\nRole: Principal Member of Technical Staff\nStart date: 2004-01\nEnd date: 2011-02\nYear: 2004-2011\nStatus: completed\nIcon: cpu",
           "chunkIndex": 0
         },
         {
@@ -2553,6 +2884,15 @@
       "path": "lab/future-experiments.md",
       "title": "Future Experiments",
       "kind": "lab",
+      "frontMatter": {
+        "title": "Future Experiments",
+        "kind": "lab",
+        "summary": "In-progress experiments in browser AI, orchestration, and tooling.",
+        "order": 30,
+        "tags": [],
+        "technologies": [],
+        "icon": "flask-conical"
+      },
       "summary": "In-progress experiments in browser AI, orchestration, and tooling.",
       "order": 30,
       "tags": [],
@@ -2565,7 +2905,7 @@
           "title": "Future Experiments",
           "kind": "lab",
           "section": "Metadata",
-          "text": "Title: Future Experiments\nPath: lab/future-experiments.md\nSection: Metadata\n\nTitle: Future Experiments\nPath: lab/future-experiments.md\nKind: lab\nSummary: In-progress experiments in browser AI, orchestration, and tooling.",
+          "text": "Title: Future Experiments\nPath: lab/future-experiments.md\nSection: Metadata\n\nTitle: Future Experiments\nPath: lab/future-experiments.md\nKind: lab\nSummary: In-progress experiments in browser AI, orchestration, and tooling.\nOrder: 30\nIcon: flask-conical",
           "chunkIndex": 0
         },
         {
@@ -2585,6 +2925,22 @@
       "path": "lab/portfolio-workspace.md",
       "title": "Portfolio Workspace",
       "kind": "lab",
+      "frontMatter": {
+        "title": "Portfolio Workspace",
+        "kind": "lab",
+        "category": "IDEAS",
+        "summary": "The anki.fyi IDE-style knowledge workspace concept.",
+        "order": 10,
+        "tags": [
+          "portfolio",
+          "knowledge base",
+          "local AI",
+          "RAG"
+        ],
+        "technologies": [],
+        "icon": "layout-dashboard",
+        "featured": true
+      },
       "summary": "The anki.fyi IDE-style knowledge workspace concept.",
       "order": 10,
       "tags": [
@@ -2602,7 +2958,7 @@
           "title": "Portfolio Workspace",
           "kind": "lab",
           "section": "Metadata",
-          "text": "Title: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nSection: Metadata\n\nTitle: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nKind: lab\nSummary: The anki.fyi IDE-style knowledge workspace concept.\nTags: portfolio, knowledge base, local AI, RAG",
+          "text": "Title: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nSection: Metadata\n\nTitle: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nKind: lab\nCategory: IDEAS\nSummary: The anki.fyi IDE-style knowledge workspace concept.\nOrder: 10\nTags: portfolio, knowledge base, local AI, RAG\nIcon: layout-dashboard\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -2642,6 +2998,16 @@
       "path": "lab/zerofabric-runtime-simulator.md",
       "title": "ZeroFabric Runtime Simulator",
       "kind": "lab",
+      "frontMatter": {
+        "title": "ZeroFabric Runtime Simulator",
+        "kind": "lab",
+        "summary": "Interactive simulator for governed capability paths and intent routing.",
+        "order": 20,
+        "tags": [],
+        "technologies": [],
+        "icon": "route",
+        "featured": true
+      },
       "summary": "Interactive simulator for governed capability paths and intent routing.",
       "order": 20,
       "tags": [],
@@ -2654,7 +3020,7 @@
           "title": "ZeroFabric Runtime Simulator",
           "kind": "lab",
           "section": "Metadata",
-          "text": "Title: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nSection: Metadata\n\nTitle: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nKind: lab\nSummary: Interactive simulator for governed capability paths and intent routing.",
+          "text": "Title: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nSection: Metadata\n\nTitle: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nKind: lab\nSummary: Interactive simulator for governed capability paths and intent routing.\nOrder: 20\nIcon: route\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -2694,6 +3060,20 @@
       "path": "patents/concurrency-systems.md",
       "title": "Concurrency Systems",
       "kind": "patent",
+      "frontMatter": {
+        "title": "Concurrency Systems",
+        "kind": "patent",
+        "category": "PATENTS",
+        "summary": "Thread synchronization and concurrent execution innovations.",
+        "order": 20,
+        "tags": [
+          "patent",
+          "synchronization",
+          "runtime"
+        ],
+        "technologies": [],
+        "icon": "git-branch"
+      },
       "summary": "Thread synchronization and concurrent execution innovations.",
       "order": 20,
       "tags": [
@@ -2710,7 +3090,7 @@
           "title": "Concurrency Systems",
           "kind": "patent",
           "section": "Metadata",
-          "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Metadata\n\nTitle: Concurrency Systems\nPath: patents/concurrency-systems.md\nKind: patent\nSummary: Thread synchronization and concurrent execution innovations.\nTags: patent, synchronization, runtime\n\n## Links\n\n- url: https://patents.google.com/patent/US10198279B2",
+          "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Metadata\n\nTitle: Concurrency Systems\nPath: patents/concurrency-systems.md\nKind: patent\nCategory: PATENTS\nSummary: Thread synchronization and concurrent execution innovations.\nOrder: 20\nTags: patent, synchronization, runtime\nIcon: git-branch\n\n## Links\n\n- url: https://patents.google.com/patent/US10198279B2",
           "chunkIndex": 0
         },
         {
@@ -2730,6 +3110,20 @@
       "path": "patents/embedded-jvm-runtime.md",
       "title": "Embedded JVM Runtime",
       "kind": "patent",
+      "frontMatter": {
+        "title": "Embedded JVM Runtime",
+        "kind": "patent",
+        "category": "PATENTS",
+        "summary": "Embedded JVM architecture and runtime optimizations.",
+        "order": 50,
+        "tags": [
+          "patent",
+          "JVM",
+          "mobile"
+        ],
+        "technologies": [],
+        "icon": "cpu"
+      },
       "summary": "Embedded JVM architecture and runtime optimizations.",
       "order": 50,
       "tags": [
@@ -2746,7 +3140,7 @@
           "title": "Embedded JVM Runtime",
           "kind": "patent",
           "section": "Metadata",
-          "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nKind: patent\nSummary: Embedded JVM architecture and runtime optimizations.\nTags: patent, JVM, mobile\n\n## Links\n\n- url: https://patents.google.com/patent/US8856805",
+          "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nKind: patent\nCategory: PATENTS\nSummary: Embedded JVM architecture and runtime optimizations.\nOrder: 50\nTags: patent, JVM, mobile\nIcon: cpu\n\n## Links\n\n- url: https://patents.google.com/patent/US8856805",
           "chunkIndex": 0
         },
         {
@@ -2766,6 +3160,20 @@
       "path": "patents/embedded-process-communication.md",
       "title": "Embedded Process Communication",
       "kind": "patent",
+      "frontMatter": {
+        "title": "Embedded Process Communication",
+        "kind": "patent",
+        "category": "PATENTS",
+        "summary": "Inter-process communication for embedded and mobile runtimes.",
+        "order": 30,
+        "tags": [
+          "patent",
+          "embedded",
+          "communication"
+        ],
+        "technologies": [],
+        "icon": "radio"
+      },
       "summary": "Inter-process communication for embedded and mobile runtimes.",
       "order": 30,
       "tags": [
@@ -2782,7 +3190,7 @@
           "title": "Embedded Process Communication",
           "kind": "patent",
           "section": "Metadata",
-          "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Metadata\n\nTitle: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nKind: patent\nSummary: Inter-process communication for embedded and mobile runtimes.\nTags: patent, embedded, communication\n\n## Links\n\n- url: https://patents.google.com/patent/US8978023",
+          "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Metadata\n\nTitle: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nKind: patent\nCategory: PATENTS\nSummary: Inter-process communication for embedded and mobile runtimes.\nOrder: 30\nTags: patent, embedded, communication\nIcon: radio\n\n## Links\n\n- url: https://patents.google.com/patent/US8978023",
           "chunkIndex": 0
         },
         {
@@ -2802,6 +3210,20 @@
       "path": "patents/mobile-platform-innovations.md",
       "title": "Mobile Platform Innovations",
       "kind": "patent",
+      "frontMatter": {
+        "title": "Mobile Platform Innovations",
+        "kind": "patent",
+        "category": "PATENTS",
+        "summary": "Mobile application platform features and runtime enhancements.",
+        "order": 40,
+        "tags": [
+          "patent",
+          "mobile",
+          "application framework"
+        ],
+        "technologies": [],
+        "icon": "layers"
+      },
       "summary": "Mobile application platform features and runtime enhancements.",
       "order": 40,
       "tags": [
@@ -2818,7 +3240,7 @@
           "title": "Mobile Platform Innovations",
           "kind": "patent",
           "section": "Metadata",
-          "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Metadata\n\nTitle: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nKind: patent\nSummary: Mobile application platform features and runtime enhancements.\nTags: patent, mobile, application framework\n\n## Links\n\n- url: https://patents.google.com/patent/US8863126",
+          "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Metadata\n\nTitle: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nKind: patent\nCategory: PATENTS\nSummary: Mobile application platform features and runtime enhancements.\nOrder: 40\nTags: patent, mobile, application framework\nIcon: layers\n\n## Links\n\n- url: https://patents.google.com/patent/US8863126",
           "chunkIndex": 0
         },
         {
@@ -2838,6 +3260,16 @@
       "path": "patents/patent-portfolio.md",
       "title": "Patent Portfolio",
       "kind": "patent",
+      "frontMatter": {
+        "title": "Patent Portfolio",
+        "kind": "patent",
+        "summary": "Overview of issued patents across runtime, mobile, and embedded systems.",
+        "order": 10,
+        "tags": [],
+        "technologies": [],
+        "icon": "badge",
+        "featured": true
+      },
       "summary": "Overview of issued patents across runtime, mobile, and embedded systems.",
       "order": 10,
       "tags": [],
@@ -2850,7 +3282,7 @@
           "title": "Patent Portfolio",
           "kind": "patent",
           "section": "Metadata",
-          "text": "Title: Patent Portfolio\nPath: patents/patent-portfolio.md\nSection: Metadata\n\nTitle: Patent Portfolio\nPath: patents/patent-portfolio.md\nKind: patent\nSummary: Overview of issued patents across runtime, mobile, and embedded systems.",
+          "text": "Title: Patent Portfolio\nPath: patents/patent-portfolio.md\nSection: Metadata\n\nTitle: Patent Portfolio\nPath: patents/patent-portfolio.md\nKind: patent\nSummary: Overview of issued patents across runtime, mobile, and embedded systems.\nOrder: 10\nIcon: badge\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -2880,6 +3312,37 @@
       "path": "projects/ask-rudy.md",
       "title": "Ask Rudy",
       "kind": "project",
+      "frontMatter": {
+        "title": "Ask Rudy",
+        "kind": "project",
+        "category": "PROJECTS",
+        "summary": "Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.",
+        "elevatorPitch": "Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.",
+        "order": 60,
+        "importance": "major",
+        "tags": [
+          "retrieval",
+          "local AI",
+          "Q&A",
+          "browser",
+          "grounded answers",
+          "personal knowledge"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Cursor",
+          "Browser APIs",
+          "Retrieval workflows",
+          "Embeddings",
+          "Semantic Search",
+          "Local Knowledge Concepts",
+          "Context-Aware AI"
+        ],
+        "year": 2026,
+        "status": "prototype",
+        "icon": "message-circle"
+      },
       "summary": "Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.",
       "elevatorPitch": "Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.",
       "order": 60,
@@ -2912,7 +3375,7 @@
           "title": "Ask Rudy",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: Ask Rudy\nPath: projects/ask-rudy.md\nSection: Metadata\n\nTitle: Ask Rudy\nPath: projects/ask-rudy.md\nKind: project\nSummary: Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.\nElevator pitch: Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.\nTags: retrieval, local AI, Q&A, browser, grounded answers, personal knowledge\nTechnologies: TypeScript, React, Cursor, Browser APIs, Retrieval workflows, Embeddings, Semantic Search, Local Knowledge Concepts, Context-Aware AI\nYear: 2026\nStatus: prototype\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457002618771361792--XXa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+          "text": "Title: Ask Rudy\nPath: projects/ask-rudy.md\nSection: Metadata\n\nTitle: Ask Rudy\nPath: projects/ask-rudy.md\nKind: project\nCategory: PROJECTS\nSummary: Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.\nElevator pitch: Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.\nOrder: 60\nImportance: major\nTags: retrieval, local AI, Q&A, browser, grounded answers, personal knowledge\nTechnologies: TypeScript, React, Cursor, Browser APIs, Retrieval workflows, Embeddings, Semantic Search, Local Knowledge Concepts, Context-Aware AI\nYear: 2026\nStatus: prototype\nIcon: message-circle\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457002618771361792--XXa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
           "chunkIndex": 0
         },
         {
@@ -2992,6 +3455,39 @@
       "path": "projects/astrovalley.md",
       "title": "AstroValley",
       "kind": "project",
+      "frontMatter": {
+        "title": "AstroValley",
+        "kind": "project",
+        "summary": "Browser-native AI sandbox disguised as an astrology application.",
+        "elevatorPitch": "Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.",
+        "order": 20,
+        "importance": "flagship",
+        "tags": [
+          "local LLM",
+          "browser runtimes",
+          "procedural worlds",
+          "WebGPU",
+          "AI orchestration",
+          "interactive systems"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Cursor",
+          "React Three Fiber",
+          "Three.js",
+          "WebGPU",
+          "WebLLM",
+          "Gemma",
+          "astronomy-engine",
+          "IndexedDB"
+        ],
+        "year": 2026,
+        "status": "active prototype",
+        "icon": "orbit",
+        "featured": true
+      },
       "summary": "Browser-native AI sandbox disguised as an astrology application.",
       "elevatorPitch": "Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.",
       "order": 20,
@@ -3026,7 +3522,7 @@
           "title": "AstroValley",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+          "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nOrder: 20\nImportance: flagship\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\nIcon: orbit\nFeatured: true\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
           "chunkIndex": 0
         },
         {
@@ -3106,6 +3602,34 @@
       "path": "projects/crafticle.md",
       "title": "Crafticle",
       "kind": "project",
+      "frontMatter": {
+        "title": "Crafticle",
+        "kind": "project",
+        "category": "PROJECTS",
+        "summary": "Authoring and publishing tools for structured creative writing.",
+        "elevatorPitch": "Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.",
+        "order": 70,
+        "importance": "major",
+        "tags": [
+          "AI writing",
+          "TipTap",
+          "React",
+          "human-in-the-loop"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Cursor",
+          "Next.js",
+          "TipTap",
+          "Rich text editing",
+          "LLM APIs",
+          "Structured content workflows"
+        ],
+        "year": 2026,
+        "status": "prototype",
+        "icon": "pen-tool"
+      },
       "summary": "Authoring and publishing tools for structured creative writing.",
       "elevatorPitch": "Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.",
       "order": 70,
@@ -3135,7 +3659,7 @@
           "title": "Crafticle",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: Crafticle\nPath: projects/crafticle.md\nSection: Metadata\n\nTitle: Crafticle\nPath: projects/crafticle.md\nKind: project\nSummary: Authoring and publishing tools for structured creative writing.\nElevator pitch: Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.\nTags: AI writing, TipTap, React, human-in-the-loop\nTechnologies: TypeScript, React, Cursor, Next.js, TipTap, Rich text editing, LLM APIs, Structured content workflows\nYear: 2026\nStatus: prototype\n\n## Links\n\n- website: https://crafticle.app",
+          "text": "Title: Crafticle\nPath: projects/crafticle.md\nSection: Metadata\n\nTitle: Crafticle\nPath: projects/crafticle.md\nKind: project\nCategory: PROJECTS\nSummary: Authoring and publishing tools for structured creative writing.\nElevator pitch: Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.\nOrder: 70\nImportance: major\nTags: AI writing, TipTap, React, human-in-the-loop\nTechnologies: TypeScript, React, Cursor, Next.js, TipTap, Rich text editing, LLM APIs, Structured content workflows\nYear: 2026\nStatus: prototype\nIcon: pen-tool\n\n## Links\n\n- website: https://crafticle.app",
           "chunkIndex": 0
         },
         {
@@ -3215,6 +3739,36 @@
       "path": "projects/florow.md",
       "title": "Florow",
       "kind": "concept",
+      "frontMatter": {
+        "title": "Florow",
+        "kind": "concept",
+        "category": "PROJECTS",
+        "summary": "Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.",
+        "elevatorPitch": "Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.",
+        "order": 25,
+        "importance": "flagship",
+        "tags": [
+          "spaced repetition",
+          "learning",
+          "scheduling",
+          "education",
+          "productivity",
+          "adaptive planning"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Scheduling Algorithms",
+          "Adaptive Learning",
+          "Calendar Systems",
+          "Learning Analytics"
+        ],
+        "year": 2026,
+        "status": "concept exploration",
+        "icon": "calendar-days",
+        "featured": true
+      },
       "summary": "Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.",
       "elevatorPitch": "Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.",
       "order": 25,
@@ -3245,7 +3799,7 @@
           "title": "Florow",
           "kind": "concept",
           "section": "Metadata",
-          "text": "Title: Florow\nPath: projects/florow.md\nSection: Metadata\n\nTitle: Florow\nPath: projects/florow.md\nKind: concept\nSummary: Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.\nElevator pitch: Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.\nTags: spaced repetition, learning, scheduling, education, productivity, adaptive planning\nTechnologies: TypeScript, React, Next.js, Scheduling Algorithms, Adaptive Learning, Calendar Systems, Learning Analytics\nYear: 2026\nStatus: concept exploration",
+          "text": "Title: Florow\nPath: projects/florow.md\nSection: Metadata\n\nTitle: Florow\nPath: projects/florow.md\nKind: concept\nCategory: PROJECTS\nSummary: Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.\nElevator pitch: Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.\nOrder: 25\nImportance: flagship\nTags: spaced repetition, learning, scheduling, education, productivity, adaptive planning\nTechnologies: TypeScript, React, Next.js, Scheduling Algorithms, Adaptive Learning, Calendar Systems, Learning Analytics\nYear: 2026\nStatus: concept exploration\nIcon: calendar-days\nFeatured: true",
           "chunkIndex": 0
         },
         {
@@ -3345,6 +3899,36 @@
       "path": "projects/lintern.md",
       "title": "Lintern",
       "kind": "project",
+      "frontMatter": {
+        "title": "Lintern",
+        "kind": "project",
+        "category": "PROJECTS",
+        "summary": "Local-first data guardrails for AI workflows.",
+        "elevatorPitch": "Local-first AI guardrails that detect sensitive information before it reaches external AI systems.",
+        "order": 10,
+        "importance": "flagship",
+        "tags": [
+          "local-first AI",
+          "data guardrails",
+          "browser extension",
+          "embeddings"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Cursor",
+          "Chrome Extension APIs",
+          "DOM interception",
+          "Embeddings",
+          "Semantic detection",
+          "Local browser storage"
+        ],
+        "year": 2026,
+        "status": "active prototype",
+        "icon": "lintern-logo",
+        "featured": true
+      },
       "summary": "Local-first data guardrails for AI workflows.",
       "elevatorPitch": "Local-first AI guardrails that detect sensitive information before it reaches external AI systems.",
       "order": 10,
@@ -3375,7 +3959,7 @@
           "title": "Lintern",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: Lintern\nPath: projects/lintern.md\nSection: Metadata\n\nTitle: Lintern\nPath: projects/lintern.md\nKind: project\nSummary: Local-first data guardrails for AI workflows.\nElevator pitch: Local-first AI guardrails that detect sensitive information before it reaches external AI systems.\nTags: local-first AI, data guardrails, browser extension, embeddings\nTechnologies: TypeScript, React, Next.js, Cursor, Chrome Extension APIs, DOM interception, Embeddings, Semantic detection, Local browser storage\nYear: 2026\nStatus: active prototype\n\n## Links\n\n- website: https://lintern.app",
+          "text": "Title: Lintern\nPath: projects/lintern.md\nSection: Metadata\n\nTitle: Lintern\nPath: projects/lintern.md\nKind: project\nCategory: PROJECTS\nSummary: Local-first data guardrails for AI workflows.\nElevator pitch: Local-first AI guardrails that detect sensitive information before it reaches external AI systems.\nOrder: 10\nImportance: flagship\nTags: local-first AI, data guardrails, browser extension, embeddings\nTechnologies: TypeScript, React, Next.js, Cursor, Chrome Extension APIs, DOM interception, Embeddings, Semantic detection, Local browser storage\nYear: 2026\nStatus: active prototype\nIcon: lintern-logo\nFeatured: true\n\n## Links\n\n- website: https://lintern.app",
           "chunkIndex": 0
         },
         {
@@ -3455,6 +4039,33 @@
       "path": "projects/ozmap.md",
       "title": "OzMap",
       "kind": "project",
+      "frontMatter": {
+        "title": "OzMap",
+        "kind": "project",
+        "category": "PROJECTS",
+        "summary": "AI-powered learning trails that turn topics into navigable knowledge maps.",
+        "elevatorPitch": "AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.",
+        "order": 30,
+        "importance": "flagship",
+        "tags": [
+          "learning systems",
+          "graph orchestration",
+          "AI",
+          "interactive systems"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Cursor",
+          "Graph modeling",
+          "AI-assisted topic generation",
+          "Interactive navigation"
+        ],
+        "year": 2026,
+        "status": "active prototype",
+        "icon": "map"
+      },
       "summary": "AI-powered learning trails that turn topics into navigable knowledge maps.",
       "elevatorPitch": "AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.",
       "order": 30,
@@ -3483,7 +4094,7 @@
           "title": "OzMap",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: OzMap\nPath: projects/ozmap.md\nSection: Metadata\n\nTitle: OzMap\nPath: projects/ozmap.md\nKind: project\nSummary: AI-powered learning trails that turn topics into navigable knowledge maps.\nElevator pitch: AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.\nTags: learning systems, graph orchestration, AI, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, Graph modeling, AI-assisted topic generation, Interactive navigation\nYear: 2026\nStatus: active prototype\n\n## Links\n\n- website: https://ozmap.app",
+          "text": "Title: OzMap\nPath: projects/ozmap.md\nSection: Metadata\n\nTitle: OzMap\nPath: projects/ozmap.md\nKind: project\nCategory: PROJECTS\nSummary: AI-powered learning trails that turn topics into navigable knowledge maps.\nElevator pitch: AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.\nOrder: 30\nImportance: flagship\nTags: learning systems, graph orchestration, AI, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, Graph modeling, AI-assisted topic generation, Interactive navigation\nYear: 2026\nStatus: active prototype\nIcon: map\n\n## Links\n\n- website: https://ozmap.app",
           "chunkIndex": 0
         },
         {
@@ -3563,6 +4174,37 @@
       "path": "projects/rudy-finds.md",
       "title": "Rudy Finds",
       "kind": "project",
+      "frontMatter": {
+        "title": "Rudy Finds",
+        "kind": "project",
+        "category": "PROJECTS",
+        "summary": "Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.",
+        "elevatorPitch": "Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.",
+        "order": 50,
+        "importance": "major",
+        "tags": [
+          "semantic search",
+          "browser extension",
+          "retrieval",
+          "AI tooling",
+          "local AI",
+          "knowledge discovery"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Cursor",
+          "Chrome Extension APIs",
+          "Embeddings",
+          "Semantic Search",
+          "Browser APIs",
+          "Local Storage",
+          "Vector Retrieval"
+        ],
+        "year": 2026,
+        "status": "prototype",
+        "icon": "search"
+      },
       "summary": "Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.",
       "elevatorPitch": "Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.",
       "order": 50,
@@ -3595,7 +4237,7 @@
           "title": "Rudy Finds",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: Rudy Finds\nPath: projects/rudy-finds.md\nSection: Metadata\n\nTitle: Rudy Finds\nPath: projects/rudy-finds.md\nKind: project\nSummary: Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.\nElevator pitch: Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.\nTags: semantic search, browser extension, retrieval, AI tooling, local AI, knowledge discovery\nTechnologies: TypeScript, React, Cursor, Chrome Extension APIs, Embeddings, Semantic Search, Browser APIs, Local Storage, Vector Retrieval\nYear: 2026\nStatus: prototype\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457784846191546368-7HNh/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+          "text": "Title: Rudy Finds\nPath: projects/rudy-finds.md\nSection: Metadata\n\nTitle: Rudy Finds\nPath: projects/rudy-finds.md\nKind: project\nCategory: PROJECTS\nSummary: Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.\nElevator pitch: Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.\nOrder: 50\nImportance: major\nTags: semantic search, browser extension, retrieval, AI tooling, local AI, knowledge discovery\nTechnologies: TypeScript, React, Cursor, Chrome Extension APIs, Embeddings, Semantic Search, Browser APIs, Local Storage, Vector Retrieval\nYear: 2026\nStatus: prototype\nIcon: search\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457784846191546368-7HNh/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
           "chunkIndex": 0
         },
         {
@@ -3675,6 +4317,37 @@
       "path": "projects/storybook-arcade.md",
       "title": "Storybook Arcade",
       "kind": "project",
+      "frontMatter": {
+        "title": "Storybook Arcade",
+        "kind": "project",
+        "category": "PROJECTS",
+        "summary": "Multimodal storytelling system combining language, images, narration, and interaction.",
+        "elevatorPitch": "AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.",
+        "order": 40,
+        "importance": "flagship",
+        "tags": [
+          "multimodal AI",
+          "storytelling",
+          "TTS",
+          "orchestration",
+          "image generation",
+          "creative systems"
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Cursor",
+          "LLM APIs",
+          "Image generation",
+          "Text-to-speech",
+          "Streaming workflows",
+          "Raspberry Pi",
+          "Prompt orchestration"
+        ],
+        "year": 2026,
+        "status": "prototype",
+        "icon": "gamepad"
+      },
       "summary": "Multimodal storytelling system combining language, images, narration, and interaction.",
       "elevatorPitch": "AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.",
       "order": 40,
@@ -3707,7 +4380,7 @@
           "title": "Storybook Arcade",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: Storybook Arcade\nPath: projects/storybook-arcade.md\nSection: Metadata\n\nTitle: Storybook Arcade\nPath: projects/storybook-arcade.md\nKind: project\nSummary: Multimodal storytelling system combining language, images, narration, and interaction.\nElevator pitch: AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.\nTags: multimodal AI, storytelling, TTS, orchestration, image generation, creative systems\nTechnologies: TypeScript, React, Cursor, LLM APIs, Image generation, Text-to-speech, Streaming workflows, Raspberry Pi, Prompt orchestration\nYear: 2026\nStatus: prototype\n\n## Links\n\n- demo: https://youtu.be/ZOrma2xMTy8\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-genai-raspberrypi-ugcPost-7449479750080692224-ABGN/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+          "text": "Title: Storybook Arcade\nPath: projects/storybook-arcade.md\nSection: Metadata\n\nTitle: Storybook Arcade\nPath: projects/storybook-arcade.md\nKind: project\nCategory: PROJECTS\nSummary: Multimodal storytelling system combining language, images, narration, and interaction.\nElevator pitch: AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.\nOrder: 40\nImportance: flagship\nTags: multimodal AI, storytelling, TTS, orchestration, image generation, creative systems\nTechnologies: TypeScript, React, Cursor, LLM APIs, Image generation, Text-to-speech, Streaming workflows, Raspberry Pi, Prompt orchestration\nYear: 2026\nStatus: prototype\nIcon: gamepad\n\n## Links\n\n- demo: https://youtu.be/ZOrma2xMTy8\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-genai-raspberrypi-ugcPost-7449479750080692224-ABGN/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
           "chunkIndex": 0
         },
         {
@@ -3797,6 +4470,37 @@
       "path": "projects/zerofabric.md",
       "title": "ZeroFabric",
       "kind": "concept",
+      "frontMatter": {
+        "title": "ZeroFabric",
+        "kind": "concept",
+        "category": "PROJECTS",
+        "summary": "Runtime semantic capability coordination for agentic workflows.",
+        "elevatorPitch": "A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.",
+        "order": 15,
+        "importance": "flagship",
+        "tags": [
+          "AI orchestration",
+          "agentic workflows",
+          "runtime systems",
+          "capabilities",
+          "semantic routing",
+          "governance"
+        ],
+        "technologies": [
+          "TypeScript",
+          "Runtime Systems",
+          "AI Agents",
+          "Capability Modeling",
+          "Policy Engines",
+          "Event-Driven Architecture",
+          "Semantic Routing",
+          "Workflow Orchestration"
+        ],
+        "year": 2026,
+        "status": "concept exploration",
+        "icon": "network",
+        "featured": true
+      },
       "summary": "Runtime semantic capability coordination for agentic workflows.",
       "elevatorPitch": "A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.",
       "order": 15,
@@ -3828,7 +4532,7 @@
           "title": "ZeroFabric",
           "kind": "concept",
           "section": "Metadata",
-          "text": "Title: ZeroFabric\nPath: projects/zerofabric.md\nSection: Metadata\n\nTitle: ZeroFabric\nPath: projects/zerofabric.md\nKind: concept\nSummary: Runtime semantic capability coordination for agentic workflows.\nElevator pitch: A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.\nTags: AI orchestration, agentic workflows, runtime systems, capabilities, semantic routing, governance\nTechnologies: TypeScript, Runtime Systems, AI Agents, Capability Modeling, Policy Engines, Event-Driven Architecture, Semantic Routing, Workflow Orchestration\nYear: 2026\nStatus: concept exploration\n\n## Links\n\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_aiinfrastructure-softwarearchitecture-systemsdesign-share-7461473011150450688-5lDf/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+          "text": "Title: ZeroFabric\nPath: projects/zerofabric.md\nSection: Metadata\n\nTitle: ZeroFabric\nPath: projects/zerofabric.md\nKind: concept\nCategory: PROJECTS\nSummary: Runtime semantic capability coordination for agentic workflows.\nElevator pitch: A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.\nOrder: 15\nImportance: flagship\nTags: AI orchestration, agentic workflows, runtime systems, capabilities, semantic routing, governance\nTechnologies: TypeScript, Runtime Systems, AI Agents, Capability Modeling, Policy Engines, Event-Driven Architecture, Semantic Routing, Workflow Orchestration\nYear: 2026\nStatus: concept exploration\nIcon: network\nFeatured: true\n\n## Links\n\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_aiinfrastructure-softwarearchitecture-systemsdesign-share-7461473011150450688-5lDf/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
           "chunkIndex": 0
         },
         {
@@ -3918,6 +4622,15 @@
       "path": "writing/lessons-from-six-in-twelve.md",
       "title": "Lessons from Six in Twelve",
       "kind": "writing",
+      "frontMatter": {
+        "title": "Lessons from Six in Twelve",
+        "kind": "writing",
+        "summary": "Reflections on shipping many experiments in a compressed timeframe.",
+        "order": 40,
+        "tags": [],
+        "technologies": [],
+        "icon": "timer"
+      },
       "summary": "Reflections on shipping many experiments in a compressed timeframe.",
       "order": 40,
       "tags": [],
@@ -3930,7 +4643,7 @@
           "title": "Lessons from Six in Twelve",
           "kind": "writing",
           "section": "Metadata",
-          "text": "Title: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nSection: Metadata\n\nTitle: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nKind: writing\nSummary: Reflections on shipping many experiments in a compressed timeframe.",
+          "text": "Title: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nSection: Metadata\n\nTitle: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nKind: writing\nSummary: Reflections on shipping many experiments in a compressed timeframe.\nOrder: 40\nIcon: timer",
           "chunkIndex": 0
         },
         {
@@ -3960,6 +4673,15 @@
       "path": "writing/local-llm-orchestration.md",
       "title": "Local LLM Orchestration",
       "kind": "writing",
+      "frontMatter": {
+        "title": "Local LLM Orchestration",
+        "kind": "writing",
+        "summary": "Patterns for orchestrating local models with deterministic guardrails.",
+        "order": 30,
+        "tags": [],
+        "technologies": [],
+        "icon": "brain"
+      },
       "summary": "Patterns for orchestrating local models with deterministic guardrails.",
       "order": 30,
       "tags": [],
@@ -3972,7 +4694,7 @@
           "title": "Local LLM Orchestration",
           "kind": "writing",
           "section": "Metadata",
-          "text": "Title: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nSection: Metadata\n\nTitle: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nKind: writing\nSummary: Patterns for orchestrating local models with deterministic guardrails.",
+          "text": "Title: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nSection: Metadata\n\nTitle: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nKind: writing\nSummary: Patterns for orchestrating local models with deterministic guardrails.\nOrder: 30\nIcon: brain",
           "chunkIndex": 0
         },
         {
@@ -4002,6 +4724,15 @@
       "path": "writing/stop-building-static-agents.md",
       "title": "Stop Building Static Agents",
       "kind": "writing",
+      "frontMatter": {
+        "title": "Stop Building Static Agents",
+        "kind": "writing",
+        "summary": "Why governed capability spaces matter more than one-shot agent demos.",
+        "order": 20,
+        "tags": [],
+        "technologies": [],
+        "icon": "file-text"
+      },
       "summary": "Why governed capability spaces matter more than one-shot agent demos.",
       "order": 20,
       "tags": [],
@@ -4014,7 +4745,7 @@
           "title": "Stop Building Static Agents",
           "kind": "writing",
           "section": "Metadata",
-          "text": "Title: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nSection: Metadata\n\nTitle: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nKind: writing\nSummary: Why governed capability spaces matter more than one-shot agent demos.",
+          "text": "Title: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nSection: Metadata\n\nTitle: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nKind: writing\nSummary: Why governed capability spaces matter more than one-shot agent demos.\nOrder: 20\nIcon: file-text",
           "chunkIndex": 0
         },
         {
@@ -4058,7 +4789,7 @@
       "title": "About Anki",
       "kind": "profile",
       "section": "Metadata",
-      "text": "Title: About Anki\nPath: about/about-anki.md\nSection: Metadata\n\nTitle: About Anki\nPath: about/about-anki.md\nKind: profile\nSummary: Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.\nTags: AI orchestration, developer platforms, TypeScript, runtime systems",
+      "text": "Title: About Anki\nPath: about/about-anki.md\nSection: Metadata\n\nTitle: About Anki\nPath: about/about-anki.md\nKind: profile\nCategory: ABOUT\nSummary: Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.\nOrder: 1\nTags: AI orchestration, developer platforms, TypeScript, runtime systems\nIcon: user",
       "chunkIndex": 0
     },
     {
@@ -4108,7 +4839,7 @@
       "title": "Contact",
       "kind": "profile",
       "section": "Metadata",
-      "text": "Title: Contact\nPath: about/contact.md\nSection: Metadata\n\nTitle: Contact\nPath: about/contact.md\nKind: profile\nSummary: Ways to reach Anki for collaboration, consulting, and professional inquiries.\nTags: contact, LinkedIn, email",
+      "text": "Title: Contact\nPath: about/contact.md\nSection: Metadata\n\nTitle: Contact\nPath: about/contact.md\nKind: profile\nCategory: ABOUT\nSummary: Ways to reach Anki for collaboration, consulting, and professional inquiries.\nOrder: 3\nTags: contact, LinkedIn, email\nIcon: mail",
       "chunkIndex": 0
     },
     {
@@ -4136,9 +4867,9 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Metadata",
-      "text": "Title: resume\nPath: about/resume.md\nSection: Metadata\n\nTitle: resume\nPath: about/resume.md\nKind: about",
+      "text": "Title: resume\nPath: about/resume.md\nSection: Metadata\n\nTitle: resume\nPath: about/resume.md\nKind: profile",
       "chunkIndex": 0
     },
     {
@@ -4146,7 +4877,7 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Anki Nelaturu",
       "text": "Title: resume\nPath: about/resume.md\nSection: Anki Nelaturu\n\n**Santa Clara, CA**  \n(408) 431-3061  \nanki.r.nelaturu@gmail.com  \nlinkedin.com/in/ankinelaturu\n\n### Principal AI Product Engineer | AI Orchestration, Agentic Workflows & Developer Platforms\n\nPrincipal engineer specializing in AI-native orchestration systems, developer platforms, and runtime workflows. Over 20 years building scalable execution platforms, developer tooling, embedded runtimes, and enterprise application platforms. Recent focus includes AI-assisted engineering workflows, local-first AI systems, retrieval pipelines, semantic orchestration, and human-in-the-loop execution models.\n\n---",
       "chunkIndex": 1
@@ -4156,7 +4887,7 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Skills",
       "text": "Title: resume\nPath: about/resume.md\nSection: Skills\n\n- AI orchestration workflows\n- Agentic systems\n- LLM APIs\n- Function calling\n- Retrieval workflows\n- Embeddings\n- TypeScript\n- JavaScript (ES6+)\n- React\n- Next.js\n- Node.js\n- Runtime systems\n- Asynchronous execution\n- Execution pipelines\n- WebSockets\n- ONNX\n- REST APIs\n- CI/CD\n- Babel\n- Rollup\n- Jasmine\n- Karma\n\n---",
       "chunkIndex": 2
@@ -4166,7 +4897,7 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Selected Projects",
       "text": "Title: resume\nPath: about/resume.md\nSection: Selected Projects\n\n### Storybook Arcade (Once Upon a GPT)\nhttps://youtu.be/ZOrma2xMTy8\n\nEngineered a multimodal orchestration pipeline combining LLM reasoning, image generation, and text-to-speech systems into synchronized story-generation workflows with streaming execution and low-latency feedback.\n\n---",
       "chunkIndex": 3
@@ -4176,7 +4907,7 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Professional Experience",
       "text": "Title: resume\nPath: about/resume.md\nSection: Professional Experience\n\n### Independent Product Engineer — AI Systems & Developer Tools\n**Oct 2025 – Present**\n\nBuilt AI-driven systems across developer tooling, learning orchestration, and content workflows, emphasizing low-latency execution, streaming interactions, and iterative human-in-the-loop refinement.\n\n#### OzMap\nhttps://ozmap.app\n\nArchitected a graph-based learning orchestration system enabling dynamic topic generation, branching exploration paths, and synchronized execution state across interactive sessions.\n\n#### Lintern\nhttps://lintern.app\n\nBuilt a local-first data inspection system for AI workflows using heuristic and embedding-based semantic detection pipelines to identify sensitive information with low-latency, in-browser execution.\n\n#### Crafticle\nhttps://crafticle.app\n\nBuilt an AI-assisted content orchestration system enabling structured idea extraction, transformation pipelines, and iterative human-guided article composition.\n\n---\n\n### Oracle\n\n#### Consulting Member of Technical Staff\n**Sep 2024 – Sep 2025**\n\n**Technical Lead – TypeScript Enablement & Generative AI Integration (Oracle Visual Builder)**\n\n- Led end-to-end TypeScript enablement across runtime, build systems, and tooling.\n- Built an LLM-driven orchestration engine using function-calling APIs to synthesize deterministic multi-step action sequences from natural language instructions.\n- Built an on-the-fly Babel transpilation pipeline and integrated Jasmine/Karma testing into CI workflows.\n\n#### Principal Member of Technical Staff\n**Jul 2018 – Aug 2024**\n\n**Technical Lead – Visual Builder Design-Time & Action Chain Framework**\n\n- Led a team of 4–5 engineers delivering core Oracle Visual Builder platform features.\n- Architected a runtime execution framework and dependency-driven orchestration graph for asynchronous workflows.\n- Contributed across frontend and server-side components.\n- Partnered with Product and UX teams to improve developer productivity.\n- Established architectural guidelines and conducted code reviews.\n\n#### Principal Member of Technical Staff\n**Dec 2013 – Jul 2018**\n\n**Architect – Oracle Mobile Application Framework (MAF)**\n\n- Contributed to architecture and development of a cross-platform mobile framework supporting iOS, Android, and Windows.\n- Led migration to Java 8 and modern runtime integrations.\n- Designed runtime components across Java, C/C++, and native mobile layers.\n- Presented at JavaOne and Oracle OpenWorld.\n\n#### Principal Member of Technical Staff\n**Feb 2011 – Dec 2013**\n\n- Contributed to Java Embedded Suite (JES).\n- Designed and developed REST services and runtime components for embedded and distributed IoT environments.\n\n---\n\n### Sun Microsystems\n\n#### Principal Member of Technical Staff\n**Jan 2004 – Feb 2011**\n\n- Contributed to resource-constrained JVM runtime systems.\n- Focused on synchronization, execution performance, portability, and secure embedded execution.\n- Delivered technical sessions and workshops at JavaOne.\n\n---",
       "chunkIndex": 4
@@ -4186,7 +4917,7 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Education",
       "text": "Title: resume\nPath: about/resume.md\nSection: Education\n\n### Master of Science, Computer Science\n**1999**\n\nNational Institute of Electronics & Information Technology (NIELIT), India\n\n---",
       "chunkIndex": 5
@@ -4196,7 +4927,7 @@
       "documentId": "about/resume",
       "path": "about/resume.md",
       "title": "resume",
-      "kind": "about",
+      "kind": "profile",
       "section": "Patents",
       "text": "Title: resume\nPath: about/resume.md\nSection: Patents\n\n- US10198279B2 — Thread synchronization for platform neutrality\n- US8978023 — Virtual channel for embedded process communication\n- US8863126 — Canonical mechanism for securely assembling features into a mobile application\n- US8856805 — Java virtual machine embedded in a native mobile application",
       "chunkIndex": 6
@@ -4208,7 +4939,7 @@
       "title": "AI Orchestration",
       "kind": "capability",
       "section": "Metadata",
-      "text": "Title: AI Orchestration\nPath: capabilities/ai-orchestration.md\nSection: Metadata\n\nTitle: AI Orchestration\nPath: capabilities/ai-orchestration.md\nKind: capability\nSummary: Agentic workflows, governed execution paths, and capability coordination.\nTags: orchestration, LLMs, workflows, function calling",
+      "text": "Title: AI Orchestration\nPath: capabilities/ai-orchestration.md\nSection: Metadata\n\nTitle: AI Orchestration\nPath: capabilities/ai-orchestration.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Agentic workflows, governed execution paths, and capability coordination.\nOrder: 10\nTags: orchestration, LLMs, workflows, function calling\nIcon: network\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -4248,7 +4979,7 @@
       "title": "Browser Runtimes",
       "kind": "capability",
       "section": "Metadata",
-      "text": "Title: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nSection: Metadata\n\nTitle: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nKind: capability\nSummary: Browser-native AI, WebLLM, and local-first execution models.\nTags: browser, local-first, ONNX, extensions",
+      "text": "Title: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nSection: Metadata\n\nTitle: Browser Runtimes\nPath: capabilities/browser-runtimes.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Browser-native AI, WebLLM, and local-first execution models.\nOrder: 30\nTags: browser, local-first, ONNX, extensions\nIcon: globe",
       "chunkIndex": 0
     },
     {
@@ -4288,7 +5019,7 @@
       "title": "Developer Platforms",
       "kind": "capability",
       "section": "Metadata",
-      "text": "Title: Developer Platforms\nPath: capabilities/developer-platforms.md\nSection: Metadata\n\nTitle: Developer Platforms\nPath: capabilities/developer-platforms.md\nKind: capability\nSummary: Tools and platforms that make complex systems usable for builders.\nTags: developer platforms, tooling, Visual Builder, authoring",
+      "text": "Title: Developer Platforms\nPath: capabilities/developer-platforms.md\nSection: Metadata\n\nTitle: Developer Platforms\nPath: capabilities/developer-platforms.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Tools and platforms that make complex systems usable for builders.\nOrder: 20\nTags: developer platforms, tooling, Visual Builder, authoring\nIcon: terminal\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -4328,7 +5059,7 @@
       "title": "Human–AI Interaction",
       "kind": "capability",
       "section": "Metadata",
-      "text": "Title: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nSection: Metadata\n\nTitle: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nKind: capability\nSummary: Iterative collaboration patterns between humans and AI systems.",
+      "text": "Title: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nSection: Metadata\n\nTitle: Human–AI Interaction\nPath: capabilities/human-ai-interaction.md\nKind: capability\nSummary: Iterative collaboration patterns between humans and AI systems.\nOrder: 60\nIcon: sparkles",
       "chunkIndex": 0
     },
     {
@@ -4358,7 +5089,7 @@
       "title": "Interactive Systems",
       "kind": "capability",
       "section": "Metadata",
-      "text": "Title: Interactive Systems\nPath: capabilities/interactive-systems.md\nSection: Metadata\n\nTitle: Interactive Systems\nPath: capabilities/interactive-systems.md\nKind: capability\nSummary: Low-latency, human-in-the-loop interactive products and authoring tools.\nTags: interactive systems, frontend, UX, real-time",
+      "text": "Title: Interactive Systems\nPath: capabilities/interactive-systems.md\nSection: Metadata\n\nTitle: Interactive Systems\nPath: capabilities/interactive-systems.md\nKind: capability\nCategory: CAPABILITIES\nSummary: Low-latency, human-in-the-loop interactive products and authoring tools.\nOrder: 40\nTags: interactive systems, frontend, UX, real-time\nIcon: mouse-pointer",
       "chunkIndex": 0
     },
     {
@@ -4398,7 +5129,7 @@
       "title": "Local-First AI",
       "kind": "capability",
       "section": "Metadata",
-      "text": "Title: Local-First AI\nPath: capabilities/local-first-ai.md\nSection: Metadata\n\nTitle: Local-First AI\nPath: capabilities/local-first-ai.md\nKind: capability\nSummary: Privacy-preserving AI workflows that run close to the user.",
+      "text": "Title: Local-First AI\nPath: capabilities/local-first-ai.md\nSection: Metadata\n\nTitle: Local-First AI\nPath: capabilities/local-first-ai.md\nKind: capability\nSummary: Privacy-preserving AI workflows that run close to the user.\nOrder: 50\nIcon: shield\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -4428,7 +5159,7 @@
       "title": "Aimless Dude & Hyper Dog",
       "kind": "creative",
       "section": "Metadata",
-      "text": "Title: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nSection: Metadata\n\nTitle: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nKind: creative\nSummary: Daily illustrated diary with Caiku micro-poems and filmstrip viewer.\nTags: caiku, visual storytelling, comic strip, creative systems, daily project",
+      "text": "Title: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nSection: Metadata\n\nTitle: Aimless Dude & Hyper Dog\nPath: creative-systems/aimless-dude-hyper-dog.md\nKind: creative\nCategory: Creative Systems\nSummary: Daily illustrated diary with Caiku micro-poems and filmstrip viewer.\nOrder: 10\nTags: caiku, visual storytelling, comic strip, creative systems, daily project\nType: filmstrip\nIcon: film\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -5708,7 +6439,7 @@
       "title": "ChatGPT Export Summary",
       "kind": "analytics",
       "section": "Metadata",
-      "text": "Title: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nSection: Metadata\n\nTitle: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nKind: analytics\nSummary: Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.\nElevator pitch: A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.\nTags: ChatGPT, AI workflows, productivity, analytics, personal knowledge, LLM usage\nTechnologies: Python, Pandas, ChatGPT Export Processing, CSV Analysis, Data Visualization\nYear: 2026\nStatus: active",
+      "text": "Title: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nSection: Metadata\n\nTitle: ChatGPT Export Summary\nPath: creative-systems/chatgpt_export_summary.md\nKind: analytics\nCategory: CREATIVE SYSTEMS\nSummary: Analysis of my ChatGPT usage patterns, conversations, and token consumption over time.\nElevator pitch: A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.\nOrder: 90\nImportance: major\nTags: ChatGPT, AI workflows, productivity, analytics, personal knowledge, LLM usage\nTechnologies: Python, Pandas, ChatGPT Export Processing, CSV Analysis, Data Visualization\nYear: 2026\nStatus: active\nIcon: bar-chart-3",
       "chunkIndex": 0
     },
     {
@@ -5808,7 +6539,7 @@
       "title": "Java Embedded Suite",
       "kind": "experience",
       "section": "Metadata",
-      "text": "Title: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nSection: Metadata\n\nTitle: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nKind: experience\nSummary: Designed REST services and runtime components for embedded and distributed IoT environments.\nElevator pitch: Built Java Embedded Suite components for RESTful services and distributed embedded systems.\nTags: Oracle, Java Embedded Suite, embedded systems, REST services, IoT, runtime systems\nTechnologies: Java, REST APIs, Embedded Systems, Distributed Systems, IoT Runtime Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2011-02\nEnd date: 2013-12\nYear: 2011-2013\nStatus: completed",
+      "text": "Title: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nSection: Metadata\n\nTitle: Java Embedded Suite\nPath: experience/oracle-java-embedded-suite.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Designed REST services and runtime components for embedded and distributed IoT environments.\nElevator pitch: Built Java Embedded Suite components for RESTful services and distributed embedded systems.\nOrder: 40\nImportance: supporting\nTags: Oracle, Java Embedded Suite, embedded systems, REST services, IoT, runtime systems\nTechnologies: Java, REST APIs, Embedded Systems, Distributed Systems, IoT Runtime Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2011-02\nEnd date: 2013-12\nYear: 2011-2013\nStatus: completed\nIcon: radio",
       "chunkIndex": 0
     },
     {
@@ -5898,7 +6629,7 @@
       "title": "Oracle Mobile Application Framework",
       "kind": "experience",
       "section": "Metadata",
-      "text": "Title: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nSection: Metadata\n\nTitle: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nKind: experience\nSummary: Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.\nElevator pitch: Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.\nTags: Oracle, mobile frameworks, cross-platform runtime, Java, native mobile, runtime systems\nTechnologies: Java, Java 8, C/C++, iOS, Android, Windows, Mobile Runtime, Cross-platform Frameworks\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2013-12\nEnd date: 2018-07\nYear: 2013-2018\nStatus: completed",
+      "text": "Title: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nSection: Metadata\n\nTitle: Oracle Mobile Application Framework\nPath: experience/oracle-mobile-application-framework.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Architected cross-platform mobile framework runtime components across Java, native layers, and mobile platforms.\nElevator pitch: Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows.\nOrder: 30\nImportance: major\nTags: Oracle, mobile frameworks, cross-platform runtime, Java, native mobile, runtime systems\nTechnologies: Java, Java 8, C/C++, iOS, Android, Windows, Mobile Runtime, Cross-platform Frameworks\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2013-12\nEnd date: 2018-07\nYear: 2013-2018\nStatus: completed\nIcon: smartphone",
       "chunkIndex": 0
     },
     {
@@ -5988,7 +6719,7 @@
       "title": "TypeScript Enablement & Generative AI Integration",
       "kind": "experience",
       "section": "Metadata",
-      "text": "Title: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nSection: Metadata\n\nTitle: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nKind: experience\nSummary: Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.\nElevator pitch: Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.\nTags: Oracle, Visual Builder, TypeScript, generative AI, action orchestration, developer platforms\nTechnologies: TypeScript, JavaScript, Babel, Jasmine, Karma, LLM APIs, Function Calling, CI/CD, Oracle Visual Builder\nCompany: Oracle\nRole: Consulting Member of Technical Staff\nStart date: 2024-09\nEnd date: 2025-09\nYear: 2024-2025\nStatus: completed",
+      "text": "Title: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nSection: Metadata\n\nTitle: TypeScript Enablement & Generative AI Integration\nPath: experience/oracle-typescript-genai-integration.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Modernized Oracle Visual Builder with TypeScript enablement and LLM-driven action orchestration.\nElevator pitch: Led TypeScript modernization and built an LLM-driven orchestration engine for deterministic multi-step action generation.\nOrder: 10\nImportance: flagship\nTags: Oracle, Visual Builder, TypeScript, generative AI, action orchestration, developer platforms\nTechnologies: TypeScript, JavaScript, Babel, Jasmine, Karma, LLM APIs, Function Calling, CI/CD, Oracle Visual Builder\nCompany: Oracle\nRole: Consulting Member of Technical Staff\nStart date: 2024-09\nEnd date: 2025-09\nYear: 2024-2025\nStatus: completed\nIcon: workflow\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -6078,7 +6809,7 @@
       "title": "Visual Builder Design-Time & Action Chain Framework",
       "kind": "experience",
       "section": "Metadata",
-      "text": "Title: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nSection: Metadata\n\nTitle: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nKind: experience\nSummary: Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.\nElevator pitch: Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.\nTags: Oracle, Visual Builder, action chains, developer platforms, runtime systems, frontend architecture\nTechnologies: JavaScript, ES6, SCSS, HTML, Runtime Execution, Dependency Graphs, Asynchronous Workflows, Web Application Platforms, Server-side Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2018-07\nEnd date: 2024-08\nYear: 2018-2024\nStatus: completed",
+      "text": "Title: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nSection: Metadata\n\nTitle: Visual Builder Design-Time & Action Chain Framework\nPath: experience/oracle-visual-builder-action-chain-framework.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Led core Oracle Visual Builder platform work including action chains, runtime execution, and design-time developer workflows.\nElevator pitch: Led platform engineering for Visual Builder design-time systems and architected action-chain runtime orchestration.\nOrder: 20\nImportance: flagship\nTags: Oracle, Visual Builder, action chains, developer platforms, runtime systems, frontend architecture\nTechnologies: JavaScript, ES6, SCSS, HTML, Runtime Execution, Dependency Graphs, Asynchronous Workflows, Web Application Platforms, Server-side Components\nCompany: Oracle\nRole: Principal Member of Technical Staff\nStart date: 2018-07\nEnd date: 2024-08\nYear: 2018-2024\nStatus: completed\nIcon: blocks\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -6168,7 +6899,7 @@
       "title": "Embedded JVM Runtime Systems",
       "kind": "experience",
       "section": "Metadata",
-      "text": "Title: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nKind: experience\nSummary: Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.\nElevator pitch: Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.\nTags: Sun Microsystems, JVM, embedded systems, runtime systems, synchronization, performance\nTechnologies: Java, JVM, Embedded Runtime, Synchronization, Performance Optimization, Portability, Secure Execution\nCompany: Sun Microsystems\nRole: Principal Member of Technical Staff\nStart date: 2004-01\nEnd date: 2011-02\nYear: 2004-2011\nStatus: completed",
+      "text": "Title: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime Systems\nPath: experience/sun-embedded-jvm-runtime.md\nKind: experience\nCategory: EXPERIENCE\nSummary: Built resource-constrained JVM runtime systems focused on synchronization, performance, portability, and secure embedded execution.\nElevator pitch: Developed embedded JVM runtime systems for constrained environments at Sun Microsystems.\nOrder: 50\nImportance: flagship\nTags: Sun Microsystems, JVM, embedded systems, runtime systems, synchronization, performance\nTechnologies: Java, JVM, Embedded Runtime, Synchronization, Performance Optimization, Portability, Secure Execution\nCompany: Sun Microsystems\nRole: Principal Member of Technical Staff\nStart date: 2004-01\nEnd date: 2011-02\nYear: 2004-2011\nStatus: completed\nIcon: cpu",
       "chunkIndex": 0
     },
     {
@@ -6258,7 +6989,7 @@
       "title": "Future Experiments",
       "kind": "lab",
       "section": "Metadata",
-      "text": "Title: Future Experiments\nPath: lab/future-experiments.md\nSection: Metadata\n\nTitle: Future Experiments\nPath: lab/future-experiments.md\nKind: lab\nSummary: In-progress experiments in browser AI, orchestration, and tooling.",
+      "text": "Title: Future Experiments\nPath: lab/future-experiments.md\nSection: Metadata\n\nTitle: Future Experiments\nPath: lab/future-experiments.md\nKind: lab\nSummary: In-progress experiments in browser AI, orchestration, and tooling.\nOrder: 30\nIcon: flask-conical",
       "chunkIndex": 0
     },
     {
@@ -6278,7 +7009,7 @@
       "title": "Portfolio Workspace",
       "kind": "lab",
       "section": "Metadata",
-      "text": "Title: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nSection: Metadata\n\nTitle: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nKind: lab\nSummary: The anki.fyi IDE-style knowledge workspace concept.\nTags: portfolio, knowledge base, local AI, RAG",
+      "text": "Title: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nSection: Metadata\n\nTitle: Portfolio Workspace\nPath: lab/portfolio-workspace.md\nKind: lab\nCategory: IDEAS\nSummary: The anki.fyi IDE-style knowledge workspace concept.\nOrder: 10\nTags: portfolio, knowledge base, local AI, RAG\nIcon: layout-dashboard\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -6318,7 +7049,7 @@
       "title": "ZeroFabric Runtime Simulator",
       "kind": "lab",
       "section": "Metadata",
-      "text": "Title: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nSection: Metadata\n\nTitle: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nKind: lab\nSummary: Interactive simulator for governed capability paths and intent routing.",
+      "text": "Title: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nSection: Metadata\n\nTitle: ZeroFabric Runtime Simulator\nPath: lab/zerofabric-runtime-simulator.md\nKind: lab\nSummary: Interactive simulator for governed capability paths and intent routing.\nOrder: 20\nIcon: route\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -6358,7 +7089,7 @@
       "title": "Concurrency Systems",
       "kind": "patent",
       "section": "Metadata",
-      "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Metadata\n\nTitle: Concurrency Systems\nPath: patents/concurrency-systems.md\nKind: patent\nSummary: Thread synchronization and concurrent execution innovations.\nTags: patent, synchronization, runtime\n\n## Links\n\n- url: https://patents.google.com/patent/US10198279B2",
+      "text": "Title: Concurrency Systems\nPath: patents/concurrency-systems.md\nSection: Metadata\n\nTitle: Concurrency Systems\nPath: patents/concurrency-systems.md\nKind: patent\nCategory: PATENTS\nSummary: Thread synchronization and concurrent execution innovations.\nOrder: 20\nTags: patent, synchronization, runtime\nIcon: git-branch\n\n## Links\n\n- url: https://patents.google.com/patent/US10198279B2",
       "chunkIndex": 0
     },
     {
@@ -6378,7 +7109,7 @@
       "title": "Embedded JVM Runtime",
       "kind": "patent",
       "section": "Metadata",
-      "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nKind: patent\nSummary: Embedded JVM architecture and runtime optimizations.\nTags: patent, JVM, mobile\n\n## Links\n\n- url: https://patents.google.com/patent/US8856805",
+      "text": "Title: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nSection: Metadata\n\nTitle: Embedded JVM Runtime\nPath: patents/embedded-jvm-runtime.md\nKind: patent\nCategory: PATENTS\nSummary: Embedded JVM architecture and runtime optimizations.\nOrder: 50\nTags: patent, JVM, mobile\nIcon: cpu\n\n## Links\n\n- url: https://patents.google.com/patent/US8856805",
       "chunkIndex": 0
     },
     {
@@ -6398,7 +7129,7 @@
       "title": "Embedded Process Communication",
       "kind": "patent",
       "section": "Metadata",
-      "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Metadata\n\nTitle: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nKind: patent\nSummary: Inter-process communication for embedded and mobile runtimes.\nTags: patent, embedded, communication\n\n## Links\n\n- url: https://patents.google.com/patent/US8978023",
+      "text": "Title: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nSection: Metadata\n\nTitle: Embedded Process Communication\nPath: patents/embedded-process-communication.md\nKind: patent\nCategory: PATENTS\nSummary: Inter-process communication for embedded and mobile runtimes.\nOrder: 30\nTags: patent, embedded, communication\nIcon: radio\n\n## Links\n\n- url: https://patents.google.com/patent/US8978023",
       "chunkIndex": 0
     },
     {
@@ -6418,7 +7149,7 @@
       "title": "Mobile Platform Innovations",
       "kind": "patent",
       "section": "Metadata",
-      "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Metadata\n\nTitle: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nKind: patent\nSummary: Mobile application platform features and runtime enhancements.\nTags: patent, mobile, application framework\n\n## Links\n\n- url: https://patents.google.com/patent/US8863126",
+      "text": "Title: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nSection: Metadata\n\nTitle: Mobile Platform Innovations\nPath: patents/mobile-platform-innovations.md\nKind: patent\nCategory: PATENTS\nSummary: Mobile application platform features and runtime enhancements.\nOrder: 40\nTags: patent, mobile, application framework\nIcon: layers\n\n## Links\n\n- url: https://patents.google.com/patent/US8863126",
       "chunkIndex": 0
     },
     {
@@ -6438,7 +7169,7 @@
       "title": "Patent Portfolio",
       "kind": "patent",
       "section": "Metadata",
-      "text": "Title: Patent Portfolio\nPath: patents/patent-portfolio.md\nSection: Metadata\n\nTitle: Patent Portfolio\nPath: patents/patent-portfolio.md\nKind: patent\nSummary: Overview of issued patents across runtime, mobile, and embedded systems.",
+      "text": "Title: Patent Portfolio\nPath: patents/patent-portfolio.md\nSection: Metadata\n\nTitle: Patent Portfolio\nPath: patents/patent-portfolio.md\nKind: patent\nSummary: Overview of issued patents across runtime, mobile, and embedded systems.\nOrder: 10\nIcon: badge\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -6468,7 +7199,7 @@
       "title": "Ask Rudy",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: Ask Rudy\nPath: projects/ask-rudy.md\nSection: Metadata\n\nTitle: Ask Rudy\nPath: projects/ask-rudy.md\nKind: project\nSummary: Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.\nElevator pitch: Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.\nTags: retrieval, local AI, Q&A, browser, grounded answers, personal knowledge\nTechnologies: TypeScript, React, Cursor, Browser APIs, Retrieval workflows, Embeddings, Semantic Search, Local Knowledge Concepts, Context-Aware AI\nYear: 2026\nStatus: prototype\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457002618771361792--XXa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+      "text": "Title: Ask Rudy\nPath: projects/ask-rudy.md\nSection: Metadata\n\nTitle: Ask Rudy\nPath: projects/ask-rudy.md\nKind: project\nCategory: PROJECTS\nSummary: Conversational interface for guided exploration and grounded Q&A over local or page-level knowledge.\nElevator pitch: Browser-native AI assistant that answers questions about the content in front of the user using retrieval and grounded context.\nOrder: 60\nImportance: major\nTags: retrieval, local AI, Q&A, browser, grounded answers, personal knowledge\nTechnologies: TypeScript, React, Cursor, Browser APIs, Retrieval workflows, Embeddings, Semantic Search, Local Knowledge Concepts, Context-Aware AI\nYear: 2026\nStatus: prototype\nIcon: message-circle\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457002618771361792--XXa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
       "chunkIndex": 0
     },
     {
@@ -6548,7 +7279,7 @@
       "title": "AstroValley",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+      "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nOrder: 20\nImportance: flagship\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\nIcon: orbit\nFeatured: true\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
       "chunkIndex": 0
     },
     {
@@ -6628,7 +7359,7 @@
       "title": "Crafticle",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: Crafticle\nPath: projects/crafticle.md\nSection: Metadata\n\nTitle: Crafticle\nPath: projects/crafticle.md\nKind: project\nSummary: Authoring and publishing tools for structured creative writing.\nElevator pitch: Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.\nTags: AI writing, TipTap, React, human-in-the-loop\nTechnologies: TypeScript, React, Cursor, Next.js, TipTap, Rich text editing, LLM APIs, Structured content workflows\nYear: 2026\nStatus: prototype\n\n## Links\n\n- website: https://crafticle.app",
+      "text": "Title: Crafticle\nPath: projects/crafticle.md\nSection: Metadata\n\nTitle: Crafticle\nPath: projects/crafticle.md\nKind: project\nCategory: PROJECTS\nSummary: Authoring and publishing tools for structured creative writing.\nElevator pitch: Human-in-the-loop AI writing workflows that transform rough ideas into structured articles.\nOrder: 70\nImportance: major\nTags: AI writing, TipTap, React, human-in-the-loop\nTechnologies: TypeScript, React, Cursor, Next.js, TipTap, Rich text editing, LLM APIs, Structured content workflows\nYear: 2026\nStatus: prototype\nIcon: pen-tool\n\n## Links\n\n- website: https://crafticle.app",
       "chunkIndex": 0
     },
     {
@@ -6708,7 +7439,7 @@
       "title": "Florow",
       "kind": "concept",
       "section": "Metadata",
-      "text": "Title: Florow\nPath: projects/florow.md\nSection: Metadata\n\nTitle: Florow\nPath: projects/florow.md\nKind: concept\nSummary: Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.\nElevator pitch: Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.\nTags: spaced repetition, learning, scheduling, education, productivity, adaptive planning\nTechnologies: TypeScript, React, Next.js, Scheduling Algorithms, Adaptive Learning, Calendar Systems, Learning Analytics\nYear: 2026\nStatus: concept exploration",
+      "text": "Title: Florow\nPath: projects/florow.md\nSection: Metadata\n\nTitle: Florow\nPath: projects/florow.md\nKind: concept\nCategory: PROJECTS\nSummary: Adaptive spaced-repetition planning that turns a learning goal into a personalized review calendar.\nElevator pitch: Enter a topic and a target date, and Florow generates an adaptive spaced-repetition plan that continuously adjusts based on your progress.\nOrder: 25\nImportance: flagship\nTags: spaced repetition, learning, scheduling, education, productivity, adaptive planning\nTechnologies: TypeScript, React, Next.js, Scheduling Algorithms, Adaptive Learning, Calendar Systems, Learning Analytics\nYear: 2026\nStatus: concept exploration\nIcon: calendar-days\nFeatured: true",
       "chunkIndex": 0
     },
     {
@@ -6808,7 +7539,7 @@
       "title": "Lintern",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: Lintern\nPath: projects/lintern.md\nSection: Metadata\n\nTitle: Lintern\nPath: projects/lintern.md\nKind: project\nSummary: Local-first data guardrails for AI workflows.\nElevator pitch: Local-first AI guardrails that detect sensitive information before it reaches external AI systems.\nTags: local-first AI, data guardrails, browser extension, embeddings\nTechnologies: TypeScript, React, Next.js, Cursor, Chrome Extension APIs, DOM interception, Embeddings, Semantic detection, Local browser storage\nYear: 2026\nStatus: active prototype\n\n## Links\n\n- website: https://lintern.app",
+      "text": "Title: Lintern\nPath: projects/lintern.md\nSection: Metadata\n\nTitle: Lintern\nPath: projects/lintern.md\nKind: project\nCategory: PROJECTS\nSummary: Local-first data guardrails for AI workflows.\nElevator pitch: Local-first AI guardrails that detect sensitive information before it reaches external AI systems.\nOrder: 10\nImportance: flagship\nTags: local-first AI, data guardrails, browser extension, embeddings\nTechnologies: TypeScript, React, Next.js, Cursor, Chrome Extension APIs, DOM interception, Embeddings, Semantic detection, Local browser storage\nYear: 2026\nStatus: active prototype\nIcon: lintern-logo\nFeatured: true\n\n## Links\n\n- website: https://lintern.app",
       "chunkIndex": 0
     },
     {
@@ -6888,7 +7619,7 @@
       "title": "OzMap",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: OzMap\nPath: projects/ozmap.md\nSection: Metadata\n\nTitle: OzMap\nPath: projects/ozmap.md\nKind: project\nSummary: AI-powered learning trails that turn topics into navigable knowledge maps.\nElevator pitch: AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.\nTags: learning systems, graph orchestration, AI, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, Graph modeling, AI-assisted topic generation, Interactive navigation\nYear: 2026\nStatus: active prototype\n\n## Links\n\n- website: https://ozmap.app",
+      "text": "Title: OzMap\nPath: projects/ozmap.md\nSection: Metadata\n\nTitle: OzMap\nPath: projects/ozmap.md\nKind: project\nCategory: PROJECTS\nSummary: AI-powered learning trails that turn topics into navigable knowledge maps.\nElevator pitch: AI-powered learning trails that turn topics into navigable maps of concepts and dependencies.\nOrder: 30\nImportance: flagship\nTags: learning systems, graph orchestration, AI, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, Graph modeling, AI-assisted topic generation, Interactive navigation\nYear: 2026\nStatus: active prototype\nIcon: map\n\n## Links\n\n- website: https://ozmap.app",
       "chunkIndex": 0
     },
     {
@@ -6968,7 +7699,7 @@
       "title": "Rudy Finds",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: Rudy Finds\nPath: projects/rudy-finds.md\nSection: Metadata\n\nTitle: Rudy Finds\nPath: projects/rudy-finds.md\nKind: project\nSummary: Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.\nElevator pitch: Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.\nTags: semantic search, browser extension, retrieval, AI tooling, local AI, knowledge discovery\nTechnologies: TypeScript, React, Cursor, Chrome Extension APIs, Embeddings, Semantic Search, Browser APIs, Local Storage, Vector Retrieval\nYear: 2026\nStatus: prototype\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457784846191546368-7HNh/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+      "text": "Title: Rudy Finds\nPath: projects/rudy-finds.md\nSection: Metadata\n\nTitle: Rudy Finds\nPath: projects/rudy-finds.md\nKind: project\nCategory: PROJECTS\nSummary: Search-driven discovery experience built around semantic retrieval and AI-assisted exploration.\nElevator pitch: Browser-native semantic search that helps users rediscover information using meaning instead of exact keywords.\nOrder: 50\nImportance: major\nTags: semantic search, browser extension, retrieval, AI tooling, local AI, knowledge discovery\nTechnologies: TypeScript, React, Cursor, Chrome Extension APIs, Embeddings, Semantic Search, Browser APIs, Local Storage, Vector Retrieval\nYear: 2026\nStatus: prototype\nIcon: search\n\n## Links\n\n- website: https://github.com/ankinelaturu/rudy-monorepo\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457784846191546368-7HNh/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
       "chunkIndex": 0
     },
     {
@@ -7048,7 +7779,7 @@
       "title": "Storybook Arcade",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: Storybook Arcade\nPath: projects/storybook-arcade.md\nSection: Metadata\n\nTitle: Storybook Arcade\nPath: projects/storybook-arcade.md\nKind: project\nSummary: Multimodal storytelling system combining language, images, narration, and interaction.\nElevator pitch: AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.\nTags: multimodal AI, storytelling, TTS, orchestration, image generation, creative systems\nTechnologies: TypeScript, React, Cursor, LLM APIs, Image generation, Text-to-speech, Streaming workflows, Raspberry Pi, Prompt orchestration\nYear: 2026\nStatus: prototype\n\n## Links\n\n- demo: https://youtu.be/ZOrma2xMTy8\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-genai-raspberrypi-ugcPost-7449479750080692224-ABGN/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+      "text": "Title: Storybook Arcade\nPath: projects/storybook-arcade.md\nSection: Metadata\n\nTitle: Storybook Arcade\nPath: projects/storybook-arcade.md\nKind: project\nCategory: PROJECTS\nSummary: Multimodal storytelling system combining language, images, narration, and interaction.\nElevator pitch: AI-powered storytelling platform that orchestrates text, images, and voice into a cohesive interactive experience.\nOrder: 40\nImportance: flagship\nTags: multimodal AI, storytelling, TTS, orchestration, image generation, creative systems\nTechnologies: TypeScript, React, Cursor, LLM APIs, Image generation, Text-to-speech, Streaming workflows, Raspberry Pi, Prompt orchestration\nYear: 2026\nStatus: prototype\nIcon: gamepad\n\n## Links\n\n- demo: https://youtu.be/ZOrma2xMTy8\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_ai-genai-raspberrypi-ugcPost-7449479750080692224-ABGN/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
       "chunkIndex": 0
     },
     {
@@ -7138,7 +7869,7 @@
       "title": "ZeroFabric",
       "kind": "concept",
       "section": "Metadata",
-      "text": "Title: ZeroFabric\nPath: projects/zerofabric.md\nSection: Metadata\n\nTitle: ZeroFabric\nPath: projects/zerofabric.md\nKind: concept\nSummary: Runtime semantic capability coordination for agentic workflows.\nElevator pitch: A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.\nTags: AI orchestration, agentic workflows, runtime systems, capabilities, semantic routing, governance\nTechnologies: TypeScript, Runtime Systems, AI Agents, Capability Modeling, Policy Engines, Event-Driven Architecture, Semantic Routing, Workflow Orchestration\nYear: 2026\nStatus: concept exploration\n\n## Links\n\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_aiinfrastructure-softwarearchitecture-systemsdesign-share-7461473011150450688-5lDf/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+      "text": "Title: ZeroFabric\nPath: projects/zerofabric.md\nSection: Metadata\n\nTitle: ZeroFabric\nPath: projects/zerofabric.md\nKind: concept\nCategory: PROJECTS\nSummary: Runtime semantic capability coordination for agentic workflows.\nElevator pitch: A conceptual runtime fabric that coordinates capabilities, policies, and intent paths for governed agentic systems.\nOrder: 15\nImportance: flagship\nTags: AI orchestration, agentic workflows, runtime systems, capabilities, semantic routing, governance\nTechnologies: TypeScript, Runtime Systems, AI Agents, Capability Modeling, Policy Engines, Event-Driven Architecture, Semantic Routing, Workflow Orchestration\nYear: 2026\nStatus: concept exploration\nIcon: network\nFeatured: true\n\n## Links\n\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_aiinfrastructure-softwarearchitecture-systemsdesign-share-7461473011150450688-5lDf/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
       "chunkIndex": 0
     },
     {
@@ -7228,7 +7959,7 @@
       "title": "Lessons from Six in Twelve",
       "kind": "writing",
       "section": "Metadata",
-      "text": "Title: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nSection: Metadata\n\nTitle: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nKind: writing\nSummary: Reflections on shipping many experiments in a compressed timeframe.",
+      "text": "Title: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nSection: Metadata\n\nTitle: Lessons from Six in Twelve\nPath: writing/lessons-from-six-in-twelve.md\nKind: writing\nSummary: Reflections on shipping many experiments in a compressed timeframe.\nOrder: 40\nIcon: timer",
       "chunkIndex": 0
     },
     {
@@ -7258,7 +7989,7 @@
       "title": "Local LLM Orchestration",
       "kind": "writing",
       "section": "Metadata",
-      "text": "Title: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nSection: Metadata\n\nTitle: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nKind: writing\nSummary: Patterns for orchestrating local models with deterministic guardrails.",
+      "text": "Title: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nSection: Metadata\n\nTitle: Local LLM Orchestration\nPath: writing/local-llm-orchestration.md\nKind: writing\nSummary: Patterns for orchestrating local models with deterministic guardrails.\nOrder: 30\nIcon: brain",
       "chunkIndex": 0
     },
     {
@@ -7288,7 +8019,7 @@
       "title": "Stop Building Static Agents",
       "kind": "writing",
       "section": "Metadata",
-      "text": "Title: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nSection: Metadata\n\nTitle: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nKind: writing\nSummary: Why governed capability spaces matter more than one-shot agent demos.",
+      "text": "Title: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nSection: Metadata\n\nTitle: Stop Building Static Agents\nPath: writing/stop-building-static-agents.md\nKind: writing\nSummary: Why governed capability spaces matter more than one-shot agent demos.\nOrder: 20\nIcon: file-text",
       "chunkIndex": 0
     },
     {
