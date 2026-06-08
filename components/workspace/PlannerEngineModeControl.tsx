@@ -24,19 +24,29 @@ const DULL_BLUE = "text-ide-blue/45";
 const BRIGHT_BLUE = "text-[#9cdcfe]";
 
 function SharedSlotLabel({ pressed }: { pressed: boolean }) {
+  const tone = pressed ? BRIGHT_GREEN : DULL_GREEN;
   return (
-    <span className={cn(pressed ? BRIGHT_GREEN : DULL_GREEN, pressed && "font-medium")}>
-      Qwen.Gemma
+    <span className="inline-flex items-center gap-1">
+      <SquareStack className={cn("h-3 w-3 shrink-0", tone)} strokeWidth={2} aria-hidden />
+      <span className={cn(pressed && "font-medium")}>
+        <span className={tone}>Qwen</span>
+        <span className={cn(pressed ? "text-ide-text/70" : "text-ide-muted/50")}> → </span>
+        <span className={tone}>Gemma</span>
+      </span>
     </span>
   );
 }
 
 function SeparateSlotLabel({ pressed }: { pressed: boolean }) {
+  const iconTone = pressed ? "text-ide-text/75" : "text-ide-muted/45";
   return (
-    <span className={cn(pressed && "font-medium")}>
-      <span className={cn(pressed ? BRIGHT_BLUE : DULL_BLUE)}>Qwen</span>
-      <span className={cn(pressed ? "text-ide-text/70" : "text-ide-muted/50")}>.</span>
-      <span className={cn(pressed ? BRIGHT_PURPLE : DULL_PURPLE)}>Gemma</span>
+    <span className="inline-flex items-center gap-1">
+      <span className={cn(pressed && "font-medium")}>
+        <span className={cn(pressed ? BRIGHT_BLUE : DULL_BLUE)}>Qwen</span>
+        <span className={cn(pressed ? "text-ide-text/70" : "text-ide-muted/50")}> ═ </span>
+        <span className={cn(pressed ? BRIGHT_PURPLE : DULL_PURPLE)}>Gemma</span>
+      </span>
+      <Columns2 className={cn("h-3 w-3 shrink-0", iconTone)} strokeWidth={2} aria-hidden />
     </span>
   );
 }
