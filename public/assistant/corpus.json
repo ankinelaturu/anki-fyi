@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "corpusHash": "b88293b65ba9b1fb",
-  "generatedAt": "2026-06-08T01:24:11.663Z",
+  "corpusHash": "2a34134c60dc9605",
+  "generatedAt": "2026-06-08T02:09:38.885Z",
   "documents": [
     {
       "id": "about/about-anki",
@@ -3468,7 +3468,8 @@
           "procedural worlds",
           "WebGPU",
           "AI orchestration",
-          "interactive systems"
+          "interactive systems",
+          "Astrology"
         ],
         "technologies": [
           "TypeScript",
@@ -3511,7 +3512,8 @@
         "procedural worlds",
         "WebGPU",
         "AI orchestration",
-        "interactive systems"
+        "interactive systems",
+        "Astrology"
       ],
       "content": "\n# AstroValley\n\n> A browser-native AI sandbox disguised as an astrology application.\n\n## What It Is\n\nAstroValley is a local-AI experimentation platform built around a deliberately unusual domain: astrology.\n\nAt first glance it appears to be an astrology product, but the real purpose is much broader. AstroValley serves as a sandbox for exploring local LLM orchestration, browser-native AI experiences, procedural world generation, semantic interactions, and rich visual interfaces that run close to the user.\n\nThe application uses astrology because it provides a highly structured data model containing planets, houses, signs, timelines, relationships, and symbolic meaning. That structure makes it an excellent environment for testing AI-driven experiences without starting from a blank slate.\n\nThe long-term vision is a personalized interactive world where data, visualization, AI reasoning, and procedural generation work together inside the browser.\n\n## Why I Built It\n\nI wanted a project that could combine several of the topics I had been exploring independently:\n\n- Local LLM execution\n- Browser runtimes\n- AI orchestration\n- Interactive 3D environments\n- Deterministic world generation\n- Rich visual storytelling\n\nAstrology happened to provide a surprisingly useful framework because it contains structured entities, relationships, timelines, and interpretations that can be transformed into visual and conversational experiences.\n\nRather than building another chat application, I wanted to explore what AI feels like when it becomes part of a living environment.\n\n## Technical Highlights\n\n- Browser-native architecture.\n- React + Next.js application foundation.\n- React Three Fiber and Three.js rendering.\n- WebGPU and WebLLM experimentation.\n- Local Gemma model direction.\n- astronomy-engine integration.\n- Deterministic world generation.\n- Persistent browser-side state.\n- Seed-based procedural content generation.\n- AI-assisted interaction layers built on structured domain data.\n\n## Key Features\n\n- Personalized valley generation.\n- Deterministic worlds derived from user profile data.\n- Procedural placement of houses and structures.\n- Interactive planetary systems.\n- Local-AI experimentation environment.\n- Browser-side persistence.\n- Rich 3D exploration experience.\n- Visual representation of structured astrological data.\n\n## Technical Challenges\n\nOne challenge is balancing playfulness with technical rigor. The experience should feel imaginative while still being built on deterministic systems that can be reproduced consistently.\n\nAnother challenge is local AI execution. Browser-side models introduce concerns around download size, GPU capabilities, memory limits, caching, and progressive loading.\n\nProcedural generation creates a third challenge: generating worlds that feel unique while remaining deterministic and explainable.\n\n## Why It Matters\n\nAstroValley represents many of the themes that appear throughout my recent work.\n\nIt combines local AI, browser runtimes, procedural interfaces, structured data systems, and interactive visualization into a single platform.\n\nThe interesting part is not astrology itself. The interesting part is using a structured symbolic domain to explore what browser-native AI experiences might look like in the future.",
       "chunks": [
@@ -3522,7 +3524,7 @@
           "title": "AstroValley",
           "kind": "project",
           "section": "Metadata",
-          "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nOrder: 20\nImportance: flagship\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\nIcon: orbit\nFeatured: true\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+          "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nOrder: 20\nImportance: flagship\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems, Astrology\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\nIcon: orbit\nFeatured: true\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
           "chunkIndex": 0
         },
         {
@@ -7279,7 +7281,7 @@
       "title": "AstroValley",
       "kind": "project",
       "section": "Metadata",
-      "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nOrder: 20\nImportance: flagship\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\nIcon: orbit\nFeatured: true\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+      "text": "Title: AstroValley\nPath: projects/astrovalley.md\nSection: Metadata\n\nTitle: AstroValley\nPath: projects/astrovalley.md\nKind: project\nSummary: Browser-native AI sandbox disguised as an astrology application.\nElevator pitch: Local-LLM experimentation platform using astrology as a structured sandbox for browser-native AI experiences.\nOrder: 20\nImportance: flagship\nTags: local LLM, browser runtimes, procedural worlds, WebGPU, AI orchestration, interactive systems, Astrology\nTechnologies: TypeScript, React, Next.js, Cursor, React Three Fiber, Three.js, WebGPU, WebLLM, Gemma, astronomy-engine, IndexedDB\nYear: 2026\nStatus: active prototype\nIcon: orbit\nFeatured: true\n\n## Links\n\n- website: https://astrovalley.app\n- linkedin: https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
       "chunkIndex": 0
     },
     {

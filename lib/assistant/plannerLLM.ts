@@ -14,6 +14,12 @@ import type { AskAnkiCallbacks, CorpusFile } from "@/lib/assistant/types";
 
 const NONE_QUERY: MetadataQuery = { action: "none" };
 
+export type PlanMetadataResult = {
+  query: MetadataQuery;
+  /** Wall time for Qwen load + query generation + parse (ms). */
+  elapsedMs: number;
+};
+
 let plannerModel = createQwenPlannerProvider();
 
 /**
@@ -48,19 +54,29 @@ export async function planMetadataQuery(
   question: string,
   corpus: CorpusFile,
   callbacks?: AskAnkiCallbacks
-): Promise<MetadataQuery> {
+): Promise<PlanMetadataResult> {
   const trimmed = question.trim();
-  if (!trimmed) return NONE_QUERY;
+  if (!trimmed) return { query: NONE_QUERY, elapsedMs: 0 };
 
   const vocabulary = buildCorpusVocabulary(corpus.documents);
   const system = buildPlannerSystemPrompt(vocabulary);
 
   callbacks?.onStatus?.("Planning metadata query (Qwen)...");
 
+  console.log("[Ask Anki] Qwen planner prompt:", {
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: trimmed },
+    ],
+  });
+
+  const qwenStart = performance.now();
+
   try {
     await plannerModel.load((message) => callbacks?.onStatus?.(message));
     const raw = await plannerModel.generatePlanner({ system, question: trimmed });
     const query = parsePlannerMetadataQuery(raw);
+    const elapsedMs = performance.now() - qwenStart;
 
     console.log("[Ask Anki] Qwen planner raw output:\n", raw);
     console.log("[Ask Anki] Metadata query JSON:\n", JSON.stringify(query, null, 2));
@@ -69,12 +85,13 @@ export async function planMetadataQuery(
       await plannerModel.unload();
     }
 
-    return query;
+    return { query, elapsedMs };
   } catch (error) {
+    const elapsedMs = performance.now() - qwenStart;
     if (process.env.NODE_ENV === "development") {
       console.warn("[Ask Anki] planner failed, falling back to vector search", error);
     }
     await plannerModel.unload();
-    return NONE_QUERY;
+    return { query: NONE_QUERY, elapsedMs };
   }
 }

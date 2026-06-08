@@ -138,6 +138,15 @@ export type AskAnkiSource = {
 };
 
 /**
+ * Wall-clock timings for a single Ask Anki turn (ms).
+ */
+export type AskAnkiTimings = {
+  qwenMs: number;
+  gemmaMs: number;
+  totalMs: number;
+};
+
+/**
  * Final result returned by `askAnki`, including the generated answer,
  * deduplicated sources, and whether the question was refused outright.
  */
@@ -145,6 +154,7 @@ export type AskAnkiResponse = {
   answer: string;
   sources: AskAnkiSource[];
   refused: boolean;
+  timings?: AskAnkiTimings;
 };
 
 /**

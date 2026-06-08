@@ -14,6 +14,7 @@ tags:
   - WebGPU
   - AI orchestration
   - interactive systems
+  - Astrology
 technologies:
   - TypeScript
   - React

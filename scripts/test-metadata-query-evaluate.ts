@@ -1,4 +1,5 @@
 import { documentMatchesQuery } from "../lib/assistant/metadataQueryEvaluate";
+import { parsePlannerMetadataQuery } from "../lib/assistant/metadataQueryValidate";
 import type { MetadataQuery } from "../lib/assistant/metadataQueryTypes";
 import type { CorpusDocument } from "../lib/assistant/types";
 
@@ -107,12 +108,47 @@ function testImportanceEq(): void {
   assert(documentMatchesQuery(flagship, query), "flagship project should match");
 }
 
+function testMissingActionPlannerJson(): void {
+  const raw = `\`\`\`json
+{
+  "filters": [
+    { "field": "kind", "op": "eq", "value": "project" },
+    { "field": "technologies", "op": "containsAll", "value": ["TypeScript"] }
+  ]
+}
+\`\`\``;
+
+  const query = parsePlannerMetadataQuery(raw);
+  assert(query.action === "list", "filters-only planner JSON should infer list action");
+  assert(query.filters?.length === 2, "filters-only planner JSON should keep filters");
+}
+
+function testBrokenPlannerJson(): void {
+  const raw = `\`\`\`json
+{
+  "action":"list",
+  "filters":[{"field":"kind","op":"eq","value":"project"},{"field":"technologies","op":"containsAny","value":["TypeScript"]}]},
+  "characters":[],"totalFrames":1
+}
+\`\`\``;
+
+  const query = parsePlannerMetadataQuery(raw);
+  assert(query.action === "list", "broken planner JSON should salvage to list");
+  assert(query.filters?.length === 2, "broken planner JSON should keep both filters");
+  assert(
+    Boolean(query.filters?.some((filter) => filter.field === "technologies")),
+    "broken planner JSON should preserve technologies filter"
+  );
+}
+
 function main(): void {
   testKindEq();
   testTechnologiesContainsAll();
   testCompanyEq();
   testFilmstripKind();
   testImportanceEq();
+  testMissingActionPlannerJson();
+  testBrokenPlannerJson();
   console.log("metadata query evaluate checks passed");
 }
 

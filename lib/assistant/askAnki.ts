@@ -30,6 +30,7 @@ import type {
   AskAnkiRequest,
   AskAnkiResponse,
   AskAnkiSource,
+  AskAnkiTimings,
   CorpusChunk,
   RetrievalResult,
 } from "@/lib/assistant/types";
@@ -165,6 +166,18 @@ function buildSources(
   return active ? [active, ...rest] : deduped;
 }
 
+export function formatAskAnkiTimings(timings: AskAnkiTimings): string {
+  return [
+    `Qwen query: ${timings.qwenMs.toFixed(0)} ms`,
+    `Gemma answer: ${timings.gemmaMs.toFixed(0)} ms`,
+    `Total: ${timings.totalMs.toFixed(0)} ms`,
+  ].join(" · ");
+}
+
+function logAskAnkiTimings(timings: AskAnkiTimings): void {
+  console.log("[Ask Anki] timings:", formatAskAnkiTimings(timings));
+}
+
 /**
  * Answer a portfolio question using retrieval-augmented local generation.
  *
@@ -175,11 +188,27 @@ export async function askAnki(
   input: string | AskAnkiRequest,
   callbacks?: AskAnkiCallbacks
 ): Promise<AskAnkiResponse> {
+  console.log("[Ask Anki] input:", input);
+
   const { question, activeFile } = normalizeAskAnkiRequest(input);
   const q = question.trim();
   if (!q) {
     return { answer: "", sources: [], refused: false };
   }
+
+  const totalStart = performance.now();
+  let qwenMs = 0;
+  let gemmaMs = 0;
+
+  const finish = (response: AskAnkiResponse): AskAnkiResponse => {
+    const timings: AskAnkiTimings = {
+      qwenMs,
+      gemmaMs,
+      totalMs: performance.now() - totalStart,
+    };
+    logAskAnkiTimings(timings);
+    return { ...response, timings };
+  };
 
   const activeFileRef = isActiveFileReference(q);
   const activeChunks = activeFile ? buildActiveFileChunks(activeFile) : [];
@@ -187,10 +216,12 @@ export async function askAnki(
   callbacks?.onStatus?.("Loading corpus...");
   const corpus = await loadCorpus();
 
-  const metadataQuery = await planMetadataQuery(q, corpus, callbacks);
+  const { query: metadataQuery, elapsedMs: plannerMs } = await planMetadataQuery(q, corpus, callbacks);
+  qwenMs = plannerMs;
+
   if (metadataQuery.action !== "none") {
     callbacks?.onStatus?.("Answering from workspace metadata...");
-    return answerMetadataQuery(metadataQuery, corpus);
+    return finish(answerMetadataQuery(metadataQuery, corpus));
   }
 
   await ensureVectorIndex();
@@ -210,11 +241,11 @@ export async function askAnki(
   }
 
   if (shouldRefuseQuestion(q, results, { activeFile })) {
-    return {
+    return finish({
       answer: REFUSAL_MESSAGE,
       sources: [],
       refused: true,
-    };
+    });
   }
 
   const retrievedLimit = activeFile
@@ -235,23 +266,26 @@ export async function askAnki(
 
   const webgpu = await isWebGPUAvailable();
   if (!webgpu) {
-    return {
+    return finish({
       answer: WEBGPU_UNSUPPORTED_MESSAGE,
       sources: [],
       refused: false,
-    };
+    });
   }
+
+  const gemmaStart = performance.now();
 
   callbacks?.onStatus?.("Loading Gemma (first use downloads model weights)...");
   try {
     await chatModel.load((message) => callbacks?.onStatus?.(message));
   } catch (error) {
+    gemmaMs = performance.now() - gemmaStart;
     logGemmaFailure("load", error, q);
-    return {
+    return finish({
       answer: formatGemmaFailure(GEMMA_LOAD_ERROR_HEADING, error),
       sources,
       refused: false,
-    };
+    });
   }
 
   callbacks?.onStatus?.("Answering from local context...");
@@ -267,23 +301,26 @@ export async function askAnki(
       { onToken: callbacks?.onToken }
     );
 
+    gemmaMs = performance.now() - gemmaStart;
+
     const baseAnswer = generated || ANKI_MISSING_INFO_REPLY;
     const answer = enrichAnswerWithContextLinks(baseAnswer, contextChunks);
 
-    return {
+    return finish({
       answer,
       sources,
       refused: false,
-    };
+    });
   } catch (error) {
+    gemmaMs = performance.now() - gemmaStart;
     logGemmaFailure("generate", error, q);
     const heading = isContextWindowExceeded(error)
       ? "The retrieved context was too large for the local Gemma model (4096 token window). Try a more specific question."
       : GEMMA_GENERATE_ERROR_HEADING;
-    return {
+    return finish({
       answer: formatGemmaFailure(heading, error),
       sources,
       refused: false,
-    };
+    });
   }
 }

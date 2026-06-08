@@ -58,12 +58,19 @@ export function buildPlannerSystemPrompt(vocabulary: CorpusVocabulary): string {
 
   return `You are a metadata query planner for a personal portfolio workspace assistant.
 
-Given a user question, output ONLY a single JSON object (no markdown, no explanation) that describes how to filter workspace documents by YAML front matter metadata.
+Given a user question, output ONLY a single JSON object (no markdown, no explanation).
 
-Schema (field names are camelCase):
-${JSON.stringify(schemaSummary, null, 2)}
+Output shape (ONLY these top-level keys):
+- {"action":"none"}
+- {"action":"list","filters":[{"field":"...","op":"...","value":...}],"sort":[{"field":"...","direction":"asc|desc"}]}
 
+sort is optional. Never output document fields (title, characters, totalFrames, etc.) at the top level.
+
+Filter "field" must be a metadata field name from the schema below (camelCase).
 Allowed filter operators: ${METADATA_FILTER_OPS.join(", ")}
+
+Metadata fields and vocabulary for filter values:
+${JSON.stringify(schemaSummary, null, 2)}
 
 Rules:
 - Use "action":"list" only for catalog or enumeration requests (list, show, find, which, what files do you have).
@@ -72,8 +79,8 @@ Rules:
 - For array fields (tags, technologies): use containsAll when user implies all terms, containsAny for any.
 - For filmstrip/creative content: kind eq "creative" or type eq "filmstrip".
 - For ideas/lab content: kind eq "concept" or kind eq "lab".
-- Every list query must include at least one filter.
-- Respond with JSON only.
+- Every list query must include at least one filter in the "filters" array.
+- Output compact valid JSON on one line. No trailing keys. No code fences.
 
 ${FEW_SHOT_EXAMPLES}`;
 }

@@ -13,7 +13,7 @@ import Image from "next/image";
 import { Terminal, Trash2 } from "lucide-react";
 import { askAnki } from "@/lib/assistant/askAnki";
 import { PRIVACY_NOTE } from "@/lib/assistant/config";
-import type { AskAnkiActiveFile, AskAnkiSource } from "@/lib/assistant/types";
+import type { AskAnkiActiveFile, AskAnkiSource, AskAnkiTimings } from "@/lib/assistant/types";
 import type { ContentFile } from "@/lib/content-types";
 import { MarkdownProse } from "@/components/markdown-prose";
 import { Input } from "@/components/ui/input";
@@ -127,6 +127,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
   const [answer, setAnswer] = useState("");
   const [sources, setSources] = useState<AskAnkiSource[]>([]);
   const [status, setStatus] = useState<string | null>(null);
+  const [timings, setTimings] = useState<AskAnkiTimings | null>(null);
   const [loading, setLoading] = useState(false);
   const outputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -190,7 +191,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
     const el = outputRef.current;
     if (!el) return;
     el.scrollTop = el.scrollHeight;
-  }, [cliLines, answer, status, currentQuestion, sources]);
+  }, [cliLines, answer, status, timings, currentQuestion, sources]);
 
   const runCliCommand = useCallback(
     (command: string) => {
@@ -263,6 +264,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
       setCurrentQuestion(q);
       setAnswer("");
       setSources([]);
+      setTimings(null);
       setStatus("Starting...");
       setLoading(true);
 
@@ -289,11 +291,13 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
 
         setAnswer(response.answer);
         setSources(response.refused ? [] : response.sources);
+        setTimings(response.timings ?? null);
         setStatus(null);
       } catch (error) {
         if (askAbortRef.current !== askId) return;
         setAnswer(error instanceof Error ? error.message : "Ask Anki failed.");
         setSources([]);
+        setTimings(null);
         setStatus(null);
       } finally {
         if (askAbortRef.current === askId) setLoading(false);
@@ -428,6 +432,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
     setCurrentQuestion(null);
     setAnswer("");
     setSources([]);
+    setTimings(null);
     setStatus(null);
     setLoading(false);
   };
@@ -528,6 +533,20 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
                 </ul>
               </div>
             )}
+
+            {timings ? (
+              <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                <span className="rounded-full border border-ide-border bg-[#1b1b1b] px-2 py-0.5 text-[10px] leading-snug text-ide-muted/80">
+                  Qwen query: {timings.qwenMs.toFixed(0)} ms
+                </span>
+                <span className="rounded-full border border-ide-border bg-[#1b1b1b] px-2 py-0.5 text-[10px] leading-snug text-ide-muted/80">
+                  Gemma answer: {timings.gemmaMs.toFixed(0)} ms
+                </span>
+                <span className="rounded-full border border-ide-border bg-[#1b1b1b] px-2 py-0.5 text-[10px] leading-snug text-ide-muted/80">
+                  Total: {timings.totalMs.toFixed(0)} ms
+                </span>
+              </div>
+            ) : null}
 
             <p className="mt-3 text-[10px] leading-snug text-ide-muted/80">{PRIVACY_NOTE}</p>
 
