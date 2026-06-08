@@ -63,12 +63,19 @@ export async function planMetadataQuery(
 
   callbacks?.onStatus?.("Planning metadata query (Qwen)...");
 
-  console.log("[Ask Anki] Qwen planner prompt:", {
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: trimmed },
-    ],
-  });
+  console.log(
+    "[Ask Anki] Qwen planner prompt:\n",
+    JSON.stringify(
+      {
+        messages: [
+          { role: "system", content: system },
+          { role: "user", content: trimmed },
+        ],
+      },
+      null,
+      2
+    )
+  );
 
   const qwenStart = performance.now();
 
