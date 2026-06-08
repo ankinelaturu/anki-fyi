@@ -12,7 +12,12 @@ import {
 import Image from "next/image";
 import { Terminal, Trash2 } from "lucide-react";
 import { askAnki } from "@/lib/assistant/askAnki";
-import { PRIVACY_NOTE } from "@/lib/assistant/config";
+import { PRIVACY_NOTE, type PlannerEngineMode } from "@/lib/assistant/config";
+import {
+  loadPlannerEngineMode,
+  setPlannerEngineMode,
+} from "@/lib/assistant/plannerEngineMode";
+import { PlannerEngineModeControl } from "@/components/workspace/PlannerEngineModeControl";
 import type { AskAnkiActiveFile, AskAnkiSource, AskAnkiTimings } from "@/lib/assistant/types";
 import type { ContentFile } from "@/lib/content-types";
 import { MarkdownProse } from "@/components/markdown-prose";
@@ -128,6 +133,7 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
   const [sources, setSources] = useState<AskAnkiSource[]>([]);
   const [status, setStatus] = useState<string | null>(null);
   const [timings, setTimings] = useState<AskAnkiTimings | null>(null);
+  const [engineMode, setEngineMode] = useState<PlannerEngineMode>("shared");
   const [loading, setLoading] = useState(false);
   const outputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -141,6 +147,17 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
 
   useEffect(() => {
     commandHistoryRef.current = loadCommandHistory();
+  }, []);
+
+  useEffect(() => {
+    const mode = loadPlannerEngineMode();
+    setEngineMode(mode);
+    setPlannerEngineMode(mode);
+  }, []);
+
+  const handleEngineModeChange = useCallback((mode: PlannerEngineMode) => {
+    setEngineMode(mode);
+    setPlannerEngineMode(mode);
   }, []);
 
   const recordCommand = useCallback((command: string) => {
@@ -448,6 +465,15 @@ export const AskAnkiTerminal = forwardRef<AskAnkiTerminalHandle, AskAnkiTerminal
           <span>Terminal</span>
           <span className="text-ide-muted">●</span>
           <span className="text-[#f87171]">Grounded Responses</span>
+          <span className="mx-1 h-3.5 border-l border-ide-border" aria-hidden />
+          <span className="text-[10px] normal-case tracking-normal text-ide-muted">
+            WebLLM slot
+          </span>
+          <PlannerEngineModeControl
+            value={engineMode}
+            onChange={handleEngineModeChange}
+            disabled={loading}
+          />
         </div>
         <button
           type="button"

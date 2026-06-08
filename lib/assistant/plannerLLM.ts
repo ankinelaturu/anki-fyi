@@ -4,7 +4,7 @@
  * Produces validated JSON filters before vector retrieval.
  */
 
-import { PLANNER_ENGINE_MODE } from "@/lib/assistant/config";
+import { getPlannerEngineMode } from "@/lib/assistant/plannerEngineMode";
 import { buildCorpusVocabulary } from "@/lib/assistant/metadataQueryEvaluate";
 import { parsePlannerMetadataQuery } from "@/lib/assistant/metadataQueryValidate";
 import type { MetadataQuery } from "@/lib/assistant/metadataQueryTypes";
@@ -40,7 +40,7 @@ export function resetPlannerModel(): void {
  * Unload the planner model when using shared engine mode before Gemma loads.
  */
 export async function unloadPlannerIfShared(): Promise<void> {
-  if (PLANNER_ENGINE_MODE === "shared") {
+  if (getPlannerEngineMode() === "shared") {
     await plannerModel.unload();
   }
 }
@@ -81,7 +81,7 @@ export async function planMetadataQuery(
     console.log("[Ask Anki] Qwen planner raw output:\n", raw);
     console.log("[Ask Anki] Metadata query JSON:\n", JSON.stringify(query, null, 2));
 
-    if (PLANNER_ENGINE_MODE === "shared") {
+    if (getPlannerEngineMode() === "shared") {
       await plannerModel.unload();
     }
 

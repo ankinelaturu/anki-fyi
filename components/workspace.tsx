@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MarkdownProse } from "@/components/markdown-prose";
-import type { LucideIcon } from "lucide-react";
 import { Binary, ExternalLink, FileText, Fingerprint, Sparkles, Circle, TriangleAlert } from "lucide-react";
 import { toAskAnkiActiveFile } from "@/lib/assistant/activeFileContext";
 import { linkDisplayLabel } from "@/lib/assistant/documentLinks";
@@ -18,6 +17,7 @@ import { ExplorerPanel } from "@/components/workspace/ExplorerPanel";
 import { SearchPanel } from "@/components/workspace/SearchPanel";
 import { StatusBar } from "@/components/workspace/StatusBar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { EditorViewModeButton } from "@/components/workspace/EditorViewModeButton";
 import { FileIcon } from "@/components/workspace/FileIcon";
 import type { ContentFile, ContentFolder } from "@/lib/content-types";
 import { FOLDER_LABELS } from "@/lib/folders";
@@ -49,44 +49,6 @@ const MAX_INSIGHTS_WIDTH = 520;
 
 const PORTRAIT_WIDTH = 668;
 const PORTRAIT_HEIGHT = 882;
-
-function EditorViewModeButton({
-  pressed,
-  onClick,
-  icon: Icon,
-  label,
-  tooltip,
-  pressedClassName = "bg-ide-active text-[#c586c0]",
-}: {
-  pressed: boolean;
-  onClick: () => void;
-  icon: LucideIcon;
-  label: string;
-  tooltip: string;
-  pressedClassName?: string;
-}) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          aria-pressed={pressed}
-          onClick={onClick}
-          className={cn(
-            "inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] tracking-wide transition-colors",
-            pressed ? pressedClassName : "text-ide-muted hover:text-ide-text"
-          )}
-        >
-          <Icon className="h-3 w-3 shrink-0" strokeWidth={2} aria-hidden />
-          {label}
-        </button>
-      </TooltipTrigger>
-      <TooltipContent side="bottom" className="max-w-xs">
-        {tooltip}
-      </TooltipContent>
-    </Tooltip>
-  );
-}
 
 export function Workspace({ folders, initialSlug }: WorkspaceProps) {
   const allFiles = useMemo(() => folders.flatMap((folder) => folder.files), [folders]);

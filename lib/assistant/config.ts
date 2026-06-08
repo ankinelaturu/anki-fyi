@@ -95,6 +95,7 @@ export const QWEN_PLANNER_MAX_NEW_TOKENS = 256;
  * - `dual`: keep Qwen loaded alongside Gemma (faster repeat metadata queries).
  */
 export type PlannerEngineMode = "dual" | "shared";
+/** Default engine mode; runtime value is set from the terminal segmented control. */
 export const PLANNER_ENGINE_MODE: PlannerEngineMode = "shared";
 
 /** Heading prepended when the local Qwen planner fails to initialize. */
