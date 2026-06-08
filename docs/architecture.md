@@ -47,26 +47,6 @@ flowchart LR
   EMB --> VECTORS_OUT
 ```
 
-```mermaid
-flowchart TB
-  subgraph BUILD["Build time (Node.js)"]
-    direction TB
-    MD["content/**/*.md<br/>YAML front matter + markdown body"]
-    DERIVE["derive-frontmatter-schema.ts"]
-    SCHEMA["frontMatterSchema.json"]
-    BSCRIPT["build-corpus.ts"]
-    EMB["Xenova/all-MiniLM-L6-v2<br/>embeddings.ts"]
-    CORPUS_OUT["public/assistant/corpus.json"]
-    VECTORS_OUT["public/assistant/vectors.json"]
-
-    MD --> BSCRIPT
-    MD --> DERIVE --> SCHEMA
-    BSCRIPT --> CORPUS_OUT
-    BSCRIPT --> EMB
-    EMB --> VECTORS_OUT
-    CORPUS_OUT -. corpusHash .- VECTORS_OUT
-  end
-```
 
 ### Runtime (browser)
 
