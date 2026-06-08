@@ -1,5 +1,6 @@
 "use client";
 
+import { Columns2, SquareStack } from "lucide-react";
 import type { PlannerEngineMode } from "@/lib/assistant/config";
 import { EditorViewModeButton } from "@/components/workspace/EditorViewModeButton";
 import { cn } from "@/lib/utils";

@@ -23,73 +23,73 @@ flowchart LR
   end
   subgraph UI["Browser — IDE workspace"]
     direction TB
-    EXPLORER["Explorer / Editor<br/>selected .md file"]
-    TERM["Ask Anki Terminal<br/>AskAnkiTerminal.tsx"]
+    EXPLORER["View Tab"]
+    TERM["Ask Anki Terminal"]
   end
   
   subgraph GARTIFACTS["Generated Artifacts"]
     direction TB
     SCHEMA["frontMatterSchema.json"]
-    CORPUS_OUT["public/assistant/corpus.json"]
-    VECTORS_OUT["public/assistant/vectors.json"]
+    CORPUS["public/assistant/corpus.json"]
+    VECTORS["public/assistant/vectors.json"]
   end  
-  subgraph UARTIFACTS["Generated Artifacts"]
+  subgraph UARTIFACTS["Input Artifacts"]
     direction TB
     Q["User question"]
-    MDFILE["Editor<br/>selected .md file"]
+    MDFILE["Current .md file"]
   end  
-  BUILD --- UI
-  GARTIFACTS --- UARTIFACTS
+
+  
+  BUILD -.- UI
+  GARTIFACTS -.- UARTIFACTS
   TERM --> Q
   EXPLORER --> MDFILE
   DERIVE --> SCHEMA
-  BSCRIPT --> CORPUS_OUT
-  EMB --> VECTORS_OUT
+  BSCRIPT --> CORPUS
+  EMB --> VECTORS
 ```
 
-
-### Runtime (browser)
-
+### Runtime
 ```mermaid
-flowchart LR
-  subgraph UI["Browser — IDE workspace"]
-    direction TB
-    EXPLORER["Explorer / Editor<br/>selected .md file"]
-    TERM["Ask Anki Terminal<br/>AskAnkiTerminal.tsx"]
-    EXPLORER --> TERM
-  end
-
-  subgraph RUNTIME["Runtime — askAnki.ts (all local, WebGPU)"]
+flowchart TB
+  subgraph ARTIFACTS["Generated Artifacts"]
     direction TB
     CORPUS["corpus.json"]
     VECTORS["vectors.json"]
     SCHEMA["frontMatterSchema.json"]
     Q["User question"]
+    MDFILE["Current .md file"]
+  end
+
+  subgraph RUNTIME["Runtime — askAnki.ts (all local, WebGPU)"]
+    direction TB
     LOAD["loadCorpus()"]
     QWEN["Qwen planner<br/>plannerLLM.ts"]
-    VALID["parse + validate JSON<br/>metadataQueryValidate.ts"]
-    META["Metadata engine<br/>metadataQueryEvaluate.ts"]
+    VALID["parse + validate JSON"]
+    META["Metadata engine"]
     META_ANS["answerMetadataQuery()<br/>formatted list answer"]
     VIDX["vectorIndex.ts<br/>cosine search + boosts"]
     QUERY_EMB["Query embedding<br/>same MiniLM model"]
-    GEMMA["Gemma 2B<br/>modelProvider.ts"]
+    GEMMA["Gemma 2B"]
     RAG_ANS["Streamed narrative answer<br/>+ sources + links"]
 
-    CORPUS --> LOAD
-    CORPUS --> VIDX
-    VECTORS --> VIDX
-    SCHEMA --> QWEN
-    Q --> LOAD --> QWEN --> VALID
+    LOAD --> QWEN --> VALID
     VALID -->|action: list| META --> META_ANS
     VALID -->|action: none| VIDX
     QUERY_EMB --> VIDX
     VIDX --> GEMMA --> RAG_ANS
   end
 
-  TERM --> Q
+  
+  Q --> LOAD
+  CORPUS --> LOAD
+  CORPUS --> VIDX
+  VECTORS --> VIDX
+  SCHEMA --> QWEN
+
   META_ANS --> TERM
   RAG_ANS --> TERM
-  EXPLORER -->|active file chunks| GEMMA
+  MDFILE -->|active file chunks| GEMMA
 ```
 
 ## Content layer
