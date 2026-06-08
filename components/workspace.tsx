@@ -56,7 +56,7 @@ function EditorViewModeButton({
   icon: Icon,
   label,
   tooltip,
-  pressedClassName = "bg-ide-active text-ide-text",
+  pressedClassName = "bg-ide-active text-[#c586c0]",
 }: {
   pressed: boolean;
   onClick: () => void;
@@ -300,7 +300,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   icon={Fingerprint}
                   label="Semantic"
                   tooltip="View corpus chunk embeddings as fingerprint, genome, and heatmap visualizations."
-                  pressedClassName="bg-ide-active text-[#c586c0]"
                 />
                 <EditorViewModeButton
                   pressed={editorViewMode === "vectors"}
@@ -308,7 +307,6 @@ export function Workspace({ folders, initialSlug }: WorkspaceProps) {
                   icon={Binary}
                   label="Vectors"
                   tooltip="View the raw embedding vector values for each section."
-                  pressedClassName="bg-ide-active text-[#c586c0]"
                 />
               </div>
             </div>
