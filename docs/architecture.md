@@ -4,32 +4,86 @@ Markdown-backed IDE workspace with **Ask Anki**: local retrieval-augmented gener
 
 ## High-level overview
 
+Build outputs (`corpus.json`, `vectors.json`, `frontMatterSchema.json`) are written at compile time and consumed by the browser at query time. The diagrams below are separate — no arrows between build and runtime.
+
+### Build time
+
+```mermaid
+flowchart LR
+  subgraph BUILD["Build time (Node.js)"]
+    direction TB
+    MD["content/**/*.md<br/>YAML front matter + markdown body"]
+    DERIVE["derive-frontmatter-schema.ts"]
+    BSCRIPT["build-corpus.ts"]
+    EMB["Xenova/all-MiniLM-L6-v2<br/>embeddings.ts"]
+
+    MD --> BSCRIPT
+    MD --> DERIVE
+    BSCRIPT --> EMB
+  end
+  subgraph UI["Browser — IDE workspace"]
+    direction TB
+    EXPLORER["Explorer / Editor<br/>selected .md file"]
+    TERM["Ask Anki Terminal<br/>AskAnkiTerminal.tsx"]
+  end
+  
+  subgraph GARTIFACTS["Generated Artifacts"]
+    direction TB
+    SCHEMA["frontMatterSchema.json"]
+    CORPUS_OUT["public/assistant/corpus.json"]
+    VECTORS_OUT["public/assistant/vectors.json"]
+  end  
+  subgraph UARTIFACTS["Generated Artifacts"]
+    direction TB
+    Q["User question"]
+    MDFILE["Editor<br/>selected .md file"]
+  end  
+  BUILD --- UI
+  GARTIFACTS --- UARTIFACTS
+  TERM --> Q
+  EXPLORER --> MDFILE
+  DERIVE --> SCHEMA
+  BSCRIPT --> CORPUS_OUT
+  EMB --> VECTORS_OUT
+```
+
 ```mermaid
 flowchart TB
   subgraph BUILD["Build time (Node.js)"]
+    direction TB
     MD["content/**/*.md<br/>YAML front matter + markdown body"]
     DERIVE["derive-frontmatter-schema.ts"]
-    SCHEMA["frontMatterSchema.json<br/>field names + types"]
-    BUILD["build-corpus.ts"]
+    SCHEMA["frontMatterSchema.json"]
+    BSCRIPT["build-corpus.ts"]
     EMB["Xenova/all-MiniLM-L6-v2<br/>embeddings.ts"]
-    CORPUS["public/assistant/corpus.json"]
-    VECTORS["public/assistant/vectors.json"]
+    CORPUS_OUT["public/assistant/corpus.json"]
+    VECTORS_OUT["public/assistant/vectors.json"]
 
-    MD --> BUILD
+    MD --> BSCRIPT
     MD --> DERIVE --> SCHEMA
-    BUILD --> CORPUS
-    BUILD --> EMB
-    EMB --> VECTORS
-    CORPUS -. corpusHash .- VECTORS
+    BSCRIPT --> CORPUS_OUT
+    BSCRIPT --> EMB
+    EMB --> VECTORS_OUT
+    CORPUS_OUT -. corpusHash .- VECTORS_OUT
   end
+```
 
+### Runtime (browser)
+
+```mermaid
+flowchart LR
   subgraph UI["Browser — IDE workspace"]
+    direction TB
     EXPLORER["Explorer / Editor<br/>selected .md file"]
     TERM["Ask Anki Terminal<br/>AskAnkiTerminal.tsx"]
     EXPLORER --> TERM
   end
 
   subgraph RUNTIME["Runtime — askAnki.ts (all local, WebGPU)"]
+    direction TB
+    CORPUS["corpus.json"]
+    VECTORS["vectors.json"]
+    SCHEMA["frontMatterSchema.json"]
     Q["User question"]
     LOAD["loadCorpus()"]
     QWEN["Qwen planner<br/>plannerLLM.ts"]
@@ -41,23 +95,21 @@ flowchart TB
     GEMMA["Gemma 2B<br/>modelProvider.ts"]
     RAG_ANS["Streamed narrative answer<br/>+ sources + links"]
 
-    Q --> LOAD
-    LOAD --> QWEN
-    SCHEMA --> QWEN
-    QWEN --> VALID
-    VALID -->|action: list| META --> META_ANS
-    VALID -->|action: none| VIDX
     CORPUS --> LOAD
     CORPUS --> VIDX
     VECTORS --> VIDX
+    SCHEMA --> QWEN
+    Q --> LOAD --> QWEN --> VALID
+    VALID -->|action: list| META --> META_ANS
+    VALID -->|action: none| VIDX
     QUERY_EMB --> VIDX
-    EXPLORER -->|active file chunks| GEMMA
     VIDX --> GEMMA --> RAG_ANS
   end
 
   TERM --> Q
   META_ANS --> TERM
   RAG_ANS --> TERM
+  EXPLORER -->|active file chunks| GEMMA
 ```
 
 ## Content layer
