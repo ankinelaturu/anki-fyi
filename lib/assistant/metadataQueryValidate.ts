@@ -208,10 +208,21 @@ function parseFilters(record: Record<string, unknown>): MetadataFilter[] | null 
   return filters.length > 0 ? filters : null;
 }
 
+/**
+ * Qwen sometimes outputs filter objects under "actions" instead of "filters".
+ */
+function normalizePlannerRecord(record: Record<string, unknown>): Record<string, unknown> {
+  if (!Array.isArray(record.filters) && Array.isArray(record.actions)) {
+    const { actions, ...rest } = record;
+    return { ...rest, action: rest.action ?? "list", filters: actions };
+  }
+  return record;
+}
+
 export function validateMetadataQuery(raw: unknown): MetadataQuery {
   if (!raw || typeof raw !== "object") return NONE_QUERY;
 
-  const record = raw as Record<string, unknown>;
+  const record = normalizePlannerRecord(raw as Record<string, unknown>);
   const action = record.action;
 
   if (action === "none") return NONE_QUERY;
@@ -249,7 +260,11 @@ export function parsePlannerMetadataQuery(text: string): MetadataQuery {
     const query = validateMetadataQuery(raw);
     if (query.action === "none" && raw && typeof raw === "object") {
       const record = raw as Record<string, unknown>;
-      if (record.action === "list" || Array.isArray(record.filters)) {
+      if (
+        record.action === "list" ||
+        Array.isArray(record.filters) ||
+        Array.isArray(record.actions)
+      ) {
         console.warn("[Ask Anki] planner JSON parsed but failed validation", { raw });
       }
     }

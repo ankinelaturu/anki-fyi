@@ -123,6 +123,21 @@ function testMissingActionPlannerJson(): void {
   assert(query.filters?.length === 2, "filters-only planner JSON should keep filters");
 }
 
+function testActionsAliasPlannerJson(): void {
+  const raw = `\`\`\`json
+{
+  "actions": [
+    { "field": "kind", "op": "eq", "value": "project" },
+    { "field": "technologies", "op": "containsAll", "value": ["TypeScript"] }
+  ]
+}
+\`\`\``;
+
+  const query = parsePlannerMetadataQuery(raw);
+  assert(query.action === "list", "actions alias should normalize to list");
+  assert(query.filters?.length === 2, "actions alias should keep filters");
+}
+
 function testBrokenPlannerJson(): void {
   const raw = `\`\`\`json
 {
@@ -148,6 +163,7 @@ function main(): void {
   testFilmstripKind();
   testImportanceEq();
   testMissingActionPlannerJson();
+  testActionsAliasPlannerJson();
   testBrokenPlannerJson();
   console.log("metadata query evaluate checks passed");
 }
