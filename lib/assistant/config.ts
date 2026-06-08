@@ -74,6 +74,33 @@ export const GEMMA_MODEL_FALLBACK_CHAIN = [
   "gemma-2-2b-it-q4f32_1-MLC-1k",
 ] as const;
 
+/**
+ * Ordered Qwen model ids for metadata query planning.
+ *
+ * Prefers small instruct models for fast JSON planning.
+ */
+export const QWEN_PLANNER_MODEL_FALLBACK_CHAIN = [
+  "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
+  "Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
+  "Qwen2.5-0.5B-Instruct-q4f32_1-MLC",
+] as const;
+
+/** Max tokens for planner JSON output. */
+export const QWEN_PLANNER_MAX_NEW_TOKENS = 256;
+
+/**
+ * WebLLM engine layout for planner + Gemma.
+ *
+ * - `shared`: unload Qwen after planning before loading Gemma (lower VRAM).
+ * - `dual`: keep Qwen loaded alongside Gemma (faster repeat metadata queries).
+ */
+export type PlannerEngineMode = "dual" | "shared";
+export const PLANNER_ENGINE_MODE: PlannerEngineMode = "shared";
+
+/** Heading prepended when the local Qwen planner fails to initialize. */
+export const QWEN_PLANNER_LOAD_ERROR_HEADING =
+  "Local Qwen planner failed to load. Metadata routing will fall back to vector search.";
+
 /** Shown when a question is refused before retrieval or generation runs. */
 export const REFUSAL_MESSAGE =
   "I only answer questions about my profile, projects, experience, writing, and portfolio workspace.";

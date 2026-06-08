@@ -16,6 +16,7 @@ import path from "path";
 import matter from "gray-matter";
 import { buildCorpusDocument } from "../lib/assistant/chunking";
 import { formatDocumentLinksBlock } from "../lib/assistant/documentLinks";
+import { parseCorpusFrontMatter } from "../lib/assistant/frontMatter";
 import { CORPUS_FOLDERS, EMBEDDING_MODEL } from "../lib/assistant/config";
 import { embedText } from "../lib/assistant/embeddings";
 import type { CorpusDocument, CorpusFile, VectorsFile } from "../lib/assistant/types";
@@ -43,28 +44,32 @@ function parseMarkdownFile(filePath: string) {
   const { data, content } = matter(raw);
   const relative = path.relative(contentDir, filePath).replace(/\\/g, "/");
   const folder = relative.includes("/") ? relative.split("/")[0]! : "about";
+  const frontMatter = parseCorpusFrontMatter(data as Record<string, unknown>, {
+    relativePath: relative,
+    folder,
+    fallbackTitle: path.basename(filePath, ".md"),
+  });
 
   return buildCorpusDocument({
     path: relative,
-    title: typeof data.title === "string" ? data.title : path.basename(filePath, ".md"),
-    kind: typeof data.kind === "string" ? data.kind : folder,
-    summary: typeof data.summary === "string" ? data.summary : undefined,
-    elevatorPitch:
-      typeof data.elevator_pitch === "string" ? data.elevator_pitch : undefined,
-    order: typeof data.order === "number" ? data.order : undefined,
-    importance: typeof data.importance === "string" ? data.importance : undefined,
-    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-    technologies: Array.isArray(data.technologies) ? data.technologies.map(String) : [],
-    company: typeof data.company === "string" ? data.company : undefined,
-    role: typeof data.role === "string" ? data.role : undefined,
-    startDate: typeof data.start_date === "string" ? data.start_date : undefined,
-    endDate: typeof data.end_date === "string" ? data.end_date : undefined,
-    year:
-      typeof data.year === "number" || typeof data.year === "string" ? data.year : undefined,
-    status: typeof data.status === "string" ? data.status : undefined,
+    title: frontMatter.title,
+    kind: frontMatter.kind,
+    summary: frontMatter.summary,
+    elevatorPitch: frontMatter.elevatorPitch,
+    order: frontMatter.order,
+    importance: frontMatter.importance,
+    tags: frontMatter.tags,
+    technologies: frontMatter.technologies,
+    company: frontMatter.company,
+    role: frontMatter.role,
+    startDate: frontMatter.startDate,
+    endDate: frontMatter.endDate,
+    year: frontMatter.year,
+    status: frontMatter.status,
     content,
-    type: typeof data.type === "string" ? data.type : undefined,
+    type: frontMatter.type,
     linksBlock: formatDocumentLinksBlock(data as Record<string, unknown>),
+    frontMatter,
   });
 }
 

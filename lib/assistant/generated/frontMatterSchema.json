@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-08T01:48:06.610Z",
+  "fileCount": 36,
+  "fields": [
+    {
+      "name": "title",
+      "yamlKey": "title",
+      "type": "string",
+      "optional": true,
+      "count": 35,
+      "examples": [
+        "About Anki",
+        "Contact",
+        "AI Orchestration"
+      ]
+    },
+    {
+      "name": "order",
+      "yamlKey": "order",
+      "type": "number",
+      "optional": true,
+      "count": 35,
+      "examples": [
+        1,
+        3,
+        10
+      ]
+    },
+    {
+      "name": "summary",
+      "yamlKey": "summary",
+      "type": "string",
+      "optional": true,
+      "count": 35,
+      "examples": [
+        "Principal engineer specializing in AI orchestration, developer platforms, and interactive systems.",
+        "Ways to reach Anki for collaboration, consulting, and professional inquiries.",
+        "Agentic workflows, governed execution paths, and capability coordination."
+      ]
+    },
+    {
+      "name": "kind",
+      "yamlKey": "kind",
+      "type": "string",
+      "optional": true,
+      "count": 35,
+      "examples": [
+        "profile",
+        "capability",
+        "creative"
+      ]
+    },
+    {
+      "name": "icon",
+      "yamlKey": "icon",
+      "type": "string",
+      "optional": true,
+      "count": 35,
+      "examples": [
+        "user",
+        "mail",
+        "network"
+      ]
+    },
+    {
+      "name": "featured",
+      "yamlKey": "featured",
+      "type": "boolean",
+      "optional": true,
+      "count": 35,
+      "examples": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "tags",
+      "yamlKey": "tags",
+      "type": "string[]",
+      "optional": true,
+      "count": 27,
+      "examples": [
+        "AI orchestration, developer platforms",
+        "contact, LinkedIn",
+        "orchestration, LLMs"
+      ]
+    },
+    {
+      "name": "category",
+      "yamlKey": "category",
+      "type": "string",
+      "optional": true,
+      "count": 26,
+      "examples": [
+        "ABOUT",
+        "CAPABILITIES",
+        "Creative Systems"
+      ]
+    },
+    {
+      "name": "elevatorPitch",
+      "yamlKey": "elevator_pitch",
+      "type": "string",
+      "optional": true,
+      "count": 15,
+      "examples": [
+        "A data-driven look at how I have used ChatGPT as a thinking partner, coding assistant, research tool, and idea exploration system.",
+        "Built Java Embedded Suite components for RESTful services and distributed embedded systems.",
+        "Built and modernized cross-platform mobile runtime systems supporting iOS, Android, and Windows."
+      ]
+    },
+    {
+      "name": "importance",
+      "yamlKey": "importance",
+      "type": "string",
+      "optional": true,
+      "count": 15,
+      "examples": [
+        "major",
+        "supporting",
+        "flagship"
+      ]
+    },
+    {
+      "name": "technologies",
+      "yamlKey": "technologies",
+      "type": "string[]",
+      "optional": true,
+      "count": 15,
+      "examples": [
+        "Python, Pandas",
+        "Java, REST APIs",
+        "Java, Java 8"
+      ]
+    },
+    {
+      "name": "status",
+      "yamlKey": "status",
+      "type": "string",
+      "optional": true,
+      "count": 15,
+      "examples": [
+        "active",
+        "completed",
+        "prototype"
+      ]
+    },
+    {
+      "name": "year",
+      "yamlKey": "year",
+      "type": "number",
+      "optional": true,
+      "count": 15,
+      "examples": [
+        2026,
+        "2011-2013",
+        "2013-2018"
+      ]
+    },
+    {
+      "name": "website",
+      "yamlKey": "website",
+      "type": "string",
+      "optional": true,
+      "count": 10,
+      "examples": [
+        "https://anki-fixme/here",
+        "https://github.com/ankinelaturu/rudy-monorepo",
+        "https://astrovalley.app"
+      ]
+    },
+    {
+      "name": "demo",
+      "yamlKey": "demo",
+      "type": "string",
+      "optional": true,
+      "count": 10,
+      "examples": [
+        "https://anki-fixme/here",
+        "https://youtu.be/ZOrma2xMTy8"
+      ]
+    },
+    {
+      "name": "linkedin",
+      "yamlKey": "linkedin",
+      "type": "string",
+      "optional": true,
+      "count": 10,
+      "examples": [
+        "https://anki-fixme/here",
+        "https://www.linkedin.com/posts/ankinelaturu_ai-llm-rag-share-7457002618771361792--XXa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8",
+        "https://www.linkedin.com/posts/ankinelaturu_edgeai-localllm-webgpu-ugcPost-7464919816416428032-0Oja/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAACvDRQBl6GL4OEHwbv49TRzTkNuiJQiR_8"
+      ]
+    },
+    {
+      "name": "screenshot",
+      "yamlKey": "screenshot",
+      "type": "string",
+      "optional": true,
+      "count": 10,
+      "examples": [
+        "/images/chatgpt-export-summary-placeholder.png",
+        "/images/projects/ask-rudy-placeholder.png",
+        "/images/projects/astrovalley-placeholder.png"
+      ]
+    },
+    {
+      "name": "company",
+      "yamlKey": "company",
+      "type": "string",
+      "optional": true,
+      "count": 5,
+      "examples": [
+        "Oracle",
+        "Sun Microsystems"
+      ]
+    },
+    {
+      "name": "role",
+      "yamlKey": "role",
+      "type": "string",
+      "optional": true,
+      "count": 5,
+      "examples": [
+        "Principal Member of Technical Staff",
+        "Consulting Member of Technical Staff"
+      ]
+    },
+    {
+      "name": "startDate",
+      "yamlKey": "start_date",
+      "type": "string",
+      "optional": true,
+      "count": 5,
+      "examples": [
+        "2011-02",
+        "2013-12",
+        "2024-09"
+      ]
+    },
+    {
+      "name": "endDate",
+      "yamlKey": "end_date",
+      "type": "string",
+      "optional": true,
+      "count": 5,
+      "examples": [
+        "2013-12",
+        "2018-07",
+        "2025-09"
+      ]
+    },
+    {
+      "name": "url",
+      "yamlKey": "url",
+      "type": "string",
+      "optional": true,
+      "count": 4,
+      "examples": [
+        "https://patents.google.com/patent/US10198279B2",
+        "https://patents.google.com/patent/US8856805",
+        "https://patents.google.com/patent/US8978023"
+      ]
+    },
+    {
+      "name": "type",
+      "yamlKey": "type",
+      "type": "string",
+      "optional": true,
+      "count": 1,
+      "examples": [
+        "filmstrip"
+      ]
+    },
+    {
+      "name": "description",
+      "yamlKey": "description",
+      "type": "string",
+      "optional": true,
+      "count": 1,
+      "examples": [
+        "Caveman-style micro stories (Caikus) featuring Aimless Dude and Rudy."
+      ]
+    },
+    {
+      "name": "imagePattern",
+      "yamlKey": "imagePattern",
+      "type": "string",
+      "optional": true,
+      "count": 1,
+      "examples": [
+        "/images/adhd/d{day}.png"
+      ]
+    },
+    {
+      "name": "totalFrames",
+      "yamlKey": "totalFrames",
+      "type": "number",
+      "optional": true,
+      "count": 1,
+      "examples": [
+        126
+      ]
+    },
+    {
+      "name": "characters",
+      "yamlKey": "characters",
+      "type": "string[]",
+      "optional": true,
+      "count": 1,
+      "examples": [
+        "Aimless Dude, Rudy"
+      ]
+    }
+  ],
+  "enums": {
+    "category": [
+      "ABOUT",
+      "CAPABILITIES",
+      "CREATIVE SYSTEMS",
+      "Creative Systems",
+      "EXPERIENCE",
+      "IDEAS",
+      "PATENTS",
+      "PROJECTS"
+    ],
+    "kind": [
+      "analytics",
+      "capability",
+      "concept",
+      "creative",
+      "experience",
+      "lab",
+      "patent",
+      "profile",
+      "project",
+      "writing"
+    ],
+    "icon": [
+      "badge",
+      "bar-chart-3",
+      "blocks",
+      "brain",
+      "calendar-days",
+      "cpu",
+      "file-text",
+      "film",
+      "flask-conical",
+      "gamepad",
+      "git-branch",
+      "globe",
+      "layers",
+      "layout-dashboard",
+      "lintern-logo",
+      "mail",
+      "map",
+      "message-circle",
+      "mouse-pointer",
+      "network",
+      "orbit",
+      "pen-tool",
+      "radio",
+      "route",
+      "search",
+      "shield",
+      "smartphone",
+      "sparkles",
+      "terminal",
+      "timer",
+      "user",
+      "workflow"
+    ],
+    "type": [
+      "filmstrip"
+    ],
+    "importance": [
+      "flagship",
+      "major",
+      "supporting"
+    ],
+    "status": [
+      "active",
+      "active prototype",
+      "completed",
+      "concept exploration",
+      "prototype"
+    ]
+  }
+}

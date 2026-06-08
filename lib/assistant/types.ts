@@ -5,6 +5,10 @@
  * request/response contract between the terminal UI and `askAnki`.
  */
 
+import type { CorpusFrontMatter } from "@/lib/assistant/frontMatter";
+
+export type { CorpusFrontMatter } from "@/lib/assistant/frontMatter";
+
 /**
  * A single searchable text unit derived from a workspace markdown document.
  *
@@ -34,6 +38,8 @@ export type CorpusDocument = {
   path: string;
   title: string;
   kind: string;
+  /** Parsed YAML front matter — source of truth for metadata queries. */
+  frontMatter: CorpusFrontMatter;
   summary?: string;
   elevatorPitch?: string;
   order?: number;
