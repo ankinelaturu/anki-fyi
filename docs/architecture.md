@@ -7,6 +7,27 @@ Markdown-backed IDE workspace with **Ask Anki**: local retrieval-augmented gener
 Build outputs (`corpus.json`, `vectors.json`, `frontMatterSchema.json`) are written at compile time and consumed by the browser at query time. The diagrams below are separate — no arrows between build and runtime.
 
 ### Build time
+```mermaid
+flowchart TB
+  subgraph BUILD["Build time (Node.js)"]
+    direction TB
+    MD["content/**/*.md<br/>YAML front matter + markdown body"]
+    BSCRIPT["build-corpus.ts"]
+    EMB["Xenova/all-MiniLM-L6-v2<br/>embeddings.ts"]
+
+    MD --> BSCRIPT
+    BSCRIPT --> EMB
+  end
+  
+  subgraph GARTIFACTS["Generated Artifacts"]
+    direction TB
+    CORPUS["public/assistant/corpus.json"]
+    VECTORS["public/assistant/vectors.json"]
+  end  
+
+  BSCRIPT --> CORPUS
+  EMB --> VECTORS
+```
 
 ```mermaid
 flowchart LR
