@@ -32,7 +32,7 @@ featured: true
 
 status: concept exploration
 year: 2026
-website: https://anki-fixme/here
+website: https://florow.app
 demo: https://anki-fixme/here
 linkedin: https://anki-fixme/here
 screenshot: /images/projects/florow-placeholder.png

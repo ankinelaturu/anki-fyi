@@ -5,6 +5,14 @@ import matter from "gray-matter";
 const contentDir = path.join(process.cwd(), "content");
 
 const manifest = {
+  "about/featured.md": {
+    title: "Featured",
+    kind: "profile",
+    icon: "sparkles",
+    summary: "Quick links to all projects with short descriptions.",
+    featured: false,
+    order: 0,
+  },
   "about/about-anki.md": {
     title: "About Anki",
     kind: "profile",

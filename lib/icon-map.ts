@@ -40,6 +40,7 @@ export const ICON_BY_KEY = {
 } as const;
 
 const FILENAME_ICON: Record<string, string> = {
+  "featured.md": "sparkles",
   "about-anki.md": "user",
   "resume.md": "file-user",
   "contact.md": "mail",
