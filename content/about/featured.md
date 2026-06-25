@@ -12,7 +12,7 @@ featured: false
 ---
 # FEATURED.md
 
-A quick index of every project — descriptions and live links.
+Independent Projects.
 
 ## Lintern
 
